@@ -1,0 +1,265 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens.
+ *
+ * Components reference semantic names only (surface, fg, accent), never raw colours, so the
+ * whole app re-themes by swapping values here. Dark is the default because this is a reading
+ * and problem-solving surface used for long stretches; light is opt-in via [data-theme="light"].
+ *
+ * Colours are OKLCH so lightness steps are perceptually even — a mid-grey stays mid-grey when
+ * the hue changes, which keeps contrast predictable across both themes.
+ */
+
+@theme {
+  /* Neutral scale — dark theme values. */
+  --color-canvas: oklch(0.17 0.012 265);
+  --color-surface: oklch(0.21 0.014 265);
+  --color-surface-raised: oklch(0.25 0.016 265);
+  --color-surface-sunken: oklch(0.14 0.012 265);
+  --color-border: oklch(0.31 0.016 265);
+  --color-border-strong: oklch(0.42 0.02 265);
+
+  --color-fg: oklch(0.95 0.005 265);
+  --color-fg-muted: oklch(0.74 0.014 265);
+  --color-fg-subtle: oklch(0.58 0.014 265);
+
+  /* Accent — the "physics blue" used for interactive affordances. */
+  --color-accent: oklch(0.7 0.15 245);
+  --color-accent-strong: oklch(0.78 0.16 245);
+  --color-accent-muted: oklch(0.38 0.08 245);
+  --color-accent-fg: oklch(0.15 0.02 245);
+
+  /* Status. Hues chosen to stay distinguishable for the common colour-vision deficiencies:
+     they differ in lightness as well as hue, so they never rely on hue alone. */
+  --color-success: oklch(0.72 0.15 155);
+  --color-success-muted: oklch(0.34 0.07 155);
+  --color-warning: oklch(0.8 0.14 85);
+  --color-warning-muted: oklch(0.36 0.07 85);
+  --color-danger: oklch(0.68 0.18 25);
+  --color-danger-muted: oklch(0.34 0.09 25);
+  --color-pending: oklch(0.72 0.12 300);
+  --color-pending-muted: oklch(0.34 0.06 300);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-code), ui-monospace, 'SF Mono', monospace;
+
+  --radius-panel: 0.75rem;
+
+  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.3), 0 8px 24px oklch(0 0 0 / 0.22);
+}
+
+[data-theme='light'] {
+  --color-canvas: oklch(0.985 0.003 265);
+  --color-surface: oklch(1 0 0);
+  --color-surface-raised: oklch(0.975 0.004 265);
+  --color-surface-sunken: oklch(0.95 0.006 265);
+  --color-border: oklch(0.9 0.006 265);
+  --color-border-strong: oklch(0.8 0.01 265);
+
+  --color-fg: oklch(0.22 0.014 265);
+  --color-fg-muted: oklch(0.44 0.014 265);
+  --color-fg-subtle: oklch(0.58 0.012 265);
+
+  --color-accent: oklch(0.52 0.16 245);
+  --color-accent-strong: oklch(0.44 0.17 245);
+  --color-accent-muted: oklch(0.92 0.04 245);
+  --color-accent-fg: oklch(1 0 0);
+
+  --color-success: oklch(0.5 0.14 155);
+  --color-success-muted: oklch(0.93 0.05 155);
+  --color-warning: oklch(0.58 0.13 75);
+  --color-warning-muted: oklch(0.95 0.05 85);
+  --color-danger: oklch(0.54 0.19 25);
+  --color-danger-muted: oklch(0.95 0.04 25);
+  --color-pending: oklch(0.5 0.14 300);
+  --color-pending-muted: oklch(0.95 0.04 300);
+
+  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.06), 0 8px 24px oklch(0 0 0 / 0.06);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  [data-theme='light'] {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* One visible focus treatment everywhere — keyboard navigation must never be invisible. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---- KaTeX integration ---------------------------------------------------- */
+
+.katex {
+  /* KaTeX defaults to 1.21em, which fights a 16px reading column. */
+  font-size: 1.08em;
+}
+
+.katex-display {
+  margin: 0;
+  padding: 0.25rem 0;
+  /* Long equations scroll rather than overflowing the layout. */
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.katex-display > .katex {
+  white-space: nowrap;
+}
+
+/* ---- MathLive integration ------------------------------------------------- */
+
+math-field {
+  --caret-color: var(--color-accent);
+  --selection-background-color: var(--color-accent-muted);
+  --contains-highlight-background-color: transparent;
+  --smart-fence-color: var(--color-fg-muted);
+  --placeholder-color: var(--color-fg-subtle);
+
+  display: block;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  font-size: 1.05rem;
+  color: var(--color-fg);
+  background-color: var(--color-surface-sunken);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0.5rem;
+  outline: none;
+}
+
+math-field:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-muted);
+}
+
+math-field::part(virtual-keyboard-toggle) {
+  color: var(--color-fg-subtle);
+}
+
+/* ---- Reading column ------------------------------------------------------- */
+
+.lesson-prose {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-fg-muted);
+}
+
+.lesson-prose > * + * {
+  margin-top: 1.1rem;
+}
+
+.lesson-prose h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-fg);
+  scroll-margin-top: 5rem;
+}
+
+.lesson-prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.65rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-fg);
+  scroll-margin-top: 5rem;
+}
+
+.lesson-prose strong {
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.lesson-prose ul,
+.lesson-prose ol {
+  padding-left: 1.5rem;
+}
+
+.lesson-prose ul {
+  list-style: disc;
+}
+
+.lesson-prose ol {
+  list-style: decimal;
+}
+
+.lesson-prose li + li {
+  margin-top: 0.4rem;
+}
+
+.lesson-prose li::marker {
+  color: var(--color-fg-subtle);
+}
+
+.lesson-prose code {
+  padding: 0.1em 0.35em;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-surface-sunken);
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+}
+
+.lesson-prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Thin scrollbars so the three-pane layout does not feel cluttered. */
+@supports (scrollbar-width: thin) {
+  .pane-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
+  }
+}
+
+/* ---- Derivation step numbering -------------------------------------------- */
+
+.derivation-steps {
+  counter-reset: derivation-step;
+}
+
+.derivation-steps > li {
+  counter-increment: derivation-step;
+}
+
+.derivation-steps .step-counter::before {
+  content: counter(derivation-step);
+}

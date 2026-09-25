@@ -1,0 +1,342 @@
+---
+title: Vector Spaces Basics
+summary: >-
+  Vectors, vector spaces, basis and independence — the container every quantum state lives in.
+readingMinutes: 45
+updated: 2026-02-17
+keyEquations:
+  - latex: c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_n\mathbf{v}_n
+    label: Linear combination
+  - latex: \operatorname{span}\{\mathbf{e}_1, \mathbf{e}_2\} = \mathbb{R}^2
+    label: Span of the standard basis
+---
+
+<Callout kind="why">
+Every quantum state you will meet — a spin, a scattering wave, a nuclear level — is a vector in
+some vector space. Get this container right and Hilbert spaces, Dirac notation and the whole
+angular-momentum machinery become refinements of it rather than new ideas.
+</Callout>
+
+## 1. What is a vector?
+
+A **vector** is a mathematical object carrying a direction and a magnitude. Read it as an
+instruction: *go this much in these directions*.
+
+Standing somewhere, the instruction "walk 3 steps right, then 2 steps forward" is the vector
+$(3, 2)$.
+
+Three notations mean the same thing: $(3, 2)$, bold $\mathbf{v}$, and arrow $\vec{v}$.
+
+## 2. Vectors as arrows
+
+An arrow is the picture of a vector.
+
+<Compare
+  caption="Anatomy of an arrow"
+  columns={['Part', 'Meaning']}
+  rows={[
+    ['Tail', 'Where the arrow starts — usually the origin'],
+    ['Head', 'Where it ends (the pointy tip)'],
+    ['Length', 'The magnitude'],
+    ['Direction', 'Where it points'],
+  ]}
+/>
+
+Drag the head below. The components update as you move it — the same figure that was ASCII art in
+your handbook, now something you can push around.
+
+<VectorPlot
+  initial={[3, 2]}
+  caption="The vector (3, 2). Drag the head, or focus it and use the arrow keys."
+/>
+
+### Direction rules
+
+<Compare
+  columns={['Component', 'Positive', 'Negative']}
+  rows={[
+    ['$x$ (first number)', 'right', 'left'],
+    ['$y$ (second number)', 'up', 'down'],
+  ]}
+/>
+
+So $(3,0)$ points right, $(0,-2)$ points down, and $(4,4)$ runs at $45^\circ$ up and to the right.
+
+## 3. What is a vector space?
+
+<Definition term="Vector space">
+The collection of *all* possible vectors of a given type.
+</Definition>
+
+If you can only move on a flat floor — left/right and forward/back — then every movement you could
+possibly make forms a vector space.
+
+### The axioms
+
+A set $V$ is a vector space when these hold for all $\mathbf{u}, \mathbf{v}, \mathbf{w}$ in $V$
+and all scalars $a, b$:
+
+<Axioms
+  items={[
+    ['\\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}', 'Addition commutes'],
+    ['(\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})', 'Addition associates'],
+    ['\\exists\\, \\mathbf{0} : \\mathbf{v} + \\mathbf{0} = \\mathbf{v}', 'A zero vector exists'],
+    ['\\forall \\mathbf{v}\\; \\exists\\, -\\mathbf{v} : \\mathbf{v} + (-\\mathbf{v}) = \\mathbf{0}', 'Every vector has an inverse'],
+    ['a(\\mathbf{u} + \\mathbf{v}) = a\\mathbf{u} + a\\mathbf{v}', 'Scalars distribute over vectors'],
+    ['(a + b)\\mathbf{v} = a\\mathbf{v} + b\\mathbf{v}', 'Vectors distribute over scalars'],
+    ['a(b\\mathbf{v}) = (ab)\\mathbf{v}', 'Scalar multiplication associates'],
+    ['1\\mathbf{v} = \\mathbf{v}', 'One is the identity scalar'],
+  ]}
+/>
+
+<Callout kind="note">
+These eight are not arbitrary bookkeeping. They are exactly the properties that let you *solve*
+linear equations — and later, that let a superposition of quantum states still be a valid state.
+</Callout>
+
+## 4. Naming: $\mathbb{R}^n$ and $\mathbb{C}^n$
+
+<Compare
+  columns={['Symbol', 'Meaning']}
+  rows={[
+    ['$\\mathbb{R}$', 'Real numbers — 1, 2.5, −3, $\\pi$'],
+    ['$\\mathbb{C}$', 'Complex numbers — $3 + 2i$'],
+    ['Superscript $n$', 'How many numbers describe each vector'],
+  ]}
+/>
+
+<Compare
+  caption="The spaces you will use"
+  columns={['Name', 'Entries', 'Count', 'Geometric meaning']}
+  rows={[
+    ['$\\mathbb{R}^1$', 'real', '1', 'a line'],
+    ['$\\mathbb{R}^2$', 'real', '2', 'a flat plane'],
+    ['$\\mathbb{R}^3$', 'real', '3', '3-D space'],
+    ['$\\mathbb{R}^n$', 'real', '$n$', '$n$-dimensional space'],
+    ['$\\mathbb{C}^1$', 'complex', '1', 'the complex plane'],
+    ['$\\mathbb{C}^2$', 'complex', '2', 'electron spin lives here'],
+    ['$\\mathbb{C}^n$', 'complex', '$n$', '$n$-dimensional complex space'],
+  ]}
+/>
+
+A <Symbol name="complex">complex</Symbol> example in $\mathbb{C}^2$:
+
+<Eq
+  id="c2-example"
+  label="A vector in C-two"
+  latex={String.raw`\begin{pmatrix} 1 + i \\ 2 - 3i \end{pmatrix}`}
+/>
+
+<Callout kind="forward">
+$\mathbb{C}^2$ is not an abstraction you will admire from a distance. It *is* the state space of a
+spin-½ particle — which means it is where every neutron in this syllabus lives.
+</Callout>
+
+## 5. Rows and columns
+
+The same vector, written two ways:
+
+<Eq
+  id="row-vs-column"
+  latex={String.raw`(3, 2, 1) \qquad\text{is the same as}\qquad \begin{pmatrix} 3 \\ 2 \\ 1 \end{pmatrix}`}
+/>
+
+Rows are convenient in prose. Columns are necessary for matrix multiplication, which is why
+quantum mechanics prefers them:
+
+<Eq
+  id="matrix-times-column"
+  label="Matrix acting on a column"
+  latex={String.raw`\begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix}`}
+/>
+
+## 6. Operations
+
+**Addition** works component by component:
+
+<Eq id="addition" latex={String.raw`(3, 2) + (1, 4) = (3+1,\; 2+4) = (4, 6)`} />
+
+Geometrically: put the arrows tip-to-tail; the result runs from the first tail to the last head.
+
+**Scalar multiplication** scales every component:
+
+<Eq id="scalar-mult" latex={String.raw`3 \cdot (2, -1) = (6, -3)`} />
+
+<Compare
+  columns={['Scalar', 'Effect on the arrow']}
+  rows={[
+    ['greater than 1', 'stretches'],
+    ['between 0 and 1', 'shrinks'],
+    ['negative', 'reverses direction'],
+  ]}
+/>
+
+## 7. Linear combination
+
+Multiply vectors by scalars and add the results:
+
+<Eq
+  id="linear-combination"
+  label="Linear combination"
+  latex={String.raw`c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + c_3\mathbf{v}_3 + \cdots`}
+/>
+
+<Derivation caption="Evaluating 3(2, −1) + 2(1, 4)">
+  <Step
+    why="Scalar multiplication distributes over each component."
+    latex={String.raw`3(2, -1) = (6, -3) \quad\text{and}\quad 2(1, 4) = (2, 8)`}
+  />
+  <Step
+    why="Addition is component-wise."
+    latex={String.raw`(6, -3) + (2, 8) = (8, 5)`}
+  />
+</Derivation>
+
+<Callout kind="forward">
+This is the single most important operation in the syllabus. A quantum state written as
+$\lvert\psi\rangle = \sum_n c_n \lvert\psi_n\rangle$ is a linear combination, and the $c_n$ are
+what you actually compute when you solve a scattering problem.
+</Callout>
+
+## 8. Span
+
+The **span** of a set of vectors is every point reachable by linear combinations of them.
+
+Take $\mathbf{e}_1 = (1,0)$ and $\mathbf{e}_2 = (0,1)$:
+
+- $(7, 3) = 7\mathbf{e}_1 + 3\mathbf{e}_2$
+- $(-2, 5) = -2\mathbf{e}_1 + 5\mathbf{e}_2$
+- ...and in fact *any* point in $\mathbb{R}^2$.
+
+<Eq id="span-r2" latex={String.raw`\operatorname{span}\{\mathbf{e}_1, \mathbf{e}_2\} = \mathbb{R}^2`} />
+
+## 9. Basis
+
+A <Symbol name="basis">basis</Symbol> is a set of vectors that is both
+
+1. **linearly independent** — none is a multiple of another, and
+2. **spanning** — linear combinations reach every point.
+
+<Eq
+  id="standard-basis"
+  label="Standard bases"
+  latex={String.raw`\mathbb{R}^2:\; \mathbf{e}_1 = (1,0),\; \mathbf{e}_2 = (0,1) \qquad \mathbb{R}^3:\; (1,0,0),\; (0,1,0),\; (0,0,1)`}
+/>
+
+<Compare
+  columns={['Space', 'Dimension', 'Vectors in a basis']}
+  rows={[
+    ['$\\mathbb{R}^1$', '1', '1'],
+    ['$\\mathbb{R}^2$', '2', '2'],
+    ['$\\mathbb{R}^3$', '3', '3'],
+    ['$\\mathbb{R}^n$', '$n$', '$n$'],
+  ]}
+/>
+
+## 10. Independence and dependence
+
+**Dependent** — one vector is a multiple of another, so they point along the same line:
+
+<Eq id="dependent-example" latex={String.raw`\mathbf{u} = (1, 2), \quad \mathbf{v} = (2, 4) = 2\mathbf{u}`} />
+
+Two dependent vectors in $\mathbb{R}^2$ can only reach a *line*, never the whole plane.
+
+**Independent** — no vector is a multiple of another:
+
+<Eq
+  id="independent-example"
+  latex={String.raw`\mathbf{u} = (1, 0), \quad \mathbf{v} = (0, 1), \quad \mathbf{v} \neq k\mathbf{u} \;\; \forall k`}
+/>
+
+### The test
+
+Ask whether $\mathbf{v} = k\mathbf{u}$ for a single $k$.
+
+<Derivation caption="Are (2, 6) and (1, 3) dependent?">
+  <Step
+    why="Set up the proportionality with one unknown scalar."
+    latex={String.raw`(2, 6) = k(1, 3) = (k, 3k)`}
+  />
+  <Step why="Match the first components." latex={String.raw`2 = k \implies k = 2`} />
+  <Step
+    why="The same k must satisfy the second component — and it does."
+    latex={String.raw`6 = 3k = 3(2) = 6 \;\checkmark`}
+  />
+  <Step
+    why="One consistent scalar works, so the vectors lie along a single line."
+    latex={String.raw`(2, 6) = 2(1, 3) \implies \text{dependent}`}
+  />
+</Derivation>
+
+<VectorPlot
+  initial={[1, 3]}
+  companion={[2, 6]}
+  caption="Dependent vectors. Drag either head: they stay on the dashed line only while one is a multiple of the other — break that and the pair spans the whole plane."
+/>
+
+## 11. Subspaces
+
+A **subspace** is a vector space living inside a larger one. It must:
+
+1. contain the zero vector,
+2. be closed under addition, and
+3. be closed under scalar multiplication.
+
+<Compare
+  caption="Subspaces of R²"
+  columns={['Type', 'Dimension', 'How many', 'Example']}
+  rows={[
+    ['origin only', '0', '1', '$\\{(0,0)\\}$'],
+    ['line through origin', '1', 'infinitely many', '$x$-axis, $y = 2x$, ...'],
+    ['the whole plane', '2', '1', '$\\mathbb{R}^2$ itself'],
+  ]}
+/>
+
+<Callout kind="warning">
+A subspace **must** pass through the origin. A line that misses the origin cannot contain
+$\mathbf{0}$, so it fails the first requirement — it is not a subspace, however much it looks
+like one.
+</Callout>
+
+## 12. Matrices, briefly
+
+A matrix is a rectangular block of numbers that **transforms** a vector into another vector.
+
+<Derivation caption="Computing the product of a matrix and a column">
+  <Step
+    why="Each output component is one row dotted into the input vector."
+    latex={String.raw`\begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 3 \\ 1 \end{pmatrix}`}
+  />
+  <Step why="Row 1 against the vector." latex={String.raw`(2)(3) + (1)(1) = 7`} />
+  <Step why="Row 2 against the vector." latex={String.raw`(0)(3) + (3)(1) = 3`} />
+  <Step
+    why="Stack the results as a column."
+    latex={String.raw`= \begin{pmatrix} 7 \\ 3 \end{pmatrix}`}
+  />
+</Derivation>
+
+Two transformations worth recognising on sight:
+
+<Eq
+  id="stretch"
+  label="Uniform stretch by 2"
+  latex={String.raw`\begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} 3 \\ 1 \end{pmatrix} = \begin{pmatrix} 6 \\ 2 \end{pmatrix}`}
+/>
+
+<Eq
+  id="rotation"
+  label="Rotation by 90 degrees"
+  latex={String.raw`\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}`}
+/>
+
+## 13. Dimension
+
+The <Symbol name="dimension">dimension</Symbol> of a vector space is the number of vectors in a
+basis: $\mathbb{R}^2$ has dimension 2, a line through the origin has dimension 1, and the origin
+alone has dimension 0.
+
+<Callout kind="forward">
+Next: **Hilbert spaces** — a vector space with an inner product, completed so that infinite sums
+behave. That one added structure is what turns the algebra above into a theory that can predict a
+cross-section.
+</Callout>

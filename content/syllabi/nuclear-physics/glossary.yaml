@@ -1,0 +1,85 @@
+# Symbol glossary. Drives <Symbol name="..." /> hover tooltips in lessons.
+# Add entries as notation is introduced — an unknown name renders plainly rather than breaking.
+
+schemaVersion: 1
+entries:
+  - name: hbar
+    latex: \hbar
+    term: Reduced Planck constant
+    meaning: >-
+      Planck's constant divided by 2 pi. The natural unit of angular momentum and action in
+      quantum mechanics.
+    seeAlso: [angular-momentum]
+
+  - name: ket
+    latex: \lvert \psi \rangle
+    term: Ket
+    meaning: >-
+      A state vector. In a finite-dimensional space it is a column of complex numbers; the
+      notation lets you name the state without committing to a basis.
+    seeAlso: [bra, inner-product]
+
+  - name: bra
+    latex: \langle \phi \rvert
+    term: Bra
+    meaning: >-
+      The dual of a ket: its conjugate transpose. Pairing a bra with a ket gives a number.
+    seeAlso: [ket, inner-product]
+
+  - name: inner-product
+    latex: \langle \phi \vert \psi \rangle
+    term: Inner product
+    meaning: >-
+      A complex number measuring the overlap of two states. Zero means orthogonal; one means
+      identical (for normalised states).
+    seeAlso: [bra, ket]
+
+  - name: reals
+    latex: \mathbb{R}
+    term: Real numbers
+    meaning: Ordinary numbers — integers, fractions, decimals, irrationals such as pi.
+    seeAlso: [complex]
+
+  - name: complex
+    latex: \mathbb{C}
+    term: Complex numbers
+    meaning: >-
+      Numbers of the form a + bi. Quantum mechanics requires them: amplitudes carry a phase,
+      and phase is what produces interference.
+    seeAlso: [reals]
+
+  - name: basis
+    latex: \{ \mathbf{e}_1, \ldots, \mathbf{e}_n \}
+    term: Basis
+    meaning: >-
+      A minimal set of linearly independent vectors that spans the space. Every vector has
+      exactly one expansion in a given basis.
+    seeAlso: [span, dimension]
+
+  - name: span
+    latex: \operatorname{span}
+    term: Span
+    meaning: Every point reachable by linear combinations of a given set of vectors.
+    seeAlso: [basis]
+
+  - name: dimension
+    latex: \dim V
+    term: Dimension
+    meaning: The number of vectors in a basis — how many independent directions the space has.
+    seeAlso: [basis]
+
+  - name: angular-momentum
+    latex: \hat{L}
+    term: Angular momentum operator
+    meaning: >-
+      Generates rotations. Its components do not commute, which is why angular momentum in
+      quantum mechanics is quantised and directions cannot all be known at once.
+    seeAlso: [hbar, commutator]
+
+  - name: commutator
+    latex: "[\\hat{A}, \\hat{B}]"
+    term: Commutator
+    meaning: >-
+      The difference AB minus BA. When it vanishes the observables can be measured
+      simultaneously; when it does not, they obey an uncertainty relation.
+    seeAlso: [angular-momentum]

@@ -1,0 +1,285 @@
+# Exercises for Module 1.1, migrated from Nuclear_Physics_Handbook.md (Q1-Q20).
+#
+# `check: {type: tutor}` means there is nothing to compare mechanically — I read it.
+# `explain.required: true` routes an answer to me even when the value itself checks out,
+# because on those questions the reasoning is the thing being assessed.
+
+schemaVersion: 1
+topic: m1.1-vector-spaces-basics
+intro: >-
+  Twenty questions across seven sets. Anything numeric is checked the moment you submit;
+  anything asking why is sent to me for review.
+
+exercises:
+  # ---- Set A: Basic understanding ----
+  - id: q1a
+    set: A
+    label: Q1(a)
+    kind: text
+    prompt: Write what the vector $(0, 4)$ means as a movement instruction.
+    check: { type: tutor }
+    solution: Move 4 steps forward (up). No horizontal movement, since the x-component is zero.
+
+  - id: q1b
+    set: A
+    label: Q1(b)
+    kind: text
+    prompt: Write what the vector $(-2, -2)$ means as a movement instruction.
+    check: { type: tutor }
+    solution: Move 2 steps left and 2 steps backward (down) — a 45-degree diagonal toward the lower left.
+
+  - id: q1c
+    set: A
+    label: Q1(c)
+    kind: text
+    prompt: Write what the vector $(7, 0)$ means as a movement instruction.
+    check: { type: tutor }
+    solution: Move 7 steps right. No vertical movement.
+
+  - id: q2
+    set: A
+    label: Q2
+    kind: latex
+    prompt: What is the name of the vector space in which each vector has five real numbers?
+    scaffold: \mathbb{R}
+    check:
+      type: latex-equivalent
+      value: \mathbb{R}^5
+      accept: ['R^5', '\mathbb{R}^{5}', 'R^{5}']
+    solution: $\mathbb{R}^5$ — R for real entries, superscript 5 for five components.
+
+  - id: q3
+    set: A
+    label: Q3
+    kind: text
+    prompt: A vector in $\mathbb{C}^3$ has how many complex numbers? Give an example.
+    explain: { required: true, hint: State the count, then write one out. }
+    check: { type: tutor }
+    solution: >-
+      Three. For example the column with entries $3 + 2i$, $1 - i$ and $4i$.
+
+  # ---- Set B: Operations ----
+  - id: q4
+    set: B
+    label: Q4
+    kind: vector
+    prompt: Calculate $2 \times (3, 1)$. What happens to the arrow?
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [6, 2]
+    explain:
+      required: true
+      hint: One sentence on the arrow's length and direction.
+    solution: >-
+      $2(3,1) = (6,2)$. The arrow doubles in length and keeps its direction, because a positive
+      scalar rescales without rotating.
+
+  - id: q5
+    set: B
+    label: Q5
+    kind: vector
+    prompt: Calculate $(2, 3) + (1, -1)$.
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [3, 2]
+    solution: $(2+1,\; 3+(-1)) = (3, 2)$ — addition is component by component.
+
+  - id: q6
+    set: B
+    label: Q6
+    kind: vector
+    prompt: Calculate $3(2, -1) + 2(1, 4)$.
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [8, 5]
+    solution: $3(2,-1) = (6,-3)$ and $2(1,4) = (2,8)$; their sum is $(8, 5)$.
+
+  # ---- Set C: True/False ----
+  - id: q7a
+    set: C
+    label: Q7(a)
+    kind: truefalse
+    prompt: True or false — the vector $(3, 2, 1)$ belongs to $\mathbb{R}^2$.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Count the components. }
+    solution: FALSE — it has three components, and $\mathbb{R}^2$ requires exactly two.
+
+  - id: q7b
+    set: C
+    label: Q7(b)
+    kind: truefalse
+    prompt: True or false — the vector $(0, 0)$ belongs to $\mathbb{R}^2$.
+    check: { type: exact, value: true }
+    explain: { required: true }
+    solution: >-
+      TRUE — two real components. It is the zero vector, and every vector space must contain it.
+
+  - id: q7c
+    set: C
+    label: Q7(c)
+    kind: truefalse
+    prompt: True or false — the vector $(1, 2)$ belongs to $\mathbb{R}^3$.
+    check: { type: exact, value: false }
+    explain: { required: true }
+    solution: FALSE — two components, but $\mathbb{R}^3$ requires exactly three.
+
+  - id: q8
+    set: C
+    label: Q8
+    kind: text
+    prompt: Can a vector space be empty (contain nothing)?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      No. Every vector space must contain at least the zero vector, which is the identity element
+      for addition. The smallest possible vector space is $\{\mathbf{0}\}$.
+
+  # ---- Set D: Deeper thinking ----
+  - id: q9
+    set: D
+    label: Q9
+    kind: text
+    prompt: I take any two vectors from $\mathbb{R}^2$ and add them. Will the result always be in $\mathbb{R}^2$?
+    explain: { required: true, hint: There is a name for this property. }
+    check: { type: tutor }
+    solution: >-
+      Yes. Adding two pairs of real numbers gives another pair of real numbers, so the result
+      stays in $\mathbb{R}^2$. This is closure under addition.
+
+  - id: q10
+    set: D
+    label: Q10
+    kind: text
+    prompt: >-
+      What is the zero vector in $\mathbb{R}^2$? In $\mathbb{R}^3$? Why must every vector space
+      have one?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $(0,0)$ and $(0,0,0)$. Every vector space needs one because the axioms require an additive
+      identity: $\mathbf{v} + \mathbf{0} = \mathbf{v}$. Without it there is no way to state what
+      an additive inverse cancels to.
+
+  - id: q11
+    set: D
+    label: Q11
+    kind: text
+    prompt: >-
+      "The set of all vectors $(x, 0)$ where $x$ is any real number forms a vector space."
+      True or false? What does it look like geometrically?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      TRUE — it is a one-dimensional subspace of $\mathbb{R}^2$. It contains $(0,0)$, and it is
+      closed under both addition and scalar multiplication. Geometrically it is the x-axis: a
+      line through the origin.
+
+  # ---- Set E: Independence and basis ----
+  - id: q12
+    set: E
+    label: Q12
+    kind: text
+    prompt: Are $(1, 0)$ and $(0, 1)$ linearly independent or dependent?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Independent. There is no scalar $k$ with $(0,1) = k(1,0)$, since that would need
+      $k = 0$ from the first component and $k = 1$ from the second.
+
+  - id: q13
+    set: E
+    label: Q13
+    kind: text
+    prompt: Are $(2, 6)$ and $(1, 3)$ linearly independent or dependent?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Dependent — $(2,6) = 2(1,3)$. One consistent scalar reproduces both components, so they
+      lie along the same line.
+
+  - id: q14
+    set: E
+    label: Q14
+    kind: text
+    prompt: >-
+      Can you reach any point in $\mathbb{R}^2$ using only $\mathbf{e}_1 = (1,0)$ and
+      $\mathbf{e}_2 = (0,1)$? Show how to reach $(7, 3)$.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Yes — they form a basis. $(7,3) = 7\mathbf{e}_1 + 3\mathbf{e}_2$, and in general
+      $(a,b) = a\mathbf{e}_1 + b\mathbf{e}_2$.
+
+  - id: q15
+    set: E
+    label: Q15
+    kind: text
+    prompt: >-
+      Why can you not reach every point in $\mathbb{R}^2$ using only $\mathbf{a} = (1,2)$ and
+      $\mathbf{b} = (2,4)$?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Because $\mathbf{b} = 2\mathbf{a}$ — they are dependent. Every linear combination
+      $c_1\mathbf{a} + c_2\mathbf{b} = (c_1 + 2c_2)\mathbf{a}$ is still a multiple of
+      $\mathbf{a}$, so the span is only the line $y = 2x$, not the plane.
+
+  - id: q16
+    set: E
+    label: Q16
+    kind: numeric
+    prompt: To form a basis for $\mathbb{R}^3$, how many linearly independent vectors do you need?
+    check: { type: numeric, value: 3 }
+    solution: Three — the number of vectors in a basis equals the dimension of the space.
+
+  # ---- Set F: Matrix multiplication ----
+  - id: q17
+    set: F
+    label: Q17
+    kind: matrix
+    prompt: Multiply the matrix by the column vector.
+    given: \begin{pmatrix} 1 & 2 \\ 3 & 0 \end{pmatrix} \begin{pmatrix} 4 \\ 1 \end{pmatrix}
+    scaffold: \begin{pmatrix} \\ \end{pmatrix}
+    check:
+      type: numeric-matrix
+      value: [[6], [12]]
+    solution: >-
+      Row 1: $(1)(4) + (2)(1) = 6$. Row 2: $(3)(4) + (0)(1) = 12$. The result is the column
+      $(6, 12)$.
+
+  # ---- Set G: Directions ----
+  - id: q18
+    set: G
+    label: Q18
+    kind: text
+    prompt: >-
+      What direction does each arrow point? (a) $(0,-5)$ (b) $(-2,0)$ (c) $(4,4)$ (d) $(-1,-1)$
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      (a) straight down; (b) straight left; (c) diagonally up-right at 45 degrees;
+      (d) diagonally down-left at 45 degrees.
+
+  - id: q19
+    set: G
+    label: Q19
+    kind: numeric
+    prompt: The vector $(-3, 0)$ — what is its length?
+    check: { type: numeric, value: 3 }
+    explain: { required: true, hint: Also say which way it points. }
+    solution: >-
+      Length 3, pointing left. Length is $\sqrt{(-3)^2 + 0^2} = 3$ — magnitude is never negative.
+
+  - id: q20
+    set: G
+    label: Q20
+    kind: text
+    prompt: I multiply the vector $(1, 1)$ by $-1$. What happens to its arrow?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      It becomes $(-1,-1)$: the same length, pointing in exactly the opposite direction.
+      Multiplying by a negative scalar reverses the arrow.

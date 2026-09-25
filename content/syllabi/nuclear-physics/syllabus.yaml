@@ -1,0 +1,1525 @@
+# Nuclear physics learning path.
+#
+# Transcribed from Learning_Path_Checklist.md. Prerequisites form a DAG: topics chain
+# within a module, and each module's first topic requires the previous module's
+# checkpoint. Edit freely — `pnpm validate:content` checks the schema and the graph.
+
+schemaVersion: 1
+id: nuclear-physics
+title: Nuclear Physics
+subtitle: Nuclear reaction theory and TALYS calculations
+description: >-
+  A staged path from the mathematics of quantum mechanics through nuclear reaction
+  theory to a publishable Th-232(n,gamma) cross-section calculation.
+goal: Master nuclear reaction theory and TALYS calculations
+
+phases:
+  - id: p1
+    title: "Phase 1 — Mathematical Foundations"
+    summary: "The mathematics nuclear reaction theory is written in. Everything downstream assumes it."
+    modules:
+      - id: m1.1
+        title: "1.1 Linear Algebra for Quantum Mechanics"
+        group: "Module 1 — Quantum Mechanics Mathematics"
+        topics:
+          - id: m1.1-vector-spaces-basics
+            title: "Vector spaces basics"
+            estimatedMinutes: 45
+          - id: m1.1-hilbert-spaces
+            title: "Hilbert spaces"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-vector-spaces-basics
+          - id: m1.1-dirac-notation-bra-ket
+            title: "Dirac notation (bra-ket)"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-hilbert-spaces
+          - id: m1.1-inner-products
+            title: "Inner products"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-dirac-notation-bra-ket
+          - id: m1.1-linear-operators
+            title: "Linear operators"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-inner-products
+          - id: m1.1-matrix-representation
+            title: "Matrix representation"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-linear-operators
+          - id: m1.1-eigenvalue-problems
+            title: "Eigenvalue problems"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-matrix-representation
+          - id: m1.1-hermitian-operators
+            title: "Hermitian operators"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-eigenvalue-problems
+          - id: m1.1-commutators
+            title: "Commutators"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-hermitian-operators
+          - id: m1.1-unitary-transformations
+            title: "Unitary transformations"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-commutators
+          - id: m1.1-checkpoint-1-1
+            title: "Checkpoint 1.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m1.1-vector-spaces-basics
+              - m1.1-hilbert-spaces
+              - m1.1-dirac-notation-bra-ket
+              - m1.1-inner-products
+              - m1.1-linear-operators
+              - m1.1-matrix-representation
+              - m1.1-eigenvalue-problems
+              - m1.1-hermitian-operators
+              - m1.1-commutators
+              - m1.1-unitary-transformations
+      - id: m1.2
+        title: "1.2 Differential Equations"
+        group: "Module 1 — Quantum Mechanics Mathematics"
+        topics:
+          - id: m1.2-odes-review
+            title: "ODEs review"
+            estimatedMinutes: 45
+            requires:
+              - m1.1-checkpoint-1-1
+          - id: m1.2-second-order-linear-odes
+            title: "Second order linear ODEs"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-odes-review
+          - id: m1.2-series-solutions-frobenius
+            title: "Series solutions (Frobenius)"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-second-order-linear-odes
+          - id: m1.2-sturm-liouville-theory
+            title: "Sturm-Liouville theory"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-series-solutions-frobenius
+          - id: m1.2-legendre-polynomials
+            title: "Legendre polynomials"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-sturm-liouville-theory
+          - id: m1.2-spherical-harmonics
+            title: "Spherical harmonics"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-legendre-polynomials
+          - id: m1.2-bessel-functions
+            title: "Bessel functions"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-spherical-harmonics
+          - id: m1.2-spherical-bessel-functions
+            title: "Spherical Bessel functions"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-bessel-functions
+          - id: m1.2-radial-schrodinger-equation
+            title: "Radial Schrodinger equation"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-spherical-bessel-functions
+          - id: m1.2-checkpoint-1-2
+            title: "Checkpoint 1.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m1.2-odes-review
+              - m1.2-second-order-linear-odes
+              - m1.2-series-solutions-frobenius
+              - m1.2-sturm-liouville-theory
+              - m1.2-legendre-polynomials
+              - m1.2-spherical-harmonics
+              - m1.2-bessel-functions
+              - m1.2-spherical-bessel-functions
+              - m1.2-radial-schrodinger-equation
+      - id: m1.3
+        title: "1.3 Complex Analysis"
+        group: "Module 1 — Quantum Mechanics Mathematics"
+        topics:
+          - id: m1.3-complex-numbers-review
+            title: "Complex numbers review"
+            estimatedMinutes: 45
+            requires:
+              - m1.2-checkpoint-1-2
+          - id: m1.3-complex-functions
+            title: "Complex functions"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-complex-numbers-review
+          - id: m1.3-analyticity
+            title: "Analyticity"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-complex-functions
+          - id: m1.3-cauchys-theorem
+            title: "Cauchy's theorem"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-analyticity
+          - id: m1.3-residue-calculus
+            title: "Residue calculus"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-cauchys-theorem
+          - id: m1.3-contour-integration
+            title: "Contour integration"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-residue-calculus
+          - id: m1.3-poles-and-branch-cuts
+            title: "Poles and branch cuts"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-contour-integration
+          - id: m1.3-application-resonances-as-complex-poles
+            title: "Application: resonances as complex poles"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-poles-and-branch-cuts
+          - id: m1.3-checkpoint-1-3
+            title: "Checkpoint 1.3"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m1.3-complex-numbers-review
+              - m1.3-complex-functions
+              - m1.3-analyticity
+              - m1.3-cauchys-theorem
+              - m1.3-residue-calculus
+              - m1.3-contour-integration
+              - m1.3-poles-and-branch-cuts
+              - m1.3-application-resonances-as-complex-poles
+      - id: m1.4
+        title: "1.4 Numerical Methods"
+        group: "Module 1 — Quantum Mechanics Mathematics"
+        topics:
+          - id: m1.4-root-finding-newton-raphson
+            title: "Root finding (Newton-Raphson)"
+            estimatedMinutes: 45
+            requires:
+              - m1.3-checkpoint-1-3
+          - id: m1.4-numerical-integration-simpson
+            title: "Numerical integration (Simpson)"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-root-finding-newton-raphson
+          - id: m1.4-gaussian-quadrature
+            title: "Gaussian quadrature"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-numerical-integration-simpson
+          - id: m1.4-runge-kutta-ode-solvers
+            title: "Runge-Kutta ODE solvers"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-gaussian-quadrature
+          - id: m1.4-interpolation-methods
+            title: "Interpolation methods"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-runge-kutta-ode-solvers
+          - id: m1.4-least-squares-fitting
+            title: "Least-squares fitting"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-interpolation-methods
+          - id: m1.4-chi-squared-minimization
+            title: "Chi-squared minimization"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-least-squares-fitting
+          - id: m1.4-monte-carlo-basics
+            title: "Monte Carlo basics"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-chi-squared-minimization
+          - id: m1.4-solve-schrodinger-with-rk4
+            title: "Solve Schrodinger with RK4"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m1.4-monte-carlo-basics
+          - id: m1.4-checkpoint-1-4
+            title: "Checkpoint 1.4"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m1.4-root-finding-newton-raphson
+              - m1.4-numerical-integration-simpson
+              - m1.4-gaussian-quadrature
+              - m1.4-runge-kutta-ode-solvers
+              - m1.4-interpolation-methods
+              - m1.4-least-squares-fitting
+              - m1.4-chi-squared-minimization
+              - m1.4-monte-carlo-basics
+              - m1.4-solve-schrodinger-with-rk4
+      - id: m2.1
+        title: "2.1 Orbital Angular Momentum"
+        group: "Module 2 — Angular Momentum Theory"
+        topics:
+          - id: m2.1-angular-momentum-operators
+            title: "Angular momentum operators"
+            estimatedMinutes: 45
+            requires:
+              - m1.4-checkpoint-1-4
+          - id: m2.1-commutation-relations
+            title: "Commutation relations"
+            estimatedMinutes: 45
+            requires:
+              - m2.1-angular-momentum-operators
+          - id: m2.1-angular-momentum-eigenvalues
+            title: "Angular momentum eigenvalues"
+            estimatedMinutes: 45
+            requires:
+              - m2.1-commutation-relations
+          - id: m2.1-spherical-harmonics-ylm
+            title: "Spherical harmonics Ylm"
+            estimatedMinutes: 45
+            requires:
+              - m2.1-angular-momentum-eigenvalues
+          - id: m2.1-ladder-operators
+            title: "Ladder operators"
+            estimatedMinutes: 45
+            requires:
+              - m2.1-spherical-harmonics-ylm
+          - id: m2.1-checkpoint-2-1
+            title: "Checkpoint 2.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m2.1-angular-momentum-operators
+              - m2.1-commutation-relations
+              - m2.1-angular-momentum-eigenvalues
+              - m2.1-spherical-harmonics-ylm
+              - m2.1-ladder-operators
+      - id: m2.2
+        title: "2.2 Spin Angular Momentum"
+        group: "Module 2 — Angular Momentum Theory"
+        topics:
+          - id: m2.2-spin-half-particles
+            title: "Spin-half particles"
+            estimatedMinutes: 45
+            requires:
+              - m2.1-checkpoint-2-1
+          - id: m2.2-pauli-matrices
+            title: "Pauli matrices"
+            estimatedMinutes: 45
+            requires:
+              - m2.2-spin-half-particles
+          - id: m2.2-spinors
+            title: "Spinors"
+            estimatedMinutes: 45
+            requires:
+              - m2.2-pauli-matrices
+          - id: m2.2-spin-orbit-coupling
+            title: "Spin-orbit coupling"
+            estimatedMinutes: 45
+            requires:
+              - m2.2-spinors
+          - id: m2.2-checkpoint-2-2
+            title: "Checkpoint 2.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m2.2-spin-half-particles
+              - m2.2-pauli-matrices
+              - m2.2-spinors
+              - m2.2-spin-orbit-coupling
+      - id: m2.3
+        title: "2.3 Addition of Angular Momenta"
+        group: "Module 2 — Angular Momentum Theory"
+        topics:
+          - id: m2.3-coupling-j-l-s
+            title: "Coupling J = L + S"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m2.2-checkpoint-2-2
+          - id: m2.3-clebsch-gordan-coefficients
+            title: "Clebsch-Gordan coefficients"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m2.3-coupling-j-l-s
+          - id: m2.3-triangle-rule
+            title: "Triangle rule"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m2.3-clebsch-gordan-coefficients
+          - id: m2.3-wigner-3j-symbols
+            title: "Wigner 3j symbols"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m2.3-triangle-rule
+          - id: m2.3-wigner-6j-symbols
+            title: "Wigner 6j symbols"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m2.3-wigner-3j-symbols
+          - id: m2.3-wigner-9j-symbols
+            title: "Wigner 9j symbols"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m2.3-wigner-6j-symbols
+          - id: m2.3-racah-algebra
+            title: "Racah algebra"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m2.3-wigner-9j-symbols
+          - id: m2.3-partial-wave-sums-in-talys
+            title: "Partial wave sums in TALYS"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m2.3-racah-algebra
+          - id: m2.3-checkpoint-2-3
+            title: "Checkpoint 2.3"
+            kind: checkpoint
+            critical: true
+            estimatedMinutes: 30
+            requires:
+              - m2.3-coupling-j-l-s
+              - m2.3-clebsch-gordan-coefficients
+              - m2.3-triangle-rule
+              - m2.3-wigner-3j-symbols
+              - m2.3-wigner-6j-symbols
+              - m2.3-wigner-9j-symbols
+              - m2.3-racah-algebra
+              - m2.3-partial-wave-sums-in-talys
+      - id: m3.1
+        title: "3.1 Basic Scattering Concepts"
+        group: "Module 3 — Scattering Theory"
+        topics:
+          - id: m3.1-cross-section-definition
+            title: "Cross-section definition"
+            estimatedMinutes: 45
+            requires:
+              - m2.3-checkpoint-2-3
+          - id: m3.1-differential-vs-total-cross-section
+            title: "Differential vs total cross-section"
+            estimatedMinutes: 45
+            requires:
+              - m3.1-cross-section-definition
+          - id: m3.1-lab-vs-centre-of-mass-frames
+            title: "Lab vs centre-of-mass frames"
+            estimatedMinutes: 45
+            requires:
+              - m3.1-differential-vs-total-cross-section
+          - id: m3.1-elastic-vs-inelastic-scattering
+            title: "Elastic vs inelastic scattering"
+            estimatedMinutes: 45
+            requires:
+              - m3.1-lab-vs-centre-of-mass-frames
+          - id: m3.1-checkpoint-3-1
+            title: "Checkpoint 3.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m3.1-cross-section-definition
+              - m3.1-differential-vs-total-cross-section
+              - m3.1-lab-vs-centre-of-mass-frames
+              - m3.1-elastic-vs-inelastic-scattering
+      - id: m3.2
+        title: "3.2 Partial Wave Analysis"
+        group: "Module 3 — Scattering Theory"
+        topics:
+          - id: m3.2-plane-wave-expansion
+            title: "Plane wave expansion"
+            estimatedMinutes: 45
+            requires:
+              - m3.1-checkpoint-3-1
+          - id: m3.2-partial-wave-expansion-of-the-amplitude
+            title: "Partial wave expansion of the amplitude"
+            estimatedMinutes: 45
+            requires:
+              - m3.2-plane-wave-expansion
+          - id: m3.2-phase-shifts
+            title: "Phase shifts"
+            estimatedMinutes: 45
+            requires:
+              - m3.2-partial-wave-expansion-of-the-amplitude
+          - id: m3.2-the-s-matrix
+            title: "The S-matrix"
+            estimatedMinutes: 45
+            requires:
+              - m3.2-phase-shifts
+          - id: m3.2-optical-theorem
+            title: "Optical theorem"
+            estimatedMinutes: 45
+            requires:
+              - m3.2-the-s-matrix
+          - id: m3.2-checkpoint-3-2
+            title: "Checkpoint 3.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m3.2-plane-wave-expansion
+              - m3.2-partial-wave-expansion-of-the-amplitude
+              - m3.2-phase-shifts
+              - m3.2-the-s-matrix
+              - m3.2-optical-theorem
+      - id: m3.3
+        title: "3.3 Resonance Scattering"
+        group: "Module 3 — Scattering Theory"
+        topics:
+          - id: m3.3-breit-wigner-formula
+            title: "Breit-Wigner formula"
+            estimatedMinutes: 45
+            requires:
+              - m3.2-checkpoint-3-2
+          - id: m3.3-resonance-energy
+            title: "Resonance energy"
+            estimatedMinutes: 45
+            requires:
+              - m3.3-breit-wigner-formula
+          - id: m3.3-partial-and-total-widths
+            title: "Partial and total widths"
+            estimatedMinutes: 45
+            requires:
+              - m3.3-resonance-energy
+          - id: m3.3-physical-meaning-of-the-width
+            title: "Physical meaning of the width"
+            estimatedMinutes: 45
+            requires:
+              - m3.3-partial-and-total-widths
+          - id: m3.3-statistical-factor
+            title: "Statistical factor"
+            estimatedMinutes: 45
+            requires:
+              - m3.3-physical-meaning-of-the-width
+          - id: m3.3-r-matrix-theory-introduction
+            title: "R-matrix theory (introduction)"
+            estimatedMinutes: 45
+            requires:
+              - m3.3-statistical-factor
+          - id: m3.3-checkpoint-3-3
+            title: "Checkpoint 3.3"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m3.3-breit-wigner-formula
+              - m3.3-resonance-energy
+              - m3.3-partial-and-total-widths
+              - m3.3-physical-meaning-of-the-width
+              - m3.3-statistical-factor
+              - m3.3-r-matrix-theory-introduction
+      - id: m3.4
+        title: "3.4 The Optical Model"
+        group: "Module 3 — Scattering Theory"
+        topics:
+          - id: m3.4-complex-potential
+            title: "Complex potential"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m3.3-checkpoint-3-3
+          - id: m3.4-woods-saxon-form-factor
+            title: "Woods-Saxon form factor"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m3.4-complex-potential
+          - id: m3.4-volume-absorption
+            title: "Volume absorption"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m3.4-woods-saxon-form-factor
+          - id: m3.4-surface-absorption
+            title: "Surface absorption"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m3.4-volume-absorption
+          - id: m3.4-spin-orbit-potential
+            title: "Spin-orbit potential"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m3.4-surface-absorption
+          - id: m3.4-isospin-dependence
+            title: "Isospin dependence"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m3.4-spin-orbit-potential
+          - id: m3.4-koning-delaroche-parameterization
+            title: "Koning-Delaroche parameterization"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m3.4-isospin-dependence
+          - id: m3.4-solve-the-radial-equation
+            title: "Solve the radial equation"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m3.4-koning-delaroche-parameterization
+          - id: m3.4-extract-phase-shifts
+            title: "Extract phase shifts"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m3.4-solve-the-radial-equation
+          - id: m3.4-calculate-elastic-cross-section
+            title: "Calculate elastic cross-section"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m3.4-extract-phase-shifts
+          - id: m3.4-checkpoint-3-4
+            title: "Checkpoint 3.4"
+            kind: checkpoint
+            critical: true
+            estimatedMinutes: 30
+            requires:
+              - m3.4-complex-potential
+              - m3.4-woods-saxon-form-factor
+              - m3.4-volume-absorption
+              - m3.4-surface-absorption
+              - m3.4-spin-orbit-potential
+              - m3.4-isospin-dependence
+              - m3.4-koning-delaroche-parameterization
+              - m3.4-solve-the-radial-equation
+              - m3.4-extract-phase-shifts
+              - m3.4-calculate-elastic-cross-section
+  - id: p2
+    title: "Phase 2 — Nuclear Physics Theory"
+    summary: "Structure, reactions and neutron capture: the physics TALYS actually models."
+    modules:
+      - id: m4.1
+        title: "4.1 Basic Nuclear Properties"
+        group: "Module 4 — Nuclear Structure"
+        topics:
+          - id: m4.1-binding-energy
+            title: "Binding energy"
+            estimatedMinutes: 45
+            requires:
+              - m3.4-checkpoint-3-4
+          - id: m4.1-semi-empirical-mass-formula
+            title: "Semi-empirical mass formula"
+            estimatedMinutes: 45
+            requires:
+              - m4.1-binding-energy
+          - id: m4.1-nuclear-radius
+            title: "Nuclear radius"
+            estimatedMinutes: 45
+            requires:
+              - m4.1-semi-empirical-mass-formula
+          - id: m4.1-nuclear-density
+            title: "Nuclear density"
+            estimatedMinutes: 45
+            requires:
+              - m4.1-nuclear-radius
+          - id: m4.1-separation-energies
+            title: "Separation energies"
+            estimatedMinutes: 45
+            requires:
+              - m4.1-nuclear-density
+          - id: m4.1-calculate-properties-for-th-232
+            title: "Calculate properties for Th-232"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m4.1-separation-energies
+          - id: m4.1-checkpoint-4-1
+            title: "Checkpoint 4.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m4.1-binding-energy
+              - m4.1-semi-empirical-mass-formula
+              - m4.1-nuclear-radius
+              - m4.1-nuclear-density
+              - m4.1-separation-energies
+              - m4.1-calculate-properties-for-th-232
+      - id: m4.2
+        title: "4.2 Nuclear Shell Model"
+        group: "Module 4 — Nuclear Structure"
+        topics:
+          - id: m4.2-magic-numbers
+            title: "Magic numbers"
+            estimatedMinutes: 45
+            requires:
+              - m4.1-checkpoint-4-1
+          - id: m4.2-mean-field-potential
+            title: "Mean-field potential"
+            estimatedMinutes: 45
+            requires:
+              - m4.2-magic-numbers
+          - id: m4.2-single-particle-levels
+            title: "Single-particle levels"
+            estimatedMinutes: 45
+            requires:
+              - m4.2-mean-field-potential
+          - id: m4.2-shell-gaps
+            title: "Shell gaps"
+            estimatedMinutes: 45
+            requires:
+              - m4.2-single-particle-levels
+          - id: m4.2-pairing-correlations
+            title: "Pairing correlations"
+            estimatedMinutes: 45
+            requires:
+              - m4.2-shell-gaps
+          - id: m4.2-ground-state-configurations
+            title: "Ground state configurations"
+            estimatedMinutes: 45
+            requires:
+              - m4.2-pairing-correlations
+          - id: m4.2-th-232-structure
+            title: "Th-232 structure"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m4.2-ground-state-configurations
+          - id: m4.2-checkpoint-4-2
+            title: "Checkpoint 4.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m4.2-magic-numbers
+              - m4.2-mean-field-potential
+              - m4.2-single-particle-levels
+              - m4.2-shell-gaps
+              - m4.2-pairing-correlations
+              - m4.2-ground-state-configurations
+              - m4.2-th-232-structure
+      - id: m4.3
+        title: "4.3 Collective Motion"
+        group: "Module 4 — Nuclear Structure"
+        topics:
+          - id: m4.3-deformation-parameters
+            title: "Deformation parameters"
+            estimatedMinutes: 45
+            requires:
+              - m4.2-checkpoint-4-2
+          - id: m4.3-rotational-bands
+            title: "Rotational bands"
+            estimatedMinutes: 45
+            requires:
+              - m4.3-deformation-parameters
+          - id: m4.3-vibrational-modes
+            title: "Vibrational modes"
+            estimatedMinutes: 45
+            requires:
+              - m4.3-rotational-bands
+          - id: m4.3-giant-dipole-resonance
+            title: "Giant Dipole Resonance"
+            estimatedMinutes: 45
+            requires:
+              - m4.3-vibrational-modes
+          - id: m4.3-gdr-in-deformed-nuclei
+            title: "GDR in deformed nuclei"
+            estimatedMinutes: 45
+            requires:
+              - m4.3-giant-dipole-resonance
+          - id: m4.3-checkpoint-4-3
+            title: "Checkpoint 4.3"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m4.3-deformation-parameters
+              - m4.3-rotational-bands
+              - m4.3-vibrational-modes
+              - m4.3-giant-dipole-resonance
+              - m4.3-gdr-in-deformed-nuclei
+      - id: m4.4
+        title: "4.4 Nuclear Level Density"
+        group: "Module 4 — Nuclear Structure"
+        topics:
+          - id: m4.4-level-density-definition
+            title: "Level density definition"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m4.3-checkpoint-4-3
+          - id: m4.4-fermi-gas-model
+            title: "Fermi gas model"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m4.4-level-density-definition
+          - id: m4.4-level-density-parameter
+            title: "Level density parameter"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m4.4-fermi-gas-model
+          - id: m4.4-effective-excitation-energy
+            title: "Effective excitation energy"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m4.4-level-density-parameter
+          - id: m4.4-back-shifted-fermi-gas
+            title: "Back-shifted Fermi gas"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m4.4-effective-excitation-energy
+          - id: m4.4-constant-temperature-model
+            title: "Constant temperature model"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m4.4-back-shifted-fermi-gas
+          - id: m4.4-microscopic-approaches
+            title: "Microscopic approaches"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m4.4-constant-temperature-model
+          - id: m4.4-talys-compare-ldmodel-1-6
+            title: "TALYS: compare ldmodel 1-6"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m4.4-microscopic-approaches
+          - id: m4.4-checkpoint-4-4
+            title: "Checkpoint 4.4"
+            kind: checkpoint
+            critical: true
+            estimatedMinutes: 30
+            requires:
+              - m4.4-level-density-definition
+              - m4.4-fermi-gas-model
+              - m4.4-level-density-parameter
+              - m4.4-effective-excitation-energy
+              - m4.4-back-shifted-fermi-gas
+              - m4.4-constant-temperature-model
+              - m4.4-microscopic-approaches
+              - m4.4-talys-compare-ldmodel-1-6
+      - id: m5.1
+        title: "5.1 Reaction Mechanisms"
+        group: "Module 5 — Nuclear Reactions"
+        topics:
+          - id: m5.1-direct-reactions
+            title: "Direct reactions"
+            estimatedMinutes: 45
+            requires:
+              - m4.4-checkpoint-4-4
+          - id: m5.1-compound-nucleus
+            title: "Compound nucleus"
+            estimatedMinutes: 45
+            requires:
+              - m5.1-direct-reactions
+          - id: m5.1-pre-equilibrium
+            title: "Pre-equilibrium"
+            estimatedMinutes: 45
+            requires:
+              - m5.1-compound-nucleus
+          - id: m5.1-bohr-independence-hypothesis
+            title: "Bohr independence hypothesis"
+            estimatedMinutes: 45
+            requires:
+              - m5.1-pre-equilibrium
+          - id: m5.1-checkpoint-5-1
+            title: "Checkpoint 5.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m5.1-direct-reactions
+              - m5.1-compound-nucleus
+              - m5.1-pre-equilibrium
+              - m5.1-bohr-independence-hypothesis
+      - id: m5.2
+        title: "5.2 Compound Nucleus Model"
+        group: "Module 5 — Nuclear Reactions"
+        topics:
+          - id: m5.2-formation-cross-section
+            title: "Formation cross-section"
+            estimatedMinutes: 45
+            requires:
+              - m5.1-checkpoint-5-1
+          - id: m5.2-transmission-coefficients
+            title: "Transmission coefficients"
+            estimatedMinutes: 45
+            requires:
+              - m5.2-formation-cross-section
+          - id: m5.2-statistical-decay
+            title: "Statistical decay"
+            estimatedMinutes: 45
+            requires:
+              - m5.2-transmission-coefficients
+          - id: m5.2-checkpoint-5-2
+            title: "Checkpoint 5.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m5.2-formation-cross-section
+              - m5.2-transmission-coefficients
+              - m5.2-statistical-decay
+      - id: m5.3
+        title: "5.3 Hauser-Feshbach Theory"
+        group: "Module 5 — Nuclear Reactions"
+        topics:
+          - id: m5.3-master-equation-derivation
+            title: "Master equation derivation"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.2-checkpoint-5-2
+          - id: m5.3-entrance-channel
+            title: "Entrance channel"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-master-equation-derivation
+          - id: m5.3-exit-channel
+            title: "Exit channel"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-entrance-channel
+          - id: m5.3-angular-momentum-coupling
+            title: "Angular momentum coupling"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-exit-channel
+          - id: m5.3-parity-conservation
+            title: "Parity conservation"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-angular-momentum-coupling
+          - id: m5.3-statistical-factor-in-hauser-feshbach
+            title: "Statistical factor in Hauser-Feshbach"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-parity-conservation
+          - id: m5.3-transmission-coefficients-per-channel
+            title: "Transmission coefficients per channel"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-statistical-factor-in-hauser-feshbach
+          - id: m5.3-sum-over-all-channels
+            title: "Sum over all channels"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-transmission-coefficients-per-channel
+          - id: m5.3-width-fluctuation-corrections
+            title: "Width fluctuation corrections"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-sum-over-all-channels
+          - id: m5.3-moldauer-prescription
+            title: "Moldauer prescription"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m5.3-width-fluctuation-corrections
+          - id: m5.3-derive-the-capture-cross-section-formula
+            title: "Derive the capture cross-section formula"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m5.3-moldauer-prescription
+          - id: m5.3-checkpoint-5-3
+            title: "Checkpoint 5.3"
+            kind: checkpoint
+            critical: true
+            estimatedMinutes: 30
+            requires:
+              - m5.3-master-equation-derivation
+              - m5.3-entrance-channel
+              - m5.3-exit-channel
+              - m5.3-angular-momentum-coupling
+              - m5.3-parity-conservation
+              - m5.3-statistical-factor-in-hauser-feshbach
+              - m5.3-transmission-coefficients-per-channel
+              - m5.3-sum-over-all-channels
+              - m5.3-width-fluctuation-corrections
+              - m5.3-moldauer-prescription
+              - m5.3-derive-the-capture-cross-section-formula
+      - id: m5.4
+        title: "5.4 Gamma-Ray Transmission"
+        group: "Module 5 — Nuclear Reactions"
+        topics:
+          - id: m5.4-e1-m1-and-e2-transitions
+            title: "E1, M1 and E2 transitions"
+            estimatedMinutes: 45
+            requires:
+              - m5.3-checkpoint-5-3
+          - id: m5.4-selection-rules
+            title: "Selection rules"
+            estimatedMinutes: 45
+            requires:
+              - m5.4-e1-m1-and-e2-transitions
+          - id: m5.4-gamma-strength-function
+            title: "Gamma strength function"
+            estimatedMinutes: 45
+            requires:
+              - m5.4-selection-rules
+          - id: m5.4-gdr-as-a-lorentzian
+            title: "GDR as a Lorentzian"
+            estimatedMinutes: 45
+            requires:
+              - m5.4-gamma-strength-function
+          - id: m5.4-talys-strength-models-8-9-and-10
+            title: "TALYS: strength models 8, 9 and 10"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m5.4-gdr-as-a-lorentzian
+          - id: m5.4-checkpoint-5-4
+            title: "Checkpoint 5.4"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m5.4-e1-m1-and-e2-transitions
+              - m5.4-selection-rules
+              - m5.4-gamma-strength-function
+              - m5.4-gdr-as-a-lorentzian
+              - m5.4-talys-strength-models-8-9-and-10
+      - id: m5.5
+        title: "5.5 Fission"
+        group: "Module 5 — Nuclear Reactions"
+        topics:
+          - id: m5.5-fission-barrier-concept
+            title: "Fission barrier concept"
+            estimatedMinutes: 45
+            requires:
+              - m5.4-checkpoint-5-4
+          - id: m5.5-double-humped-barrier
+            title: "Double-humped barrier"
+            estimatedMinutes: 45
+            requires:
+              - m5.5-fission-barrier-concept
+          - id: m5.5-liquid-drop-and-shell-corrections
+            title: "Liquid drop and shell corrections"
+            estimatedMinutes: 45
+            requires:
+              - m5.5-double-humped-barrier
+          - id: m5.5-transition-states
+            title: "Transition states"
+            estimatedMinutes: 45
+            requires:
+              - m5.5-liquid-drop-and-shell-corrections
+          - id: m5.5-fission-vs-neutron-emission
+            title: "Fission vs neutron emission"
+            estimatedMinutes: 45
+            requires:
+              - m5.5-transition-states
+          - id: m5.5-checkpoint-5-5
+            title: "Checkpoint 5.5"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m5.5-fission-barrier-concept
+              - m5.5-double-humped-barrier
+              - m5.5-liquid-drop-and-shell-corrections
+              - m5.5-transition-states
+              - m5.5-fission-vs-neutron-emission
+      - id: m6.1
+        title: "6.1 Thermal and Resonance Region"
+        group: "Module 6 — Neutron Capture"
+        topics:
+          - id: m6.1-the-1-v-law
+            title: "The 1/v law"
+            estimatedMinutes: 45
+            requires:
+              - m5.5-checkpoint-5-5
+          - id: m6.1-resolved-resonances
+            title: "Resolved resonances"
+            estimatedMinutes: 45
+            requires:
+              - m6.1-the-1-v-law
+          - id: m6.1-westcott-g-factors
+            title: "Westcott g-factors"
+            estimatedMinutes: 45
+            requires:
+              - m6.1-resolved-resonances
+          - id: m6.1-resonance-integrals
+            title: "Resonance integrals"
+            estimatedMinutes: 45
+            requires:
+              - m6.1-westcott-g-factors
+          - id: m6.1-checkpoint-6-1
+            title: "Checkpoint 6.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m6.1-the-1-v-law
+              - m6.1-resolved-resonances
+              - m6.1-westcott-g-factors
+              - m6.1-resonance-integrals
+      - id: m6.2
+        title: "6.2 Unresolved Resonance Region"
+        group: "Module 6 — Neutron Capture"
+        topics:
+          - id: m6.2-statistical-treatment
+            title: "Statistical treatment"
+            estimatedMinutes: 45
+            requires:
+              - m6.1-checkpoint-6-1
+          - id: m6.2-average-resonance-parameters
+            title: "Average resonance parameters"
+            estimatedMinutes: 45
+            requires:
+              - m6.2-statistical-treatment
+          - id: m6.2-strength-function
+            title: "Strength function"
+            estimatedMinutes: 45
+            requires:
+              - m6.2-average-resonance-parameters
+          - id: m6.2-checkpoint-6-2
+            title: "Checkpoint 6.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m6.2-statistical-treatment
+              - m6.2-average-resonance-parameters
+              - m6.2-strength-function
+      - id: m6.3
+        title: "6.3 Fast Neutron Region"
+        group: "Module 6 — Neutron Capture"
+        topics:
+          - id: m6.3-hauser-feshbach-regime
+            title: "Hauser-Feshbach regime"
+            estimatedMinutes: 45
+            requires:
+              - m6.2-checkpoint-6-2
+          - id: m6.3-pre-equilibrium-contributions
+            title: "Pre-equilibrium contributions"
+            estimatedMinutes: 45
+            requires:
+              - m6.3-hauser-feshbach-regime
+          - id: m6.3-channel-competition
+            title: "Channel competition"
+            estimatedMinutes: 45
+            requires:
+              - m6.3-pre-equilibrium-contributions
+          - id: m6.3-checkpoint-6-3
+            title: "Checkpoint 6.3"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m6.3-hauser-feshbach-regime
+              - m6.3-pre-equilibrium-contributions
+              - m6.3-channel-competition
+      - id: m6.4
+        title: "6.4 Maxwellian-Averaged Cross Sections"
+        group: "Module 6 — Neutron Capture"
+        topics:
+          - id: m6.4-macs-formula
+            title: "MACS formula"
+            estimatedMinutes: 45
+            requires:
+              - m6.3-checkpoint-6-3
+          - id: m6.4-astrophysical-applications
+            title: "Astrophysical applications"
+            estimatedMinutes: 45
+            requires:
+              - m6.4-macs-formula
+          - id: m6.4-s-process-nucleosynthesis
+            title: "s-process nucleosynthesis"
+            estimatedMinutes: 45
+            requires:
+              - m6.4-astrophysical-applications
+          - id: m6.4-calculate-macs
+            title: "Calculate MACS"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m6.4-s-process-nucleosynthesis
+          - id: m6.4-checkpoint-6-4
+            title: "Checkpoint 6.4"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m6.4-macs-formula
+              - m6.4-astrophysical-applications
+              - m6.4-s-process-nucleosynthesis
+              - m6.4-calculate-macs
+  - id: p3
+    title: "Phase 3 — Computational Skills"
+    summary: "The tooling: Python, Fortran, TALYS and the nuclear data libraries."
+    modules:
+      - id: m7.1
+        title: "7.1 Python for Nuclear Physics"
+        group: "Module 7 — Programming"
+        topics:
+          - id: m7.1-numpy-arrays
+            title: "NumPy arrays"
+            estimatedMinutes: 45
+            requires:
+              - m6.4-checkpoint-6-4
+          - id: m7.1-scipy-integration
+            title: "SciPy integration"
+            estimatedMinutes: 45
+            requires:
+              - m7.1-numpy-arrays
+          - id: m7.1-scipy-interpolation
+            title: "SciPy interpolation"
+            estimatedMinutes: 45
+            requires:
+              - m7.1-scipy-integration
+          - id: m7.1-scipy-optimization
+            title: "SciPy optimization"
+            estimatedMinutes: 45
+            requires:
+              - m7.1-scipy-interpolation
+          - id: m7.1-matplotlib-plotting
+            title: "Matplotlib plotting"
+            estimatedMinutes: 45
+            requires:
+              - m7.1-scipy-optimization
+          - id: m7.1-pandas-data-handling
+            title: "Pandas data handling"
+            estimatedMinutes: 45
+            requires:
+              - m7.1-matplotlib-plotting
+          - id: m7.1-parse-exfor-data
+            title: "Parse EXFOR data"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m7.1-pandas-data-handling
+          - id: m7.1-implement-chi-squared-fitting
+            title: "Implement chi-squared fitting"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m7.1-parse-exfor-data
+          - id: m7.1-publication-quality-plots
+            title: "Publication-quality plots"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m7.1-implement-chi-squared-fitting
+          - id: m7.1-talys-automation
+            title: "TALYS automation"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m7.1-publication-quality-plots
+          - id: m7.1-checkpoint-7-1
+            title: "Checkpoint 7.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m7.1-numpy-arrays
+              - m7.1-scipy-integration
+              - m7.1-scipy-interpolation
+              - m7.1-scipy-optimization
+              - m7.1-matplotlib-plotting
+              - m7.1-pandas-data-handling
+              - m7.1-parse-exfor-data
+              - m7.1-implement-chi-squared-fitting
+              - m7.1-publication-quality-plots
+              - m7.1-talys-automation
+      - id: m7.2
+        title: "7.2 Fortran Basics"
+        group: "Module 7 — Programming"
+        topics:
+          - id: m7.2-syntax-and-data-types
+            title: "Syntax and data types"
+            estimatedMinutes: 45
+            requires:
+              - m7.1-checkpoint-7-1
+          - id: m7.2-arrays-and-loops
+            title: "Arrays and loops"
+            estimatedMinutes: 45
+            requires:
+              - m7.2-syntax-and-data-types
+          - id: m7.2-subroutines-and-functions
+            title: "Subroutines and functions"
+            estimatedMinutes: 45
+            requires:
+              - m7.2-arrays-and-loops
+          - id: m7.2-file-i-o
+            title: "File I/O"
+            estimatedMinutes: 45
+            requires:
+              - m7.2-subroutines-and-functions
+          - id: m7.2-read-the-talys-source
+            title: "Read the TALYS source"
+            kind: implementation
+            estimatedMinutes: 90
+            requires:
+              - m7.2-file-i-o
+          - id: m7.2-checkpoint-7-2
+            title: "Checkpoint 7.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m7.2-syntax-and-data-types
+              - m7.2-arrays-and-loops
+              - m7.2-subroutines-and-functions
+              - m7.2-file-i-o
+              - m7.2-read-the-talys-source
+      - id: m8.1
+        title: "8.1 TALYS Mastery"
+        group: "Module 8 — Nuclear Data and Codes"
+        topics:
+          - id: m8.1-input-file-structure
+            title: "Input file structure"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m7.2-checkpoint-7-2
+          - id: m8.1-output-file-formats
+            title: "Output file formats"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m8.1-input-file-structure
+          - id: m8.1-key-parameter-ldmodel
+            title: "Key parameter: ldmodel"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m8.1-output-file-formats
+          - id: m8.1-key-parameter-strength
+            title: "Key parameter: strength"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m8.1-key-parameter-ldmodel
+          - id: m8.1-key-parameter-optical-model-potential
+            title: "Key parameter: optical model potential"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m8.1-key-parameter-strength
+          - id: m8.1-key-parameter-preequilibrium
+            title: "Key parameter: preequilibrium"
+            critical: true
+            estimatedMinutes: 45
+            requires:
+              - m8.1-key-parameter-optical-model-potential
+          - id: m8.1-run-a-basic-calculation
+            title: "Run a basic calculation"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m8.1-key-parameter-preequilibrium
+          - id: m8.1-parameter-sensitivity-study
+            title: "Parameter sensitivity study"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m8.1-run-a-basic-calculation
+          - id: m8.1-compare-against-exfor
+            title: "Compare against EXFOR"
+            kind: implementation
+            critical: true
+            estimatedMinutes: 90
+            requires:
+              - m8.1-parameter-sensitivity-study
+          - id: m8.1-checkpoint-8-1
+            title: "Checkpoint 8.1"
+            kind: checkpoint
+            critical: true
+            estimatedMinutes: 30
+            requires:
+              - m8.1-input-file-structure
+              - m8.1-output-file-formats
+              - m8.1-key-parameter-ldmodel
+              - m8.1-key-parameter-strength
+              - m8.1-key-parameter-optical-model-potential
+              - m8.1-key-parameter-preequilibrium
+              - m8.1-run-a-basic-calculation
+              - m8.1-parameter-sensitivity-study
+              - m8.1-compare-against-exfor
+      - id: m8.2
+        title: "8.2 Nuclear Databases"
+        group: "Module 8 — Nuclear Data and Codes"
+        topics:
+          - id: m8.2-the-exfor-database
+            title: "The EXFOR database"
+            estimatedMinutes: 45
+            requires:
+              - m8.1-checkpoint-8-1
+          - id: m8.2-exfor-data-retrieval
+            title: "EXFOR data retrieval"
+            estimatedMinutes: 45
+            requires:
+              - m8.2-the-exfor-database
+          - id: m8.2-endf-format-mf-mt
+            title: "ENDF format (MF/MT)"
+            estimatedMinutes: 45
+            requires:
+              - m8.2-exfor-data-retrieval
+          - id: m8.2-comparing-endf-b-jeff-and-jendl
+            title: "Comparing ENDF/B, JEFF and JENDL"
+            estimatedMinutes: 45
+            requires:
+              - m8.2-endf-format-mf-mt
+          - id: m8.2-the-ripl-library
+            title: "The RIPL library"
+            estimatedMinutes: 45
+            requires:
+              - m8.2-comparing-endf-b-jeff-and-jendl
+          - id: m8.2-checkpoint-8-2
+            title: "Checkpoint 8.2"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m8.2-the-exfor-database
+              - m8.2-exfor-data-retrieval
+              - m8.2-endf-format-mf-mt
+              - m8.2-comparing-endf-b-jeff-and-jendl
+              - m8.2-the-ripl-library
+      - id: m9.1
+        title: "9.1 Literature and Writing"
+        group: "Module 9 — Research Methodology"
+        topics:
+          - id: m9.1-how-to-read-a-nuclear-physics-paper
+            title: "How to read a nuclear physics paper"
+            estimatedMinutes: 45
+            requires:
+              - m8.2-checkpoint-8-2
+          - id: m9.1-statistical-vs-systematic-uncertainties
+            title: "Statistical vs systematic uncertainties"
+            estimatedMinutes: 45
+            requires:
+              - m9.1-how-to-read-a-nuclear-physics-paper
+          - id: m9.1-error-propagation
+            title: "Error propagation"
+            estimatedMinutes: 45
+            requires:
+              - m9.1-statistical-vs-systematic-uncertainties
+          - id: m9.1-paper-structure
+            title: "Paper structure"
+            estimatedMinutes: 45
+            requires:
+              - m9.1-error-propagation
+          - id: m9.1-checkpoint-9-1
+            title: "Checkpoint 9.1"
+            kind: checkpoint
+            estimatedMinutes: 30
+            requires:
+              - m9.1-how-to-read-a-nuclear-physics-paper
+              - m9.1-statistical-vs-systematic-uncertainties
+              - m9.1-error-propagation
+              - m9.1-paper-structure
+  - id: p4
+    title: "Phase 4 — Research Project"
+    summary: "Th-232(n,gamma) cross-section calculation, end to end, to a drafted paper."
+    modules:
+      - id: m10.1
+        title: "Th-232(n,gamma) Cross-Section Calculation"
+        group: "Module 10 — Research Project"
+        topics:
+          - id: m10.1-gather-exfor-th-232-capture-data
+            title: "Gather EXFOR Th-232 capture data"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m9.1-checkpoint-9-1
+          - id: m10.1-set-up-the-talys-input
+            title: "Set up the TALYS input"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-gather-exfor-th-232-capture-data
+          - id: m10.1-run-the-baseline-calculation
+            title: "Run the baseline calculation"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-set-up-the-talys-input
+          - id: m10.1-compare-with-experimental-data
+            title: "Compare with experimental data"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-run-the-baseline-calculation
+          - id: m10.1-identify-discrepancies
+            title: "Identify discrepancies"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-compare-with-experimental-data
+          - id: m10.1-parameter-optimization
+            title: "Parameter optimization"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-identify-discrepancies
+          - id: m10.1-uncertainty-quantification
+            title: "Uncertainty quantification"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-parameter-optimization
+          - id: m10.1-write-the-results-section
+            title: "Write the results section"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-uncertainty-quantification
+          - id: m10.1-prepare-publication-figures
+            title: "Prepare publication figures"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-write-the-results-section
+          - id: m10.1-draft-the-full-paper
+            title: "Draft the full paper"
+            kind: project
+            critical: true
+            estimatedMinutes: 120
+            requires:
+              - m10.1-prepare-publication-figures
+          - id: m10.1-project-complete
+            title: "Project complete"
+            kind: checkpoint
+            critical: true
+            estimatedMinutes: 30
+            requires:
+              - m10.1-gather-exfor-th-232-capture-data
+              - m10.1-set-up-the-talys-input
+              - m10.1-run-the-baseline-calculation
+              - m10.1-compare-with-experimental-data
+              - m10.1-identify-discrepancies
+              - m10.1-parameter-optimization
+              - m10.1-uncertainty-quantification
+              - m10.1-write-the-results-section
+              - m10.1-prepare-publication-figures
+              - m10.1-draft-the-full-paper

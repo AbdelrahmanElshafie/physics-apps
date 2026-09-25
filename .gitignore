@@ -1,0 +1,19 @@
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Runtime state — regenerated, machine-local.
+data/.cache/
+data/bridge/threads/
+data/events.jsonl
+
+.env*
+!.env.example
+.DS_Store
+
+# Synced from node_modules by scripts/sync-mathlive-fonts.ts
+public/mathlive/
+exports/
