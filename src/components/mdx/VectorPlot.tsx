@@ -4,6 +4,22 @@ import { useCallback, useId, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
+import {
+  CENTRE,
+  SCALE,
+  SIZE,
+  SPAN,
+  arrowKeyDelta,
+  clamp,
+  cross,
+  fmt,
+  isZero,
+  pointFromEvent as pointFrom,
+  snap,
+  toSvg,
+  type Point,
+} from './plot-geometry'
+
 /**
  * A draggable 2-D vector.
  *
@@ -15,23 +31,7 @@ import { cn } from '@/lib/utils'
  * and arrow keys move the head for keyboard users.
  */
 
-const SPAN = 8 // Axis range: -SPAN..+SPAN
-const SIZE = 320 // Viewport size in SVG user units
-const CENTRE = SIZE / 2
-const SCALE = CENTRE / SPAN
 
-const toSvg = (x: number, y: number) => ({ cx: CENTRE + x * SCALE, cy: CENTRE - y * SCALE })
-const fromSvg = (cx: number, cy: number) => ({
-  x: (cx - CENTRE) / SCALE,
-  y: (CENTRE - cy) / SCALE,
-})
-
-const clamp = (n: number) => Math.max(-SPAN, Math.min(SPAN, n))
-/** Snap to halves — fine enough to feel continuous, coarse enough to read exact values. */
-const snap = (n: number) => Math.round(n * 2) / 2
-const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1))
-
-type Point = readonly [number, number]
 
 export function VectorPlot({
   initial = [3, 2],
@@ -52,17 +52,10 @@ export function VectorPlot({
   const svgRef = useRef<SVGSVGElement>(null)
   const gradientId = useId()
 
-  const pointFromEvent = useCallback((event: { clientX: number; clientY: number }): Point | null => {
-    const svg = svgRef.current
-    if (!svg) return null
-
-    const rect = svg.getBoundingClientRect()
-    // The SVG scales with its container, so convert through the rendered box, not raw pixels.
-    const cx = ((event.clientX - rect.left) / rect.width) * SIZE
-    const cy = ((event.clientY - rect.top) / rect.height) * SIZE
-    const { x, y } = fromSvg(cx, cy)
-    return [clamp(snap(x)), clamp(snap(y))]
-  }, [])
+  const pointFromEvent = useCallback(
+    (event: { clientX: number; clientY: number }): Point | null => pointFrom(svgRef.current, event),
+    [],
+  )
 
   const handlePointerMove = (event: React.PointerEvent<SVGSVGElement>) => {
     if (!dragging) return
@@ -80,14 +73,7 @@ export function VectorPlot({
   }
 
   const keyHandler = (which: 'primary' | 'secondary') => (event: React.KeyboardEvent) => {
-    const step = event.shiftKey ? 1 : 0.5
-    const moves: Record<string, [number, number]> = {
-      ArrowLeft: [-step, 0],
-      ArrowRight: [step, 0],
-      ArrowUp: [0, step],
-      ArrowDown: [0, -step],
-    }
-    const move = moves[event.key]
+    const move = arrowKeyDelta(event.key, event.shiftKey)
     if (!move) return
     event.preventDefault()
     nudge(which, move[0], move[1])
@@ -97,12 +83,9 @@ export function VectorPlot({
 
   // Dependence test: are the two vectors parallel? The cross product vanishing is the
   // robust form of "is one a multiple of the other", and it handles zero vectors gracefully.
-  const cross = secondary ? primary[0] * secondary[1] - primary[1] * secondary[0] : null
-  const isZero = (p: Point) => p[0] === 0 && p[1] === 0
-  const dependent =
-    cross !== null && secondary
-      ? Math.abs(cross) < 1e-9 || isZero(primary) || isZero(secondary)
-      : null
+  const dependent = secondary
+    ? Math.abs(cross(primary, secondary)) < 1e-9 || isZero(primary) || isZero(secondary)
+    : null
 
   return (
     <figure className="my-6 overflow-hidden rounded-panel border border-border bg-surface-sunken/50">

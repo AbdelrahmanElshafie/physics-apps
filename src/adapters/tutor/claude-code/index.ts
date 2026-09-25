@@ -140,6 +140,79 @@ export class ClaudeCodeTutorTransport implements TutorTransport {
     }
   }
 
+
+  /**
+   * Watches every thread belonging to one topic through a single filesystem watcher.
+   *
+   * Threads are named `<topicId>`, `<topicId>#<exerciseId>` and `<topicId>@<equationId>`, but the
+   * directories are hashed, so the filter runs on the threadId recorded inside each file rather
+   * than on the path.
+   */
+  subscribeTopic(topicId: string, listener: (event: TutorEvent) => void): Unsubscribe {
+    const seen = new Set<string>()
+    let watcher: FSWatcher | null = null
+    let closed = false
+    let timer: NodeJS.Timeout | null = null
+
+    const belongs = (threadId: string) =>
+      threadId === topicId || threadId.startsWith(`${topicId}#`) || threadId.startsWith(`${topicId}@`)
+
+    const scan = async () => {
+      if (closed) return
+      let entries
+      try {
+        entries = await fs.readdir(BRIDGE_ROOT, { withFileTypes: true })
+      } catch {
+        return // No questions asked yet.
+      }
+
+      for (const entry of entries) {
+        if (!entry.isDirectory()) continue
+        const messages = await readThread(path.join(BRIDGE_ROOT, entry.name))
+        if (messages.length === 0 || !belongs(messages[0]!.threadId)) continue
+
+        const answered = answeredIds(messages)
+        for (const raw of messages.sort((a, b) => a.ts.localeCompare(b.ts))) {
+          const key = `${raw.id}:${answered.has(raw.id) ? 'done' : 'open'}`
+          if (seen.has(key)) continue
+          seen.add(key)
+          listener({
+            kind: 'message',
+            message: toTutorMessage(raw, raw.threadId as ThreadId, answered),
+          })
+        }
+      }
+    }
+
+    const schedule = () => {
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(() => void scan(), 80)
+    }
+
+    void (async () => {
+      await fs.mkdir(BRIDGE_ROOT, { recursive: true }).catch(() => undefined)
+      if (closed) return
+      await scan()
+      if (closed) return
+      try {
+        // Recursive so a brand-new thread directory is picked up, not just writes into known ones.
+        watcher = watch(BRIDGE_ROOT, { persistent: false, recursive: true }, schedule)
+      } catch {
+        try {
+          watcher = watch(BRIDGE_ROOT, { persistent: false }, schedule)
+        } catch {
+          // Watching unavailable; the client reconnect still refreshes the thread.
+        }
+      }
+    })()
+
+    return () => {
+      closed = true
+      if (timer) clearTimeout(timer)
+      watcher?.close()
+    }
+  }
+
   /** Every question still waiting on a reply, across all threads. This is what `pnpm tutor` lists. */
   async pending(): Promise<{ request: BridgeMessage; dir: string }[]> {
     let dirs: string[]

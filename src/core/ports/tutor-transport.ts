@@ -70,4 +70,15 @@ export interface TutorTransport {
   history(threadId: ThreadId): Promise<TutorMessage[]>
   /** Fires for anything new on the thread. Must be safe to call from a server-sent-events route. */
   subscribe(threadId: ThreadId, listener: (event: TutorEvent) => void): Unsubscribe
+
+  /**
+   * Fires for every thread belonging to `topicId` — the topic's own conversation and each of its
+   * per-exercise and per-equation threads.
+   *
+   * This exists because a lesson page shows one rail plus one card per exercise, and a browser
+   * allows only a handful of concurrent connections per origin. Subscribing per widget starves
+   * that pool and stalls ordinary requests, so a page opens exactly one scoped stream and fans
+   * the messages out on the client.
+   */
+  subscribeTopic(topicId: string, listener: (event: TutorEvent) => void): Unsubscribe
 }

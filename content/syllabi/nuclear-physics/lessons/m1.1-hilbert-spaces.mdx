@@ -1,0 +1,302 @@
+---
+title: Hilbert Spaces
+summary: >-
+  An inner product gives a vector space length, angle and overlap; completeness makes infinite
+  sums safe. Together they give you the space every quantum state lives in.
+readingMinutes: 50
+updated: 2026-09-26
+keyEquations:
+  - latex: \langle u \vert v \rangle = \sum_i u_i^{*} v_i
+    label: Inner product on C^n
+  - latex: \lVert v \rVert = \sqrt{\langle v \vert v \rangle}
+    label: Norm
+  - latex: c_n = \langle e_n \vert v \rangle
+    label: Expansion coefficient
+---
+
+<Callout kind="why">
+A vector space lets you add states and scale them. It does **not** let you ask the one question
+physics always asks: *how much of this state is that one?* That question is the inner product,
+and its answer squared is a probability. Everything from orthogonal spin states to a scattering
+amplitude is this one operation.
+</Callout>
+
+## 1. What a vector space is missing
+
+From the last lesson, a vector space gives you exactly two operations: add two vectors, and
+scale one by a number. That is enough to write a superposition — but notice what you still
+cannot do.
+
+<Compare
+  caption="What each structure buys you"
+  columns={['Question', 'Vector space alone', 'With an inner product']}
+  rows={[
+    ['Can I add two states?', 'yes', 'yes'],
+    ['How long is this vector?', 'no notion of length', '$\\lVert v \\rVert$'],
+    ['What is the angle between them?', 'no notion of angle', '$\\cos\\theta$'],
+    ['Are these two states distinguishable?', 'cannot ask', 'orthogonality'],
+    ['How much of $v$ points along $u$?', 'cannot ask', 'the projection'],
+  ]}
+/>
+
+Length and angle are not decoration. Without them there is no normalisation, so no probability —
+and quantum mechanics is a theory of probabilities.
+
+## 2. The inner product, starting from the dot product
+
+You already know one inner product: the dot product in $\mathbb{R}^2$.
+
+<Eq
+  id="dot-product"
+  label="Dot product in R-two"
+  latex={String.raw`\mathbf{u} \cdot \mathbf{v} = u_1 v_1 + u_2 v_2`}
+/>
+
+<Derivation caption="A concrete one">
+  <Step
+    why="Multiply matching components."
+    latex={String.raw`(3, 2) \cdot (1, 4) = (3)(1) + (2)(4)`}
+  />
+  <Step why="Add them. The result is a single number, not a vector." latex={String.raw`= 3 + 8 = 11`} />
+</Derivation>
+
+Drag the two arrows below. Watch the number, and try to make it zero.
+
+<InnerProductPlot
+  initialU={[4, 1]}
+  initialV={[2, 3]}
+  caption="The inner product of two real vectors, with the projection of v onto u shown in green."
+/>
+
+<Callout kind="note">
+Three things worth noticing while you drag. The product is **largest** when the arrows point the
+same way, **zero** when they are perpendicular, and **negative** when they point roughly
+opposite. It measures agreement of direction, weighted by length.
+</Callout>
+
+## 3. Why complex numbers force a change
+
+Quantum states live in <Symbol name="complex">complex</Symbol> spaces, and the naive formula
+breaks immediately. Take $v = (i, 0)$ and compute its length the obvious way:
+
+<Eq
+  id="naive-complex"
+  label="The naive attempt fails"
+  latex={String.raw`v_1 v_1 + v_2 v_2 = (i)(i) + 0 = i^2 = -1`}
+/>
+
+A length of $-1$ is meaningless. The fix is to conjugate the first factor:
+
+<Eq
+  id="complex-inner-product"
+  label="Inner product on C-n"
+  latex={String.raw`\langle u \vert v \rangle = \sum_{i} u_i^{*} v_i`}
+/>
+
+Now $\langle v \vert v \rangle = (i)^{*}(i) = (-i)(i) = 1$, which is real and positive. That
+is the entire reason for the star.
+
+<Derivation caption="An inner product in C-two">
+  <Step
+    why="Take u = (1, i) and v = (i, 1). Conjugate the components of u first."
+    latex={String.raw`u^{*} = (1,\; -i)`}
+  />
+  <Step
+    why="Multiply componentwise against v and add."
+    latex={String.raw`\langle u \vert v \rangle = (1)(i) + (-i)(1)`}
+  />
+  <Step why="These cancel exactly." latex={String.raw`= i - i = 0`} />
+  <Step
+    why="Zero inner product means orthogonal — even though neither vector is real."
+    latex={String.raw`\implies u \perp v`}
+  />
+</Derivation>
+
+<Callout kind="warning">
+Order matters now. $\langle u \vert v \rangle$ and $\langle v \vert u \rangle$ are
+complex conjugates of each other, not equal. Physics also conjugates the **first** slot; most
+maths textbooks conjugate the second. Both conventions are in print — check which one a paper is
+using before trusting a sign.
+</Callout>
+
+### The axioms
+
+<Axioms
+  caption="An inner product is any operation satisfying these"
+  items={[
+    ['\\langle u \\vert v \\rangle = \\langle v \\vert u \\rangle^{*}', 'Conjugate symmetry'],
+    ['\\langle u \\vert \\alpha v + \\beta w \\rangle = \\alpha\\langle u \\vert v \\rangle + \\beta\\langle u \\vert w \\rangle', 'Linear in the second slot'],
+    ['\\langle \\alpha u \\vert v \\rangle = \\alpha^{*}\\langle u \\vert v \\rangle', 'Conjugate-linear in the first'],
+    ['\\langle v \\vert v \\rangle \\geq 0', 'Positive'],
+    ['\\langle v \\vert v \\rangle = 0 \\iff v = 0', 'Only the zero vector has zero length'],
+  ]}
+/>
+
+## 4. Norm and distance
+
+The inner product of a vector with itself gives its length, called the **norm**:
+
+<Eq
+  id="norm"
+  label="Norm"
+  latex={String.raw`\lVert v \rVert = \sqrt{\langle v \vert v \rangle}`}
+/>
+
+<Derivation caption="Normalising (3, 4)">
+  <Step why="Compute the inner product with itself." latex={String.raw`\langle v \vert v \rangle = 3^2 + 4^2 = 25`} />
+  <Step why="Take the square root." latex={String.raw`\lVert v \rVert = 5`} />
+  <Step
+    why="Divide by the norm. The result has length 1 and the same direction."
+    latex={String.raw`\hat{v} = \tfrac{1}{5}(3, 4) = (0.6,\; 0.8)`}
+  />
+</Derivation>
+
+<Definition term="Normalised">
+A vector with $\lVert v \rVert = 1$. Every physical quantum state is normalised, because
+$\lVert \psi \rVert^2$ is a total probability and must come to 1.
+</Definition>
+
+## 5. Orthogonality and orthonormal bases
+
+<Definition term="Orthogonal">
+Two vectors with $\langle u \vert v \rangle = 0$. Geometrically perpendicular; physically,
+perfectly distinguishable states.
+</Definition>
+
+A basis whose vectors are all mutually orthogonal *and* all normalised is **orthonormal**. The
+two conditions pack into one statement:
+
+<Eq
+  id="orthonormality"
+  label="Orthonormality"
+  latex={String.raw`\langle e_m \vert e_n \rangle = \delta_{mn} = \begin{cases} 1 & m = n \\ 0 & m \neq n \end{cases}`}
+/>
+
+This is the equation from your checklist's "key equations to master", and now you can read it:
+*every basis vector has length one, and any two different ones are perpendicular.*
+
+## 6. Why an orthonormal basis is worth so much
+
+Expand a vector in a basis. In general, finding the coefficients means solving simultaneous
+equations. With an orthonormal basis, each coefficient falls out of a single inner product.
+
+<Derivation caption="Extracting a coefficient">
+  <Step why="Write v in the basis, with unknown coefficients." latex={String.raw`v = \sum_n c_n e_n`} />
+  <Step
+    why="Take the inner product with one particular basis vector e_m."
+    latex={String.raw`\langle e_m \vert v \rangle = \Big\langle e_m \Big\vert \sum_n c_n e_n \Big\rangle`}
+  />
+  <Step
+    why="Linearity in the second slot lets the sum come out."
+    latex={String.raw`= \sum_n c_n \langle e_m \vert e_n \rangle`}
+  />
+  <Step
+    why="Orthonormality kills every term except n = m."
+    latex={String.raw`= \sum_n c_n \delta_{mn} = c_m`}
+  />
+</Derivation>
+
+<Eq
+  id="coefficient"
+  label="The coefficient is just a projection"
+  latex={String.raw`c_n = \langle e_n \vert v \rangle`}
+/>
+
+<Callout kind="forward">
+That green bar in the figure above *is* $c_n$. Projection and expansion coefficient are the
+same object. When you later compute a scattering amplitude as $\langle \text{out} \vert \text{in} \rangle$, you are asking exactly this: how much of the incoming state lies along the
+outgoing one.
+</Callout>
+
+Reassembling the vector from its coefficients gives the **completeness relation**:
+
+<Eq
+  id="completeness"
+  label="Completeness"
+  latex={String.raw`\sum_n \lvert e_n \rangle \langle e_n \rvert = \mathbb{1}`}
+/>
+
+Read it as an instruction: *project onto every basis direction, add the pieces back up, and you
+recover what you started with.* Nothing is lost — the basis misses no direction.
+
+## 7. The "Hilbert" part: completeness of the space
+
+Everything so far works in finitely many dimensions. Quantum mechanics needs infinitely many, and
+infinite dimensions bring one genuine hazard.
+
+<Callout kind="note">
+The rational numbers have holes. The sequence 1, 1.4, 1.41, 1.414, ... has entries that crowd
+arbitrarily close together, yet its limit $\sqrt{2}$ is **not rational**. The sequence tries
+to converge and the space has nowhere to put the answer.
+</Callout>
+
+A sequence whose terms eventually crowd arbitrarily close together is a **Cauchy sequence**. A
+space is **complete** when every such sequence actually converges to a point *inside the space* —
+no holes.
+
+<Definition term="Hilbert space">
+A vector space with an inner product that is also complete. Three ingredients: vectors, an inner
+product, no holes.
+</Definition>
+
+<Compare
+  caption="Building up to it"
+  columns={['Structure', 'What it adds', 'Can you do physics in it?']}
+  rows={[
+    ['Vector space', 'add and scale', 'superposition only'],
+    ['Inner product space', 'length, angle, overlap', 'probabilities, but infinite sums may escape'],
+    ['Hilbert space', 'completeness', 'yes — this is the setting of quantum mechanics'],
+  ]}
+/>
+
+Completeness matters because a quantum state is routinely an *infinite* sum
+$\lvert\psi\rangle = \sum_n c_n \lvert e_n \rangle$. Without it, that sum could converge to
+something that is not a state at all, and the theory would be talking about nothing.
+
+## 8. The spaces you will actually use
+
+<Compare
+  columns={['Space', 'Elements', 'Dimension', 'Where it shows up']}
+  rows={[
+    ['$\\mathbb{C}^2$', 'pairs of complex numbers', '2', 'spin-½ — every neutron in this syllabus'],
+    ['$\\mathbb{C}^n$', '$n$ complex numbers', '$n$', 'any finite set of levels'],
+    ['$\\ell^2$', 'sequences with $\\sum |c_n|^2 < \\infty$', 'infinite', 'coefficients in a discrete basis'],
+    ['$L^2(\\mathbb{R}^3)$', 'functions with $\\int |\\psi|^2 \\, d^3r < \\infty$', 'infinite', 'wavefunctions'],
+  ]}
+/>
+
+$L^2$ is the important one. Its membership condition is exactly the normalisation
+requirement: a function belongs only if its total probability is finite. The space of physically
+sensible wavefunctions and the space $L^2$ are the same space — that is not a coincidence,
+it is the definition doing its job.
+
+For $L^2$ the inner product becomes an integral rather than a sum:
+
+<Eq
+  id="l2-inner-product"
+  label="Inner product on L-two"
+  latex={String.raw`\langle \phi \vert \psi \rangle = \int \phi^{*}(\mathbf{r})\, \psi(\mathbf{r}) \, d^3r`}
+/>
+
+Same operation: conjugate the first, multiply, add up. A sum over components becomes an integral
+over positions because the index has become continuous.
+
+## 9. One inequality worth knowing
+
+<Eq
+  id="cauchy-schwarz"
+  label="Cauchy-Schwarz"
+  latex={String.raw`\lvert \langle u \vert v \rangle \rvert \leq \lVert u \rVert \, \lVert v \rVert`}
+/>
+
+Overlap can never exceed the product of the lengths. For normalised states this says
+$\lvert\langle \phi \vert \psi \rangle\rvert \leq 1$ — which is what makes
+$\lvert\langle \phi \vert \psi \rangle\rvert^2$ usable as a probability. Equality holds only
+when the two vectors are parallel, meaning they are the same state up to a phase.
+
+<Callout kind="forward">
+Next: **Dirac notation**. You have already been reading it — $\langle u \vert v \rangle$,
+$\lvert e_n \rangle\langle e_n \rvert$. The next lesson takes the bracket apart into a bra
+$\langle u \rvert$ and a ket $\lvert v \rangle$ as objects in their own right, which is
+what makes operators tractable later. No new physics — a better notation for what you now know.
+</Callout>

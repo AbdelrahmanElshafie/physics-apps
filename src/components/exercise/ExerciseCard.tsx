@@ -7,7 +7,7 @@ import type { Exercise } from '@core/domain'
 import type { ExerciseProgress } from '@core/domain'
 import { MathInput } from '@/components/math/MathInput'
 import { revealSolution, submitAnswer } from '@/app/actions'
-import { useTutorThread } from '@/components/workspace/useTutorThread'
+import { useThreadMessages } from '@/components/workspace/TutorStream'
 import { useWorkspace } from '@/stores/workspace'
 import { cn } from '@/lib/utils'
 
@@ -56,9 +56,10 @@ export function ExerciseCard({
   const [pending, startTransition] = useTransition()
   const askAbout = useWorkspace((s) => s.askAbout)
 
-  // Watch this exercise's own tutor thread. Grading happens out of band — I answer from the
-  // terminal — so without this the card would stay stale until a manual refresh.
-  const { messages } = useTutorThread(`${topicId}#${exercise.id}`)
+  // This exercise's own tutor thread, taken from the page's single stream. Grading happens out
+  // of band — I answer from the terminal — so without this the card would stay stale until a
+  // manual refresh.
+  const messages = useThreadMessages(`${topicId}#${exercise.id}`)
   const liveFeedback = [...messages].reverse().find((m) => m.role === 'tutor')?.body
 
   const explanationMissing = exercise.explain.required && explanation.trim().length === 0

@@ -1,0 +1,268 @@
+# Exercises for Module 1.1 — Hilbert Spaces.
+#
+# Same two-tier grading as the vector-spaces set: anything computable is checked the moment you
+# submit; anything that turns on reasoning is routed to me.
+
+schemaVersion: 1
+topic: m1.1-hilbert-spaces
+intro: >-
+  Twenty-one questions. Sets A to D are mostly computational — get those solid before the
+  conceptual ones, because the concepts are much easier to see once the arithmetic is automatic.
+
+exercises:
+  # ---- Set A: Real inner products and norms ----
+  - id: h1
+    set: A
+    label: Q1
+    kind: numeric
+    prompt: Compute $(3, 2) \cdot (1, 4)$.
+    check: { type: numeric, value: 11 }
+    solution: $(3)(1) + (2)(4) = 3 + 8 = 11$. The result is a single number, not a vector.
+
+  - id: h2
+    set: A
+    label: Q2
+    kind: numeric
+    prompt: What is the norm $\lVert v \rVert$ of $v = (3, 4)$?
+    check: { type: numeric, value: 5 }
+    solution: $\lVert v \rVert = \sqrt{3^2 + 4^2} = \sqrt{25} = 5$.
+
+  - id: h3
+    set: A
+    label: Q3
+    kind: vector
+    prompt: Normalise $v = (3, 4)$ — that is, give the unit vector pointing the same way.
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [0.6, 0.8]
+      tolerance: 0.0001
+    solution: >-
+      Divide by the norm: $\hat{v} = \frac{1}{5}(3, 4) = (0.6, 0.8)$. Check it:
+      $0.6^2 + 0.8^2 = 0.36 + 0.64 = 1$.
+
+  - id: h4
+    set: A
+    label: Q4
+    kind: numeric
+    prompt: What is the norm of $(1, 1, 1, 1)$ in $\mathbb{R}^4$?
+    check: { type: numeric, value: 2 }
+    solution: $\sqrt{1 + 1 + 1 + 1} = \sqrt{4} = 2$. The formula does not care how many dimensions there are.
+
+  # ---- Set B: Complex inner products ----
+  - id: h5
+    set: B
+    label: Q5
+    kind: numeric
+    prompt: For $v = (1 + i,\; 2)$ in $\mathbb{C}^2$, compute $\langle v \vert v \rangle$.
+    check: { type: numeric, value: 6 }
+    explain:
+      required: true
+      hint: Show the conjugate step.
+    solution: >-
+      $\langle v \vert v \rangle = (1+i)^{*}(1+i) + (2)^{*}(2) = (1-i)(1+i) + 4$. The first term is
+      $1 - i^2 = 2$, so the total is $6$. Note it came out real and positive, which is the whole
+      point of conjugating.
+
+  - id: h6
+    set: B
+    label: Q6
+    kind: numeric
+    prompt: For $u = (1,\; i)$ and $v = (i,\; 1)$, compute $\langle u \vert v \rangle$.
+    check: { type: numeric, value: 0 }
+    explain: { required: true }
+    solution: >-
+      Conjugate $u$ first: $u^{*} = (1, -i)$. Then
+      $\langle u \vert v \rangle = (1)(i) + (-i)(1) = i - i = 0$. They are orthogonal, even though
+      neither vector is real.
+
+  - id: h7
+    set: B
+    label: Q7
+    kind: text
+    prompt: >-
+      Why does the complex inner product conjugate one of the vectors? What goes wrong without it?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Without conjugation $\langle v \vert v \rangle$ can be negative or complex — for $v = (i, 0)$
+      you would get $i^2 = -1$. Since $\langle v \vert v \rangle$ is the squared length, and
+      lengths are real and non-negative, the definition would be useless. Conjugating gives
+      $\sum_i \lvert v_i \rvert^2$, which is always real and non-negative.
+
+  - id: h8
+    set: B
+    label: Q8
+    kind: latex
+    prompt: If $\langle u \vert v \rangle = 3 - 2i$, what is $\langle v \vert u \rangle$?
+    check:
+      type: latex-equivalent
+      value: 3+2i
+      accept: ['3 + 2i', '3+2\i', '(3+2i)']
+    solution: >-
+      $3 + 2i$. Conjugate symmetry says
+      $\langle v \vert u \rangle = \langle u \vert v \rangle^{*}$ — swapping the order conjugates
+      the result. This is why order matters in the complex case but not the real one.
+
+  # ---- Set C: Orthogonality ----
+  - id: h9
+    set: C
+    label: Q9
+    kind: truefalse
+    prompt: True or false — $(1, 2)$ and $(2, -1)$ are orthogonal.
+    check: { type: exact, value: true }
+    explain: { required: true }
+    solution: TRUE. $(1)(2) + (2)(-1) = 2 - 2 = 0$, so they are perpendicular.
+
+  - id: h10
+    set: C
+    label: Q10
+    kind: truefalse
+    prompt: True or false — $(1, 2)$ and $(2, 4)$ are orthogonal.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: What is their relationship instead? }
+    solution: >-
+      FALSE. $(1)(2) + (2)(4) = 10 \neq 0$. In fact $(2,4) = 2(1,2)$, so they are linearly
+      dependent — the opposite extreme from orthogonal. Parallel means maximum overlap.
+
+  - id: h11
+    set: C
+    label: Q11
+    kind: numeric
+    prompt: Find the value of $k$ that makes $(3, k)$ orthogonal to $(2, 6)$.
+    check: { type: numeric, value: -1 }
+    solution: >-
+      Set the inner product to zero: $(3)(2) + (k)(6) = 6 + 6k = 0$, so $k = -1$. Check:
+      $(3,-1) \cdot (2,6) = 6 - 6 = 0$.
+
+  - id: h12
+    set: C
+    label: Q12
+    kind: truefalse
+    prompt: >-
+      True or false — the set $\{(1, 0),\; (1, 1)\}$ is an orthonormal basis for $\mathbb{R}^2$.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Check both conditions separately. }
+    solution: >-
+      FALSE. It is a perfectly good basis, but not an orthonormal one: it fails both conditions.
+      $(1,0) \cdot (1,1) = 1 \neq 0$, so they are not orthogonal, and
+      $\lVert (1,1) \rVert = \sqrt{2} \neq 1$, so the second is not normalised.
+
+  # ---- Set D: Orthonormal expansion ----
+  - id: h13
+    set: D
+    label: Q13
+    kind: numeric
+    prompt: >-
+      Take the orthonormal basis $f_1 = (0.6,\; 0.8)$, $f_2 = (-0.8,\; 0.6)$ and the vector
+      $v = (5, 0)$. Find the coefficient $c_1 = \langle f_1 \vert v \rangle$.
+    check: { type: numeric, value: 3, tolerance: 0.0001 }
+    solution: $c_1 = (0.6)(5) + (0.8)(0) = 3$.
+
+  - id: h14
+    set: D
+    label: Q14
+    kind: numeric
+    prompt: For the same basis and vector, find $c_2 = \langle f_2 \vert v \rangle$.
+    check: { type: numeric, value: -4, tolerance: 0.0001 }
+    solution: >-
+      $c_2 = (-0.8)(5) + (0.6)(0) = -4$. Check the reconstruction:
+      $3 f_1 - 4 f_2 = (1.8, 2.4) + (3.2, -2.4) = (5, 0) = v$.
+
+  - id: h15
+    set: D
+    label: Q15
+    kind: numeric
+    prompt: >-
+      Still with $v = (5, 0)$ and $c_1 = 3$, $c_2 = -4$ — compute $c_1^2 + c_2^2$. Compare it with
+      $\lVert v \rVert^2$.
+    check: { type: numeric, value: 25 }
+    explain: { required: true, hint: They are equal. Why must they be? }
+    solution: >-
+      $9 + 16 = 25$, and $\lVert v \rVert^2 = 25$ too. This is Parseval's identity: in an
+      orthonormal basis the squared length is the sum of the squared coefficients. Physically it
+      is why probabilities over a complete set of outcomes add to 1.
+
+  - id: h16
+    set: D
+    label: Q16
+    kind: text
+    prompt: >-
+      Why is it so much easier to find expansion coefficients in an orthonormal basis than in an
+      arbitrary one?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      In a general basis you must solve simultaneous equations, because every basis vector
+      contributes to every component. With orthonormality, taking the inner product with $e_m$
+      annihilates every term except one: $\langle e_m \vert v \rangle = \sum_n c_n \delta_{mn} =
+      c_m$. Each coefficient is read off independently with a single inner product.
+
+  # ---- Set E: Completeness and Hilbert spaces ----
+  - id: h17
+    set: E
+    label: Q17
+    kind: truefalse
+    prompt: True or false — the set of rational numbers is complete.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Think of a sequence of rationals approaching an irrational. }
+    solution: >-
+      FALSE. The sequence $1,\; 1.4,\; 1.41,\; 1.414,\; \ldots$ is Cauchy — its terms crowd
+      arbitrarily close together — but its limit $\sqrt{2}$ is irrational, so it converges to a
+      point outside the set. The rationals have holes; the reals are the completion that fills them.
+
+  - id: h18
+    set: E
+    label: Q18
+    kind: text
+    prompt: What three ingredients does a space need to be a Hilbert space?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      A vector space (you can add and scale), an inner product (length, angle and overlap), and
+      completeness (every Cauchy sequence converges to a point still inside the space).
+
+  - id: h19
+    set: E
+    label: Q19
+    kind: text
+    prompt: >-
+      Why does quantum mechanics need completeness, rather than making do with an inner product
+      space?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Because quantum states are routinely infinite sums, $\lvert\psi\rangle = \sum_n c_n
+      \lvert e_n\rangle$. Without completeness such a sum could fail to converge to anything in the
+      space, so the expansion would describe no state at all. Completeness guarantees the limit is
+      itself a legitimate state.
+
+  # ---- Set F: Physical meaning ----
+  - id: h20
+    set: F
+    label: Q20
+    kind: numeric
+    prompt: >-
+      For two normalised states, what is the largest possible value of
+      $\lvert \langle \phi \vert \psi \rangle \rvert$?
+    check: { type: numeric, value: 1 }
+    explain: { required: true, hint: Use Cauchy-Schwarz. }
+    solution: >-
+      $1$. Cauchy-Schwarz gives $\lvert\langle \phi \vert \psi \rangle\rvert \leq \lVert \phi
+      \rVert \lVert \psi \rVert = 1 \cdot 1 = 1$. This bound is exactly what lets
+      $\lvert\langle \phi \vert \psi \rangle\rvert^2$ be read as a probability.
+
+  - id: h21
+    set: F
+    label: Q21
+    kind: text
+    prompt: >-
+      Two normalised states satisfy $\langle \phi \vert \psi \rangle = 0$. What does that mean
+      physically? What if instead $\lvert\langle \phi \vert \psi \rangle\rvert = 1$?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Zero overlap means the states are perfectly distinguishable: measuring $\phi$ on a system
+      prepared in $\psi$ never happens. Overlap of modulus 1 is the opposite extreme — equality in
+      Cauchy-Schwarz forces the vectors to be parallel, so they are the same physical state
+      differing at most by an overall phase, which is unobservable.

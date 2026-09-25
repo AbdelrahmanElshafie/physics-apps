@@ -4,14 +4,18 @@ import { asThreadId } from '@core/domain'
 import { container } from '@/container'
 
 /**
- * Server-sent events for one tutor thread.
+ * Server-sent events for a tutor conversation.
  *
- * This is the half of the bridge that makes it feel live: the transport watches the thread's
- * directory, and when I write a reply from the terminal it is pushed straight to the open page.
+ * `?topic=<topicId>` streams every thread belonging to that topic — the rail's conversation plus
+ * one per exercise or equation. `?thread=<threadId>` streams a single thread.
  *
- * SSE rather than WebSockets because the traffic is one-directional — questions go out over a
- * server action, only replies come back — and SSE reconnects on its own when the dev server
- * restarts, which it does constantly while authoring.
+ * A page uses the topic form and fans the messages out on the client, because a browser allows
+ * only a handful of concurrent connections per origin: one stream per exercise card saturates the
+ * pool and stalls ordinary navigation and form posts.
+ *
+ * SSE rather than WebSockets because traffic is one-directional — questions go out over a server
+ * action, only replies come back — and SSE reconnects by itself when the dev server restarts,
+ * which it does constantly while authoring.
  */
 
 export const dynamic = 'force-dynamic'
@@ -21,13 +25,14 @@ export const runtime = 'nodejs'
 const HEARTBEAT_MS = 25_000
 
 export async function GET(request: NextRequest) {
-  const threadParam = request.nextUrl.searchParams.get('thread')
-  if (!threadParam) {
-    return new Response('Missing "thread" query parameter.', { status: 400 })
+  const topic = request.nextUrl.searchParams.get('topic')
+  const thread = request.nextUrl.searchParams.get('thread')
+
+  if (!topic && !thread) {
+    return new Response('Provide either a "topic" or a "thread" query parameter.', { status: 400 })
   }
 
   const { tutor } = container()
-  const threadId = asThreadId(threadParam)
   const encoder = new TextEncoder()
 
   const stream = new ReadableStream<Uint8Array>({
@@ -48,10 +53,12 @@ export async function GET(request: NextRequest) {
       // waiting state — a queued badge for the file bridge, a token stream for the API later.
       send('ready', { transport: tutor.id, capabilities: tutor.capabilities })
 
-      const unsubscribe = tutor.subscribe(threadId, (event) => {
+      const onEvent = (event: Parameters<Parameters<typeof tutor.subscribe>[1]>[0]) => {
         if (event.kind === 'message') {
           send('message', {
             id: String(event.message.id),
+            // Included so a topic-scoped stream can be routed to the right card on the client.
+            threadId: String(event.message.threadId),
             role: event.message.role,
             body: event.message.body,
             ts: event.message.ts,
@@ -63,7 +70,11 @@ export async function GET(request: NextRequest) {
         } else {
           send('status', { id: String(event.messageId), status: event.status })
         }
-      })
+      }
+
+      const unsubscribe = topic
+        ? tutor.subscribeTopic(topic, onEvent)
+        : tutor.subscribe(asThreadId(thread!), onEvent)
 
       // Proxies and browsers drop idle connections; a comment frame keeps it warm without
       // registering as an event on the client.

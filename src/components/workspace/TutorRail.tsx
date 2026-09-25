@@ -7,7 +7,7 @@ import { readThread, sendQuestion } from '@/app/actions'
 import { useWorkspace } from '@/stores/workspace'
 import { cn, formatRelative } from '@/lib/utils'
 
-import { useTutorThread, type ThreadMessage } from './useTutorThread'
+import { useThreadMessages, useTutorStream, type ThreadMessage } from './TutorStream'
 
 /**
  * The tutor conversation.
@@ -21,7 +21,7 @@ import { useTutorThread, type ThreadMessage } from './useTutorThread'
 type Message = ThreadMessage
 
 export function TutorRail({ topicId, topicTitle }: { topicId: string; topicTitle: string }) {
-  const { askContext, draft, setDraft, clearAsk, tutorOpen } = useWorkspace()
+  const { askContext, draft, setDraft, clearAsk } = useWorkspace()
   const [history, setHistory] = useState<Message[]>([])
   const [sending, setSending] = useState(false)
   const scroller = useRef<HTMLDivElement>(null)
@@ -45,7 +45,8 @@ export function TutorRail({ topicId, topicTitle }: { topicId: string; topicTitle
     }
   }, [threadId])
 
-  const { messages: live, capabilities, connected } = useTutorThread(threadId, { enabled: tutorOpen })
+  const live = useThreadMessages(threadId)
+  const { capabilities, connected } = useTutorStream()
 
   // The stream replays the whole thread on connect, so it supersedes the seed where ids overlap.
   const messages = [...history.filter((h) => !live.some((l) => l.id === h.id)), ...live].sort((a, b) =>

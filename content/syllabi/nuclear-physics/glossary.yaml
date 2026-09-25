@@ -83,3 +83,67 @@ entries:
       The difference AB minus BA. When it vanishes the observables can be measured
       simultaneously; when it does not, they obey an uncertainty relation.
     seeAlso: [angular-momentum]
+
+  - name: norm
+    latex: \lVert v \rVert
+    term: Norm
+    meaning: >-
+      The length of a vector, defined as the square root of its inner product with itself. A
+      physical quantum state always has norm 1.
+    seeAlso: [inner-product, normalised]
+
+  - name: normalised
+    latex: \lVert \psi \rVert = 1
+    term: Normalised
+    meaning: >-
+      A vector of length one. Required of every physical state, because the squared norm is a
+      total probability.
+    seeAlso: [norm]
+
+  - name: orthogonal
+    latex: \langle u \vert v \rangle = 0
+    term: Orthogonal
+    meaning: >-
+      Two vectors whose inner product vanishes — geometrically perpendicular, physically two
+      perfectly distinguishable states.
+    seeAlso: [inner-product, orthonormal]
+
+  - name: orthonormal
+    latex: \langle e_m \vert e_n \rangle = \delta_{mn}
+    term: Orthonormal
+    meaning: >-
+      A set of vectors that are mutually orthogonal and each of length one. Expansion
+      coefficients in such a basis are single inner products.
+    seeAlso: [basis, orthogonal, completeness]
+
+  - name: completeness
+    latex: \sum_n \lvert e_n \rangle \langle e_n \rvert = \mathbb{1}
+    term: Completeness relation
+    meaning: >-
+      Projecting onto every basis direction and summing the pieces returns the original vector —
+      the basis misses no direction.
+    seeAlso: [orthonormal, basis]
+
+  - name: cauchy
+    latex: \lim_{m,n \to \infty} \lVert v_m - v_n \rVert = 0
+    term: Cauchy sequence
+    meaning: >-
+      A sequence whose terms eventually crowd arbitrarily close together. A space is complete
+      when every such sequence converges to a point inside the space.
+    seeAlso: [hilbert-space]
+
+  - name: hilbert-space
+    latex: \mathcal{H}
+    term: Hilbert space
+    meaning: >-
+      A vector space with an inner product that is also complete. The setting of quantum
+      mechanics — states are its vectors, and observables act on it as operators.
+    seeAlso: [inner-product, cauchy, l2]
+
+  - name: l2
+    latex: L^2
+    term: Square-integrable functions
+    meaning: >-
+      Functions whose total squared magnitude is finite. Exactly the wavefunctions that can be
+      normalised, which is why this is the Hilbert space of quantum mechanics.
+    seeAlso: [hilbert-space, normalised]
