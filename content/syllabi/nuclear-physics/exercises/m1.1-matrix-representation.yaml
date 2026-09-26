@@ -1,0 +1,212 @@
+# Exercises for Module 1.1 — Matrix representation.
+#
+# Mostly computational, because this is the topic where the abstractions finally become arithmetic
+# and the only way to trust that is to do some.
+
+schemaVersion: 1
+topic: m1.1-matrix-representation
+intro: >-
+  Sixteen questions. Set A builds matrices from matrix elements, Set C derives why multiplication
+  works the way it does, and Set E is about what survives a change of basis — which is where the
+  physics lives.
+
+exercises:
+  # ---- Set A: Building the matrix ----
+  - id: r1
+    set: A
+    label: Q1
+    kind: matrix
+    prompt: >-
+      Write the matrix of the projector $\hat{P} = \ket{0}\bra{0}$ in the standard basis
+      $\{\ket{0}, \ket{1}\}$.
+    scaffold: \begin{pmatrix} & \\ & \end{pmatrix}
+    check:
+      type: numeric-matrix
+      value: [[1, 0], [0, 0]]
+    solution: >-
+      $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$. Only $P_{00} = \braoket{0}{\hat{P}}{0} = 1$
+      survives; every other element contains $\braket{0}{1} = 0$.
+
+  - id: r2
+    set: A
+    label: Q2
+    kind: numeric
+    prompt: >-
+      For $\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$, what is the matrix element
+      $\braoket{0}{\sigma_x}{1}$ — that is, row 1, column 2?
+    check: { type: numeric, value: 1 }
+    solution: $1$. The first index selects the row, the second the column.
+
+  - id: r3
+    set: A
+    label: Q3
+    kind: numeric
+    prompt: How many numbers does it take to write an operator on a 3-dimensional space?
+    check: { type: numeric, value: 9 }
+    solution: $N^2 = 9$. One matrix element for every ordered pair of basis vectors.
+
+  - id: r4
+    set: A
+    label: Q4
+    kind: text
+    prompt: >-
+      What does column $n$ of a matrix tell you about the operator, in words?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      It is where the operator sends the $n$-th basis vector, written in that same basis:
+      $\hat{A}\ket{e_n} = \sum_m A_{mn}\ket{e_m}$. Holding a matrix as "a list of where each axis
+      goes" is far more useful than holding it as a grid of numbers.
+
+  # ---- Set B: States as columns ----
+  - id: r5
+    set: B
+    label: Q5
+    kind: vector
+    prompt: >-
+      Write $\ket{\psi} = 3\ket{0} + 4\ket{1}$ as a column in the standard basis.
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [3, 4]
+    solution: $(3, 4)$, since $\psi_n = \braket{e_n}{\psi}$ picks out each coefficient.
+
+  - id: r6
+    set: B
+    label: Q6
+    kind: numeric
+    prompt: For that same state, compute $\braket{\psi}{\psi}$.
+    check: { type: numeric, value: 25 }
+    solution: $3^2 + 4^2 = 25$. To be a physical state it would need dividing by 5.
+
+  - id: r7
+    set: B
+    label: Q7
+    kind: vector
+    prompt: >-
+      Apply $\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ to the column $(3, 4)$.
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [4, 3]
+    solution: $(4, 3)$ — the operator swaps the two components, which is what "flip" means.
+
+  # ---- Set C: Composition ----
+  - id: r8
+    set: C
+    label: Q8
+    kind: text
+    prompt: >-
+      Derive $(AB)_{mn} = \sum_k A_{mk}B_{kn}$ by inserting the identity. Say where each step
+      comes from.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $(AB)_{mn} = \braoket{e_m}{\hat{A}\hat{B}}{e_n} =
+      \bra{e_m}\hat{A}\left(\sum_k \ket{e_k}\bra{e_k}\right)\hat{B}\ket{e_n} =
+      \sum_k \braoket{e_m}{\hat{A}}{e_k}\braoket{e_k}{\hat{B}}{e_n} = \sum_k A_{mk}B_{kn}$.
+      Matrix multiplication is a consequence of completeness, not a convention.
+
+  - id: r9
+    set: C
+    label: Q9
+    kind: matrix
+    prompt: >-
+      With $\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ and
+      $\sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$, compute the product
+      $\sigma_x \sigma_z$.
+    scaffold: \begin{pmatrix} & \\ & \end{pmatrix}
+    check:
+      type: numeric-matrix
+      value: [[0, -1], [1, 0]]
+    solution: >-
+      $\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$. Remember $\sigma_z$ acts first.
+
+  - id: r10
+    set: C
+    label: Q10
+    kind: matrix
+    prompt: Now compute the other order, $\sigma_z \sigma_x$.
+    scaffold: \begin{pmatrix} & \\ & \end{pmatrix}
+    check:
+      type: numeric-matrix
+      value: [[0, 1], [-1, 0]]
+    explain: { required: true, hint: Compare with your answer to Q9. }
+    solution: >-
+      $\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$, which is minus the previous answer. These
+      two operators *anticommute*: $\sigma_x\sigma_z = -\sigma_z\sigma_x$, so their commutator is
+      certainly not zero.
+
+  # ---- Set D: Hermitian matrices ----
+  - id: r11
+    set: D
+    label: Q11
+    kind: truefalse
+    prompt: >-
+      True or false — $\begin{pmatrix} 1 & i \\ -i & 2 \end{pmatrix}$ is Hermitian.
+    check: { type: exact, value: true }
+    explain: { required: true }
+    solution: >-
+      TRUE. Transposing swaps the off-diagonal entries to give $\begin{pmatrix} 1 & -i \\ i & 2
+      \end{pmatrix}$, and conjugating returns the original. Note the diagonal is real, as it must
+      be for any Hermitian matrix.
+
+  - id: r12
+    set: D
+    label: Q12
+    kind: truefalse
+    prompt: >-
+      True or false — $\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ is Hermitian.
+    check: { type: exact, value: false }
+    explain: { required: true }
+    solution: >-
+      FALSE. Its conjugate transpose is $\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$, which is
+      minus the original. This matrix is *anti*-Hermitian.
+
+  - id: r13
+    set: D
+    label: Q13
+    kind: text
+    prompt: Why must the diagonal entries of a Hermitian matrix be real?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Hermiticity says $A_{mn} = (A_{nm})^{*}$. On the diagonal $m = n$, so $A_{nn} =
+      (A_{nn})^{*}$ — and a number equal to its own conjugate is real.
+
+  # ---- Set E: Basis change and invariants ----
+  - id: r14
+    set: E
+    label: Q14
+    kind: numeric
+    prompt: What is the trace of $\sigma_x$ in the standard basis?
+    check: { type: numeric, value: 0 }
+    solution: $0 + 0 = 0$ — the sum of the diagonal entries.
+
+  - id: r15
+    set: E
+    label: Q15
+    kind: numeric
+    prompt: >-
+      In the basis $\{\ket{+}, \ket{-}\}$ the same operator is
+      $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$. What is its trace now?
+    check: { type: numeric, value: 0 }
+    explain: { required: true, hint: Compare with Q14 and say why. }
+    solution: >-
+      $1 + (-1) = 0$, the same as before. The trace is invariant under a change of basis, so it is
+      a property of the operator rather than of the way you wrote it down.
+
+  - id: r16
+    set: E
+    label: Q16
+    kind: text
+    prompt: >-
+      The same operator has different entries in different bases. What, then, is actually physical
+      about a matrix — and why does that matter for a calculated cross-section?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      The basis-independent quantities: trace, determinant, and the eigenvalues. Individual entries
+      are artefacts of the axes you chose. It matters because a measurable quantity cannot depend
+      on an arbitrary choice made while setting up the calculation — if a cross-section changed when
+      you rotated your coordinates, the calculation would be wrong.

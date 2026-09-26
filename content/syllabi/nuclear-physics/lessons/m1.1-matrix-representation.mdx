@@ -1,0 +1,216 @@
+---
+title: Matrix Representation
+summary: >-
+  Choose a basis and every operator becomes an array of numbers. Matrix multiplication turns out
+  not to be a definition but a consequence, and the same operator has a different matrix in every
+  basis — which is the question the next lesson answers.
+readingMinutes: 50
+updated: 2026-09-26
+keyEquations:
+  - latex: A_{mn} = \braoket{e_m}{\hat{A}}{e_n}
+    label: Matrix elements
+  - latex: (AB)_{mn} = \sum_k A_{mk} B_{kn}
+    label: Composition is matrix multiplication
+  - latex: A' = U^{\dagger} A U
+    label: Change of basis
+---
+
+<Callout kind="why">
+Everything so far has been basis-free, which is elegant and completely uncomputable. This lesson
+is the bridge: pick a basis, and each operator collapses into a grid of numbers, each state into a
+column. Two things fall out that are worth the trip — matrix multiplication turns out to be
+*forced* rather than defined, and the same operator gets a different matrix in every basis.
+</Callout>
+
+## 1. The recipe
+
+Sandwich the operator between two basis vectors:
+
+<Eq
+  id="matrix-element-def"
+  label="The matrix element"
+  latex={String.raw`A_{mn} = \braoket{e_m}{\hat{A}}{e_n}`}
+/>
+
+Run $m$ down the rows and $n$ across the columns and you have filled in a grid. For an
+$N$-dimensional space that is $N^2$ numbers, and those numbers *are* the operator — as far as any
+calculation is concerned.
+
+Where does the recipe come from? Insert the identity twice.
+
+<Derivation caption="Why those are the right numbers">
+  <Step
+    why="Start with the operator acting on a basis vector. The result is some ket."
+    latex={String.raw`\hat{A}\ket{e_n}`}
+  />
+  <Step
+    why="Any ket can be expanded in the basis — insert the identity."
+    latex={String.raw`= \left(\sum_m \ket{e_m}\bra{e_m}\right)\hat{A}\ket{e_n}`}
+  />
+  <Step
+    why="Regroup. The bracket is a number, so this is a weighted sum of basis kets."
+    latex={String.raw`= \sum_m \braoket{e_m}{\hat{A}}{e_n} \, \ket{e_m}`}
+  />
+  <Step
+    why="Those weights are exactly the column of the matrix under index n."
+    latex={String.raw`= \sum_m A_{mn} \ket{e_m}`}
+  />
+</Derivation>
+
+<Callout kind="note">
+Read that last line carefully: column $n$ of the matrix tells you **what $\hat{A}$ does to the
+$n$-th basis vector**. That is the most useful way to hold a matrix in your head — not as a grid
+of numbers, but as a list of where each basis direction goes.
+</Callout>
+
+## 2. States become columns
+
+The same move on a state gives its components:
+
+<Eq
+  id="state-column"
+  label="A state as a column"
+  latex={String.raw`\psi_n = \braket{e_n}{\psi} \qquad \ket{\psi} \;\longrightarrow\; \begin{pmatrix} \psi_1 \\ \psi_2 \\ \vdots \end{pmatrix}`}
+/>
+
+And the abstract statement $\hat{A}\ket{\psi} = \ket{\varphi}$ becomes an ordinary matrix acting on
+an ordinary column:
+
+<Eq
+  id="matrix-acting"
+  label="The operator equation, in components"
+  latex={String.raw`\varphi_m = \sum_n A_{mn} \psi_n`}
+/>
+
+## 3. Composition is forced to be matrix multiplication
+
+Nobody decided that matrices multiply row-into-column. It follows from completeness.
+
+<Derivation caption="Deriving matrix multiplication">
+  <Step
+    why="Take the matrix element of a product of two operators."
+    latex={String.raw`(AB)_{mn} = \braoket{e_m}{\hat{A}\hat{B}}{e_n}`}
+  />
+  <Step
+    why="Insert the identity between them — the workhorse move again."
+    latex={String.raw`= \bra{e_m}\hat{A}\left(\sum_k \ket{e_k}\bra{e_k}\right)\hat{B}\ket{e_n}`}
+  />
+  <Step
+    why="Regroup into two matrix elements."
+    latex={String.raw`= \sum_k \braoket{e_m}{\hat{A}}{e_k} \braoket{e_k}{\hat{B}}{e_n}`}
+  />
+  <Step
+    why="Which is precisely the rule you were taught to memorise."
+    latex={String.raw`= \sum_k A_{mk} B_{kn}`}
+  />
+</Derivation>
+
+<Callout kind="why">
+This is worth pausing on. Matrix multiplication looks arbitrary when you first meet it — why *that*
+combination of rows and columns? Because it is what composing two operators does, once you write
+both in a basis. The rule is a theorem, not a convention.
+</Callout>
+
+The same argument turns the abstract dagger into the concrete conjugate transpose:
+
+<Eq
+  id="adjoint-components"
+  label="The adjoint, in components"
+  latex={String.raw`\left(A^{\dagger}\right)_{mn} = \left(A_{nm}\right)^{*}`}
+/>
+
+So a Hermitian operator is a matrix equal to its own conjugate transpose: real on the diagonal,
+and mirrored-and-conjugated off it.
+
+## 4. Worked example: one operator, two bases
+
+Take the spin-flip operator on $\mathbb{C}^2$, in the standard basis
+$\ket{0} = (1,0)$, $\ket{1} = (0,1)$:
+
+<Eq
+  id="sigma-x-standard"
+  label="Spin flip in the standard basis"
+  latex={String.raw`\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}`}
+/>
+
+Column 1 is $(0,1)$ — it sends $\ket{0}$ to $\ket{1}$, which is what "flip" means. Now change to
+the basis of its own combinations:
+
+<Eq
+  id="plus-minus-basis"
+  label="A different basis"
+  latex={String.raw`\ket{+} = \tfrac{1}{\sqrt{2}}\left(\ket{0} + \ket{1}\right), \qquad \ket{-} = \tfrac{1}{\sqrt{2}}\left(\ket{0} - \ket{1}\right)`}
+/>
+
+<Derivation caption="Recomputing the matrix elements">
+  <Step
+    why="Apply the flip to the plus state: it swaps the two components and nothing changes."
+    latex={String.raw`\sigma_x \ket{+} = \tfrac{1}{\sqrt{2}}\left(\ket{1} + \ket{0}\right) = +\ket{+}`}
+  />
+  <Step
+    why="On the minus state the swap reverses the sign."
+    latex={String.raw`\sigma_x \ket{-} = \tfrac{1}{\sqrt{2}}\left(\ket{1} - \ket{0}\right) = -\ket{-}`}
+  />
+  <Step
+    why="So the diagonal elements are plus and minus one, and the off-diagonal ones vanish."
+    latex={String.raw`\sigma_x' = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}`}
+  />
+</Derivation>
+
+<Compare
+  caption="The same operator, written twice"
+  columns={['Basis', 'Matrix', 'Reading']}
+  rows={[
+    ['$\\{\\ket{0}, \\ket{1}\\}$', 'off-diagonal', 'it mixes the basis states'],
+    ['$\\{\\ket{+}, \\ket{-}\\}$', 'diagonal', 'it merely rescales them'],
+  ]}
+/>
+
+<Callout kind="warning">
+Nothing was done to the operator. It is the same physical instruction in both lines — only the
+axes changed. A matrix is not an operator; it is an operator *plus a choice of basis*.
+</Callout>
+
+## 5. Changing basis
+
+Collect the new basis vectors as the columns of a matrix $U$. Then:
+
+<Eq
+  id="similarity"
+  label="Similarity transformation"
+  latex={String.raw`A' = U^{\dagger} A U`}
+/>
+
+Because the columns of $U$ are orthonormal, $U$ is unitary — which is the concrete reason the last
+lesson called unitary operators "changes of basis". For the example above,
+$U = \tfrac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$, and multiplying it out
+returns exactly the diagonal matrix.
+
+## 6. What survives a change of basis
+
+If the numbers all change, what is actually a property of the operator?
+
+<Compare
+  caption="Invariants"
+  columns={['Quantity', 'Standard basis', 'Plus-minus basis', 'Invariant?']}
+  rows={[
+    ['Entries', '$0, 1, 1, 0$', '$1, 0, 0, -1$', 'no'],
+    ['Trace $\\operatorname{tr} A$', '$0 + 0 = 0$', '$1 + (-1) = 0$', 'yes'],
+    ['Determinant', '$-1$', '$-1$', 'yes'],
+    ['Eigenvalues', '$\\pm 1$', '$\\pm 1$', 'yes'],
+  ]}
+/>
+
+Trace and determinant are basis-independent, so they are honest facts about the operator rather
+than artefacts of how you wrote it down. This is why they turn up everywhere in nuclear physics:
+a cross-section cannot depend on which axes you chose.
+
+<Callout kind="forward">
+Notice what happened in the worked example. In one basis the matrix was diagonal, and in that
+basis the operator's action is trivial — multiply each component by a number. Those numbers were
+$\pm 1$, the eigenvalues.
+
+**Next: eigenvalue problems** — how to find that basis for any operator, rather than being handed
+it. For the optical model that is the difference between a coupled system of equations and a set
+of independent ones.
+</Callout>
