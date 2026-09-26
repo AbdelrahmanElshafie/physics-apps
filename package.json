@@ -17,7 +17,8 @@
     "tutor:reply": "tsx scripts/tutor.ts reply",
     "validate:content": "tsx scripts/validate-content.ts",
     "export:handbook": "tsx scripts/export-handbook.ts",
-    "fonts:sync": "tsx scripts/sync-mathlive-fonts.ts"
+    "fonts:sync": "tsx scripts/sync-mathlive-fonts.ts",
+    "grasp:script": "tsx scripts/grasp-script.ts"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.12",

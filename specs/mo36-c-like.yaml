@@ -1,0 +1,69 @@
+# C-like molybdenum, Mo XXXVII — the calculation already run by hand in
+# G:\Researches\GRASP\Mo36_script.sh, expressed as a spec.
+#
+# This is the reference case: generate from it, and the script should reproduce the run that
+# produced Mo36_results (346 even CSFs, 423 odd). Change one field and diff the output to see
+# exactly what that parameter controls.
+#
+#   pnpm grasp:script specs/mo36-c-like.yaml -o out/mo36.sh
+
+name: Mo36_calculation
+ion: Mo XXXVII (C-like Mo)
+electrons: 6
+
+nucleus:
+  element: Mo
+  Z: 42
+  A: 98
+  # A static, spinless nucleus: the right choice when you want energy levels and transitions
+  # rather than hyperfine structure.
+  spin: 0
+  magneticMoment: 0
+  quadrupoleMoment: 0
+
+# 1s2 is closed and stays closed. The six electrons are 1s2 2s2 2p2.
+core: He
+
+blocks:
+  - id: even
+    label: Even parity
+    reference: ['2s(2,*)2p(2,*)']
+    # 2*J from 0 to 4, i.e. J = 0, 1, 2 — three blocks.
+    twoJMin: 0
+    twoJMax: 4
+    blockCount: 3
+    levels: '1-10'
+
+  - id: odd
+    label: Odd parity
+    reference: ['2s(1,*)2p(3,*)']
+    # J = 0, 1, 2, 3 — four blocks.
+    twoJMin: 0
+    twoJMax: 6
+    blockCount: 4
+    levels: '1-10'
+
+activeSet:
+  # The first correlation layer. El-Sayed's papers push this out to n=6, l=3 one layer at a time
+  # and use the shift between layers as the uncertainty estimate.
+  orbitals: ['3s', '3p', '3d']
+  # Single and double excitations, as in both papers.
+  excitations: 2
+
+varyOrbitals: '*'
+# The orbitals occupied in the reference configurations must keep the right number of nodes.
+spectroscopicOrbitals: '1s,2s,2p-,2p'
+levelWeights: standard
+maxScfCycles: 100
+
+rci:
+  transverse: true # Breit interaction
+  modifyFrequencies: false
+  vacuumPolarisation: true # QED
+  normalMassShift: true
+  specificMassShift: true
+  selfEnergy: true # QED, the larger term
+  selfEnergyMaxN: 3
+
+graspHome: /home/bodo/GRASP2018
+workDir: ~/Mo36_verify

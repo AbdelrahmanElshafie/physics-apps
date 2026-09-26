@@ -145,6 +145,34 @@ Arabic style: plain Egyptian-leaning phrasing, technical terms kept in English i
 first use (`الضرب الداخلي (inner product)`), Western digits throughout — that is what the papers
 and the nuclear data tables use.
 
+## GRASP / MCDHF track
+
+The research goal is producing work like Fatma El-Sayed's JQSRT papers (Zr XXXV 2020, Mo XXXVI
+2021): MCDHF in GRASP2018, active-space CSF expansion, RCI with Breit + QED, then E1/M1/E2/M2
+transition data with uncertainty taken from the shift between successive active-set layers.
+
+GRASP2018 lives in WSL at `~/GRASP2018` (53 binaries, MPI builds included). Reference material and
+a known-good hand-written pipeline are in `G:\Researches\GRASP`.
+
+- `src/core/domain/grasp.ts` — a calculation as data. Every field is an answer one GRASP program
+  asks for, named with the program's own prompt wording, taken from the GRASP2018 sources.
+- `src/core/services/grasp-script.ts` — spec in, runnable pipeline out. Pure, so it is testable and
+  will feed the WSL runner later.
+- `src/adapters/grasp/parse/rlevels.ts` — the energy-level table, written against real output.
+- `pnpm grasp:script specs/<spec>.yaml -o out/run.sh`
+
+**Never put a comment inside a heredoc.** Its contents are the program's stdin, so an annotated
+answer line is fed to GRASP as part of that answer. Annotations go in a comment block above the
+heredoc; a test enforces it. This is not hypothetical — it killed a real run.
+
+**rnucleus takes seven answers**, not six: Z, A, revise?, *mass of the neutral atom in amu*, spin,
+dipole moment, quadrupole moment. Omitting the mass shifts every later answer up by one and the
+program dies on end-of-file far from the cause.
+
+Verification standard for this track: the generated Mo36 script produces `even.c` and `odd.c`
+**byte-identical** to the real run, with 346 and 423 CSFs matching `ncftot` in its rlevels output.
+Hold new GRASP tooling to that bar — check it against artefacts that already exist.
+
 ## Exercise grading is two-tier
 
 `AnswerChecker` settles what it can (numerics, vectors, matrices, booleans, normalised LaTeX).

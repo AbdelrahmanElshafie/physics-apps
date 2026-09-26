@@ -20,3 +20,6 @@ exports/
 
 # Scratchpads are per-machine working, not content.
 data/scratch/
+
+# Generated GRASP scripts.
+out/
