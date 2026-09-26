@@ -1,75 +1,74 @@
-# Computational Atomic & Nuclear Physics.
+# الفيزياء الذرية والنووية الحسابية — شجرة المنهج بالعربية.
 #
-# GENERATED. Module and topic ids are load-bearing: progress in data/events.jsonl is
-# keyed on them, so renaming one orphans completed work. syllabus.ar.yaml is produced
-# from the same source and must keep identical ids; validate:content enforces it.
+# مولّد آليًا. المعرّفات (ids) مطابقة للنسخة الإنجليزية بالظبط، والعناوين فقط مترجمة.
+# العناوين اللي لسه مترجمتش بتفضل بالإنجليزي — التطابق البنيوي هو المهم.
 
 schemaVersion: 1
 id: nuclear-physics
-title: Computational Atomic & Nuclear Physics
-subtitle: From the mathematics to published MCDHF calculations
-description: 'A single path: mathematical foundations, relativistic quantum mechanics, MCDHF theory, GRASP2018
-  in practice, ending in an original calculation written up for publication.'
-goal: Produce publishable MCDHF atomic structure calculations
+title: الفيزياء الذرية والنووية الحسابية
+subtitle: من الرياضيات إلى حسابات MCDHF منشورة
+description: 'مسار متكامل: الأسس الرياضية، ميكانيكا الكم النسبية، نظرية MCDHF، GRASP2018 عمليًا، وينتهي
+  بحساب أصلي مكتوب للنشر.'
+goal: إنتاج حسابات MCDHF قابلة للنشر
 phases:
 - id: p1
-  title: Phase 1 — Mathematical Foundations
-  summary: The mathematics both tracks are written in.
+  title: المرحلة 1 — الأسس الرياضية
+  summary: الرياضيات اللي المسارين مكتوبين بيها.
   modules:
   - id: m1.1
-    title: 1.1 Linear Algebra for Quantum Mechanics
-    group: Module 1 — Quantum Mechanics Mathematics
+    title: 1.1 الجبر الخطي لميكانيكا الكم
+    group: الوحدة 1 — رياضيات ميكانيكا الكم
     topics:
     - id: m1.1-vector-spaces-basics
-      title: Vector spaces basics
+      title: أساسيات الفضاءات المتجهية
       estimatedMinutes: 45
     - id: m1.1-hilbert-spaces
-      title: Hilbert spaces
+      title: فضاءات هيلبرت
       estimatedMinutes: 45
       requires:
       - m1.1-vector-spaces-basics
     - id: m1.1-dirac-notation-bra-ket
-      title: Dirac notation (bra-ket)
+      title: ترميز ديراك (bra-ket)
       estimatedMinutes: 45
       requires:
       - m1.1-hilbert-spaces
     - id: m1.1-inner-products
-      title: Inner products
+      title: الضرب الداخلي
       estimatedMinutes: 45
       requires:
       - m1.1-dirac-notation-bra-ket
     - id: m1.1-linear-operators
-      title: Linear operators
+      title: المؤثرات الخطية
       estimatedMinutes: 45
       requires:
       - m1.1-inner-products
     - id: m1.1-matrix-representation
-      title: Matrix representation
+      title: التمثيل المصفوفي
       estimatedMinutes: 45
       requires:
       - m1.1-linear-operators
     - id: m1.1-eigenvalue-problems
-      title: Eigenvalue problems
+      title: مسائل القيم الذاتية
       estimatedMinutes: 45
       requires:
       - m1.1-matrix-representation
     - id: m1.1-hermitian-operators
-      title: Hermitian operators
+      title: المؤثرات الهرميتية
       estimatedMinutes: 45
       requires:
       - m1.1-eigenvalue-problems
     - id: m1.1-commutators
-      title: Commutators
+      title: المبدلات
       estimatedMinutes: 45
       requires:
       - m1.1-hermitian-operators
     - id: m1.1-unitary-transformations
-      title: Unitary transformations
+      title: التحويلات الوحدوية
       estimatedMinutes: 45
       requires:
       - m1.1-commutators
     - id: m1.1-checkpoint-1-1
-      title: Checkpoint 1.1
+      title: نقطة مراجعة 1.1
       kind: checkpoint
       estimatedMinutes: 30
       requires:
@@ -84,8 +83,8 @@ phases:
       - m1.1-commutators
       - m1.1-unitary-transformations
   - id: m1.2
-    title: 1.2 Differential Equations
-    group: Module 1 — Quantum Mechanics Mathematics
+    title: 1.2 المعادلات التفاضلية
+    group: الوحدة 1 — رياضيات ميكانيكا الكم
     topics:
     - id: m1.2-odes-review
       title: ODEs review
@@ -147,8 +146,8 @@ phases:
       - m1.2-spherical-bessel-functions
       - m1.2-radial-schrodinger-equation
   - id: m1.3
-    title: 1.3 Complex Analysis
-    group: Module 1 — Quantum Mechanics Mathematics
+    title: 1.3 التحليل المركب
+    group: الوحدة 1 — رياضيات ميكانيكا الكم
     topics:
     - id: m1.3-complex-numbers-review
       title: Complex numbers review
@@ -204,8 +203,8 @@ phases:
       - m1.3-poles-and-branch-cuts
       - m1.3-application-resonances-as-complex-poles
   - id: m1.4
-    title: 1.4 Numerical Methods
-    group: Module 1 — Quantum Mechanics Mathematics
+    title: 1.4 الطرق العددية
+    group: الوحدة 1 — رياضيات ميكانيكا الكم
     topics:
     - id: m1.4-root-finding-newton-raphson
       title: Root finding (Newton-Raphson)
@@ -268,8 +267,8 @@ phases:
       - m1.4-monte-carlo-basics
       - m1.4-solve-schrodinger-with-rk4
   - id: m2.1
-    title: 2.1 Orbital Angular Momentum
-    group: Module 2 — Angular Momentum Theory
+    title: 2.1 الزخم الزاوي المداري
+    group: الوحدة 2 — نظرية الزخم الزاوي
     topics:
     - id: m2.1-angular-momentum-operators
       title: Angular momentum operators
@@ -307,8 +306,8 @@ phases:
       - m2.1-spherical-harmonics-ylm
       - m2.1-ladder-operators
   - id: m2.2
-    title: 2.2 Spin Angular Momentum
-    group: Module 2 — Angular Momentum Theory
+    title: 2.2 الزخم الزاوي المغزلي
+    group: الوحدة 2 — نظرية الزخم الزاوي
     topics:
     - id: m2.2-spin-half-particles
       title: Spin-half particles
@@ -340,8 +339,8 @@ phases:
       - m2.2-spinors
       - m2.2-spin-orbit-coupling
   - id: m2.3
-    title: 2.3 Addition of Angular Momenta
-    group: Module 2 — Angular Momentum Theory
+    title: 2.3 جمع الزخوم الزاوية
+    group: الوحدة 2 — نظرية الزخم الزاوي
     topics:
     - id: m2.3-coupling-j-l-s
       title: Coupling J = L + S
@@ -407,54 +406,53 @@ phases:
       - m2.3-racah-algebra
       - m2.3-partial-wave-sums-in-talys
 - id: p2
-  title: Phase 2 — Quantum Mechanics for Atoms
-  summary: Relativistic quantum mechanics, the Dirac equation, and the many-electron structure MCDHF is
-    built on.
+  title: المرحلة 2 — ميكانيكا الكم للذرات
+  summary: ميكانيكا الكم النسبية، ومعادلة ديراك، وبنية الذرة متعددة الإلكترونات اللي MCDHF متبني عليها.
   modules:
   - id: m11.1
-    title: 11.1 Relativistic Quantum Mechanics
-    group: Module 11 — Quantum Mechanics for Atoms
+    title: 11.1 ميكانيكا الكم النسبية
+    group: الوحدة 11 — ميكانيكا الكم للذرات
     topics:
     - id: m11.1-why-relativity-matters-for-atoms
       estimatedMinutes: 45
       critical: true
-      title: Why relativity matters for atoms
+      title: ليه النسبية مهمة للذرات
     - id: m11.1-failures-of-the-schrodinger-equation
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.1-why-relativity-matters-for-atoms
-      title: Failures of the Schrodinger equation
+      title: أين تفشل معادلة شرودنجر
     - id: m11.1-the-klein-gordon-equation-and-its-problems
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.1-failures-of-the-schrodinger-equation
-      title: The Klein-Gordon equation and its problems
+      title: معادلة كلاين-جوردون ومشاكلها
     - id: m11.1-the-dirac-equation
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.1-the-klein-gordon-equation-and-its-problems
-      title: The Dirac equation
+      title: معادلة ديراك
     - id: m11.1-dirac-matrices-and-spinors
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.1-the-dirac-equation
-      title: Dirac matrices and spinors
+      title: مصفوفات ديراك والسبينورات
     - id: m11.1-large-and-small-components
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.1-dirac-matrices-and-spinors
-      title: Large and small components
+      title: المركبتان الكبيرة والصغيرة
     - id: m11.1-negative-energy-solutions
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.1-large-and-small-components
-      title: Negative energy solutions
+      title: حلول الطاقة السالبة
     - id: m11.1-checkpoint-11-1
       estimatedMinutes: 30
       kind: checkpoint
@@ -467,53 +465,53 @@ phases:
       - m11.1-dirac-matrices-and-spinors
       - m11.1-large-and-small-components
       - m11.1-negative-energy-solutions
-      title: Checkpoint 11.1
+      title: نقطة مراجعة 11.1
   - id: m11.2
-    title: 11.2 The Dirac Equation in a Central Field
-    group: Module 11 — Quantum Mechanics for Atoms
+    title: 11.2 معادلة ديراك في مجال مركزي
+    group: الوحدة 11 — ميكانيكا الكم للذرات
     topics:
     - id: m11.2-separation-in-spherical-coordinates
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.1-checkpoint-11-1
-      title: Separation in spherical coordinates
+      title: الفصل في الإحداثيات الكروية
     - id: m11.2-the-quantum-number-kappa
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.2-separation-in-spherical-coordinates
-      title: The quantum number kappa
+      title: العدد الكمي كابا
     - id: m11.2-the-radial-dirac-equations
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.2-the-quantum-number-kappa
-      title: The radial Dirac equations
+      title: معادلات ديراك القطرية
     - id: m11.2-dirac-orbitals
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.2-the-radial-dirac-equations
-      title: Dirac orbitals
+      title: أوربيتالات ديراك
     - id: m11.2-hydrogenic-dirac-solutions
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.2-dirac-orbitals
-      title: Hydrogenic Dirac solutions
+      title: حلول ديراك الهيدروجينية
     - id: m11.2-fine-structure-from-first-principles
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.2-hydrogenic-dirac-solutions
-      title: Fine structure from first principles
+      title: البنية الدقيقة من المبادئ الأولى
     - id: m11.2-relativistic-contraction-of-s-orbitals
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.2-fine-structure-from-first-principles
-      title: Relativistic contraction of s orbitals
+      title: الانكماش النسبي لأوربيتالات s
     - id: m11.2-checkpoint-11-2
       estimatedMinutes: 30
       kind: checkpoint
@@ -526,59 +524,59 @@ phases:
       - m11.2-hydrogenic-dirac-solutions
       - m11.2-fine-structure-from-first-principles
       - m11.2-relativistic-contraction-of-s-orbitals
-      title: Checkpoint 11.2
+      title: نقطة مراجعة 11.2
   - id: m11.3
-    title: 11.3 Many-Electron Atoms
-    group: Module 11 — Quantum Mechanics for Atoms
+    title: 11.3 الذرات متعددة الإلكترونات
+    group: الوحدة 11 — ميكانيكا الكم للذرات
     topics:
     - id: m11.3-the-n-electron-hamiltonian
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.2-checkpoint-11-2
-      title: The N-electron Hamiltonian
+      title: هاميلتوني N إلكترون
     - id: m11.3-slater-determinants
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.3-the-n-electron-hamiltonian
-      title: Slater determinants
+      title: محددات سليتر
     - id: m11.3-subshells-and-occupation
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.3-slater-determinants
-      title: Subshells and occupation
+      title: الأغلفة الفرعية والإشغال
     - id: m11.3-jj-coupling
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.3-subshells-and-occupation
-      title: jj coupling
+      title: اقتران jj
     - id: m11.3-lsj-coupling-and-when-each-applies
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.3-jj-coupling
-      title: LSJ coupling and when each applies
+      title: اقتران LSJ ومتى نستخدم كل واحد
     - id: m11.3-configuration-state-functions
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.3-lsj-coupling-and-when-each-applies
-      title: Configuration state functions
+      title: دوال حالة التوزيع (CSF)
     - id: m11.3-atomic-state-functions
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.3-configuration-state-functions
-      title: Atomic state functions
+      title: دوال الحالة الذرية (ASF)
     - id: m11.3-parity-and-j-blocks
       estimatedMinutes: 45
       critical: true
       requires:
       - m11.3-atomic-state-functions
-      title: Parity and J blocks
+      title: التماثل وكتل J
     - id: m11.3-checkpoint-11-3
       estimatedMinutes: 30
       kind: checkpoint
@@ -592,14 +590,14 @@ phases:
       - m11.3-configuration-state-functions
       - m11.3-atomic-state-functions
       - m11.3-parity-and-j-blocks
-      title: Checkpoint 11.3
+      title: نقطة مراجعة 11.3
 - id: p3
-  title: Phase 3 — Scattering and Nuclear Theory
-  summary: Scattering theory, nuclear structure and reactions.
+  title: المرحلة 3 — التشتت والنظرية النووية
+  summary: نظرية التشتت وبنية النواة والتفاعلات النووية.
   modules:
   - id: m3.1
-    title: 3.1 Basic Scattering Concepts
-    group: Module 3 — Scattering Theory
+    title: 3.1 مفاهيم التشتت الأساسية
+    group: الوحدة 3 — نظرية التشتت
     topics:
     - id: m3.1-cross-section-definition
       title: Cross-section definition
@@ -631,8 +629,8 @@ phases:
       - m3.1-lab-vs-centre-of-mass-frames
       - m3.1-elastic-vs-inelastic-scattering
   - id: m3.2
-    title: 3.2 Partial Wave Analysis
-    group: Module 3 — Scattering Theory
+    title: 3.2 تحليل الموجات الجزئية
+    group: الوحدة 3 — نظرية التشتت
     topics:
     - id: m3.2-plane-wave-expansion
       title: Plane wave expansion
@@ -670,8 +668,8 @@ phases:
       - m3.2-the-s-matrix
       - m3.2-optical-theorem
   - id: m3.3
-    title: 3.3 Resonance Scattering
-    group: Module 3 — Scattering Theory
+    title: 3.3 تشتت الرنين
+    group: الوحدة 3 — نظرية التشتت
     topics:
     - id: m3.3-breit-wigner-formula
       title: Breit-Wigner formula
@@ -715,8 +713,8 @@ phases:
       - m3.3-statistical-factor
       - m3.3-r-matrix-theory-introduction
   - id: m3.4
-    title: 3.4 The Optical Model
-    group: Module 3 — Scattering Theory
+    title: 3.4 النموذج البصري
+    group: الوحدة 3 — نظرية التشتت
     topics:
     - id: m3.4-complex-potential
       title: Complex potential
@@ -798,8 +796,8 @@ phases:
       - m3.4-extract-phase-shifts
       - m3.4-calculate-elastic-cross-section
   - id: m4.1
-    title: 4.1 Basic Nuclear Properties
-    group: Module 4 — Nuclear Structure
+    title: 4.1 الخواص النووية الأساسية
+    group: الوحدة 4 — البنية النووية
     topics:
     - id: m4.1-binding-energy
       title: Binding energy
@@ -844,8 +842,8 @@ phases:
       - m4.1-separation-energies
       - m4.1-calculate-properties-for-th-232
   - id: m4.2
-    title: 4.2 Nuclear Shell Model
-    group: Module 4 — Nuclear Structure
+    title: 4.2 نموذج الأغلفة النووي
+    group: الوحدة 4 — البنية النووية
     topics:
     - id: m4.2-magic-numbers
       title: Magic numbers
@@ -896,8 +894,8 @@ phases:
       - m4.2-ground-state-configurations
       - m4.2-th-232-structure
   - id: m4.3
-    title: 4.3 Collective Motion
-    group: Module 4 — Nuclear Structure
+    title: 4.3 الحركة الجماعية
+    group: الوحدة 4 — البنية النووية
     topics:
     - id: m4.3-deformation-parameters
       title: Deformation parameters
@@ -935,8 +933,8 @@ phases:
       - m4.3-giant-dipole-resonance
       - m4.3-gdr-in-deformed-nuclei
   - id: m4.4
-    title: 4.4 Nuclear Level Density
-    group: Module 4 — Nuclear Structure
+    title: 4.4 كثافة المستويات النووية
+    group: الوحدة 4 — البنية النووية
     topics:
     - id: m4.4-level-density-definition
       title: Level density definition
@@ -1002,8 +1000,8 @@ phases:
       - m4.4-microscopic-approaches
       - m4.4-talys-compare-ldmodel-1-6
   - id: m5.1
-    title: 5.1 Reaction Mechanisms
-    group: Module 5 — Nuclear Reactions
+    title: 5.1 آليات التفاعل
+    group: الوحدة 5 — التفاعلات النووية
     topics:
     - id: m5.1-direct-reactions
       title: Direct reactions
@@ -1035,8 +1033,8 @@ phases:
       - m5.1-pre-equilibrium
       - m5.1-bohr-independence-hypothesis
   - id: m5.2
-    title: 5.2 Compound Nucleus Model
-    group: Module 5 — Nuclear Reactions
+    title: 5.2 نموذج النواة المركبة
+    group: الوحدة 5 — التفاعلات النووية
     topics:
     - id: m5.2-formation-cross-section
       title: Formation cross-section
@@ -1062,8 +1060,8 @@ phases:
       - m5.2-transmission-coefficients
       - m5.2-statistical-decay
   - id: m5.3
-    title: 5.3 Hauser-Feshbach Theory
-    group: Module 5 — Nuclear Reactions
+    title: 5.3 نظرية هاوزر-فيشباخ
+    group: الوحدة 5 — التفاعلات النووية
     topics:
     - id: m5.3-master-equation-derivation
       title: Master equation derivation
@@ -1150,8 +1148,8 @@ phases:
       - m5.3-moldauer-prescription
       - m5.3-derive-the-capture-cross-section-formula
   - id: m5.4
-    title: 5.4 Gamma-Ray Transmission
-    group: Module 5 — Nuclear Reactions
+    title: 5.4 نفاذية أشعة جاما
+    group: الوحدة 5 — التفاعلات النووية
     topics:
     - id: m5.4-e1-m1-and-e2-transitions
       title: E1, M1 and E2 transitions
@@ -1190,8 +1188,8 @@ phases:
       - m5.4-gdr-as-a-lorentzian
       - m5.4-talys-strength-models-8-9-and-10
   - id: m5.5
-    title: 5.5 Fission
-    group: Module 5 — Nuclear Reactions
+    title: 5.5 الانشطار
+    group: الوحدة 5 — التفاعلات النووية
     topics:
     - id: m5.5-fission-barrier-concept
       title: Fission barrier concept
@@ -1229,8 +1227,8 @@ phases:
       - m5.5-transition-states
       - m5.5-fission-vs-neutron-emission
   - id: m6.1
-    title: 6.1 Thermal and Resonance Region
-    group: Module 6 — Neutron Capture
+    title: 6.1 المنطقة الحرارية والرنينية
+    group: الوحدة 6 — أسر النيوترون
     topics:
     - id: m6.1-the-1-v-law
       title: The 1/v law
@@ -1262,8 +1260,8 @@ phases:
       - m6.1-westcott-g-factors
       - m6.1-resonance-integrals
   - id: m6.2
-    title: 6.2 Unresolved Resonance Region
-    group: Module 6 — Neutron Capture
+    title: 6.2 منطقة الرنين غير المحلول
+    group: الوحدة 6 — أسر النيوترون
     topics:
     - id: m6.2-statistical-treatment
       title: Statistical treatment
@@ -1289,8 +1287,8 @@ phases:
       - m6.2-average-resonance-parameters
       - m6.2-strength-function
   - id: m6.3
-    title: 6.3 Fast Neutron Region
-    group: Module 6 — Neutron Capture
+    title: 6.3 منطقة النيوترونات السريعة
+    group: الوحدة 6 — أسر النيوترون
     topics:
     - id: m6.3-hauser-feshbach-regime
       title: Hauser-Feshbach regime
@@ -1316,8 +1314,8 @@ phases:
       - m6.3-pre-equilibrium-contributions
       - m6.3-channel-competition
   - id: m6.4
-    title: 6.4 Maxwellian-Averaged Cross Sections
-    group: Module 6 — Neutron Capture
+    title: 6.4 المقاطع العرضية بمتوسط ماكسويل
+    group: الوحدة 6 — أسر النيوترون
     topics:
     - id: m6.4-macs-formula
       title: MACS formula
@@ -1350,33 +1348,33 @@ phases:
       - m6.4-s-process-nucleosynthesis
       - m6.4-calculate-macs
 - id: p4
-  title: Phase 4 — MCDHF Theory
-  summary: The variational method, electron correlation, and the physics beyond Dirac-Coulomb.
+  title: المرحلة 4 — نظرية MCDHF
+  summary: الطريقة التغايرية، والترابط الإلكتروني، والفيزياء بعد ديراك-كولوم.
   modules:
   - id: m12.1
-    title: 12.1 The Variational Method for Atoms
-    group: Module 12 — MCDHF Theory
+    title: 12.1 الطريقة التغايرية للذرات
+    group: الوحدة 12 — نظرية MCDHF
     topics:
     - id: m12.1-the-rayleigh-ritz-principle
       estimatedMinutes: 45
       requires:
       - m11.3-checkpoint-11-3
-      title: The Rayleigh-Ritz principle
+      title: مبدأ رايلي-ريتز
     - id: m12.1-the-energy-functional
       estimatedMinutes: 45
       requires:
       - m12.1-the-rayleigh-ritz-principle
-      title: The energy functional
+      title: دالّية الطاقة
     - id: m12.1-optimal-level-and-extended-optimal-level
       estimatedMinutes: 45
       requires:
       - m12.1-the-energy-functional
-      title: Optimal level and extended optimal level
+      title: المستوى الأمثل والمستوى الأمثل الممتد
     - id: m12.1-level-weights
       estimatedMinutes: 45
       requires:
       - m12.1-optimal-level-and-extended-optimal-level
-      title: Level weights
+      title: أوزان المستويات
     - id: m12.1-checkpoint-12-1
       estimatedMinutes: 30
       kind: checkpoint
@@ -1385,35 +1383,35 @@ phases:
       - m12.1-the-energy-functional
       - m12.1-optimal-level-and-extended-optimal-level
       - m12.1-level-weights
-      title: Checkpoint 12.1
+      title: نقطة مراجعة 12.1
   - id: m12.2
-    title: 12.2 The MCDHF Equations
-    group: Module 12 — MCDHF Theory
+    title: 12.2 معادلات MCDHF
+    group: الوحدة 12 — نظرية MCDHF
     topics:
     - id: m12.2-deriving-the-mcdhf-equations
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.1-checkpoint-12-1
-      title: Deriving the MCDHF equations
+      title: اشتقاق معادلات MCDHF
     - id: m12.2-the-self-consistent-field-procedure
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.2-deriving-the-mcdhf-equations
-      title: The self-consistent field procedure
+      title: إجراء المجال ذاتي الاتساق
     - id: m12.2-convergence-and-how-it-fails
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.2-the-self-consistent-field-procedure
-      title: Convergence and how it fails
+      title: التقارب وكيف يفشل
     - id: m12.2-spectroscopic-and-correlation-orbitals
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.2-convergence-and-how-it-fails
-      title: Spectroscopic and correlation orbitals
+      title: الأوربيتالات الطيفية والترابطية
     - id: m12.2-checkpoint-12-2
       estimatedMinutes: 30
       kind: checkpoint
@@ -1423,60 +1421,60 @@ phases:
       - m12.2-the-self-consistent-field-procedure
       - m12.2-convergence-and-how-it-fails
       - m12.2-spectroscopic-and-correlation-orbitals
-      title: Checkpoint 12.2
+      title: نقطة مراجعة 12.2
   - id: m12.3
-    title: 12.3 Electron Correlation and the Active Space
-    group: Module 12 — MCDHF Theory
+    title: 12.3 الترابط الإلكتروني والفضاء النشط
+    group: الوحدة 12 — نظرية MCDHF
     topics:
     - id: m12.3-what-electron-correlation-means
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.2-checkpoint-12-2
-      title: What electron correlation means
+      title: معنى الترابط الإلكتروني
     - id: m12.3-valence-valence-correlation
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.3-what-electron-correlation-means
-      title: Valence-valence correlation
+      title: ترابط التكافؤ-التكافؤ
     - id: m12.3-core-valence-correlation
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.3-valence-valence-correlation
-      title: Core-valence correlation
+      title: ترابط القلب-التكافؤ
     - id: m12.3-core-core-correlation
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.3-core-valence-correlation
-      title: Core-core correlation
+      title: ترابط القلب-القلب
     - id: m12.3-the-active-space-approach
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.3-core-core-correlation
-      title: The active space approach
+      title: منهج الفضاء النشط
     - id: m12.3-single-and-double-excitations
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.3-the-active-space-approach
-      title: Single and double excitations
+      title: الإثارات الأحادية والثنائية
     - id: m12.3-layer-by-layer-convergence
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.3-single-and-double-excitations
-      title: Layer-by-layer convergence
+      title: التقارب طبقة بعد طبقة
     - id: m12.3-csf-growth-and-computational-cost
       estimatedMinutes: 90
       kind: implementation
       critical: true
       requires:
       - m12.3-layer-by-layer-convergence
-      title: CSF growth and computational cost
+      title: نمو عدد CSF والتكلفة الحسابية
     - id: m12.3-checkpoint-12-3
       estimatedMinutes: 30
       kind: checkpoint
@@ -1490,47 +1488,47 @@ phases:
       - m12.3-single-and-double-excitations
       - m12.3-layer-by-layer-convergence
       - m12.3-csf-growth-and-computational-cost
-      title: Checkpoint 12.3
+      title: نقطة مراجعة 12.3
   - id: m12.4
-    title: 12.4 Breit Interaction and QED
-    group: Module 12 — MCDHF Theory
+    title: 12.4 تفاعل برايت وتصحيحات QED
+    group: الوحدة 12 — نظرية MCDHF
     topics:
     - id: m12.4-beyond-the-dirac-coulomb-hamiltonian
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.3-checkpoint-12-3
-      title: Beyond the Dirac-Coulomb Hamiltonian
+      title: ما بعد هاميلتوني ديراك-كولوم
     - id: m12.4-the-transverse-photon-interaction
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.4-beyond-the-dirac-coulomb-hamiltonian
-      title: The transverse photon interaction
+      title: تفاعل الفوتون المستعرض
     - id: m12.4-vacuum-polarisation
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.4-the-transverse-photon-interaction
-      title: Vacuum polarisation
+      title: استقطاب الفراغ
     - id: m12.4-self-energy
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.4-vacuum-polarisation
-      title: Self-energy
+      title: الطاقة الذاتية
     - id: m12.4-normal-and-specific-mass-shifts
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.4-self-energy
-      title: Normal and specific mass shifts
+      title: الإزاحات الكتلية العادية والنوعية
     - id: m12.4-relativistic-configuration-interaction
       estimatedMinutes: 45
       critical: true
       requires:
       - m12.4-normal-and-specific-mass-shifts
-      title: Relativistic configuration interaction
+      title: تفاعل التوزيعات النسبي (RCI)
     - id: m12.4-checkpoint-12-4
       estimatedMinutes: 30
       kind: checkpoint
@@ -1542,40 +1540,40 @@ phases:
       - m12.4-self-energy
       - m12.4-normal-and-specific-mass-shifts
       - m12.4-relativistic-configuration-interaction
-      title: Checkpoint 12.4
+      title: نقطة مراجعة 12.4
 - id: p5
-  title: Phase 5 — Radiative Transitions
-  summary: Multipole radiation and the quantities the papers actually report.
+  title: المرحلة 5 — الانتقالات الإشعاعية
+  summary: الإشعاع متعدد الأقطاب والكميات اللي الأوراق بتنشرها فعلًا.
   modules:
   - id: m13.1
-    title: 13.1 Multipole Radiation
-    group: Module 13 — Radiative Transitions
+    title: 13.1 الإشعاع متعدد الأقطاب
+    group: الوحدة 13 — الانتقالات الإشعاعية
     topics:
     - id: m13.1-the-multipole-expansion-of-the-radiation-field
       estimatedMinutes: 45
       requires:
       - m12.4-checkpoint-12-4
-      title: The multipole expansion of the radiation field
+      title: مفكوك متعدد الأقطاب لمجال الإشعاع
     - id: m13.1-electric-and-magnetic-multipoles
       estimatedMinutes: 45
       requires:
       - m13.1-the-multipole-expansion-of-the-radiation-field
-      title: Electric and magnetic multipoles
+      title: الأقطاب الكهربية والمغناطيسية
     - id: m13.1-e1-m1-e2-and-m2-transitions
       estimatedMinutes: 45
       requires:
       - m13.1-electric-and-magnetic-multipoles
-      title: E1, M1, E2 and M2 transitions
+      title: انتقالات E1 و M1 و E2 و M2
     - id: m13.1-selection-rules
       estimatedMinutes: 45
       requires:
       - m13.1-e1-m1-e2-and-m2-transitions
-      title: Selection rules
+      title: قواعد الاختيار
     - id: m13.1-parity-and-angular-momentum-in-transitions
       estimatedMinutes: 45
       requires:
       - m13.1-selection-rules
-      title: Parity and angular momentum in transitions
+      title: التماثل والزخم الزاوي في الانتقالات
     - id: m13.1-checkpoint-13-1
       estimatedMinutes: 30
       kind: checkpoint
@@ -1585,47 +1583,47 @@ phases:
       - m13.1-e1-m1-e2-and-m2-transitions
       - m13.1-selection-rules
       - m13.1-parity-and-angular-momentum-in-transitions
-      title: Checkpoint 13.1
+      title: نقطة مراجعة 13.1
   - id: m13.2
-    title: 13.2 Transition Quantities
-    group: Module 13 — Radiative Transitions
+    title: 13.2 كميات الانتقال
+    group: الوحدة 13 — الانتقالات الإشعاعية
     topics:
     - id: m13.2-line-strength
       estimatedMinutes: 45
       critical: true
       requires:
       - m13.1-checkpoint-13-1
-      title: Line strength
+      title: قوة الخط
     - id: m13.2-weighted-oscillator-strength
       estimatedMinutes: 45
       critical: true
       requires:
       - m13.2-line-strength
-      title: Weighted oscillator strength
+      title: قوة المذبذب الموزونة
     - id: m13.2-transition-probability
       estimatedMinutes: 45
       critical: true
       requires:
       - m13.2-weighted-oscillator-strength
-      title: Transition probability
+      title: احتمالية الانتقال
     - id: m13.2-lifetimes-and-branching-ratios
       estimatedMinutes: 45
       critical: true
       requires:
       - m13.2-transition-probability
-      title: Lifetimes and branching ratios
+      title: الأعمار ونسب التفرع
     - id: m13.2-babushkin-and-coulomb-gauges
       estimatedMinutes: 45
       critical: true
       requires:
       - m13.2-lifetimes-and-branching-ratios
-      title: Babushkin and Coulomb gauges
+      title: معياري بابوشكين وكولوم
     - id: m13.2-gauge-agreement-as-an-accuracy-indicator
       estimatedMinutes: 45
       critical: true
       requires:
       - m13.2-babushkin-and-coulomb-gauges
-      title: Gauge agreement as an accuracy indicator
+      title: توافق المعيارين كمؤشر للدقة
     - id: m13.2-checkpoint-13-2
       estimatedMinutes: 30
       kind: checkpoint
@@ -1637,14 +1635,14 @@ phases:
       - m13.2-lifetimes-and-branching-ratios
       - m13.2-babushkin-and-coulomb-gauges
       - m13.2-gauge-agreement-as-an-accuracy-indicator
-      title: Checkpoint 13.2
+      title: نقطة مراجعة 13.2
 - id: p6
-  title: Phase 6 — Computational Skills
-  summary: Python, Fortran, and the nuclear data libraries.
+  title: المرحلة 6 — المهارات الحسابية
+  summary: Python و Fortran ومكتبات البيانات النووية.
   modules:
   - id: m7.1
-    title: 7.1 Python for Nuclear Physics
-    group: Module 7 — Programming
+    title: 7.1 Python للفيزياء النووية
+    group: الوحدة 7 — البرمجة
     topics:
     - id: m7.1-numpy-arrays
       title: NumPy arrays
@@ -1716,8 +1714,8 @@ phases:
       - m7.1-publication-quality-plots
       - m7.1-talys-automation
   - id: m7.2
-    title: 7.2 Fortran Basics
-    group: Module 7 — Programming
+    title: 7.2 أساسيات Fortran
+    group: الوحدة 7 — البرمجة
     topics:
     - id: m7.2-syntax-and-data-types
       title: Syntax and data types
@@ -1756,8 +1754,8 @@ phases:
       - m7.2-file-i-o
       - m7.2-read-the-talys-source
   - id: m8.1
-    title: 8.1 TALYS Mastery
-    group: Module 8 — Nuclear Data and Codes
+    title: 8.1 إتقان TALYS
+    group: الوحدة 8 — البيانات والبرامج النووية
     topics:
     - id: m8.1-input-file-structure
       title: Input file structure
@@ -1832,8 +1830,8 @@ phases:
       - m8.1-parameter-sensitivity-study
       - m8.1-compare-against-exfor
   - id: m8.2
-    title: 8.2 Nuclear Databases
-    group: Module 8 — Nuclear Data and Codes
+    title: 8.2 قواعد البيانات النووية
+    group: الوحدة 8 — البيانات والبرامج النووية
     topics:
     - id: m8.2-the-exfor-database
       title: The EXFOR database
@@ -1871,30 +1869,29 @@ phases:
       - m8.2-comparing-endf-b-jeff-and-jendl
       - m8.2-the-ripl-library
 - id: p7
-  title: Phase 7 — GRASP2018 in Practice
-  summary: Every program in the chain, the strategy that makes it converge, and what to do when it does
-    not.
+  title: المرحلة 7 — GRASP2018 عمليًا
+  summary: كل برنامج في السلسلة، والاستراتيجية اللي بتخليه يتقارب، وإيه تعمل لما ميتقاربش.
   modules:
   - id: m14.1
-    title: 14.1 Getting GRASP Running
-    group: Module 14 — GRASP2018 in Practice
+    title: 14.1 تشغيل GRASP
+    group: الوحدة 14 — GRASP2018 عمليًا
     topics:
     - id: m14.1-building-grasp2018
       estimatedMinutes: 90
       kind: implementation
       requires:
       - m13.2-checkpoint-13-2
-      title: Building GRASP2018
+      title: بناء GRASP2018
     - id: m14.1-file-conventions-and-the-working-directory
       estimatedMinutes: 45
       requires:
       - m14.1-building-grasp2018
-      title: File conventions and the working directory
+      title: اصطلاحات الملفات ومجلد العمل
     - id: m14.1-the-program-chain-at-a-glance
       estimatedMinutes: 45
       requires:
       - m14.1-file-conventions-and-the-working-directory
-      title: The program chain at a glance
+      title: سلسلة البرامج في لمحة
     - id: m14.1-checkpoint-14-1
       estimatedMinutes: 30
       kind: checkpoint
@@ -1902,78 +1899,78 @@ phases:
       - m14.1-building-grasp2018
       - m14.1-file-conventions-and-the-working-directory
       - m14.1-the-program-chain-at-a-glance
-      title: Checkpoint 14.1
+      title: نقطة مراجعة 14.1
   - id: m14.2
-    title: 14.2 The Program Chain
-    group: Module 14 — GRASP2018 in Practice
+    title: 14.2 سلسلة البرامج
+    group: الوحدة 14 — GRASP2018 عمليًا
     topics:
     - id: m14.2-rnucleus-the-nuclear-model
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.1-checkpoint-14-1
-      title: 'rnucleus: the nuclear model'
+      title: 'rnucleus: النموذج النووي'
     - id: m14.2-rcsfgenerate-building-the-csf-list
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rnucleus-the-nuclear-model
-      title: 'rcsfgenerate: building the CSF list'
+      title: 'rcsfgenerate: بناء قائمة CSF'
     - id: m14.2-rangular-angular-coefficients
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rcsfgenerate-building-the-csf-list
-      title: 'rangular: angular coefficients'
+      title: 'rangular: المعاملات الزاوية'
     - id: m14.2-rwfnestimate-initial-orbitals
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rangular-angular-coefficients
-      title: 'rwfnestimate: initial orbitals'
+      title: 'rwfnestimate: الأوربيتالات الابتدائية'
     - id: m14.2-rmcdhf-the-scf-calculation
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rwfnestimate-initial-orbitals
-      title: 'rmcdhf: the SCF calculation'
+      title: 'rmcdhf: حساب SCF'
     - id: m14.2-rci-breit-and-qed
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rmcdhf-the-scf-calculation
-      title: 'rci: Breit and QED'
+      title: 'rci: برايت و QED'
     - id: m14.2-jj2lsj-spectroscopic-labels
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rci-breit-and-qed
-      title: 'jj2lsj: spectroscopic labels'
+      title: 'jj2lsj: التسميات الطيفية'
     - id: m14.2-rlevels-the-energy-table
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-jj2lsj-spectroscopic-labels
-      title: 'rlevels: the energy table'
+      title: 'rlevels: جدول الطاقات'
     - id: m14.2-rbiotransform-biorthogonal-orbitals
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rlevels-the-energy-table
-      title: 'rbiotransform: biorthogonal orbitals'
+      title: 'rbiotransform: الأوربيتالات المتعامدة حيويًا'
     - id: m14.2-rtransition-transition-data
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-rbiotransform-biorthogonal-orbitals
-      title: 'rtransition: transition data'
+      title: 'rtransition: بيانات الانتقالات'
     - id: m14.2-run-a-complete-calculation-end-to-end
       estimatedMinutes: 90
       kind: implementation
       critical: true
       requires:
       - m14.2-rtransition-transition-data
-      title: Run a complete calculation end to end
+      title: شغّل حسابًا كاملًا من البداية للنهاية
     - id: m14.2-checkpoint-14-2
       estimatedMinutes: 30
       kind: checkpoint
@@ -1990,48 +1987,48 @@ phases:
       - m14.2-rbiotransform-biorthogonal-orbitals
       - m14.2-rtransition-transition-data
       - m14.2-run-a-complete-calculation-end-to-end
-      title: Checkpoint 14.2
+      title: نقطة مراجعة 14.2
   - id: m14.3
-    title: 14.3 Strategy and Failures
-    group: Module 14 — GRASP2018 in Practice
+    title: 14.3 الاستراتيجية والأعطال
+    group: الوحدة 14 — GRASP2018 عمليًا
     topics:
     - id: m14.3-orbital-freezing-strategy
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.2-checkpoint-14-2
-      title: Orbital freezing strategy
+      title: استراتيجية تجميد الأوربيتالات
     - id: m14.3-restarting-from-converged-orbitals
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.3-orbital-freezing-strategy
-      title: Restarting from converged orbitals
+      title: إعادة البدء من أوربيتالات متقاربة
     - id: m14.3-diagnosing-non-convergence
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.3-restarting-from-converged-orbitals
-      title: Diagnosing non-convergence
+      title: تشخيص عدم التقارب
     - id: m14.3-common-errors-and-what-they-mean
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.3-diagnosing-non-convergence
-      title: Common errors and what they mean
+      title: الأخطاء الشائعة ومعناها
     - id: m14.3-estimating-runtime-and-memory
       estimatedMinutes: 45
       critical: true
       requires:
       - m14.3-common-errors-and-what-they-mean
-      title: Estimating runtime and memory
+      title: تقدير زمن التشغيل والذاكرة
     - id: m14.3-running-with-mpi
       estimatedMinutes: 90
       kind: implementation
       critical: true
       requires:
       - m14.3-estimating-runtime-and-memory
-      title: Running with MPI
+      title: التشغيل باستخدام MPI
     - id: m14.3-checkpoint-14-3
       estimatedMinutes: 30
       kind: checkpoint
@@ -2043,36 +2040,36 @@ phases:
       - m14.3-common-errors-and-what-they-mean
       - m14.3-estimating-runtime-and-memory
       - m14.3-running-with-mpi
-      title: Checkpoint 14.3
+      title: نقطة مراجعة 14.3
 - id: p8
-  title: Phase 8 — Analysis, Uncertainty and Publication
-  summary: Turning output files into a defensible result, and a result into a paper.
+  title: المرحلة 8 — التحليل وعدم اليقين والنشر
+  summary: تحويل ملفات المخرجات لنتيجة قابلة للدفاع عنها، والنتيجة لورقة بحثية.
   modules:
   - id: m15.1
-    title: 15.1 Working with GRASP Output
-    group: Module 15 — Analysis and Publication
+    title: 15.1 التعامل مع مخرجات GRASP
+    group: الوحدة 15 — التحليل والنشر
     topics:
     - id: m15.1-reading-the-rlevels-table
       estimatedMinutes: 45
       requires:
       - m14.3-checkpoint-14-3
-      title: Reading the rlevels table
+      title: قراءة جدول rlevels
     - id: m15.1-lsj-composition-files
       estimatedMinutes: 45
       requires:
       - m15.1-reading-the-rlevels-table
-      title: LSJ composition files
+      title: ملفات تركيب LSJ
     - id: m15.1-transition-output-files
       estimatedMinutes: 45
       requires:
       - m15.1-lsj-composition-files
-      title: Transition output files
+      title: ملفات مخرجات الانتقالات
     - id: m15.1-automating-extraction-with-python
       estimatedMinutes: 90
       kind: implementation
       requires:
       - m15.1-transition-output-files
-      title: Automating extraction with Python
+      title: أتمتة الاستخراج بـ Python
     - id: m15.1-checkpoint-15-1
       estimatedMinutes: 30
       kind: checkpoint
@@ -2081,35 +2078,35 @@ phases:
       - m15.1-lsj-composition-files
       - m15.1-transition-output-files
       - m15.1-automating-extraction-with-python
-      title: Checkpoint 15.1
+      title: نقطة مراجعة 15.1
   - id: m15.2
-    title: 15.2 Uncertainty and Validation
-    group: Module 15 — Analysis and Publication
+    title: 15.2 عدم اليقين والتحقق
+    group: الوحدة 15 — التحليل والنشر
     topics:
     - id: m15.2-layer-to-layer-convergence-as-uncertainty
       estimatedMinutes: 45
       critical: true
       requires:
       - m15.1-checkpoint-15-1
-      title: Layer-to-layer convergence as uncertainty
+      title: التقارب بين الطبقات كتقدير لعدم اليقين
     - id: m15.2-comparing-with-nist-asd
       estimatedMinutes: 45
       critical: true
       requires:
       - m15.2-layer-to-layer-convergence-as-uncertainty
-      title: Comparing with NIST ASD
+      title: المقارنة مع قاعدة NIST ASD
     - id: m15.2-comparing-with-other-theoretical-work
       estimatedMinutes: 45
       critical: true
       requires:
       - m15.2-comparing-with-nist-asd
-      title: Comparing with other theoretical work
+      title: المقارنة مع الأعمال النظرية الأخرى
     - id: m15.2-gauge-agreement-as-validation
       estimatedMinutes: 45
       critical: true
       requires:
       - m15.2-comparing-with-other-theoretical-work
-      title: Gauge agreement as validation
+      title: توافق المعيارين كوسيلة تحقق
     - id: m15.2-checkpoint-15-2
       estimatedMinutes: 30
       kind: checkpoint
@@ -2119,31 +2116,31 @@ phases:
       - m15.2-comparing-with-nist-asd
       - m15.2-comparing-with-other-theoretical-work
       - m15.2-gauge-agreement-as-validation
-      title: Checkpoint 15.2
+      title: نقطة مراجعة 15.2
   - id: m15.3
-    title: 15.3 Writing the Paper
-    group: Module 15 — Analysis and Publication
+    title: 15.3 كتابة الورقة البحثية
+    group: الوحدة 15 — التحليل والنشر
     topics:
     - id: m15.3-structure-of-a-jqsrt-style-paper
       estimatedMinutes: 45
       requires:
       - m15.2-checkpoint-15-2
-      title: Structure of a JQSRT-style paper
+      title: بنية ورقة على نمط JQSRT
     - id: m15.3-building-the-tables
       estimatedMinutes: 45
       requires:
       - m15.3-structure-of-a-jqsrt-style-paper
-      title: Building the tables
+      title: بناء الجداول
     - id: m15.3-figures-that-carry-the-argument
       estimatedMinutes: 45
       requires:
       - m15.3-building-the-tables
-      title: Figures that carry the argument
+      title: الأشكال التي تحمل الحجة
     - id: m15.3-responding-to-referees
       estimatedMinutes: 45
       requires:
       - m15.3-figures-that-carry-the-argument
-      title: Responding to referees
+      title: الرد على المحكّمين
     - id: m15.3-checkpoint-15-3
       estimatedMinutes: 30
       kind: checkpoint
@@ -2152,10 +2149,10 @@ phases:
       - m15.3-building-the-tables
       - m15.3-figures-that-carry-the-argument
       - m15.3-responding-to-referees
-      title: Checkpoint 15.3
+      title: نقطة مراجعة 15.3
   - id: m9.1
-    title: 9.1 Literature and Writing
-    group: Module 9 — Research Methodology
+    title: 9.1 الأدبيات والكتابة
+    group: الوحدة 9 — منهجية البحث
     topics:
     - id: m9.1-how-to-read-a-nuclear-physics-paper
       title: How to read a nuclear physics paper
@@ -2187,12 +2184,12 @@ phases:
       - m9.1-error-propagation
       - m9.1-paper-structure
 - id: p9
-  title: Phase 9 — Research Projects
-  summary: 'Three projects: the TALYS calculation, a reproduction, and an original result.'
+  title: المرحلة 9 — مشاريع البحث
+  summary: 'تلات مشاريع: حساب TALYS، وإعادة إنتاج، ونتيجة أصلية.'
   modules:
   - id: m10.1
-    title: Th-232(n,gamma) Cross-Section Calculation
-    group: Module 10 — Research Project
+    title: مشروع Th-232(n,gamma)
+    group: الوحدة 10 — مشروع بحثي
     topics:
     - id: m10.1-gather-exfor-th-232-capture-data
       title: Gather EXFOR Th-232 capture data
@@ -2281,8 +2278,8 @@ phases:
       - m10.1-prepare-publication-figures
       - m10.1-draft-the-full-paper
   - id: m16.1
-    title: Reproduce Zr XXXV
-    group: Module 16 — MCDHF Research Projects
+    title: إعادة إنتاج Zr XXXV
+    group: الوحدة 16 — مشاريع بحث MCDHF
     topics:
     - id: m16.1-read-the-2020-paper-closely
       estimatedMinutes: 120
@@ -2290,56 +2287,56 @@ phases:
       critical: true
       requires:
       - m15.3-checkpoint-15-3
-      title: Read the 2020 paper closely
+      title: اقرأ ورقة 2020 بتمعّن
     - id: m16.1-set-up-the-c-like-zr-calculation
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.1-read-the-2020-paper-closely
-      title: Set up the C-like Zr calculation
+      title: جهّز حساب Zr الشبيه بالكربون
     - id: m16.1-run-the-mr-layer
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.1-set-up-the-c-like-zr-calculation
-      title: Run the MR layer
+      title: شغّل طبقة MR
     - id: m16.1-extend-to-n-equals-4
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.1-run-the-mr-layer
-      title: Extend to n equals 4
+      title: وسّع إلى n = 4
     - id: m16.1-extend-to-n-equals-5-and-6
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.1-extend-to-n-equals-4
-      title: Extend to n equals 5 and 6
+      title: وسّع إلى n = 5 و 6
     - id: m16.1-compare-energies-with-the-published-table
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.1-extend-to-n-equals-5-and-6
-      title: Compare energies with the published table
+      title: قارن الطاقات بالجدول المنشور
     - id: m16.1-compare-transition-data
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.1-compare-energies-with-the-published-table
-      title: Compare transition data
+      title: قارن بيانات الانتقالات
     - id: m16.1-explain-any-disagreement
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.1-compare-transition-data
-      title: Explain any disagreement
+      title: فسّر أي اختلاف
     - id: m16.1-reproduction-validated
       estimatedMinutes: 30
       kind: checkpoint
@@ -2353,10 +2350,10 @@ phases:
       - m16.1-compare-energies-with-the-published-table
       - m16.1-compare-transition-data
       - m16.1-explain-any-disagreement
-      title: Reproduction validated
+      title: تم التحقق من إعادة الإنتاج
   - id: m16.2
-    title: Original Calculation
-    group: Module 16 — MCDHF Research Projects
+    title: حساب أصلي
+    group: الوحدة 16 — مشاريع بحث MCDHF
     topics:
     - id: m16.2-survey-the-literature-for-a-gap
       estimatedMinutes: 120
@@ -2364,56 +2361,56 @@ phases:
       critical: true
       requires:
       - m16.1-reproduction-validated
-      title: Survey the literature for a gap
+      title: امسح الأدبيات بحثًا عن فجوة
     - id: m16.2-choose-the-ion-and-justify-it
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.2-survey-the-literature-for-a-gap
-      title: Choose the ion and justify it
+      title: اختر الأيون وبرّر الاختيار
     - id: m16.2-design-the-active-space
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.2-choose-the-ion-and-justify-it
-      title: Design the active space
+      title: صمّم الفضاء النشط
     - id: m16.2-run-the-layer-sequence
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.2-design-the-active-space
-      title: Run the layer sequence
+      title: شغّل تتابع الطبقات
     - id: m16.2-estimate-uncertainties
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.2-run-the-layer-sequence
-      title: Estimate uncertainties
+      title: قدّر عدم اليقين
     - id: m16.2-build-the-tables-and-figures
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.2-estimate-uncertainties
-      title: Build the tables and figures
+      title: ابنِ الجداول والأشكال
     - id: m16.2-draft-the-paper
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.2-build-the-tables-and-figures
-      title: Draft the paper
+      title: اكتب مسودة الورقة
     - id: m16.2-internal-review-and-revision
       estimatedMinutes: 120
       kind: project
       critical: true
       requires:
       - m16.2-draft-the-paper
-      title: Internal review and revision
+      title: مراجعة داخلية وتنقيح
     - id: m16.2-ready-for-submission
       estimatedMinutes: 30
       kind: checkpoint
@@ -2427,4 +2424,4 @@ phases:
       - m16.2-build-the-tables-and-figures
       - m16.2-draft-the-paper
       - m16.2-internal-review-and-revision
-      title: Ready for submission
+      title: جاهز للتقديم

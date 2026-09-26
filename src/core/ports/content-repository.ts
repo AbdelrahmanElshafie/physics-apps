@@ -12,8 +12,9 @@ import type { Syllabus } from '../domain/syllabus'
  * implementation (M5) satisfies the same interface, so nothing above this line changes.
  */
 export interface ContentRepository {
-  listSyllabi(): Promise<Syllabus[]>
-  getSyllabus(id: SyllabusId): Promise<Syllabus | null>
+  listSyllabi(locale?: Locale): Promise<Syllabus[]>
+  /** The tree itself is translated too, so the navigator is not English inside an Arabic page. */
+  getSyllabus(id: SyllabusId, locale?: Locale): Promise<Syllabus | null>
   /** Every topic across every syllabus, keyed by qualified id — the graph works on this. */
   allTopics(): Promise<Map<TopicId, import('../domain/syllabus').Topic>>
   /**

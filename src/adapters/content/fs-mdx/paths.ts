@@ -5,7 +5,8 @@ export const CONTENT_ROOT = path.join(process.cwd(), 'content', 'syllabi')
 export const DATA_ROOT = path.join(process.cwd(), 'data')
 
 export const syllabusDir = (id: string) => path.join(CONTENT_ROOT, id)
-export const syllabusFile = (id: string) => path.join(syllabusDir(id), 'syllabus.yaml')
+export const syllabusFile = (id: string, suffix = '') =>
+  path.join(syllabusDir(id), `syllabus${suffix}.yaml`)
 export const glossaryFile = (id: string) => path.join(syllabusDir(id), 'glossary.yaml')
 /**
  * Locale-suffixed content paths. English is the unsuffixed base file, so the original content

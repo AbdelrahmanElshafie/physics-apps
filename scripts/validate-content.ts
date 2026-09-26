@@ -91,6 +91,7 @@ async function main(): Promise<void> {
 
   // Translations must agree with the English original on ids, kinds and checks.
   await checkLocaleParity()
+  await checkSyllabusParity()
 
   // Check the lesson file naming matches what the repository will look for.
   for (const [topicId] of allTopics) {
@@ -189,6 +190,81 @@ async function checkLocaleParity(): Promise<void> {
       }
     }
   }
+}
+
+/**
+ * The syllabus tree must have identical ids in every locale.
+ *
+ * Only the titles are translated. A topic present in one tree and missing from another would mean
+ * progress recorded against it simply vanishes when the reader switches language.
+ */
+async function checkSyllabusParity(): Promise<void> {
+  const root = path.join(process.cwd(), 'content', 'syllabi')
+
+  let syllabusDirs: string[]
+  try {
+    syllabusDirs = (await fs.readdir(root, { withFileTypes: true }))
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name)
+  } catch {
+    return
+  }
+
+  for (const syllabus of syllabusDirs) {
+    let base: string
+    try {
+      base = await fs.readFile(path.join(root, syllabus, 'syllabus.yaml'), 'utf8')
+    } catch {
+      continue
+    }
+    const englishIds = treeIds(base)
+
+    for (const locale of LOCALES) {
+      if (locale === DEFAULT_LOCALE) continue
+
+      let raw: string
+      try {
+        raw = await fs.readFile(
+          path.join(root, syllabus, `syllabus${localeSuffix(locale)}.yaml`),
+          'utf8',
+        )
+      } catch {
+        continue // No translated tree is fine; it falls back to English.
+      }
+
+      const translatedIds = treeIds(raw)
+      const missing = [...englishIds].filter((id) => !translatedIds.has(id))
+      const extra = [...translatedIds].filter((id) => !englishIds.has(id))
+
+      if (missing.length > 0) {
+        errors.push(
+          `${syllabus} [${locale}]: syllabus tree is missing ${missing.length} id(s), e.g. ${missing.slice(0, 3).join(', ')}.`,
+        )
+      }
+      if (extra.length > 0) {
+        errors.push(
+          `${syllabus} [${locale}]: syllabus tree has ${extra.length} id(s) not in English, e.g. ${extra.slice(0, 3).join(', ')}.`,
+        )
+      }
+    }
+  }
+}
+
+/** Every phase, module and topic id in a syllabus file. */
+function treeIds(raw: string): Set<string> {
+  const tree = parseYaml(raw) as {
+    phases?: { id: string; modules?: { id: string; topics?: { id: string }[] }[] }[]
+  }
+
+  const ids = new Set<string>()
+  for (const phase of tree.phases ?? []) {
+    ids.add(`phase:${phase.id}`)
+    for (const mod of phase.modules ?? []) {
+      ids.add(`module:${mod.id}`)
+      for (const topic of mod.topics ?? []) ids.add(`topic:${topic.id}`)
+    }
+  }
+  return ids
 }
 
 function parseExercises(raw: string): Record<string, { check: unknown; kind: unknown }> {

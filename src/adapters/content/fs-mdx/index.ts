@@ -93,15 +93,21 @@ export class FileSystemContentRepository implements ContentRepository {
     return ids.sort()
   }
 
-  async getSyllabus(id: SyllabusId): Promise<Syllabus | null> {
-    return this.cached(this.syllabusCache, syllabusFile(id), (raw) =>
-      buildSyllabus(syllabusFileSchema.parse(parseYaml(raw))),
-    )
+  async getSyllabus(id: SyllabusId, locale: Locale = DEFAULT_LOCALE): Promise<Syllabus | null> {
+    for (const candidate of localeCandidates(locale)) {
+      const syllabus = await this.cached(
+        this.syllabusCache,
+        syllabusFile(id, localeSuffix(candidate)),
+        (raw) => buildSyllabus(syllabusFileSchema.parse(parseYaml(raw))),
+      )
+      if (syllabus) return syllabus
+    }
+    return null
   }
 
-  async listSyllabi(): Promise<Syllabus[]> {
+  async listSyllabi(locale: Locale = DEFAULT_LOCALE): Promise<Syllabus[]> {
     const ids = await this.listSyllabusIds()
-    const loaded = await Promise.all(ids.map((id) => this.getSyllabus(id)))
+    const loaded = await Promise.all(ids.map((id) => this.getSyllabus(id, locale)))
     return loaded.filter((s): s is Syllabus => s !== null)
   }
 

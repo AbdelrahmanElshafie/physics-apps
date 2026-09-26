@@ -60,7 +60,7 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
   const { content, progress } = container();
 
   const syllabusId = asSyllabusId(syllabusParam);
-  const syllabus = await content.getSyllabus(syllabusId);
+  const syllabus = await content.getSyllabus(syllabusId, locale);
   if (!syllabus) notFound();
 
   const topicId = qualifyTopicId(syllabusId, topicParam);
