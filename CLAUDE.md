@@ -82,10 +82,22 @@ MDX parses element children as markdown, which **eats LaTeX backslashes**. So:
 
 Same applies to `<Step latex={String.raw\`...\`} why="..." />`.
 
+Same applies to the `latex` field of a `<Faded steps={[...]} />` array.
+
 Available components: `Eq`, `Callout` (why/note/warning/forward), `Compare`, `Axioms`,
-`Derivation`+`Step`, `Definition`, `Symbol` (glossary tooltip), `VectorPlot`,
-`InnerProductPlot`, `EigenPlot`. Registered in
+`Derivation`+`Step`, `Definition`, `Symbol` (glossary tooltip), `Predict`, `Faded`, `VectorPlot`,
+`InnerProductPlot`, `EigenPlot`, `DiracRadial`. Registered in
 `src/components/mdx/index.tsx` — add widgets there.
+
+`Compare` renders `$...$` inside **cells** but not inside **column headers**; keep headers plain
+text. `Predict` and `Faded` are teaching devices, not assessment — they record nothing, so a
+question whose answer should count belongs in the exercise YAML instead.
+
+**A number a lesson prints is a number a test should check.** Physics that a widget plots and the
+prose quotes lives in `src/core/domain/` as a pure function, and the test compares the *printed
+rounding* (`value.toFixed(n) === "0.3065"`), not a tolerance window — a tolerance waves through a
+cell that reads 0.307 where the value rounds to 0.306. See `relativistic.ts` and
+`tests/relativistic.test.ts`.
 
 **Never write backslash-heavy files with a bash heredoc.** It collapses `\\` to `\` and silently
 corrupts every regex and LaTeX macro. Use the Write tool.
@@ -139,7 +151,18 @@ typed off the English keys so an untranslated string is a compile error.
 alone is not enough — `unicode-bidi: isolate` is what keeps an equation out of the paragraph's
 bidi resolution, so a minus sign cannot migrate to the wrong end inside Arabic prose. That CSS is
 in `globals.css` under "Bidirectional text" and covers `.katex`, `math-field`, `code` and
-`[data-ltr]`. If you add a surface that renders maths or code, isolate it there too.
+`[data-ltr]`. If you add a surface that renders maths or code, isolate it there too. A plot is one
+of those surfaces: put `data-ltr` on the `<svg>`, or an axis label like `r → 0.119 a₀` is reordered
+and truncated on an RTL page.
+
+**Widget chrome is localised in the registry, not in the widget.** A client component cannot call
+`translator()` for the page's language, because a `?lang=` override never reaches the client store.
+So `mdxComponents()` in `src/components/mdx/index.tsx` — the last server-side point that knows the
+locale — resolves the strings and passes them down as a plain `strings` prop. It is handed
+`lesson.servedLocale`, not the requested locale, so an untranslated topic keeps English chrome
+around its English prose rather than mixing the two. A new interactive widget with any visible text
+of its own follows the same shape: a `<Name>Strings` interface, keys in `src/lib/i18n.ts`, resolved
+in the registry.
 
 Arabic style: plain Egyptian-leaning phrasing, technical terms kept in English in parentheses on
 first use (`الضرب الداخلي (inner product)`), Western digits throughout — that is what the papers
