@@ -68,3 +68,58 @@ export function smallOverLarge(Z: number): number {
 export function fineStructure2p(Z: number): number {
   return (Math.pow(Z, 4) * ALPHA * ALPHA * RYDBERG_CM) / 16
 }
+
+/**
+ * Everything below belongs to Topic 11.1's second lesson, *Failures of the Schrodinger equation*.
+ * It quantifies the two specific things the non-relativistic Hamiltonian is missing: the p^4
+ * kinetic-energy correction, and any dependence on j at all.
+ */
+
+/**
+ * Non-relativistic (Schrodinger + Coulomb) hydrogenic binding energy in cm^-1: `-Z^2 Ry / n^2`.
+ *
+ * Negative and depends only on n — never on l or j. That second fact is the qualitative failure
+ * of section 4: no fine-structure splitting can come out of an energy that does not know j exists.
+ */
+export function coulombBindingEnergy(Z: number, n: number): number {
+  return -(Z * Z * RYDBERG_CM) / (n * n)
+}
+
+/**
+ * Ratio of the first relativistic kinetic-energy correction, `p^4 / 8 m^3 c^2`, to the leading
+ * non-relativistic kinetic energy, `p^2 / 2m`, for a bound electron with `v/c = Z alpha / n`.
+ *
+ * Works out to `(v/c)^2 / 4` — the term the binomial expansion of `E = mc^2 sqrt(1 + p^2/m^2c^2)`
+ * drops when it is truncated at the Schrodinger equation's order. Negligible at hydrogen
+ * (0.001%), a few per cent at Mo XXXVI: the same (Z alpha)^2 that set the scale of everything in
+ * the first lesson, now showing up as a fraction of the kinetic energy itself.
+ */
+export function relativisticKineticCorrectionRatio(Z: number, n = 1): number {
+  const beta = speedOverC(Z, n)
+  return (beta * beta) / 4
+}
+
+/**
+ * The Sommerfeld fine-structure factor `n/(j + 1/2) - 3/4`.
+ *
+ * Pure bookkeeping — how the j-dependent part of the exact hydrogenic energy varies with the
+ * total angular momentum j at fixed n. It is what a Schrodinger calculation has no way to write
+ * down, because j never appears in its Hamiltonian at all.
+ */
+export function sommerfeldTerm(n: number, j: number): number {
+  return n / (j + 0.5) - 0.75
+}
+
+/**
+ * First-order relativistic energy shift in cm^-1, `-(Z^4 alpha^2 Ry / n^4) * sommerfeldTerm(n, j)`.
+ *
+ * This is the term responsible for splitting states of the same n and l by j — stated here, not
+ * derived, since deriving it is the job of a later lesson once the Dirac equation exists. Its
+ * purpose in this one is narrower: showing the shape of what Schrodinger's equation is missing.
+ * The 2p splitting it predicts, `sommerfeldFineStructureShift(Z, 2, 0.5) -
+ * sommerfeldFineStructureShift(Z, 2, 1.5)`, is exactly `-fineStructure2p(Z)` — the same number
+ * the first lesson quoted, now traced to where the Z^4 actually comes from.
+ */
+export function sommerfeldFineStructureShift(Z: number, n: number, j: number): number {
+  return -((Math.pow(Z, 4) * ALPHA * ALPHA * RYDBERG_CM) / Math.pow(n, 4)) * sommerfeldTerm(n, j)
+}

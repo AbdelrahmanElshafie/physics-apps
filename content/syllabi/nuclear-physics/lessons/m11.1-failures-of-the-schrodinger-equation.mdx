@@ -1,0 +1,229 @@
+---
+title: Failures of the Schrodinger Equation
+summary: >-
+  The last lesson found two numbers: a bound speed of 0.3c, and a fine-structure splitting bigger
+  than a million wavenumbers. This lesson finds the two specific things missing from the
+  Schrodinger Hamiltonian that are responsible for both — one a matter of degree, one not.
+readingMinutes: 45
+updated: 2026-09-26
+keyEquations:
+  - latex: E = \sqrt{p^2c^2 + m^2c^4}
+    label: Exact relativistic energy
+  - latex: H = mc^2 + \frac{p^2}{2m} - \frac{p^4}{8m^3c^2} + \cdots
+    label: Non-relativistic expansion
+  - latex: E_{nj}^{(1)} = -\frac{Z^4\alpha^2}{n^4}\left(\frac{n}{j+\frac12}-\frac34\right)\mathrm{Ry}
+    label: Sommerfeld fine-structure term
+---
+
+<Callout kind="why">
+It is easy to nod along with "the Schrodinger equation is non-relativistic" without being able to
+say what, specifically, it gets wrong. That vagueness is worth removing before building a
+replacement. This lesson finds two separate failures by name — one that shrinks smoothly to
+nothing as $Z\alpha \to 0$, and one that is exactly zero at every $Z$, forever, because the
+equation has no way to even ask the question.
+</Callout>
+
+## 1. Two clues, one culprit
+
+The last lesson found two numbers for a 1s electron in molybdenum: $v/c \approx 0.3065$, and a
+fine-structure splitting (equation 11.2) that grows as $Z^4$ and reaches over a million
+wavenumbers. Neither number came from the Schrodinger equation — they came from comparing it
+against reality. This lesson opens the equation itself and finds exactly which piece is
+responsible for each.
+
+The claim is specific: the non-relativistic Hamiltonian $H = p^2/2m + V$ is missing two things,
+and they are different in kind, not just in size.
+
+## 2. The energy relation Schrodinger's equation assumes
+
+Every version of Schrodinger's equation you have used builds its kinetic energy from one
+assumption: $E = p^2/2m$, the ordinary Newtonian relation. Special relativity replaces it with
+
+<Eq
+  id="exact-energy"
+  label="Exact relativistic energy of a free particle"
+  number="11.5"
+  latex={String.raw`E = \sqrt{p^2c^2 + m^2c^4}`}
+/>
+
+These are not two approximations to each other by a small correction — or rather, they are, and
+finding that correction is the point.
+
+<Faded
+  caption="Expanding the exact energy to see what Newtonian kinetic energy leaves out"
+  steps={[
+    {
+      why: 'Factor out mc^2 and write the rest as a square root of 1 plus something small.',
+      latex: String.raw`E = mc^2\sqrt{1 + \frac{p^2}{m^2c^2}}`,
+    },
+    {
+      why: 'For small x, the binomial expansion gives sqrt(1+x) to second order.',
+      latex: String.raw`\sqrt{1+x} \approx 1 + \frac{x}{2} - \frac{x^2}{8}, \qquad x = \frac{p^2}{m^2c^2}`,
+    },
+    {
+      why: 'Substitute x and multiply through by mc^2.',
+      latex: String.raw`E \approx mc^2\left(1 + \frac{p^2}{2m^2c^2} - \frac{p^4}{8m^4c^4}\right)`,
+    },
+    {
+      why: 'Distribute the mc^2 across the three terms.',
+      latex: String.raw`E \approx mc^2 + \frac{p^2}{2m} - \frac{p^4}{8m^3c^2}`,
+    },
+    {
+      why: 'Name each piece: rest energy, all of Schrodinger’s kinetic energy, and the first term it drops.',
+      latex: String.raw`E \approx \underbrace{mc^2}_{\text{rest energy}} \;+\; \underbrace{\frac{p^2}{2m}}_{\text{Schrodinger's }H} \;-\; \underbrace{\frac{p^4}{8m^3c^2}}_{\text{missing}}`,
+    },
+  ]}
+/>
+
+<Eq
+  id="expansion"
+  label="Non-relativistic expansion of the exact energy"
+  number="11.6"
+  latex={String.raw`H = mc^2 + \frac{p^2}{2m} - \frac{p^4}{8m^3c^2} + \cdots`}
+/>
+
+Drop the constant rest energy, as always, and what is left is exact: Schrodinger's $p^2/2m$, minus
+a $p^4$ term it never had. That term is not a refinement anyone forgot to add — it is not present
+in the equation at any order.
+
+## 3. How big is the missing term?
+
+Compare the missing term to the kinetic energy Schrodinger's equation does have:
+
+<Derivation caption="The size of the p^4 term relative to p^2/2m">
+  <Step
+    why="Divide the correction by the leading kinetic energy."
+    latex={String.raw`\frac{p^4/8m^3c^2}{p^2/2m} = \frac{p^2}{4m^2c^2}`}
+  />
+  <Step
+    why="For a bound electron p = mv, so p^2/m^2 = v^2 and the ratio is purely (v/c)^2."
+    latex={String.raw`\frac{p^2}{4m^2c^2} = \frac{1}{4}\left(\frac{v}{c}\right)^2`}
+  />
+</Derivation>
+
+<Eq
+  id="kinetic-ratio"
+  label="Size of the missing kinetic term, relative to what Schrodinger keeps"
+  number="11.7"
+  latex={String.raw`\frac{p^4/8m^3c^2}{p^2/2m} = \frac{1}{4}\left(\frac{v}{c}\right)^2`}
+/>
+
+Using $v/c = Z\alpha/n$ from the first lesson, this is $(Z\alpha/n)^2/4$ — the same $(Z\alpha)^2$
+that set every scale in that lesson, now measuring how much of the kinetic energy itself
+Schrodinger's equation is quietly discarding.
+
+<Compare
+  caption="The missing kinetic term as a fraction of the kinetic energy Schrodinger's equation keeps, for the 1s electron"
+  columns={['Ion', 'Z', 'Missing term / kept term']}
+  rows={[
+    ['H', '1', '0.0013%'],
+    ['C', '6', '0.0479%'],
+    ['Fe', '26', '0.8999%'],
+    ['Zr — the 2020 paper', '40', '2.1301%'],
+    ['Mo — the 2021 paper', '42', '2.3484%'],
+    ['U', '92', '11.2680%'],
+  ]}
+/>
+
+For hydrogen this is one part in a hundred thousand — utterly beneath notice. For molybdenum it is
+already **2.3%** of the kinetic energy itself, before any other relativistic effect is counted.
+This alone would justify worrying about relativity. It is not, however, the more serious failure.
+
+## 4. The failure that is not a matter of degree
+
+Suppose you patched the $p^4$ term back in by hand, as some textbooks do, calling it the
+"relativistic mass correction." You would still have a Hamiltonian that cannot produce fine
+structure at all, for a reason no patch fixes.
+
+<Callout kind="note">
+Solve the Schrodinger equation for hydrogen exactly and the energy comes out depending only on the
+principal quantum number $n$ — not on $\ell$, and not on any quantum number describing spin,
+because the equation has no spin in it to depend on. (This extra degeneracy in $\ell$ is itself a
+peculiarity of the pure Coulomb potential, tied to a hidden symmetry of the $1/r$ force — a fact
+worth knowing but not needed here.) The point that matters: there is no $j$ anywhere in $H = p^2/2m
++ V$, because $j$ combines orbital motion with spin, and spin does not exist in this equation at
+any stage.
+</Callout>
+
+The real energy levels do depend on $j$. Stated ahead of its derivation — this is the exact result
+a full relativistic treatment gives, not something this lesson has built yet — the first-order
+shift is the Sommerfeld formula:
+
+<Eq
+  id="sommerfeld"
+  label="Sommerfeld fine-structure term"
+  number="11.8"
+  latex={String.raw`E_{nj}^{(1)} = -\frac{Z^4\alpha^2}{n^4}\left(\frac{n}{j+\frac12}-\frac34\right)\mathrm{Ry}`}
+/>
+
+Watch what happens at $n=2$, where $\ell=1$ allows two values of $j$: $\tfrac12$ and $\tfrac32$.
+
+<Derivation caption="Recovering equation 11.2 from the Sommerfeld term">
+  <Step
+    why="Evaluate the bracket at n=2, j=1/2 — the 2s_{1/2} and 2p_{1/2} states."
+    latex={String.raw`\frac{n}{j+\frac12}-\frac34 = \frac{2}{1} - \frac34 = 1.25`}
+  />
+  <Step
+    why="Evaluate it at n=2, j=3/2 — the 2p_{3/2} state."
+    latex={String.raw`\frac{n}{j+\frac12}-\frac34 = \frac{2}{2} - \frac34 = 0.25`}
+  />
+  <Step
+    why="The two shifts differ because the bracket does. Subtract them to get the splitting between the 2p states."
+    latex={String.raw`\Delta E_{\text{fs}}(2p) = \frac{Z^4\alpha^2}{n^4}\mathrm{Ry}\,(1.25 - 0.25) = \frac{Z^4\alpha^2}{16}\mathrm{Ry}`}
+  />
+</Derivation>
+
+That last line is exactly equation 11.2 from the first lesson. The $Z^4$ that produced a
+million-wavenumber splitting in molybdenum is not a separate fact about nature — it is this
+bracket, $n/(j+\tfrac12) - \tfrac34$, evaluated at the two $j$'s that $\ell=1$ permits.
+Schrodinger's equation cannot reach this formula by any amount of refinement, because $j$ is not a
+label anything in $H = p^2/2m + V$ can carry.
+
+<Axioms
+  caption="Two failures, not one"
+  items={[
+    [
+      String.raw`\text{Missing } p^4 \text{ term}`,
+      'Quantitative. Shrinks smoothly as (Z\\alpha)^2 to zero: negligible at hydrogen, a few per cent at Mo. In principle fixable by adding a correction term.',
+    ],
+    [
+      String.raw`\text{No dependence on } j`,
+      'Qualitative. Predicts exactly zero splitting between different j at the same n, at every Z, forever — not a small number, an absent one. No correction term added to this Hamiltonian fixes it, because the Hamiltonian has no j-valued object to write the correction in terms of.',
+    ],
+  ]}
+/>
+
+## 5. Predict before you read on
+
+<Predict
+  question="Which of these does plain Schrodinger + Coulomb get wrong in kind, not just in size — no amount of decimal places would ever fix it?"
+  options={[
+    'The ground-state energy of hydrogen',
+    'The 1s binding energy of Zr XXXV, off by a couple of per cent',
+    'The splitting between $2p_{1/2}$ and $2p_{3/2}$ in hydrogen',
+    'The size of the Bohr radius',
+  ]}
+  answer={2}
+>
+The ground-state energy, the Zr binding energy and the Bohr radius are all *quantitatively* wrong
+— off by an amount proportional to some power of $Z\alpha$, shrinking toward zero as that
+parameter shrinks. The $2p_{1/2}$–$2p_{3/2}$ splitting is different: Schrodinger's equation
+predicts it is **exactly zero**, at every $Z$, not a small number that happens to be hard to
+compute. Equation 11.8 shows why — the splitting lives entirely in a term built from $j$, and $j$
+is not a quantum number this Hamiltonian has any way to produce.
+</Predict>
+
+## 6. What this rules in
+
+Both failures point the same direction, but not to the same fix. The missing $p^4$ term says: use
+the exact energy-momentum relation, $E^2 = p^2c^2 + m^2c^4$, instead of truncating it. The missing
+$j$ says: find an equation with something in it that behaves like spin.
+
+<Callout kind="forward">
+The obvious next move is to take $E^2 = p^2c^2 + m^2c^4$ literally and turn it into a wave equation
+by the same substitution that gives Schrodinger's equation from $E = p^2/2m$. That equation
+exists — it is called the Klein-Gordon equation, and it does fix the $p^4$ problem completely,
+exactly, to all orders. The next lesson builds it and finds that it trades one failure for two
+new ones, including the same missing $j$ this lesson ends on. Getting both fixed at once is what
+finally forces the move to Dirac's equation.
+</Callout>

@@ -5,10 +5,15 @@ import { describe, expect, it } from 'vitest'
 
 import {
   ALPHA,
+  coulombBindingEnergy,
   diracExponent,
   fineStructure2p,
   lorentzFactor,
+  relativisticKineticCorrectionRatio,
+  RYDBERG_CM,
   smallOverLarge,
+  sommerfeldFineStructureShift,
+  sommerfeldTerm,
   speedOverC,
 } from '@core/domain'
 
@@ -26,6 +31,16 @@ import {
 
 const CONTENT = path.join(process.cwd(), 'content', 'syllabi', 'nuclear-physics')
 const TOPIC = 'm11.1-why-relativity-matters-for-atoms'
+const TOPIC2 = 'm11.1-failures-of-the-schrodinger-equation'
+
+/** Reads one topic's exercise file for one locale, keyed by exercise id. */
+function readExercises(topic: string, locale: '' | '.ar') {
+  const raw = fs.readFileSync(path.join(CONTENT, 'exercises', `${topic}${locale}.yaml`), 'utf8')
+  const parsed = parseYaml(raw) as {
+    exercises: { id: string; check: { type: string; value?: unknown; tolerance?: number } }[]
+  }
+  return new Map(parsed.exercises.map((e) => [e.id, e.check]))
+}
 
 describe('relativistic formulas, against known values', () => {
   it('reproduces the textbook 2p fine structure of hydrogen', () => {
@@ -61,6 +76,29 @@ describe('relativistic formulas, against known values', () => {
 
   it('scales fine structure as the fourth power', () => {
     expect(fineStructure2p(40) / fineStructure2p(6)).toBeCloseTo((40 / 6) ** 4, 6)
+  })
+
+  it('derives the 2p fine structure from the Sommerfeld shift at j = 1/2 and j = 3/2', () => {
+    // fineStructure2p was introduced in the first lesson as a standalone formula. This lesson
+    // traces it to sommerfeldFineStructureShift, the j-dependent term Schrodinger's equation
+    // cannot write down. The two must agree exactly, not approximately — they are the same
+    // physics, and a lesson that presents them as if they were different facts would be wrong.
+    for (const Z of [1, 6, 40, 42, 92]) {
+      const splitting =
+        sommerfeldFineStructureShift(Z, 2, 0.5) - sommerfeldFineStructureShift(Z, 2, 1.5)
+      expect(Math.abs(splitting)).toBeCloseTo(fineStructure2p(Z), 6)
+    }
+  })
+
+  it('the missing kinetic-energy term is negligible at hydrogen and a few per cent at Mo', () => {
+    expect(relativisticKineticCorrectionRatio(1) * 100).toBeLessThan(0.01)
+    expect(relativisticKineticCorrectionRatio(42) * 100).toBeGreaterThan(2)
+    expect(relativisticKineticCorrectionRatio(42) * 100).toBeLessThan(3)
+  })
+
+  it('reproduces the hydrogen ground-state binding energy', () => {
+    // -109737.3 cm^-1 is the Rydberg energy itself, by definition of Ry — the textbook check.
+    expect(coulombBindingEnergy(1, 1)).toBeCloseTo(-RYDBERG_CM, 4)
   })
 })
 
@@ -121,13 +159,7 @@ describe('the lesson quotes what the formulas give', () => {
 })
 
 describe('the exercise answers are the values the formulas give', () => {
-  const exercises = (locale: '' | '.ar') => {
-    const raw = fs.readFileSync(path.join(CONTENT, 'exercises', `${TOPIC}${locale}.yaml`), 'utf8')
-    const parsed = parseYaml(raw) as {
-      exercises: { id: string; check: { type: string; value?: unknown; tolerance?: number } }[]
-    }
-    return new Map(parsed.exercises.map((e) => [e.id, e.check]))
-  }
+  const exercises = (locale: '' | '.ar') => readExercises(TOPIC, locale)
 
   const expected: Record<string, number> = {
     rel1: speedOverC(42),
@@ -164,5 +196,81 @@ describe('the exercise answers are the values the formulas give', () => {
   it('rel4 really is the smallest Z above half light speed', () => {
     expect(speedOverC(69)).toBeGreaterThan(0.5)
     expect(speedOverC(68)).toBeLessThan(0.5)
+  })
+})
+
+describe('the second lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC2}.mdx`), 'utf8')
+  const arabic = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC2}.ar.mdx`), 'utf8')
+
+  /** Each row of the Compare table in section 3, as the lesson prints it. */
+  const RATIO_TABLE: [number, string][] = [
+    [1, '0.0013%'],
+    [6, '0.0479%'],
+    [26, '0.8999%'],
+    [40, '2.1301%'],
+    [42, '2.3484%'],
+    [92, '11.2680%'],
+  ]
+
+  it.each(RATIO_TABLE)('the Z=%i kinetic-ratio row is what the formula rounds to', (Z, cell) => {
+    const digits = cell.replace('%', '').split('.')[1]?.length ?? 0
+    expect(`${(relativisticKineticCorrectionRatio(Z) * 100).toFixed(digits)}%`).toBe(cell)
+  })
+
+  it.each(RATIO_TABLE)('the Z=%i kinetic-ratio row appears in both languages', (Z, cell) => {
+    for (const [name, source] of [
+      ['english', mdx],
+      ['arabic', arabic],
+    ] as const) {
+      expect(source, `${name} is missing the ratio for Z=${Z}`).toContain(`'${cell}'`)
+    }
+  })
+
+  it('states the Mo ratio in prose, not only in the table', () => {
+    // Section 3 repeats the figure in words at coarser (1 decimal place) rounding than the
+    // table's 4; both mdx.test.ts and this file exist so no lesson repeats a number without a
+    // test noticing if the two roundings ever disagree.
+    const expected = `${(relativisticKineticCorrectionRatio(42) * 100).toFixed(1)}%`
+    expect(mdx).toContain(`**${expected}**`)
+    expect(arabic).toContain(`**${expected}**`)
+  })
+})
+
+describe('the second lesson’s exercise answers are the values the formulas give', () => {
+  const expected: Record<string, number> = {
+    fail1: relativisticKineticCorrectionRatio(42) * 100,
+    fail2: relativisticKineticCorrectionRatio(1) * 100,
+    fail4: 87, // smallest integer Z with the p^4 ratio >= 10%
+    fail5: sommerfeldTerm(3, 0.5),
+    fail6: sommerfeldTerm(3, 2.5),
+    fail7: fineStructure2p(40),
+    fail11: relativisticKineticCorrectionRatio(92) * 100,
+  }
+
+  for (const locale of ['', '.ar'] as const) {
+    const label = locale === '' ? 'english' : 'arabic'
+
+    it(`${label}: every numeric answer is within its own stated tolerance`, () => {
+      const checks = readExercises(TOPIC2, locale)
+
+      for (const [id, truth] of Object.entries(expected)) {
+        const check = checks.get(id)
+        expect(check, `${id} missing`).toBeDefined()
+        expect(check!.type).toBe('numeric')
+
+        const stated = check!.value as number
+        const tolerance = check!.tolerance ?? 0
+        expect(
+          Math.abs(stated - truth),
+          `${id}: answer ${stated} is ${Math.abs(stated - truth).toPrecision(3)} from the true ${truth.toPrecision(6)}, but the tolerance is only ${tolerance}`,
+        ).toBeLessThanOrEqual(tolerance)
+      }
+    })
+  }
+
+  it('fail4 really is the smallest Z where the p^4 ratio reaches 10%', () => {
+    expect(relativisticKineticCorrectionRatio(87) * 100).toBeGreaterThanOrEqual(10)
+    expect(relativisticKineticCorrectionRatio(86) * 100).toBeLessThan(10)
   })
 })

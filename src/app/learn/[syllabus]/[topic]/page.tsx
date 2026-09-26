@@ -303,6 +303,16 @@ function ExerciseSection({
                         }),
                       }
                     : {})}
+                  {...(exercise.choices
+                    ? {
+                        // A choice label can carry the occasional $...$ too (Q9's j, l, n) — same
+                        // treatment as the prompt, keyed by choice id since a multichoice card
+                        // renders labels, not a single block of text.
+                        choiceHtml: Object.fromEntries(
+                          exercise.choices.map((c) => [c.id, renderInlineMath(c.label)]),
+                        ),
+                      }
+                    : {})}
                   solutionHtml={renderInlineMath(exercise.solution)}
                 />
               ))}

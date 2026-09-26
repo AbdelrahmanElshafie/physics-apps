@@ -1,0 +1,236 @@
+# Exercises for Topic 11.1 — Failures of the Schrodinger equation.
+#
+# Set A is the size of the missing p^4 term; Set B is the Sommerfeld bracket that carries the
+# j-dependence Schrodinger's equation cannot produce; Set C checks the concepts read straight off
+# the lesson; Set D is the reasoning, and those come to me.
+#
+# Constants: alpha = 1/137.036, Ry = 109737.3 cm^-1.
+
+schemaVersion: 1
+topic: m11.1-failures-of-the-schrodinger-equation
+intro: >-
+  Fourteen questions. Sets A and B are the two numbers this lesson is built on; get those and the
+  rest follows.
+
+exercises:
+  # ---- Set A: The missing p^4 term ----
+  - id: fail1
+    set: A
+    label: Q1
+    kind: numeric
+    prompt: >-
+      What percentage of the leading kinetic energy is the missing $p^4$ term, for the 1s electron
+      of molybdenum, $Z = 42$? Give four decimal places.
+    check:
+      type: numeric
+      value: 2.3484
+      tolerance: 0.005
+    hint: Equation 11.7, with $v/c$ from the first lesson at $n = 1$.
+    solution: >-
+      $(v/c)^2/4 = (0.3065)^2/4 = 0.02348$, that is $2.3484\%$. The same $(Z\alpha)^2$ that set
+      every scale in the first lesson, now measured as a fraction of the kinetic energy itself.
+
+  - id: fail2
+    set: A
+    label: Q2
+    kind: numeric
+    prompt: >-
+      Compute the same percentage for hydrogen, $Z = 1$. Give four decimal places.
+    check:
+      type: numeric
+      value: 0.0013
+      tolerance: 0.0003
+    solution: >-
+      $(0.0073)^2/4 = 1.33 \times 10^{-5}$, that is $0.0013\%$ — about eighteen hundred times
+      smaller than molybdenum's, since it scales as $Z^2$.
+
+  - id: fail3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: >-
+      True or false: the missing $p^4$ term shrinks smoothly to zero as $Z\alpha \to 0$, the same
+      way an ordinary approximation error does.
+    check: { type: exact, value: true }
+    solution: >-
+      True — this is the "matter of degree" failure. Unlike the missing $j$-dependence in Set B,
+      there is nothing qualitatively broken here: the term is just small when $Z\alpha$ is small,
+      and grows continuously as it isn't.
+
+  - id: fail4
+    set: A
+    label: Q4
+    kind: numeric
+    prompt: >-
+      What is the smallest integer $Z$ at which the missing $p^4$ term reaches 10% of the leading
+      kinetic energy (for the 1s electron)?
+    check:
+      type: numeric
+      value: 87
+      tolerance: 0.5
+    hint: Solve $(Z\alpha)^2/4 = 0.10$ for $Z$, then round up.
+    solution: >-
+      $(Z\alpha)^2 = 0.4 \Rightarrow Z\alpha = 0.6325 \Rightarrow Z = 86.7$, so $Z = 87$ (francium)
+      is the first integer past it. Past this point the "small correction" is a tenth of the
+      energy it is correcting.
+
+  # ---- Set B: The Sommerfeld bracket ----
+  - id: fail5
+    set: B
+    label: Q5
+    kind: numeric
+    prompt: >-
+      Evaluate the Sommerfeld bracket $n/(j+\tfrac12) - \tfrac34$ at $n = 3$, $j = \tfrac12$.
+    check:
+      type: numeric
+      value: 2.25
+      tolerance: 0.001
+    solution: $3/(0.5+0.5) - 0.75 = 3 - 0.75 = 2.25$.
+
+  - id: fail6
+    set: B
+    label: Q6
+    kind: numeric
+    prompt: >-
+      Evaluate the same bracket at $n = 3$, $j = \tfrac52$ — one of the states $\ell = 2$ allows at
+      $n=3$.
+    check:
+      type: numeric
+      value: 0.25
+      tolerance: 0.001
+    solution: $3/(2.5+0.5) - 0.75 = 1 - 0.75 = 0.25$.
+
+  - id: fail7
+    set: B
+    label: Q7
+    kind: numeric
+    prompt: >-
+      Using equation 11.8, what is the size of the $2p_{1/2}$–$2p_{3/2}$ splitting for zirconium,
+      $Z = 40$, in cm$^{-1}$?
+    check:
+      type: numeric
+      value: 934986
+      tolerance: 4000
+    hint: This is the same calculation as equation 11.2, just at a different $Z$.
+    solution: >-
+      $Z^4\alpha^2\mathrm{Ry}/16 = 40^4 \times (1/137.036)^2 \times 109737.3 / 16 \approx
+      934986\ \text{cm}^{-1}$ — matching the $9.35\times10^5$ row of the first lesson's table,
+      because it is the same formula.
+
+  - id: fail8
+    set: B
+    label: Q8
+    kind: latex
+    prompt: >-
+      Write the Sommerfeld bracket in terms of $n$ and $j$.
+    scaffold: \frac{}{}-
+    check:
+      type: latex-equivalent
+      value: '\frac{n}{j+\frac12}-\frac34'
+      accept:
+        - '\frac{n}{j+\frac{1}{2}}-\frac{3}{4}'
+        - '\frac{n}{j+1/2}-\frac{3}{4}'
+        - 'n/(j+1/2) - 3/4'
+        - '\frac{n}{j+0.5}-0.75'
+    solution: >-
+      $n/(j+\tfrac12) - \tfrac34$. Everything about how fine structure depends on $j$ lives in
+      this one expression — it is the piece $H = p^2/2m + V$ has no way to write.
+
+  # ---- Set C: Reading the lesson straight ----
+  - id: fail9
+    set: C
+    label: Q9
+    kind: multichoice
+    prompt: Which quantum number does $H = p^2/2m + V$ have no way to depend on, at any order?
+    choices:
+      - { id: n, label: $n$, the principal quantum number }
+      - { id: l, label: $\ell$, the orbital angular momentum }
+      - { id: j, label: $j$, the total angular momentum }
+      - { id: m, label: $m_\ell$, the magnetic quantum number }
+    check: { type: exact, value: j }
+    solution: >-
+      $j$. It combines orbital motion with spin, and this Hamiltonian has no spin in it at any
+      stage — not a small omission, a structural one.
+
+  - id: fail10
+    set: C
+    label: Q10
+    kind: truefalse
+    prompt: >-
+      True or false: hydrogen's extra degeneracy in $\ell$ under plain Schrodinger + Coulomb is
+      itself evidence that the equation is relativistically correct.
+    check: { type: exact, value: false }
+    solution: >-
+      False. That degeneracy is a peculiarity of the pure $1/r$ potential's own hidden symmetry —
+      it exists in the fully non-relativistic theory and has nothing to do with relativity. Do not
+      mistake one unrelated piece of hydrogen's mathematical elegance for evidence the equation is
+      relativistic.
+
+  - id: fail11
+    set: C
+    label: Q11
+    kind: numeric
+    prompt: >-
+      What percentage of the leading kinetic energy is the missing $p^4$ term at uranium, $Z=92$?
+      Give three decimal places.
+    check:
+      type: numeric
+      value: 11.268
+      tolerance: 0.05
+    solution: >-
+      $(0.6714)^2/4 \approx 11.268\%$ — over a tenth of the kinetic energy, from a single
+      "correction" term.
+
+  # ---- Set D: The reasoning ----
+  - id: fail12
+    set: D
+    label: Q12
+    kind: truefalse
+    prompt: >-
+      True or false: adding the $p^4$ correction back into the Schrodinger Hamiltonian by hand
+      would fully reproduce hydrogen's fine structure.
+    check: { type: exact, value: false }
+    explain:
+      required: true
+      hint: The p^4 term has no j in it either. What does that leave out?
+    solution: >-
+      False. The $p^4$ term is a scalar correction to the kinetic energy — it shifts every state
+      of a given $n$ and $\ell$ by the same amount, regardless of $j$. It closes part of the
+      quantitative gap from Set A, but it still cannot split $2p_{1/2}$ from $2p_{3/2}$, because it
+      has no $j$-dependence to give. The real fine structure needs a spin-orbit term as well, which
+      requires spin to exist in the equation in the first place — the second failure, untouched.
+
+  - id: fail13
+    set: D
+    label: Q13
+    kind: text
+    prompt: >-
+      Explain why hydrogen's extra degeneracy in $\ell$ (energy depending only on $n$) is not, by
+      itself, evidence that the Schrodinger equation is relativistically correct.
+    check: { type: tutor }
+    solution: >-
+      That degeneracy comes from a hidden symmetry of the pure Coulomb potential specifically (a
+      conserved Runge-Lenz-like vector, beyond what angular momentum alone would give), and it is
+      present in the fully non-relativistic Schrodinger equation with no relativity involved at
+      all. It says something elegant about the $1/r$ force, not something correct about relativity
+      — the equation is still missing the $p^4$ term and the $j$-dependence regardless of how many
+      states happen to share an energy.
+
+  - id: fail14
+    set: D
+    label: Q14
+    kind: text
+    prompt: >-
+      In your own words, explain why no correction term added onto $H = p^2/2m + V$ can ever
+      produce a $j$-dependent energy shift.
+    check: { type: tutor }
+    explain:
+      hint: What would such a correction have to be built out of?
+    solution: >-
+      Any correction term is a function of the operators already present in the theory — position,
+      momentum, and whatever else the equation was built with. $H = p^2/2m + V$ was built entirely
+      out of position and momentum; it contains no spin operator, and $j$ is defined as orbital
+      angular momentum combined with spin. A term with no spin in it cannot depend on a quantity
+      that is defined using spin, no matter how it is constructed. Getting $j$-dependence requires
+      changing what the equation is built from, not tuning a coefficient on what is already there —
+      which is exactly why the next two lessons build new equations rather than patching this one.

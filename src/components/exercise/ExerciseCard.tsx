@@ -36,6 +36,7 @@ export function ExerciseCard({
   givenHtml,
   solutionHtml,
   scaffoldHtml,
+  choiceHtml,
 }: {
   exercise: Exercise
   topicId: string
@@ -44,6 +45,8 @@ export function ExerciseCard({
   givenHtml?: string
   solutionHtml: string
   scaffoldHtml?: string
+  /** Pre-rendered HTML for each choice's label, keyed by choice id — see promptHtml. */
+  choiceHtml?: Record<string, string>
 }) {
   // The scaffold is shown as an "expected shape" hint below, never seeded into the field —
   // pre-filling a template means the first thing you do is navigate someone else's skeleton
@@ -170,7 +173,11 @@ export function ExerciseCard({
                   onChange={() => setAnswer(choice.id)}
                   className="size-3.5 accent-[var(--color-accent)]"
                 />
-                {choice.label}
+                {choiceHtml?.[choice.id] ? (
+                  <span dangerouslySetInnerHTML={{ __html: choiceHtml[choice.id]! }} />
+                ) : (
+                  choice.label
+                )}
               </label>
             ))}
           </fieldset>
