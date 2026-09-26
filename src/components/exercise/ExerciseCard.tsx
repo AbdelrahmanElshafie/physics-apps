@@ -147,14 +147,43 @@ export function ExerciseCard({
           </p>
         )}
 
-        <MathInput
-          value={answer}
-          onChange={setAnswer}
-          onSubmit={submit}
-          ariaLabel={`Answer to ${exercise.label ?? exercise.id}`}
-          placeholder="Your answer"
-          disabled={pending}
-        />
+        {exercise.kind === 'multichoice' && exercise.choices ? (
+          // A multiple-choice question gets real options. Making someone type "operator" into a
+          // maths field would be testing their spelling, not their understanding.
+          <fieldset disabled={pending} className="space-y-1.5">
+            <legend className="sr-only">Answer to {exercise.label ?? exercise.id}</legend>
+            {exercise.choices.map((choice) => (
+              <label
+                key={choice.id}
+                className={cn(
+                  'flex cursor-pointer items-center gap-2.5 rounded-lg border px-3 py-2 text-sm transition-colors',
+                  answer === choice.id
+                    ? 'border-accent bg-accent-muted/30 text-fg'
+                    : 'border-border bg-surface-sunken text-fg-muted hover:border-border-strong',
+                )}
+              >
+                <input
+                  type="radio"
+                  name={`choice-${exercise.id}`}
+                  value={choice.id}
+                  checked={answer === choice.id}
+                  onChange={() => setAnswer(choice.id)}
+                  className="size-3.5 accent-[var(--color-accent)]"
+                />
+                {choice.label}
+              </label>
+            ))}
+          </fieldset>
+        ) : (
+          <MathInput
+            value={answer}
+            onChange={setAnswer}
+            onSubmit={submit}
+            ariaLabel={`Answer to ${exercise.label ?? exercise.id}`}
+            placeholder="Your answer"
+            disabled={pending}
+          />
+        )}
 
         {exercise.explain.required && (
           <div className="space-y-1.5">

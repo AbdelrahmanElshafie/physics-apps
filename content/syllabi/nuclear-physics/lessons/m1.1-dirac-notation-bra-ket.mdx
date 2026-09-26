@@ -1,0 +1,241 @@
+---
+title: Dirac Notation (bra-ket)
+summary: >-
+  Splitting the bracket into a bra and a ket. No new physics — a notation that makes operators,
+  projections and basis changes obvious instead of laborious.
+readingMinutes: 45
+updated: 2026-09-26
+keyEquations:
+  - latex: \braket{\phi}{\psi}
+    label: The bracket
+  - latex: \sum_n \ket{e_n}\bra{e_n} = \mathbb{1}
+    label: Completeness as an operator
+  - latex: \braoket{\phi}{\hat{A}}{\psi}
+    label: Matrix element
+---
+
+<Callout kind="why">
+You have been reading this notation for a lesson already. Now it gets taken apart. The payoff is
+that $\ket{\psi}\bra{\phi}$ — a ket times a bra, in that order — is an **operator**, and once you
+see that, projection, completeness and changing basis all become the same small move rather than
+three separate techniques.
+</Callout>
+
+## 1. Splitting the bracket
+
+Dirac's observation was that the bracket $\braket{\phi}{\psi}$ has two halves worth naming.
+
+<Compare
+  columns={['Object', 'Written', 'What it is']}
+  rows={[
+    ['Ket', '$\\ket{\\psi}$', 'a state vector — a column, in any chosen basis'],
+    ['Bra', '$\\bra{\\phi}$', 'its dual — a row, conjugated'],
+    ['Bracket', '$\\braket{\\phi}{\\psi}$', 'a bra meeting a ket: a single complex number'],
+  ]}
+/>
+
+The pun is deliberate: **bra** + **ket** = bracket.
+
+<Definition term="Ket">
+A vector in the Hilbert space. $\ket{\psi}$ names the *state*, without committing to a basis —
+which is the notation's first real advantage.
+</Definition>
+
+<Definition term="Bra">
+The dual of a ket: its conjugate transpose. Where $\ket{\psi}$ is a column, $\bra{\psi}$ is the
+row you get by transposing and conjugating every entry.
+</Definition>
+
+## 2. In components
+
+Take a state in $\mathbb{C}^2$ — a spin, say.
+
+<Eq
+  id="ket-components"
+  label="A ket as a column"
+  latex={String.raw`\ket{\psi} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}`}
+/>
+
+<Eq
+  id="bra-components"
+  label="Its bra: transpose and conjugate"
+  latex={String.raw`\bra{\psi} = \begin{pmatrix} \alpha^{*} & \beta^{*} \end{pmatrix}`}
+/>
+
+Putting them together, row times column, gives a number:
+
+<Eq
+  id="bracket-components"
+  label="The bracket is a number"
+  latex={String.raw`\braket{\psi}{\psi} = \begin{pmatrix} \alpha^{*} & \beta^{*} \end{pmatrix} \begin{pmatrix} \alpha \\ \beta \end{pmatrix} = |\alpha|^2 + |\beta|^2`}
+/>
+
+Which is the norm-squared from last lesson, now with the conjugation built into the notation
+rather than remembered as a rule.
+
+<Callout kind="note">
+The conjugation lives in the **bra**. That is why $\braket{\phi}{\psi} = \braket{\psi}{\phi}^{*}$
+falls out automatically: swapping which vector supplies the bra swaps which one gets conjugated.
+</Callout>
+
+## 3. The move that earns the notation: outer products
+
+Row times column gives a number. **Column times row gives a matrix.**
+
+<Eq
+  id="outer-product"
+  label="An outer product is an operator"
+  latex={String.raw`\ket{\psi}\bra{\phi} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix} \begin{pmatrix} \gamma^{*} & \delta^{*} \end{pmatrix} = \begin{pmatrix} \alpha\gamma^{*} & \alpha\delta^{*} \\ \beta\gamma^{*} & \beta\delta^{*} \end{pmatrix}`}
+/>
+
+<Compare
+  caption="Order is everything"
+  columns={['Written', 'Shape', 'Result']}
+  rows={[
+    ['$\\braket{\\phi}{\\psi}$', 'row × column', 'a number (a scalar)'],
+    ['$\\ket{\\psi}\\bra{\\phi}$', 'column × row', 'a matrix (an operator)'],
+  ]}
+/>
+
+<Callout kind="warning">
+This is the one thing to get right. $\braket{\phi}{\psi}$ and $\ket{\psi}\bra{\phi}$ are built
+from the same two states and are completely different kinds of object — a number you could put on
+a graph, and a machine that eats a state and returns another state.
+</Callout>
+
+## 4. Projection operators
+
+The most useful outer product puts a normalised state against itself:
+
+<Eq
+  id="projector"
+  label="Projector onto a state"
+  latex={String.raw`\hat{P}_e = \ket{e}\bra{e}`}
+/>
+
+Apply it to a state and watch what the bracketing does:
+
+<Derivation caption="Why this projects">
+  <Step
+    why="Apply the operator. Nothing has been assumed except associativity."
+    latex={String.raw`\hat{P}_e \ket{\psi} = \ket{e}\bra{e}\,\ket{\psi}`}
+  />
+  <Step
+    why="Regroup: the bra and ket in the middle form a bracket, which is just a number."
+    latex={String.raw`= \ket{e} \braket{e}{\psi}`}
+  />
+  <Step
+    why="A number times a ket. The result points along e, scaled by how much of psi lay along e."
+    latex={String.raw`= \braket{e}{\psi} \, \ket{e}`}
+  />
+</Derivation>
+
+That coefficient $\braket{e}{\psi}$ is the same projection you dragged around in the last lesson.
+Notice the notation did the work: regrouping the symbols *was* the derivation.
+
+<InnerProductPlot
+  initialU={[4, 0]}
+  initialV={[3, 3]}
+  caption="The green bar is the projection. In bra-ket notation that whole picture is P|psi> = |e><e|psi>."
+/>
+
+## 5. Completeness, as an operator
+
+Sum the projectors over a complete orthonormal basis and you get the identity:
+
+<Eq
+  id="completeness-operator"
+  label="Completeness"
+  latex={String.raw`\sum_n \ket{e_n}\bra{e_n} = \mathbb{1}`}
+/>
+
+Last lesson this was a statement about recovering a vector from its components. Here it is an
+**equation between operators**, and that is what makes it a tool: anywhere you see a product of
+brackets, you may insert $\mathbb{1}$ for free.
+
+<Derivation caption="Inserting the identity — the workhorse move">
+  <Step
+    why="Start with an overlap you want to compute but cannot evaluate directly."
+    latex={String.raw`\braket{\phi}{\psi}`}
+  />
+  <Step
+    why="Insert the identity between them. Legal, because the identity changes nothing."
+    latex={String.raw`= \bra{\phi} \left( \sum_n \ket{e_n}\bra{e_n} \right) \ket{\psi}`}
+  />
+  <Step
+    why="Regroup into brackets. Each term is now two ordinary numbers multiplied."
+    latex={String.raw`= \sum_n \braket{\phi}{e_n} \braket{e_n}{\psi}`}
+  />
+</Derivation>
+
+<Callout kind="forward">
+You will use that move constantly. It is how a position-space integral turns into a momentum-space
+one, and how the sum over intermediate states appears in a scattering amplitude. In Hauser-Feshbach
+theory the sum over channels is this identity inserted between an entrance and an exit state.
+</Callout>
+
+## 6. A state versus its representation
+
+$\ket{\psi}$ is the state itself. To get numbers you must choose a basis and take brackets.
+
+<Compare
+  caption="One state, different coordinates"
+  columns={['Expression', 'Meaning']}
+  rows={[
+    ['$\\ket{\\psi}$', 'the state — basis-free'],
+    ['$\\braket{e_n}{\\psi}$', 'its component along $e_n$'],
+    ['$\\braket{x}{\\psi} = \\psi(x)$', 'the wavefunction — its component in the position basis'],
+    ['$\\braket{p}{\\psi} = \\tilde{\\psi}(p)$', 'the same state in the momentum basis'],
+  ]}
+/>
+
+<Callout kind="note">
+The wavefunction is not the state. It is the state's shadow in one particular basis, exactly as
+$(3, 2)$ is not the arrow but its components in one particular pair of axes. Changing basis
+changes every number and leaves $\ket{\psi}$ untouched.
+</Callout>
+
+## 7. Operators and matrix elements
+
+An operator maps kets to kets: $\hat{A}\ket{\psi} = \ket{\varphi}$. Sandwiching one between a bra
+and a ket gives a **matrix element**:
+
+<Eq
+  id="matrix-element"
+  label="Matrix element"
+  latex={String.raw`A_{mn} = \braoket{e_m}{\hat{A}}{e_n}`}
+/>
+
+Collect those numbers over all $m, n$ and you have the matrix of the operator in that basis — the
+bridge from abstract operator to something you can hand a computer.
+
+<Eq
+  id="expectation"
+  label="Expectation value"
+  latex={String.raw`\langle \hat{A} \rangle = \braoket{\psi}{\hat{A}}{\psi}`}
+/>
+
+This is the equation on your checklist as "expectation value", and now each piece has a name: a
+bra, an operator, a ket, evaluating to the average you would measure over many identical systems.
+
+## 8. The rules, collected
+
+<Axioms
+  caption="Everything above, in one place"
+  items={[
+    ['\\braket{\\phi}{\\psi} \\in \\mathbb{C}', 'a bracket is a number'],
+    ['\\braket{\\phi}{\\psi} = \\braket{\\psi}{\\phi}^{*}', 'swapping order conjugates'],
+    ['\\ket{\\psi}\\bra{\\phi} \\;\\text{is an operator}', 'column times row is a matrix'],
+    ['\\braket{e_m}{e_n} = \\delta_{mn}', 'orthonormality'],
+    ['\\sum_n \\ket{e_n}\\bra{e_n} = \\mathbb{1}', 'completeness'],
+    ['\\ket{\\psi} = \\sum_n \\braket{e_n}{\\psi} \\ket{e_n}', 'expansion in a basis'],
+    ['\\braket{\\psi}{\\psi} = 1', 'a physical state is normalised'],
+  ]}
+/>
+
+<Callout kind="forward">
+Next: **inner products** in their own right, then **linear operators**. From here the notation
+stops being something to translate and becomes how you think — by the time you reach
+$\braoket{\text{out}}{\hat{T}}{\text{in}}$ for a transition amplitude, it should read as an
+ordinary sentence.
+</Callout>

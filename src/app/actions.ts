@@ -61,7 +61,9 @@ export async function submitAnswer(input: {
     },
   )
 
-  revalidatePath(topicPath(topicId))
+  // Deliberately no revalidatePath here. The card renders the verdict from this return value and
+  // any later grade arrives over the live stream, so re-rendering the whole page would only add
+  // seconds (it recompiles the lesson MDX) without changing anything the learner sees.
   return result
 }
 
@@ -75,7 +77,7 @@ export async function revealSolution(topicId: string, exerciseId: string): Promi
     topicId,
     exerciseId,
   })
-  revalidatePath(topicPath(topicId as TopicId))
+  // Same reasoning as submitAnswer: the client already toggled the solution open.
 }
 
 export async function passCheckpoint(topicId: string, note?: string): Promise<void> {

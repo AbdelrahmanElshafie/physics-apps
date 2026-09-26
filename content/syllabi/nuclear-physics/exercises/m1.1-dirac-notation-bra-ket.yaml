@@ -1,0 +1,275 @@
+# Exercises for Module 1.1 — Dirac notation.
+#
+# Heavier on "what kind of object is this?" than on arithmetic, because that is where the notation
+# is actually won or lost. Several answers are now settled symbolically rather than by pattern
+# matching, so a correct answer written a different way still passes.
+
+schemaVersion: 1
+topic: m1.1-dirac-notation-bra-ket
+intro: >-
+  Eighteen questions. Set A is bookkeeping, Set B is the number-versus-operator distinction that
+  everything else rests on, and Sets D to F are where the notation starts doing real work.
+
+exercises:
+  # ---- Set A: Reading the notation ----
+  - id: d1
+    set: A
+    label: Q1
+    kind: text
+    prompt: In your own words, what is the difference between $\ket{\psi}$ and $\bra{\psi}$?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $\ket{\psi}$ is the state vector — a column in any chosen basis. $\bra{\psi}$ is its dual:
+      the conjugate transpose, a row. The conjugation lives in the bra, which is what makes
+      $\braket{\psi}{\psi}$ come out real and positive.
+
+  - id: d2
+    set: A
+    label: Q2
+    kind: latex
+    prompt: >-
+      For $\ket{\psi} = \begin{pmatrix} 2 \\ 3i \end{pmatrix}$, write $\bra{\psi}$ as a row.
+    scaffold: \begin{pmatrix} & \end{pmatrix}
+    check:
+      type: latex-equivalent
+      value: \begin{pmatrix} 2 & -3i \end{pmatrix}
+      accept:
+        - '(2, -3i)'
+        - '\begin{pmatrix}2 & -3i\end{pmatrix}'
+        - '\begin{bmatrix}2 & -3i\end{bmatrix}'
+    solution: >-
+      $\bra{\psi} = \begin{pmatrix} 2 & -3i \end{pmatrix}$. Transpose to a row and conjugate every
+      entry: $2$ is real so it is unchanged, and $3i$ becomes $-3i$.
+
+  - id: d3
+    set: A
+    label: Q3
+    kind: numeric
+    prompt: >-
+      For that same $\ket{\psi} = \begin{pmatrix} 2 \\ 3i \end{pmatrix}$, compute
+      $\braket{\psi}{\psi}$.
+    check: { type: numeric, value: 13 }
+    explain: { required: true, hint: Show the conjugation. }
+    solution: >-
+      $\braket{\psi}{\psi} = (2)^{*}(2) + (3i)^{*}(3i) = 4 + (-3i)(3i) = 4 + 9 = 13$. Real and
+      positive, as a squared length must be.
+
+  - id: d4
+    set: A
+    label: Q4
+    kind: latex
+    prompt: If $\braket{\phi}{\psi} = 2 - 5i$, what is $\braket{\psi}{\phi}$?
+    check:
+      type: latex-equivalent
+      value: 2+5i
+      accept: ['2 + 5i', '(2+5i)']
+    solution: $2 + 5i$ — swapping the order conjugates the bracket.
+
+  # ---- Set B: Number or operator? ----
+  - id: d5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: What kind of object is $\braket{\phi}{\psi}$?
+    choices:
+      - { id: number, label: A complex number }
+      - { id: operator, label: An operator }
+      - { id: ket, label: A ket }
+      - { id: bra, label: A bra }
+    check: { type: exact, value: number }
+    solution: A complex number. A row times a column contracts to a single scalar.
+
+  - id: d6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: What kind of object is $\ket{\psi}\bra{\phi}$?
+    choices:
+      - { id: number, label: A complex number }
+      - { id: operator, label: An operator }
+      - { id: ket, label: A ket }
+      - { id: bra, label: A bra }
+    check: { type: exact, value: operator }
+    explain: { required: true, hint: What shape is column times row? }
+    solution: >-
+      An operator. A column times a row is a matrix — it eats a ket and returns a ket. This is the
+      distinction the whole notation is built around.
+
+  - id: d7
+    set: B
+    label: Q7
+    kind: multichoice
+    prompt: What kind of object is $\hat{A}\ket{\psi}$?
+    choices:
+      - { id: number, label: A complex number }
+      - { id: operator, label: An operator }
+      - { id: ket, label: A ket }
+      - { id: bra, label: A bra }
+    check: { type: exact, value: ket }
+    solution: A ket. An operator maps states to states.
+
+  - id: d8
+    set: B
+    label: Q8
+    kind: text
+    prompt: >-
+      Explain, without using matrices, why $\braket{\phi}{\psi}$ and $\ket{\psi}\bra{\phi}$ are
+      different kinds of object even though both are built from the same two states.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Order decides what contracts with what. In $\braket{\phi}{\psi}$ the bra faces the ket, so
+      the two vectors pair up and collapse to a single number. In $\ket{\psi}\bra{\phi}$ the open
+      ends face outward: the ket is waiting on the left and the bra on the right, so the object is
+      something that still needs a state fed into it — an operator.
+
+  # ---- Set C: Projection ----
+  - id: d9
+    set: C
+    label: Q9
+    kind: latex
+    prompt: >-
+      Simplify $\ket{e}\bra{e}\,\ket{\psi}$ by regrouping the symbols.
+    check:
+      type: latex-equivalent
+      value: \braket{e}{\psi}\ket{e}
+      accept:
+        - '\ket{e}\braket{e}{\psi}'
+        - '\langle e \vert \psi \rangle \lvert e \rangle'
+        - '\lvert e \rangle \langle e \vert \psi \rangle'
+    solution: >-
+      $\ket{e}\braket{e}{\psi}$ — the middle bra and ket form a bracket, which is a number, so the
+      result is that number times $\ket{e}$.
+
+  - id: d10
+    set: C
+    label: Q10
+    kind: text
+    prompt: >-
+      What does the operator $\hat{P} = \ket{e}\bra{e}$ do to a state, in plain language?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      It projects: it throws away everything except the part of the state lying along $\ket{e}$.
+      The output always points along $\ket{e}$, scaled by the overlap $\braket{e}{\psi}$.
+
+  - id: d11
+    set: C
+    label: Q11
+    kind: truefalse
+    prompt: >-
+      True or false — applying a projector twice does something different from applying it once,
+      that is $\hat{P}^2 \neq \hat{P}$.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Use orthonormality on the middle bracket. }
+    solution: >-
+      FALSE. $\hat{P}^2 = \ket{e}\braket{e}{e}\bra{e} = \ket{e}\bra{e} = \hat{P}$, using
+      $\braket{e}{e} = 1$. Once you have projected, projecting again changes nothing — which is
+      exactly what "projection" should mean.
+
+  # ---- Set D: Completeness ----
+  - id: d12
+    set: D
+    label: Q12
+    kind: latex
+    prompt: Write the completeness relation for an orthonormal basis $\{\ket{e_n}\}$.
+    check:
+      type: latex-equivalent
+      value: \sum_n \ket{e_n}\bra{e_n} = \mathbb{1}
+      accept:
+        - '\sum_n \lvert e_n \rangle \langle e_n \rvert = 1'
+        - '\sum_n \ket{e_n}\bra{e_n} = 1'
+        - '\sum_n \ket{e_n}\bra{e_n} = I'
+    solution: $\sum_n \ket{e_n}\bra{e_n} = \mathbb{1}$ — the projectors onto a complete basis sum to the identity.
+
+  - id: d13
+    set: D
+    label: Q13
+    kind: text
+    prompt: >-
+      Insert the identity into $\braket{\phi}{\psi}$ and write what you get as a sum. Show the
+      regrouping step.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $\braket{\phi}{\psi} = \bra{\phi}\left(\sum_n \ket{e_n}\bra{e_n}\right)\ket{\psi} = \sum_n
+      \braket{\phi}{e_n}\braket{e_n}{\psi}$. The overlap becomes a sum over the basis of products
+      of two ordinary numbers.
+
+  - id: d14
+    set: D
+    label: Q14
+    kind: text
+    prompt: >-
+      Why is inserting the identity always allowed, and why is it useful rather than just true?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Allowed because the identity operator changes nothing, so it can be dropped in anywhere.
+      Useful because it converts a quantity you cannot evaluate directly into a sum of quantities
+      you can — it is how you change basis, and how sums over intermediate states appear in
+      scattering theory.
+
+  # ---- Set E: States versus representations ----
+  - id: d15
+    set: E
+    label: Q15
+    kind: text
+    prompt: What is $\braket{x}{\psi}$, and how does it differ from $\ket{\psi}$?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $\braket{x}{\psi} = \psi(x)$ is the wavefunction: the component of the state in the position
+      basis. $\ket{\psi}$ is the state itself, independent of any basis. Changing basis changes
+      every number in $\psi(x)$ while leaving $\ket{\psi}$ exactly as it was.
+
+  - id: d16
+    set: E
+    label: Q16
+    kind: latex
+    prompt: >-
+      Write the expansion of $\ket{\psi}$ in an orthonormal basis, with the coefficients written as
+      brackets.
+    check:
+      type: latex-equivalent
+      value: \ket{\psi} = \sum_n \braket{e_n}{\psi} \ket{e_n}
+      accept:
+        - '\ket{\psi} = \sum_n \ket{e_n} \braket{e_n}{\psi}'
+        - '\lvert \psi \rangle = \sum_n \langle e_n \vert \psi \rangle \lvert e_n \rangle'
+    solution: >-
+      $\ket{\psi} = \sum_n \braket{e_n}{\psi}\ket{e_n}$. This is just completeness applied to
+      $\ket{\psi}$, which is why the two statements are really one.
+
+  # ---- Set F: Operators ----
+  - id: d17
+    set: F
+    label: Q17
+    kind: latex
+    prompt: >-
+      Write the matrix element of an operator $\hat{A}$ between basis states $\ket{e_m}$ and
+      $\ket{e_n}$.
+    check:
+      type: latex-equivalent
+      value: \braoket{e_m}{\hat{A}}{e_n}
+      accept:
+        - 'A_{mn} = \braoket{e_m}{\hat{A}}{e_n}'
+        - '\langle e_m \vert \hat{A} \vert e_n \rangle'
+        - '\bra{e_m}\hat{A}\ket{e_n}'
+    solution: >-
+      $A_{mn} = \braoket{e_m}{\hat{A}}{e_n}$. Collected over all $m$ and $n$ these numbers are the
+      matrix of the operator in that basis.
+
+  - id: d18
+    set: F
+    label: Q18
+    kind: text
+    prompt: >-
+      The expectation value is $\braoket{\psi}{\hat{A}}{\psi}$. Read that expression aloud in
+      words, and say what it means physically.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      "Bra psi, A, ket psi" — the operator $\hat{A}$ acts on the state $\ket{\psi}$, and the result
+      is overlapped back against $\bra{\psi}$. Physically it is the average value of the observable
+      $A$ over many measurements on identically prepared systems in state $\ket{\psi}$.

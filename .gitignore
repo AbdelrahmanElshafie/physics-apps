@@ -17,3 +17,6 @@ data/events.jsonl
 # Synced from node_modules by scripts/sync-mathlive-fonts.ts
 public/mathlive/
 exports/
+
+# Scratchpads are per-machine working, not content.
+data/scratch/

@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, type ReactNode } from 'react'
-import { Maximize2, Moon, PanelLeft, PanelRight, Sun } from 'lucide-react'
+import Link from 'next/link'
+import { Maximize2, Moon, NotebookPen, PanelLeft, PanelRight, Sun } from 'lucide-react'
 
 import { useWorkspace } from '@/stores/workspace'
 import { cn } from '@/lib/utils'
@@ -80,6 +81,15 @@ export function WorkspaceShell({
           <h1 className="truncate text-sm font-semibold text-fg">{title}</h1>
           {subtitle && <p className="truncate text-xs text-fg-subtle">{subtitle}</p>}
         </div>
+
+        <Link
+          href="/scratch"
+          title="Your working — a blank page for solving things"
+          aria-label="Open your working"
+          className="rounded-lg border border-transparent p-2 text-fg-subtle transition-colors hover:bg-surface-raised hover:text-fg"
+        >
+          <NotebookPen className="size-4" aria-hidden />
+        </Link>
 
         <IconButton onClick={toggleFocusMode} active={focusMode} label="Toggle focus mode" hint="f">
           <Maximize2 className="size-4" aria-hidden />

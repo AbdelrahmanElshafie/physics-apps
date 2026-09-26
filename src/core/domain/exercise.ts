@@ -44,6 +44,14 @@ export const checkSchema = z.discriminatedUnion('type', [
     /** Extra spellings that should also pass, e.g. `\mathbb{R}^5` vs `R^5`. */
     accept: z.array(z.string()).default([]),
   }),
+  z.object({
+    /**
+     * Full symbolic equivalence, e.g. a factored form against an expanded one. Settled by the
+     * SymPy adapter; falls through to the tutor when that is unavailable or undecided.
+     */
+    type: z.literal('symbolic'),
+    value: z.string(),
+  }),
   z.object({ type: z.literal('tutor') }),
 ])
 export type Check = z.infer<typeof checkSchema>

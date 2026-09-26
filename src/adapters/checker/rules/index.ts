@@ -35,6 +35,11 @@ export class RulesAnswerChecker implements AnswerChecker {
       case 'tutor':
         return UNVERIFIED
 
+      case 'symbolic':
+        // Out of scope by design: real symbolic equivalence needs a CAS, which is the SymPy
+        // adapter's job. Handing it back unverified lets the composite chain move on.
+        return UNVERIFIED
+
       case 'exact': {
         if (typeof check.value === 'boolean') {
           const parsed = parseBoolean(raw)

@@ -21,7 +21,7 @@ import { ExerciseCard } from "@/components/exercise/ExerciseCard";
 import { CheckpointPanel } from "@/components/workspace/CheckpointPanel";
 import { TopicViewTracker } from "@/components/workspace/TopicViewTracker";
 import { TutorStreamProvider } from "@/components/workspace/TutorStream";
-import { renderMath } from "@/lib/katex";
+import { KATEX_MACROS, renderMath } from "@/lib/katex";
 
 /**
  * The learning workspace for one topic.
@@ -173,7 +173,12 @@ export default async function TopicPage({ params }: PageProps) {
                     remarkPlugins: [remarkGfm, remarkMath],
                     // Prose math ($...$) renders through the same KaTeX as <Eq>.
                     rehypePlugins: [
-                      [rehypeKatex, { output: "htmlAndMathml", strict: false }],
+                      [
+                        rehypeKatex,
+                        // The same macro table the <Eq> component uses, so \ket and friends
+                        // behave identically in prose and in components.
+                        { output: "htmlAndMathml", strict: false, macros: KATEX_MACROS },
+                      ],
                     ],
                   },
                 }}

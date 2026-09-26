@@ -89,10 +89,39 @@ Available components: `Eq`, `Callout` (why/note/warning/forward), `Compare`, `Ax
 **Never write backslash-heavy files with a bash heredoc.** It collapses `\\` to `\` and silently
 corrupts every regex and LaTeX macro. Use the Write tool.
 
+## The scratchpad
+
+`/scratch` is free-form working, separate from exercises: the learner writes a derivation one line
+per step, and **each line is checked against the one before it**. That catches the sign lost in
+step three that the next five steps faithfully preserve — the failure an answer-only check cannot
+see. "Ask for review" sends the whole derivation to my queue with the working inlined, so
+`pnpm tutor <n>` shows it without opening the app.
+
+Stored as one JSON file per pad under `data/scratch/` (gitignored — it is personal working, not
+content), behind `ScratchpadRepository`. Deliberately *not* in the event log: that log is
+append-only history, and a document edited in place would bloat it with every autosave.
+
+## Symbolic checking (SymPy)
+
+`scripts/sympy_sidecar.py` is a long-lived Python worker speaking JSON lines over stdin/stdout.
+Long-lived because importing SymPy costs over a second, so spawning per check would make "instant"
+a lie. `CompositeAnswerChecker` runs the rule-based checker first and only consults SymPy for what
+is left: roots, unevaluated arithmetic, factored-versus-expanded.
+
+Requires `pip install sympy "antlr4-python3-runtime==4.11.*"`. **Without it the app is fine** —
+the adapter reports `unverified` and those answers route to me. `SYMBOLIC_CHECKING=off` disables
+it; `PYTHON_BIN` overrides the interpreter.
+
+The worker has a prose guard: `parse_latex` will happily read "this is not maths" as a product of
+single-letter symbols and then report a confident "not equal". Two or more three-letter words means
+prose, and prose is never judged.
+
 ## Exercise grading is two-tier
 
 `AnswerChecker` settles what it can (numerics, vectors, matrices, booleans, normalised LaTeX).
 Everything else goes to me.
+
+Order: rules -> SymPy -> tutor. A definite verdict stops the chain; `unverified` passes it on.
 
 **The one inviolable rule: an answer the checker cannot parse returns `unverified`, never
 `incorrect`.** Marking correct work wrong because the parser is limited would destroy trust in
@@ -114,5 +143,18 @@ Progress lives in the event log, so I no longer reconstruct context by re-readin
 ## Roadmap
 
 M0/M1 (built): foundation, content pipeline, lesson reader, exercise runner, event log, bridge.
-M2: derivations UI polish, more widgets, ⌘K palette, mastery dashboard, spaced review.
-M3: Anthropic API tutor. M4: Python sidecar (SymPy, TALYS, EXFOR). M5: SQLite, auth, deploy.
+M2: ⌘K palette, mastery dashboard, spaced review. M3: Anthropic API tutor.
+M4 (partly done): SymPy checking landed; TALYS and EXFOR still to come.
+M5: SQLite, auth, deploy.
+
+## Performance notes
+
+Server actions on the hot path (`submitAnswer`, `revealSolution`) deliberately skip
+`revalidatePath`. Revalidating recompiles the lesson MDX and re-renders the 219-topic navigator,
+which took a submission from 1s to 14s in dev while changing nothing the learner could see — the
+card renders its own verdict and later grades arrive over the live stream. Keep it that way;
+only use revalidation where lock states actually change, as in `passCheckpoint`.
+
+One SSE connection per page, never per component. Browsers allow about six per origin over
+HTTP/1.1, so a stream per exercise card exhausts the pool and stalls ordinary requests. Consumers
+use `useThreadMessages` from `TutorStream`, which fans out a single topic-scoped stream.

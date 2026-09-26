@@ -1,11 +1,19 @@
 import { ulid } from 'ulid'
 
-import type { AnswerChecker, ProgressRepository, TutorTransport } from '@core/ports'
+import type {
+  AnswerChecker,
+  ProgressRepository,
+  ScratchpadRepository,
+  TutorTransport,
+} from '@core/ports'
 import type { Clock, IdGenerator } from '@core/services'
 
+import { CompositeAnswerChecker } from '@adapters/checker/composite'
 import { RulesAnswerChecker } from '@adapters/checker/rules'
+import { SympyAnswerChecker } from '@adapters/checker/sympy'
 import { FileSystemContentRepository } from '@adapters/content/fs-mdx'
 import { FileSystemProgressRepository } from '@adapters/progress/fs-events'
+import { FileSystemScratchpadRepository } from '@adapters/scratch/fs-json'
 import { ClaudeCodeTutorTransport } from '@adapters/tutor/claude-code'
 
 /**
@@ -23,6 +31,7 @@ import { ClaudeCodeTutorTransport } from '@adapters/tutor/claude-code'
 export interface Container {
   readonly content: FileSystemContentRepository
   readonly progress: ProgressRepository
+  readonly scratch: ScratchpadRepository
   readonly tutor: TutorTransport
   readonly checker: AnswerChecker
   readonly clock: Clock
@@ -51,12 +60,27 @@ function createTutorTransport(): TutorTransport {
   }
 }
 
+/**
+ * Rules first, SymPy second.
+ *
+ * The rule-based checker settles most answers synchronously; the symbolic worker handles what is
+ * left (roots, unevaluated arithmetic, factored forms). If Python or SymPy is missing the symbolic
+ * stage simply reports `unverified`, so the app degrades to tutor review rather than failing.
+ * Set SYMBOLIC_CHECKING=off to skip it entirely.
+ */
+function createAnswerChecker(): AnswerChecker {
+  const rules = new RulesAnswerChecker()
+  if (process.env.SYMBOLIC_CHECKING === 'off') return rules
+  return new CompositeAnswerChecker(rules, new SympyAnswerChecker())
+}
+
 function build(): Container {
   return {
     content: new FileSystemContentRepository(),
     progress: new FileSystemProgressRepository(),
+    scratch: new FileSystemScratchpadRepository(),
     tutor: createTutorTransport(),
-    checker: new RulesAnswerChecker(),
+    checker: createAnswerChecker(),
     clock: systemClock,
     ids: ulidIds,
   }
@@ -64,8 +88,33 @@ function build(): Container {
 
 const globalRef = globalThis as typeof globalThis & { __physicsContainer?: Container }
 
+/**
+ * Every field the container must have.
+ *
+ * Typed as a total record so adding a dependency to `Container` without listing it here is a
+ * compile error. That matters because the instance is cached across hot reloads: adding a field
+ * would otherwise leave the dev server serving a stale container missing it, which surfaces as a
+ * baffling "cannot read properties of undefined" far from the actual change.
+ */
+const REQUIRED_KEYS: Record<keyof Container, true> = {
+  content: true,
+  progress: true,
+  scratch: true,
+  tutor: true,
+  checker: true,
+  clock: true,
+  ids: true,
+}
+
+function isComplete(candidate: Container): boolean {
+  return Object.keys(REQUIRED_KEYS).every((key) => key in candidate)
+}
+
 export function container(): Container {
-  globalRef.__physicsContainer ??= build()
+  const cached = globalRef.__physicsContainer
+  if (cached && isComplete(cached)) return cached
+
+  globalRef.__physicsContainer = build()
   return globalRef.__physicsContainer
 }
 
