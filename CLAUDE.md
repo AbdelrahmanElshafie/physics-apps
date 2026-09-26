@@ -190,6 +190,12 @@ stale copy of the module: a new `check.type` will validate fine under `pnpm vali
 values. If a brand-new lesson URL 404s or 500s while existing ones work, it is the same thing —
 `rm -rf .next` and restart.
 
+**The equation palette lives in `src/components/math/palette.ts`**, one table serving both
+editors. MathLive's insert tokens are `#@` (the selection, or the item before the caret) and `#?`
+(a placeholder the caret jumps into) — *not* `#0`, which is macro-argument syntax and silently
+produces an empty slot. So the superscript button is `#@^{#?}`: it takes what you just typed as
+the base and drops you in the exponent. `tests/palette.test.ts` enforces this and rejects `#0`.
+
 **Never reach for a component's DOM node with `document.querySelector`.** A lesson page has ~20
 math fields and the scratchpad has one per step, so a global lookup silently targets the first one
 — the palette inserted into the wrong card and the symptom read as "nothing happens". Use a ref;
