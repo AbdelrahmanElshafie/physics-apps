@@ -1,25 +1,18 @@
+# Universal, repo-wide. Each app/package under apps/ and packages/ may add its
+# own .gitignore for anything specific to it (see apps/physics-instructor/.gitignore
+# for the fuller example: runtime data, generated fonts, GRASP output, etc.).
+
 node_modules/
 .next/
 out/
+dist/
 build/
 *.tsbuildinfo
 next-env.d.ts
-
-# Runtime state — regenerated, machine-local.
-data/.cache/
-data/bridge/threads/
-data/events.jsonl
 
 .env*
 !.env.example
 .DS_Store
 
-# Synced from node_modules by scripts/sync-mathlive-fonts.ts
-public/mathlive/
-exports/
-
-# Scratchpads are per-machine working, not content.
-data/scratch/
-
-# Generated GRASP scripts.
-out/
+# pnpm workspace state
+.pnpm-store/
