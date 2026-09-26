@@ -46,6 +46,18 @@ export const checkSchema = z.discriminatedUnion('type', [
   }),
   z.object({
     /**
+     * Any non-zero scalar multiple of `value` counts as correct.
+     *
+     * Exists for eigenvector questions: an eigenvector is a *direction*, so (1,1) and (2,2) are
+     * equally right, and a question that says "give any vector on that line" must not then accept
+     * only one of them.
+     */
+    type: z.literal('parallel'),
+    value: z.array(z.number()),
+    tolerance: z.number().nonnegative().default(1e-9),
+  }),
+  z.object({
+    /**
      * Full symbolic equivalence, e.g. a factored form against an expanded one. Settled by the
      * SymPy adapter; falls through to the tutor when that is unavailable or undecided.
      */

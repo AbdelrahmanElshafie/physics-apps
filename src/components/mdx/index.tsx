@@ -7,6 +7,7 @@ import { M } from '@/components/math/Math'
 import { renderMath } from '@/lib/katex'
 
 import { Axioms, Callout, Compare, Definition, Derivation, Step } from './blocks'
+import { EigenPlot } from './EigenPlot'
 import { InnerProductPlot } from './InnerProductPlot'
 import { SymbolTooltip } from './SymbolTooltip'
 import { VectorPlot } from './VectorPlot'
@@ -54,6 +55,7 @@ export function mdxComponents(options: {
     // ---- widgets ----------------------------------------------------------
     VectorPlot,
     InnerProductPlot,
+    EigenPlot,
 
     // ---- glossary ---------------------------------------------------------
     Symbol: ({ name, children }: { name: string; children: ReactNode }) => {

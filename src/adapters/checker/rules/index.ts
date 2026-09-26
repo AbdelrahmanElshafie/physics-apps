@@ -12,6 +12,10 @@ import {
 } from './latex'
 
 const UNVERIFIED: CheckOutcome = { verdict: 'unverified' }
+
+/** Renders the scale factor readably, so the feedback explains why a multiple was accepted. */
+const fmtFactor = (factor: number): string =>
+  Number.isInteger(factor) ? `${factor} times` : `${factor.toFixed(3)} times`
 const correct = (detail?: string): CheckOutcome => ({
   verdict: 'correct',
   ...(detail !== undefined ? { detail } : {}),
@@ -102,6 +106,37 @@ export class RulesAnswerChecker implements AnswerChecker {
           }
         }
         return correct()
+      }
+
+      case 'parallel': {
+        const parsed = parseVector(raw)
+        if (parsed === null) return UNVERIFIED
+
+        if (parsed.length !== check.value.length) {
+          return incorrect(
+            `Expected ${check.value.length} component${check.value.length === 1 ? '' : 's'}, got ${parsed.length}.`,
+          )
+        }
+        if (parsed.every((component) => component === 0)) {
+          return incorrect('The zero vector does not count — it lies on every line at once.')
+        }
+
+        // Recover the scale factor from the first component that can carry one, then require
+        // every other component to agree with it.
+        const pivot = check.value.findIndex((component) => Math.abs(component) > 1e-12)
+        if (pivot === -1) return UNVERIFIED
+
+        const factor = parsed[pivot]! / check.value[pivot]!
+        if (!Number.isFinite(factor) || factor === 0) {
+          return incorrect('That is not a multiple of the expected direction.')
+        }
+
+        const matches = parsed.every((component, i) =>
+          closeEnough(component, factor * check.value[i]!, check.tolerance),
+        )
+        return matches
+          ? correct(Math.abs(factor - 1) > 1e-9 ? `Correct — that is ${fmtFactor(factor)} the reference vector, which is the same direction.` : undefined)
+          : incorrect('That does not point along the expected direction.')
       }
 
       case 'latex-equivalent': {

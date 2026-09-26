@@ -127,6 +127,46 @@ describe('RulesAnswerChecker', () => {
     expect(await verdict(check, '0.30000000001')).toBe('correct')
   })
 
+  // --- direction-only answers (eigenvectors) ---
+
+  it('accepts any non-zero multiple for a parallel check', async () => {
+    // An eigenvector is a direction, so (2,2) is as correct as (1,1). A question that invites
+    // "any vector on that line" must not then accept only one of them.
+    const check: Check = { type: 'parallel', value: [1, 1], tolerance: 1e-9 }
+    expect(await verdict(check, '(1, 1)')).toBe('correct')
+    expect(await verdict(check, '(2, 2)')).toBe('correct')
+    expect(await verdict(check, '(-3, -3)')).toBe('correct')
+    expect(await verdict(check, '(0.5, 0.5)')).toBe('correct')
+  })
+
+  it('explains the scale factor when a multiple is accepted', async () => {
+    const outcome = await checker.check({ type: 'parallel', value: [1, 1], tolerance: 1e-9 }, '(2, 2)')
+    expect(outcome.detail).toMatch(/2 times/)
+  })
+
+  it('still rejects a different direction', async () => {
+    const check: Check = { type: 'parallel', value: [1, 1], tolerance: 1e-9 }
+    expect(await verdict(check, '(1, 2)')).toBe('incorrect')
+    expect(await verdict(check, '(1, -1)')).toBe('incorrect')
+  })
+
+  it('rejects the zero vector, which lies on every line', async () => {
+    const outcome = await checker.check({ type: 'parallel', value: [1, 1], tolerance: 1e-9 }, '(0, 0)')
+    expect(outcome.verdict).toBe('incorrect')
+    expect(outcome.detail).toMatch(/zero vector/)
+  })
+
+  it('rejects the wrong number of components', async () => {
+    const check: Check = { type: 'parallel', value: [1, 1], tolerance: 1e-9 }
+    expect(await verdict(check, '(1, 1, 1)')).toBe('incorrect')
+  })
+
+  it('handles a direction with a zero component', async () => {
+    const check: Check = { type: 'parallel', value: [0, 1], tolerance: 1e-9 }
+    expect(await verdict(check, '(0, 5)')).toBe('correct')
+    expect(await verdict(check, '(1, 5)')).toBe('incorrect')
+  })
+
   // --- the refusal-to-guess contract ---
 
   it('returns unverified, never incorrect, for an answer it cannot parse', async () => {

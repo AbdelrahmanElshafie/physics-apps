@@ -83,7 +83,8 @@ MDX parses element children as markdown, which **eats LaTeX backslashes**. So:
 Same applies to `<Step latex={String.raw\`...\`} why="..." />`.
 
 Available components: `Eq`, `Callout` (why/note/warning/forward), `Compare`, `Axioms`,
-`Derivation`+`Step`, `Definition`, `Symbol` (glossary tooltip), `VectorPlot`. Registered in
+`Derivation`+`Step`, `Definition`, `Symbol` (glossary tooltip), `VectorPlot`,
+`InnerProductPlot`, `EigenPlot`. Registered in
 `src/components/mdx/index.tsx` — add widgets there.
 
 **Never write backslash-heavy files with a bash heredoc.** It collapses `\\` to `\` and silently
@@ -154,6 +155,12 @@ Server actions on the hot path (`submitAnswer`, `revealSolution`) deliberately s
 which took a submission from 1s to 14s in dev while changing nothing the learner could see — the
 card renders its own verdict and later grades arrive over the live stream. Keep it that way;
 only use revalidation where lock states actually change, as in `passCheckpoint`.
+
+**Restart the dev server after changing a Zod schema or adding a route.** Next's HMR keeps a
+stale copy of the module: a new `check.type` will validate fine under `pnpm validate:content`
+(fresh process) while the running server rejects it with a discriminator error listing the old
+values. If a brand-new lesson URL 404s or 500s while existing ones work, it is the same thing —
+`rm -rf .next` and restart.
 
 One SSE connection per page, never per component. Browsers allow about six per origin over
 HTTP/1.1, so a stream per exercise card exhausts the pool and stalls ordinary requests. Consumers

@@ -1,0 +1,208 @@
+---
+title: Eigenvalue Problems
+summary: >-
+  The directions an operator only rescales. Finding them turns a coupled system into independent
+  equations, and in quantum mechanics the scaling factors are what a measurement returns.
+readingMinutes: 55
+updated: 2026-09-26
+keyEquations:
+  - latex: \hat{A}\ket{\psi} = \lambda \ket{\psi}
+    label: The eigenvalue equation
+  - latex: \det\left(A - \lambda \mathbb{1}\right) = 0
+    label: Characteristic equation
+  - latex: A = U \Lambda U^{\dagger}
+    label: Diagonalisation
+---
+
+<Callout kind="why">
+Last lesson ended on an accident: written in one basis the spin-flip matrix was diagonal, and
+there the operator did nothing but multiply each component by a number. This lesson is about
+finding that basis deliberately, for any operator. It is the most practically useful thing in
+Module 1.1 — and in quantum mechanics those numbers are not a convenience, they are the possible
+results of a measurement.
+</Callout>
+
+## 1. The question
+
+Most directions get rotated *and* stretched by an operator. A few get only stretched.
+
+<Eq
+  id="eigen-equation"
+  label="The eigenvalue equation"
+  latex={String.raw`\hat{A}\ket{\psi} = \lambda \ket{\psi}`}
+/>
+
+A ket satisfying this is an **eigenvector** of $\hat{A}$, and the number $\lambda$ is its
+**eigenvalue**. The equation says: acting with the operator did nothing that scaling would not
+have done.
+
+Drag the blue arrow below. The gold arrow is where the operator sends it. Most of the time they
+disagree; on the dashed lines they do not.
+
+<EigenPlot
+  matrix={[
+    [0, 1],
+    [1, 0],
+  ]}
+  initial={[3, 1]}
+  label="σₓ"
+  caption="The spin-flip operator. Two dashed eigendirections, with eigenvalues +1 and -1."
+/>
+
+<Callout kind="note">
+If $\ket{\psi}$ is an eigenvector then so is $c\ket{\psi}$ for any non-zero $c$ — the same equation
+survives multiplication. So an eigenvector is really a **direction**, not a particular arrow, and
+we fix the length afterwards by normalising.
+</Callout>
+
+## 2. Finding them
+
+Rearrange the eigenvalue equation so one side is zero:
+
+<Eq
+  id="rearranged"
+  latex={String.raw`\left(\hat{A} - \lambda\mathbb{1}\right)\ket{\psi} = 0`}
+/>
+
+This says the operator $\hat{A} - \lambda\mathbb{1}$ annihilates a non-zero vector. An operator
+that does that cannot be invertible — and a matrix is non-invertible exactly when its determinant
+vanishes:
+
+<Eq
+  id="characteristic"
+  label="Characteristic equation"
+  latex={String.raw`\det\left(A - \lambda \mathbb{1}\right) = 0`}
+/>
+
+For an $N \times N$ matrix this is a polynomial of degree $N$ in $\lambda$, so there are $N$
+eigenvalues counted with multiplicity — possibly complex, possibly repeated.
+
+<Derivation caption="Eigenvalues of the spin-flip operator">
+  <Step
+    why="Subtract lambda from the diagonal."
+    latex={String.raw`A - \lambda\mathbb{1} = \begin{pmatrix} -\lambda & 1 \\ 1 & -\lambda \end{pmatrix}`}
+  />
+  <Step
+    why="Take the determinant: product of the diagonal minus product of the off-diagonal."
+    latex={String.raw`\det = \lambda^2 - 1`}
+  />
+  <Step
+    why="Set it to zero and solve."
+    latex={String.raw`\lambda^2 - 1 = 0 \implies \lambda = \pm 1`}
+  />
+</Derivation>
+
+Now put each eigenvalue back to find its direction.
+
+<Derivation caption="The eigenvector for lambda = +1">
+  <Step
+    why="Substitute lambda = 1 into (A - lambda)psi = 0."
+    latex={String.raw`\begin{pmatrix} -1 & 1 \\ 1 & -1 \end{pmatrix}\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0`}
+  />
+  <Step
+    why="Both rows give the same condition — they must, or only the zero vector would satisfy it."
+    latex={String.raw`-v_1 + v_2 = 0 \implies v_2 = v_1`}
+  />
+  <Step
+    why="Any vector with equal components works. Normalise to fix the length."
+    latex={String.raw`\ket{+} = \tfrac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}`}
+  />
+</Derivation>
+
+Repeating for $\lambda = -1$ gives $v_2 = -v_1$, that is $\ket{-} = \tfrac{1}{\sqrt{2}}(1, -1)$.
+Those are exactly the basis vectors that made the matrix diagonal last lesson — and now they were
+*derived* rather than guessed.
+
+<Callout kind="warning">
+The two rows agreeing is a feature, not a mistake in your algebra. The determinant was set to zero
+precisely to make the rows dependent. If you ever get two independent conditions, the eigenvalue
+is wrong.
+</Callout>
+
+## 3. Degeneracy
+
+When an eigenvalue repeats it is **degenerate**, and it may come with a whole plane of
+eigenvectors rather than a single direction.
+
+The identity operator is the extreme case: every vector satisfies
+$\mathbb{1}\ket{\psi} = 1\ket{\psi}$, so $\lambda = 1$ with the entire space as its eigenspace. Any
+basis at all diagonalises it.
+
+<Callout kind="forward">
+Degeneracy is not a curiosity in nuclear physics — it is the norm. A level with angular momentum
+$j$ is $(2j+1)$-fold degenerate, and lifting that degeneracy with a magnetic field or a deformation
+is how much of nuclear structure gets probed. When it happens you are free to choose any
+orthonormal basis within the eigenspace, and the art is choosing one that respects another
+symmetry.
+</Callout>
+
+## 4. Diagonalisation
+
+Collect the eigenvectors as the columns of $U$ and the eigenvalues down the diagonal of $\Lambda$:
+
+<Eq
+  id="diagonalisation"
+  label="Diagonalisation"
+  latex={String.raw`A = U \Lambda U^{\dagger} \qquad\Longleftrightarrow\qquad \Lambda = U^{\dagger} A U`}
+/>
+
+This is the change of basis from last lesson, with the basis chosen to be the eigenvectors. In that
+basis the operator is as simple as an operator can be.
+
+<Compare
+  caption="Why anyone bothers"
+  columns={['Task', 'General basis', 'Eigenbasis']}
+  rows={[
+    ['Apply the operator', 'full matrix product', 'multiply each component by its $\\lambda$'],
+    ['Apply it $n$ times', '$n$ matrix products', 'raise each $\\lambda$ to the $n$'],
+    ['Solve the coupled equations', 'simultaneous system', '$N$ independent one-line problems'],
+    ['Exponentiate it', 'a power series', '$e^{\\lambda}$ on the diagonal'],
+  ]}
+/>
+
+That third row is the reason this topic is on your checklist. A set of coupled channel equations
+becomes, in the eigenbasis, a set of independent ones — which is exactly how a coupled-channels
+calculation is made tractable.
+
+## 5. A free consistency check
+
+The invariants from last lesson can be read straight off the eigenvalues:
+
+<Eq
+  id="trace-det"
+  label="Invariants from eigenvalues"
+  latex={String.raw`\operatorname{tr} A = \sum_i \lambda_i \qquad \det A = \prod_i \lambda_i`}
+/>
+
+For the spin-flip operator: trace $0 = (+1) + (-1)$, determinant $-1 = (+1)(-1)$. Both check out.
+
+<Callout kind="note">
+Use this. It costs nothing and catches most arithmetic slips: add your eigenvalues and compare
+with the trace, multiply them and compare with the determinant. If either disagrees, you have made
+a mistake before you have wasted time on the eigenvectors.
+</Callout>
+
+## 6. What the numbers mean
+
+In quantum mechanics the eigenvalue equation is not a computational trick — it is the measurement
+postulate.
+
+<Compare
+  caption="The physical reading"
+  columns={['Mathematics', 'Physics']}
+  rows={[
+    ['Eigenvalues of $\\hat{A}$', 'the possible results of measuring $A$'],
+    ['Eigenvector $\\ket{a}$', 'the state left behind after getting result $a$'],
+    ['$|\\braket{a}{\\psi}|^2$', 'the probability of that result'],
+    ['$\\hat{H}\\ket{E} = E\\ket{E}$', 'the stationary states and their energies'],
+  ]}
+/>
+
+<Callout kind="forward">
+One thing should now look fragile. Nothing so far guarantees the eigenvalues are **real** — the
+characteristic polynomial can perfectly well have complex roots — and a measurement had better not
+return $3 + 2i$. Nor is there any guarantee the eigenvectors form a basis at all.
+
+**Next: Hermitian operators**, which are exactly the class for which both guarantees hold. That is
+why every observable is one, and it is the last structural piece before commutators.
+</Callout>
