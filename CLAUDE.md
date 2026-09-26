@@ -210,6 +210,13 @@ every other verdict. `tests/checker.test.ts` pins this down.
 An exercise with `explain.required: true` always reaches me even when the value checks out,
 because on those questions the reasoning is the thing being taught.
 
+**A `multichoice` choice's `label` can contain `$...$`, but only the page renders it as maths.**
+`ExerciseCard` never runs a choice label through KaTeX itself — the page pre-renders each one to
+HTML server-side (same pattern as `promptHtml`/`solutionHtml`) and passes it down as `choiceHtml`,
+keyed by choice id. Every choice label written before Topic 11.1's second lesson happened to be
+plain prose, so a label like `$j$` rendering as the literal text `$j$` went unnoticed until then.
+`tests/exercise-card.test.tsx` pins both the typeset path and the plain-text fallback.
+
 ## Teaching workflow
 
 1. `pnpm tutor` — see what is waiting.
