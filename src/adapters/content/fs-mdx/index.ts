@@ -2,6 +2,8 @@ import fs from 'node:fs/promises'
 import { parse as parseYaml } from 'yaml'
 
 import {
+  DEFAULT_LOCALE,
+  localeSuffix,
   buildSyllabus,
   exerciseFileSchema,
   glossaryFileSchema,
@@ -11,6 +13,7 @@ import {
   type Exercise,
   type GlossaryEntry,
   type Lesson,
+  type Locale,
   type Syllabus,
   type SyllabusId,
   type Topic,
@@ -110,26 +113,56 @@ export class FileSystemContentRepository implements ContentRepository {
     return all
   }
 
-  async getLesson(topicId: TopicId): Promise<Lesson | null> {
+  async getLesson(topicId: TopicId, locale: Locale = DEFAULT_LOCALE): Promise<Lesson | null> {
     const { syllabus, local } = parseTopicId(topicId)
-    return this.cached(this.lessonCache, lessonFile(syllabus, local), (raw) => {
-      const { data, body } = splitFrontmatter(raw)
-      return {
-        topicId,
-        frontmatter: lessonFrontmatterSchema.parse(data),
-        body,
-      }
-    })
+
+    // Try the requested locale, then fall back to English. A missing translation must degrade to
+    // readable content, never to a blank page — and the caller is told which it got.
+    for (const candidate of localeCandidates(locale)) {
+      const lesson = await this.cached(
+        this.lessonCache,
+        lessonFile(syllabus, local, localeSuffix(candidate)),
+        (raw) => {
+          const { data, body } = splitFrontmatter(raw)
+          return {
+            topicId,
+            frontmatter: lessonFrontmatterSchema.parse(data),
+            body,
+            servedLocale: candidate,
+          }
+        },
+      )
+      if (lesson) return lesson
+    }
+    return null
   }
 
-  async getExercises(topicId: TopicId): Promise<Exercise[]> {
+  async getExercises(topicId: TopicId, locale: Locale = DEFAULT_LOCALE): Promise<Exercise[]> {
     const { syllabus, local } = parseTopicId(topicId)
-    const parsed = await this.cached(
-      this.exerciseCache,
-      exerciseFile(syllabus, local),
-      (raw) => exerciseFileSchema.parse(parseYaml(raw)).exercises,
-    )
-    return parsed ?? []
+
+    for (const candidate of localeCandidates(locale)) {
+      const parsed = await this.cached(
+        this.exerciseCache,
+        exerciseFile(syllabus, local, localeSuffix(candidate)),
+        (raw) => exerciseFileSchema.parse(parseYaml(raw)).exercises,
+      )
+      if (parsed) return parsed
+    }
+    return []
+  }
+
+  /** Which locale a lesson would actually be served in, without loading the body. */
+  async lessonLocale(topicId: TopicId, locale: Locale): Promise<Locale | null> {
+    const { syllabus, local } = parseTopicId(topicId)
+    for (const candidate of localeCandidates(locale)) {
+      try {
+        await fs.access(lessonFile(syllabus, local, localeSuffix(candidate)))
+        return candidate
+      } catch {
+        // Try the next candidate.
+      }
+    }
+    return null
   }
 
   async getGlossary(syllabusId: SyllabusId): Promise<GlossaryEntry[]> {
@@ -150,4 +183,9 @@ export class FileSystemContentRepository implements ContentRepository {
     }
     return counts
   }
+}
+
+/** The requested locale first, then English as the fallback (listed once). */
+function localeCandidates(locale: Locale): Locale[] {
+  return locale === DEFAULT_LOCALE ? [DEFAULT_LOCALE] : [locale, DEFAULT_LOCALE]
 }

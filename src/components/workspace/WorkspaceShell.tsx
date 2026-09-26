@@ -1,10 +1,14 @@
 'use client'
 
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import Link from 'next/link'
-import { Maximize2, Moon, NotebookPen, PanelLeft, PanelRight, Sun } from 'lucide-react'
+import { Maximize2, Moon, NotebookPen, PanelLeft, PanelRight, Settings, Sun } from 'lucide-react'
 
+import { LOCALE_INFO } from '@core/domain'
 import { useWorkspace } from '@/stores/workspace'
+import { translator } from '@/lib/i18n'
+
+import { SettingsDialog } from './SettingsDialog'
 import { cn } from '@/lib/utils'
 
 /**
@@ -20,12 +24,16 @@ export function WorkspaceShell({
   children,
   title,
   subtitle,
+  topicId,
+  hasTranslation,
 }: {
   navigator: ReactNode
   tutor: ReactNode
   children: ReactNode
   title: string
   subtitle?: string
+  topicId?: string
+  hasTranslation?: boolean
 }) {
   const {
     navigatorOpen,
@@ -36,13 +44,24 @@ export function WorkspaceShell({
     toggleTutor,
     toggleFocusMode,
     setTheme,
+    locale,
   } = useWorkspace()
+
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const t = translator(locale)
 
   // The store is the source of truth for the theme; the inline script in <head> only prevents
   // the first-paint flash. This keeps the attribute in step with later toggles.
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
+
+  // Keep the document's language and direction in step with the setting. The inline script in
+  // <head> covers the first paint; this covers every change after it.
+  useEffect(() => {
+    document.documentElement.setAttribute('lang', locale)
+    document.documentElement.setAttribute('dir', LOCALE_INFO[locale].direction)
+  }, [locale])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -71,7 +90,7 @@ export function WorkspaceShell({
         <IconButton
           onClick={toggleNavigator}
           active={navigatorOpen}
-          label="Toggle syllabus panel"
+          label={t('header.toggleSyllabus')}
           hint="["
         >
           <PanelLeft className="size-4" aria-hidden />
@@ -84,20 +103,24 @@ export function WorkspaceShell({
 
         <Link
           href="/scratch"
-          title="Your working — a blank page for solving things"
-          aria-label="Open your working"
+          title={t('header.scratchpad')}
+          aria-label={t('header.scratchpad')}
           className="rounded-lg border border-transparent p-2 text-fg-subtle transition-colors hover:bg-surface-raised hover:text-fg"
         >
           <NotebookPen className="size-4" aria-hidden />
         </Link>
 
-        <IconButton onClick={toggleFocusMode} active={focusMode} label="Toggle focus mode" hint="f">
+        <IconButton onClick={() => setSettingsOpen(true)} label={t('header.settings')}>
+          <Settings className="size-4" aria-hidden />
+        </IconButton>
+
+        <IconButton onClick={toggleFocusMode} active={focusMode} label={t('header.focusMode')} hint="f">
           <Maximize2 className="size-4" aria-hidden />
         </IconButton>
 
         <IconButton
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+          label={theme === 'dark' ? t('header.lightTheme') : t('header.darkTheme')}
         >
           {theme === 'dark' ? (
             <Sun className="size-4" aria-hidden />
@@ -106,7 +129,7 @@ export function WorkspaceShell({
           )}
         </IconButton>
 
-        <IconButton onClick={toggleTutor} active={tutorOpen} label="Toggle instructor panel" hint="]">
+        <IconButton onClick={toggleTutor} active={tutorOpen} label={t('header.toggleInstructor')} hint="]">
           <PanelRight className="size-4" aria-hidden />
         </IconButton>
       </header>
@@ -148,6 +171,14 @@ export function WorkspaceShell({
           />
         )}
       </div>
+
+      <SettingsDialog
+        open={settingsOpen}
+        onOpenChange={setSettingsOpen}
+        {...(topicId !== undefined ? { topicId } : {})}
+        topicTitle={title}
+        {...(hasTranslation !== undefined ? { hasTranslation } : {})}
+      />
     </div>
   )
 }

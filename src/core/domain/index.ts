@@ -1,4 +1,5 @@
 export * from './ids'
+export * from './locale'
 export * from './syllabus'
 export * from './graph'
 export * from './exercise'

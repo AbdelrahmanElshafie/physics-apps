@@ -22,6 +22,9 @@ import { CheckpointPanel } from "@/components/workspace/CheckpointPanel";
 import { TopicViewTracker } from "@/components/workspace/TopicViewTracker";
 import { TutorStreamProvider } from "@/components/workspace/TutorStream";
 import { KATEX_MACROS, renderMath } from "@/lib/katex";
+import { resolveLocale } from "@/lib/server-locale";
+import { LOCALE_INFO, DEFAULT_LOCALE } from "@core/domain";
+import { translator } from "@/lib/i18n";
 
 /**
  * The learning workspace for one topic.
@@ -33,6 +36,7 @@ export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ syllabus: string; topic: string }>;
+  searchParams: Promise<{ lang?: string | string[] }>;
 }
 
 export async function generateMetadata({
@@ -48,8 +52,11 @@ export async function generateMetadata({
   return { title: title ?? "Topic" };
 }
 
-export default async function TopicPage({ params }: PageProps) {
+export default async function TopicPage({ params, searchParams }: PageProps) {
   const { syllabus: syllabusParam, topic: topicParam } = await params;
+  const locale = await resolveLocale(await searchParams);
+  const direction = LOCALE_INFO[locale].direction;
+  const t = translator(locale);
   const { content, progress } = container();
 
   const syllabusId = asSyllabusId(syllabusParam);
@@ -68,8 +75,8 @@ export default async function TopicPage({ params }: PageProps) {
     exerciseCounts,
     allTopics,
   ] = await Promise.all([
-    content.getLesson(topicId),
-    content.getExercises(topicId),
+    content.getLesson(topicId, locale),
+    content.getExercises(topicId, locale),
     content.getGlossary(syllabusId),
     progress.state(),
     content.exerciseCounts(),
@@ -136,10 +143,20 @@ export default async function TopicPage({ params }: PageProps) {
           />
         }
         tutor={<TutorRail topicId={String(topicId)} topicTitle={topic.title} />}
+        topicId={String(topicId)}
+        hasTranslation={lesson !== null && lesson.servedLocale === locale}
       >
         <TopicViewTracker topicId={String(topicId)} />
 
-        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+        <div
+          className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8"
+          lang={lesson?.servedLocale ?? DEFAULT_LOCALE}
+          dir={
+            lesson && lesson.servedLocale !== locale
+              ? LOCALE_INFO[lesson.servedLocale].direction
+              : direction
+          }
+        >
           <header className="mb-8">
             <p className="text-xs font-medium uppercase tracking-wide text-accent">
               {moduleTitle}
@@ -154,10 +171,22 @@ export default async function TopicPage({ params }: PageProps) {
             )}
             {lesson?.frontmatter.readingMinutes && (
               <p className="mt-2 text-xs text-fg-subtle">
-                About {lesson.frontmatter.readingMinutes} minutes of reading
+                {t("lesson.readingTime", {
+                  minutes: lesson.frontmatter.readingMinutes,
+                })}
               </p>
             )}
           </header>
+
+          {lesson && lesson.servedLocale !== locale && (
+            <p
+              dir={LOCALE_INFO[locale].direction}
+              lang={locale}
+              className="mb-6 rounded-panel border border-warning/40 bg-warning-muted/25 px-4 py-3 text-sm leading-relaxed text-fg-muted"
+            >
+              {t("lesson.translationMissing")}
+            </p>
+          )}
 
           {lesson ? (
             <div className="lesson-prose">

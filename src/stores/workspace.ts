@@ -3,6 +3,17 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+import { DEFAULT_LOCALE, type Locale } from '@core/domain'
+
+/** Name shared with the server, which reads this to pick the content language. */
+export const LOCALE_COOKIE = 'pi_locale'
+
+function writeLocaleCookie(locale: Locale): void {
+  if (typeof document === 'undefined') return
+  // A year, site-wide, and Lax so it survives ordinary navigation. Nothing sensitive is stored.
+  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`
+}
+
 /**
  * Ephemeral UI state only.
  *
@@ -27,6 +38,15 @@ interface WorkspaceState {
   focusMode: boolean
   theme: 'dark' | 'light'
 
+  /**
+   * Language for lessons, exercises and the interface.
+   *
+   * Mirrored into a cookie so the server can render content in the right language on the first
+   * request. Per-page overrides live in the URL (`?lang=ar`) rather than here — the server needs
+   * to read them too, and a shareable link to one Arabic topic is worth more than a hidden map.
+   */
+  locale: Locale
+
   /** What the pending question is about, set when "ask about this" is clicked. */
   askContext: AskContext | null
   draft: string
@@ -35,6 +55,7 @@ interface WorkspaceState {
   toggleTutor: () => void
   toggleFocusMode: () => void
   setTheme: (theme: 'dark' | 'light') => void
+  setLocale: (locale: Locale) => void
 
   /** Opens the tutor rail with the question scoped to a specific equation or exercise. */
   askAbout: (context: AskContext, prefill?: string) => void
@@ -49,6 +70,7 @@ export const useWorkspace = create<WorkspaceState>()(
       tutorOpen: true,
       focusMode: false,
       theme: 'dark',
+      locale: DEFAULT_LOCALE,
       askContext: null,
       draft: '',
 
@@ -61,6 +83,10 @@ export const useWorkspace = create<WorkspaceState>()(
             : { focusMode: true, navigatorOpen: false, tutorOpen: false },
         ),
       setTheme: (theme) => set({ theme }),
+      setLocale: (locale) => {
+        writeLocaleCookie(locale)
+        set({ locale })
+      },
 
       askAbout: (context, prefill) =>
         set((state) => ({
@@ -81,6 +107,7 @@ export const useWorkspace = create<WorkspaceState>()(
         tutorOpen: s.tutorOpen,
         focusMode: s.focusMode,
         theme: s.theme,
+        locale: s.locale,
         draft: s.draft,
       }),
     },

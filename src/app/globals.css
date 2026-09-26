@@ -263,3 +263,76 @@ math-field::part(virtual-keyboard-toggle) {
 .derivation-steps .step-counter::before {
   content: counter(derivation-step);
 }
+
+/* ---- Bidirectional text ---------------------------------------------------
+ *
+ * The load-bearing rule for an Arabic physics lesson: maths must never be
+ * reordered by the bidirectional algorithm.
+ *
+ * Without isolation, an inline equation inside an RTL sentence gets its pieces
+ * shuffled by the surrounding direction — a minus sign migrating to the wrong
+ * end, a subscript landing before its symbol. `direction: ltr` alone is not
+ * enough; `unicode-bidi: isolate` is what stops the equation from taking part
+ * in the paragraph's bidi resolution at all. The equation becomes a neutral
+ * object that the Arabic flows around.
+ */
+
+.katex,
+.katex-display,
+math-field,
+code,
+pre,
+.latex-source,
+[data-ltr] {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Display equations stay centred in their own LTR box regardless of page direction. */
+[dir='rtl'] .katex-display {
+  text-align: center;
+}
+
+/* Arabic needs a little more line height — the script has taller ascenders and
+   deeper descenders than Latin, and physics prose is dense enough already. */
+[dir='rtl'] .lesson-prose {
+  line-height: 1.95;
+  font-size: 1.09rem;
+}
+
+[dir='rtl'] .lesson-prose ul,
+[dir='rtl'] .lesson-prose ol {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+/* Latin technical terms inside Arabic prose — "Hilbert space", "ldmodel" — must
+   also be isolated, or trailing punctuation jumps to the wrong side. */
+[dir='rtl'] .term-latin {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Numbers in Arabic scientific writing stay Western digits, which is what every
+   paper and every nuclear data table uses. */
+[dir='rtl'] {
+  font-variant-numeric: lining-nums;
+}
+
+/* Tables flip their column order under RTL, which is correct — but a cell whose
+   content is maths must not flip inside itself. */
+[dir='rtl'] th,
+[dir='rtl'] td {
+  text-align: right;
+}
+
+[dir='rtl'] th .katex,
+[dir='rtl'] td .katex {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* The derivation step counter sits on the leading edge in either direction. */
+[dir='rtl'] .derivation-steps > li {
+  direction: rtl;
+}

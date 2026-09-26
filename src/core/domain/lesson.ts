@@ -17,6 +17,8 @@ export interface Lesson {
   readonly frontmatter: LessonFrontmatter
   /** Raw MDX body, compiled by the UI layer. */
   readonly body: string
+  /** Which locale this content is actually in — may differ from the one requested. */
+  readonly servedLocale: import('./locale').Locale
 }
 
 export const glossaryFileSchema = z.object({

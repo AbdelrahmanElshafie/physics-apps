@@ -117,6 +117,29 @@ The worker has a prose guard: `parse_latex` will happily read "this is not maths
 single-letter symbols and then report a confident "not equal". Two or more three-letter words means
 prose, and prose is never judged.
 
+## Languages (English / Arabic)
+
+Content is per-locale sibling files: `m1.1-hilbert-spaces.ar.mdx` next to the English base, same
+for `.ar.yaml` exercises. **Adding a translation is adding a file.** A missing one falls back to
+English and the page says so — never a blank.
+
+Keep exercise `id` and `check` identical across locales. Progress is recorded against the id, so
+renaming one would hide an answer already submitted in the other language.
+
+Resolution order: `?lang=` in the URL (the per-page override, and shareable) beats the `pi_locale`
+cookie (the global setting, written by the store). Interface strings live in `src/lib/i18n.ts`,
+typed off the English keys so an untranslated string is a compile error.
+
+**The rule that matters: maths must never be reordered by the bidi algorithm.** `direction: ltr`
+alone is not enough — `unicode-bidi: isolate` is what keeps an equation out of the paragraph's
+bidi resolution, so a minus sign cannot migrate to the wrong end inside Arabic prose. That CSS is
+in `globals.css` under "Bidirectional text" and covers `.katex`, `math-field`, `code` and
+`[data-ltr]`. If you add a surface that renders maths or code, isolate it there too.
+
+Arabic style: plain Egyptian-leaning phrasing, technical terms kept in English in parentheses on
+first use (`الضرب الداخلي (inner product)`), Western digits throughout — that is what the papers
+and the nuclear data tables use.
+
 ## Exercise grading is two-tier
 
 `AnswerChecker` settles what it can (numerics, vectors, matrices, booleans, normalised LaTeX).

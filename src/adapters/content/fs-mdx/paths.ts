@@ -7,7 +7,11 @@ export const DATA_ROOT = path.join(process.cwd(), 'data')
 export const syllabusDir = (id: string) => path.join(CONTENT_ROOT, id)
 export const syllabusFile = (id: string) => path.join(syllabusDir(id), 'syllabus.yaml')
 export const glossaryFile = (id: string) => path.join(syllabusDir(id), 'glossary.yaml')
-export const lessonFile = (syllabusId: string, localTopicId: string) =>
-  path.join(syllabusDir(syllabusId), 'lessons', `${localTopicId}.mdx`)
-export const exerciseFile = (syllabusId: string, localTopicId: string) =>
-  path.join(syllabusDir(syllabusId), 'exercises', `${localTopicId}.yaml`)
+/**
+ * Locale-suffixed content paths. English is the unsuffixed base file, so the original content
+ * keeps working and a translation is simply a sibling: `m1.1-hilbert-spaces.ar.mdx`.
+ */
+export const lessonFile = (syllabusId: string, localTopicId: string, suffix = '') =>
+  path.join(syllabusDir(syllabusId), 'lessons', `${localTopicId}${suffix}.mdx`)
+export const exerciseFile = (syllabusId: string, localTopicId: string, suffix = '') =>
+  path.join(syllabusDir(syllabusId), 'exercises', `${localTopicId}${suffix}.yaml`)

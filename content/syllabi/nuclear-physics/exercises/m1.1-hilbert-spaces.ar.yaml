@@ -1,0 +1,262 @@
+# تمارين الوحدة 1.1 — فضاءات هيلبرت (النسخة العربية).
+#
+# الـ id والـ check لازم يفضلوا زي النسخة الإنجليزية بالظبط: التقدّم متسجّل بالـ id، فلو اتغيّر
+# هتلاقي إجابة اتحلّت بالإنجليزي مش ظاهرة في العربي.
+
+schemaVersion: 1
+topic: m1.1-hilbert-spaces
+intro: >-
+  واحد وعشرين سؤال. المجموعات A لـ D حسابية في معظمها — ظبّطها الأول، لأن المفاهيم بتبقى أوضح بكتير
+  لما الحساب يبقى تلقائي.
+
+exercises:
+  # ---- المجموعة A: الضرب الداخلي والمعيار ----
+  - id: h1
+    set: A
+    label: س1
+    kind: numeric
+    prompt: احسب $(3, 2) \cdot (1, 4)$.
+    check: { type: numeric, value: 11 }
+    solution: $(3)(1) + (2)(4) = 3 + 8 = 11$. الناتج عدد واحد، مش متجه.
+
+  - id: h2
+    set: A
+    label: س2
+    kind: numeric
+    prompt: إيه المعيار $\lVert v \rVert$ للمتجه $v = (3, 4)$؟
+    check: { type: numeric, value: 5 }
+    solution: $\lVert v \rVert = \sqrt{3^2 + 4^2} = \sqrt{25} = 5$.
+
+  - id: h3
+    set: A
+    label: س3
+    kind: vector
+    prompt: طبّع $v = (3, 4)$ — يعني هات متجه الوحدة اللي في نفس الاتجاه.
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [0.6, 0.8]
+      tolerance: 0.0001
+    solution: >-
+      اقسم على المعيار: $\hat{v} = \frac{1}{5}(3, 4) = (0.6, 0.8)$. اتأكد:
+      $0.6^2 + 0.8^2 = 0.36 + 0.64 = 1$.
+
+  - id: h4
+    set: A
+    label: س4
+    kind: numeric
+    prompt: إيه معيار $(1, 1, 1, 1)$ في $\mathbb{R}^4$؟
+    check: { type: numeric, value: 2 }
+    solution: $\sqrt{1 + 1 + 1 + 1} = \sqrt{4} = 2$. الصيغة مش فارق معاها عدد الأبعاد.
+
+  # ---- المجموعة B: الضرب الداخلي المركب ----
+  - id: h5
+    set: B
+    label: س5
+    kind: numeric
+    prompt: للمتجه $v = (1 + i,\; 2)$ في $\mathbb{C}^2$، احسب $\langle v \vert v \rangle$.
+    check: { type: numeric, value: 6 }
+    explain:
+      required: true
+      hint: وضّح خطوة المرافق.
+    solution: >-
+      $\langle v \vert v \rangle = (1+i)^{*}(1+i) + (2)^{*}(2) = (1-i)(1+i) + 4$. الحد الأول
+      $1 - i^2 = 2$، يبقى المجموع $6$. لاحظ إنه طلع حقيقي وموجب، وده كل الغرض من المرافق.
+
+  - id: h6
+    set: B
+    label: س6
+    kind: numeric
+    prompt: للمتجهين $u = (1,\; i)$ و $v = (i,\; 1)$، احسب $\langle u \vert v \rangle$.
+    check: { type: numeric, value: 0 }
+    explain: { required: true }
+    solution: >-
+      خد مرافق $u$ الأول: $u^{*} = (1, -i)$. يبقى
+      $\langle u \vert v \rangle = (1)(i) + (-i)(1) = i - i = 0$. يعني متعامدين، رغم إن مفيش فيهم
+      متجه حقيقي.
+
+  - id: h7
+    set: B
+    label: س7
+    kind: text
+    prompt: >-
+      ليه الضرب الداخلي المركب بياخد مرافق واحد من المتجهين؟ وإيه اللي بيحصل من غيره؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      من غير المرافق $\langle v \vert v \rangle$ ممكن يطلع سالب أو مركب — للمتجه $v = (i, 0)$ كنت
+      هتطلع $i^2 = -1$. وبما إن $\langle v \vert v \rangle$ هو مربع الطول، والأطوال حقيقية وغير
+      سالبة، التعريف كان هيبقى بلا فايدة. المرافق بيدّي $\sum_i \lvert v_i \rvert^2$، وده دايمًا
+      حقيقي وغير سالب.
+
+  - id: h8
+    set: B
+    label: س8
+    kind: latex
+    prompt: لو $\langle u \vert v \rangle = 3 - 2i$، يبقى $\langle v \vert u \rangle$ تساوي كام؟
+    check:
+      type: latex-equivalent
+      value: 3+2i
+      accept: ['3 + 2i', '(3+2i)']
+    solution: >-
+      $3 + 2i$. التماثل المرافق بيقول
+      $\langle v \vert u \rangle = \langle u \vert v \rangle^{*}$ — يعني تبديل الترتيب بياخد
+      المرافق. وده سبب إن الترتيب مهم في الحالة المركبة ومش مهم في الحقيقية.
+
+  # ---- المجموعة C: التعامد ----
+  - id: h9
+    set: C
+    label: س9
+    kind: truefalse
+    prompt: صح ولا غلط — $(1, 2)$ و $(2, -1)$ متعامدين.
+    check: { type: exact, value: true }
+    explain: { required: true }
+    solution: صح. $(1)(2) + (2)(-1) = 2 - 2 = 0$، يبقى متعامدين.
+
+  - id: h10
+    set: C
+    label: س10
+    kind: truefalse
+    prompt: صح ولا غلط — $(1, 2)$ و $(2, 4)$ متعامدين.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: طب علاقتهم إيه بقى؟ }
+    solution: >-
+      غلط. $(1)(2) + (2)(4) = 10 \neq 0$. بالعكس، $(2,4) = 2(1,2)$، يعني معتمدين خطيًا — الطرف
+      المقابل تمامًا للتعامد. التوازي معناه أقصى تداخل ممكن.
+
+  - id: h11
+    set: C
+    label: س11
+    kind: numeric
+    prompt: هات قيمة $k$ اللي تخلي $(3, k)$ متعامد مع $(2, 6)$.
+    check: { type: numeric, value: -1 }
+    solution: >-
+      خلّي الضرب الداخلي بصفر: $(3)(2) + (k)(6) = 6 + 6k = 0$، يبقى $k = -1$. اتأكد:
+      $(3,-1) \cdot (2,6) = 6 - 6 = 0$.
+
+  - id: h12
+    set: C
+    label: س12
+    kind: truefalse
+    prompt: >-
+      صح ولا غلط — المجموعة $\{(1, 0),\; (1, 1)\}$ أساس متعامد متجانس لـ $\mathbb{R}^2$.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: راجع الشرطين كل واحد لوحده. }
+    solution: >-
+      غلط. هي أساس كويس فعلًا، بس مش متعامد متجانس: بتفشل في الشرطين. $(1,0) \cdot (1,1) = 1 \neq 0$
+      يعني مش متعامدين، و $\lVert (1,1) \rVert = \sqrt{2} \neq 1$ يعني التاني مش مطبّع.
+
+  # ---- المجموعة D: التمدد في أساس متعامد متجانس ----
+  - id: h13
+    set: D
+    label: س13
+    kind: numeric
+    prompt: >-
+      خد الأساس المتعامد المتجانس $f_1 = (0.6,\; 0.8)$ و $f_2 = (-0.8,\; 0.6)$ والمتجه
+      $v = (5, 0)$. هات المعامل $c_1 = \langle f_1 \vert v \rangle$.
+    check: { type: numeric, value: 3, tolerance: 0.0001 }
+    solution: $c_1 = (0.6)(5) + (0.8)(0) = 3$.
+
+  - id: h14
+    set: D
+    label: س14
+    kind: numeric
+    prompt: لنفس الأساس والمتجه، هات $c_2 = \langle f_2 \vert v \rangle$.
+    check: { type: numeric, value: -4, tolerance: 0.0001 }
+    solution: >-
+      $c_2 = (-0.8)(5) + (0.6)(0) = -4$. اتأكد من إعادة التركيب:
+      $3 f_1 - 4 f_2 = (1.8, 2.4) + (3.2, -2.4) = (5, 0) = v$.
+
+  - id: h15
+    set: D
+    label: س15
+    kind: numeric
+    prompt: >-
+      لسه مع $v = (5, 0)$ و $c_1 = 3$ و $c_2 = -4$ — احسب $c_1^2 + c_2^2$ وقارنه بـ
+      $\lVert v \rVert^2$.
+    check: { type: numeric, value: 25 }
+    explain: { required: true, hint: هما متساويين. ليه لازم يبقوا كده؟ }
+    solution: >-
+      $9 + 16 = 25$، و $\lVert v \rVert^2 = 25$ برضه. دي متطابقة بارسيفال (Parseval): في أساس
+      متعامد متجانس مربع الطول هو مجموع مربعات المعاملات. وفيزيائيًا ده سبب إن الاحتمالات على كل
+      النواتج الممكنة بتجمع لواحد.
+
+  - id: h16
+    set: D
+    label: س16
+    kind: text
+    prompt: >-
+      ليه إيجاد المعاملات في أساس متعامد متجانس أسهل بكتير من أساس عادي؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      في الأساس العادي لازم تحل معادلات آنية، لأن كل متجه أساس بيساهم في كل مركبة. مع التعامد
+      والتجانس، الضرب الداخلي مع $e_m$ بيفني كل الحدود ما عدا واحد:
+      $\langle e_m \vert v \rangle = \sum_n c_n \delta_{mn} = c_m$. كل معامل بيتقرا لوحده بضرب
+      داخلي واحد.
+
+  # ---- المجموعة E: الاكتمال وفضاءات هيلبرت ----
+  - id: h17
+    set: E
+    label: س17
+    kind: truefalse
+    prompt: صح ولا غلط — مجموعة الأعداد النسبية مكتملة.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: فكّر في متتالية نسبية بتقرب من عدد أصم. }
+    solution: >-
+      غلط. المتتالية $1,\; 1.4,\; 1.41,\; 1.414,\; \ldots$ متتالية كوشي — حدودها بتقرب من بعض لأي
+      درجة — بس نهايتها $\sqrt{2}$ عدد أصم، يعني بتتقارب لنقطة بره المجموعة. الأعداد النسبية فيها
+      خروم، والأعداد الحقيقية هي الاكتمال اللي بيسدّها.
+
+  - id: h18
+    set: E
+    label: س18
+    kind: text
+    prompt: إيه التلات مكوّنات اللي الفضاء محتاجها عشان يبقى فضاء هيلبرت؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      فضاء متجهي (تقدر تجمع وتضرب في عدد)، وضرب داخلي (طول وزاوية وتداخل)، والاكتمال (كل متتالية
+      كوشي بتتقارب لنقطة لسه جوه الفضاء).
+
+  - id: h19
+    set: E
+    label: س19
+    kind: text
+    prompt: >-
+      ليه ميكانيكا الكم محتاجة الاكتمال، ومكفّهاش فضاء بضرب داخلي وخلاص؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      لأن الحالات الكمّية عادةً مجاميع لا نهائية، $\lvert\psi\rangle = \sum_n c_n
+      \lvert e_n\rangle$. من غير الاكتمال المجموع ده ممكن ميتقاربش لأي حاجة جوه الفضاء، يبقى
+      التمدد مش بيوصف أي حالة أصلًا. الاكتمال بيضمن إن النهاية نفسها حالة مشروعة.
+
+  # ---- المجموعة F: المعنى الفيزيائي ----
+  - id: h20
+    set: F
+    label: س20
+    kind: numeric
+    prompt: >-
+      لحالتين مطبّعتين، إيه أكبر قيمة ممكنة لـ
+      $\lvert \langle \phi \vert \psi \rangle \rvert$؟
+    check: { type: numeric, value: 1 }
+    explain: { required: true, hint: استخدم كوشي-شفارتز. }
+    solution: >-
+      $1$. كوشي-شفارتز بتدّي $\lvert\langle \phi \vert \psi \rangle\rvert \leq \lVert \phi
+      \rVert \lVert \psi \rVert = 1 \cdot 1 = 1$. والحد ده بالظبط هو اللي بيخلّي
+      $\lvert\langle \phi \vert \psi \rangle\rvert^2$ يتقرا كاحتمال.
+
+  - id: h21
+    set: F
+    label: س21
+    kind: text
+    prompt: >-
+      حالتين مطبّعتين عندهم $\langle \phi \vert \psi \rangle = 0$. ده معناه إيه فيزيائيًا؟ وإيه لو
+      كانت $\lvert\langle \phi \vert \psi \rangle\rvert = 1$ بدل كده؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      تداخل بصفر معناه إن الحالتين متمايزين تمامًا: لو النظام متحضّر في $\psi$ عمرك ما هتقيس
+      $\phi$. أما تداخل بمقياس واحد فده الطرف المقابل — المساواة في كوشي-شفارتز بتفرض إن المتجهين
+      متوازيين، يعني نفس الحالة الفيزيائية ما عدا طور عام، والطور ده مش قابل للقياس.
