@@ -147,3 +147,35 @@ entries:
       Functions whose total squared magnitude is finite. Exactly the wavefunctions that can be
       normalised, which is why this is the Hilbert space of quantum mechanics.
     seeAlso: [hilbert-space, normalised]
+
+  - name: operator
+    latex: \hat{A}
+    term: Linear operator
+    meaning: >-
+      A rule taking a ket to a ket that respects superposition. The hat marks it as an
+      instruction rather than a number.
+    seeAlso: [adjoint, hermitian, unitary]
+
+  - name: adjoint
+    latex: \hat{A}^{\dagger}
+    term: Adjoint (dagger)
+    meaning: >-
+      The partner operator defined by moving it across a bracket. In components, the conjugate
+      transpose. Products reverse under it.
+    seeAlso: [operator, hermitian]
+
+  - name: hermitian
+    latex: \hat{A}^{\dagger} = \hat{A}
+    term: Hermitian operator
+    meaning: >-
+      An operator equal to its own adjoint. Its expectation values are real, which is why every
+      observable is one.
+    seeAlso: [adjoint, operator]
+
+  - name: unitary
+    latex: \hat{U}^{\dagger}\hat{U} = \mathbb{1}
+    term: Unitary operator
+    meaning: >-
+      An operator whose adjoint is its inverse. It preserves every inner product, so probability
+      is conserved — the form of time evolution and of every change of basis.
+    seeAlso: [adjoint, operator]

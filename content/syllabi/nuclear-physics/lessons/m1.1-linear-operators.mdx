@@ -1,0 +1,223 @@
+---
+title: Linear Operators
+summary: >-
+  What an operator is, why linearity is the whole content, how operators combine — and the fact
+  that ordering them differently gives different answers, which is where quantum mechanics starts.
+readingMinutes: 50
+updated: 2026-09-26
+keyEquations:
+  - latex: \hat{A}\left(\alpha\ket{\psi} + \beta\ket{\phi}\right) = \alpha\hat{A}\ket{\psi} + \beta\hat{A}\ket{\phi}
+    label: Linearity
+  - latex: \left[\hat{x}, \hat{p}\right] = i\hbar
+    label: The canonical commutator
+  - latex: \braoket{\phi}{\hat{A}}{\psi} = \braoket{\psi}{\hat{A}^{\dagger}}{\phi}^{*}
+    label: Defining the adjoint
+---
+
+<Callout kind="why">
+You have already met an operator: the projector $\ket{e}\bra{e}$. This lesson asks what operators
+are in general. The payoff is one unfamiliar fact — **applying two operators in the other order
+can give a different answer** — and that single fact is where the uncertainty principle,
+quantised angular momentum and the whole structure of the next five topics come from.
+</Callout>
+
+## 1. What an operator is
+
+<Definition term="Operator">
+A rule that takes a ket and returns a ket: $\hat{A}\ket{\psi} = \ket{\varphi}$. The hat is a
+reminder that it is an instruction, not a number.
+</Definition>
+
+An operator is **linear** when it respects superposition:
+
+<Eq
+  id="linearity"
+  label="The linearity condition"
+  latex={String.raw`\hat{A}\left(\alpha\ket{\psi} + \beta\ket{\phi}\right) = \alpha\hat{A}\ket{\psi} + \beta\hat{A}\ket{\phi}`}
+/>
+
+That is the entire definition, and it is doing more work than it looks. Quantum states superpose;
+an operator that failed this would take a legitimate superposition to something that depended on
+how you chose to decompose it. Linearity is what keeps the physics consistent.
+
+## 2. A gallery
+
+<Compare
+  caption="Operators you already use, or soon will"
+  columns={['Operator', 'Action', 'Where it shows up']}
+  rows={[
+    ['Identity $\\mathbb{1}$', '$\\ket{\\psi} \\mapsto \\ket{\\psi}$', 'inserted everywhere, as completeness'],
+    ['Projector $\\ket{e}\\bra{e}$', 'keeps the part along $\\ket{e}$', 'measurement, basis expansion'],
+    ['Position $\\hat{x}$', '$f(x) \\mapsto x f(x)$', 'multiply by the coordinate'],
+    ['Momentum $\\hat{p}$', '$f \\mapsto -i\\hbar \\, \\dd f / \\dd x$', 'generates translations'],
+    ['Parity $\\hat{P}$', '$f(x) \\mapsto f(-x)$', 'selection rules, nuclear states'],
+    ['Hamiltonian $\\hat{H}$', '$\\ket{\\psi} \\mapsto$ energy content', 'the Schrodinger equation'],
+  ]}
+/>
+
+Notice that $\hat{x}$ and $\hat{p}$ are utterly different kinds of instruction — one multiplies,
+one differentiates — yet both are linear, so both are legitimate operators.
+
+## 3. Testing linearity
+
+Check the two halves separately: does it survive addition, and does it survive scaling?
+
+<Compare
+  caption="Linear or not?"
+  columns={['Rule', 'Linear?', 'Why']}
+  rows={[
+    ['$f \\mapsto x f$', 'yes', 'multiplication distributes over sums'],
+    ['$f \\mapsto \\dd f/\\dd x$', 'yes', 'differentiation is linear'],
+    ['$f \\mapsto f(-x)$', 'yes', 'relabelling the argument does not mix terms'],
+    ['$f \\mapsto f^2$', 'no', '$(f+g)^2 \\neq f^2 + g^2$'],
+    ['$f \\mapsto f + 1$', 'no', 'fails scaling: doubling the input does not double the output'],
+    ['$f \\mapsto f^{*}$', 'no', 'pulls a scalar out conjugated — *antilinear*'],
+  ]}
+/>
+
+<Callout kind="note">
+Complex conjugation is the interesting failure. It survives addition but conjugates any scalar it
+pulls out, which makes it **antilinear** rather than merely broken. Time reversal is antilinear
+for exactly this reason — it is the one place in physics where this distinction matters.
+</Callout>
+
+## 4. Operator algebra
+
+Operators add, scale, and multiply — where multiplication means *do one, then the other*.
+
+<Axioms
+  caption="How operators combine"
+  items={[
+    ['(\\hat{A} + \\hat{B})\\ket{\\psi} = \\hat{A}\\ket{\\psi} + \\hat{B}\\ket{\\psi}', 'sum: apply both, add results'],
+    ['(c\\hat{A})\\ket{\\psi} = c\\left(\\hat{A}\\ket{\\psi}\\right)', 'scalar multiple'],
+    ['\\hat{A}\\hat{B}\\ket{\\psi} = \\hat{A}\\left(\\hat{B}\\ket{\\psi}\\right)', 'product: B first, then A'],
+    ['\\hat{A}^2 = \\hat{A}\\hat{A}', 'powers are repeated application'],
+    ['\\hat{A}^{-1}\\hat{A} = \\mathbb{1}', 'the inverse undoes it, when one exists'],
+  ]}
+/>
+
+<Callout kind="warning">
+Read $\hat{A}\hat{B}$ **right to left**: $\hat{B}$ acts first. It looks backwards, and it is the
+commonest slip when first computing a commutator.
+</Callout>
+
+## 5. Order matters
+
+For numbers, $ab = ba$ always. For operators it is the exception, not the rule.
+
+<Derivation caption="Applying x and d/dx in both orders">
+  <Step
+    why="First order: differentiate, then multiply by x."
+    latex={String.raw`\hat{x}\frac{\dd}{\dd x} f = x f'`}
+  />
+  <Step
+    why="Other order: multiply by x first, then differentiate — and the product rule bites."
+    latex={String.raw`\frac{\dd}{\dd x} \hat{x} f = \frac{\dd}{\dd x}\left(x f\right) = f + x f'`}
+  />
+  <Step
+    why="Subtract. The x f' terms cancel and a whole extra function is left over."
+    latex={String.raw`\left(\hat{x}\frac{\dd}{\dd x} - \frac{\dd}{\dd x}\hat{x}\right) f = x f' - f - x f' = -f`}
+  />
+  <Step
+    why="True for every f, so this is a statement about the operators themselves."
+    latex={String.raw`\left[\hat{x}, \frac{\dd}{\dd x}\right] = -1`}
+  />
+</Derivation>
+
+The bracket is the **commutator**, $[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}$. It
+measures the failure of two operators to commute — zero when order does not matter.
+
+Put in the physical momentum operator $\hat{p} = -i\hbar\,\dd/\dd x$ and the same calculation gives
+the most important equation in quantum mechanics:
+
+<Eq
+  id="canonical-commutator"
+  label="The canonical commutator"
+  latex={String.raw`\left[\hat{x}, \hat{p}\right] = i\hbar`}
+/>
+
+<Callout kind="forward">
+That $\hbar$ on the right is not decoration. Non-zero commutator means position and momentum
+cannot both be sharp, and the uncertainty principle is a theorem about exactly this number. The
+Commutators topic later in this module derives the consequences; for now the point is only that
+operators can fail to commute, and that the failure is itself a physical quantity.
+</Callout>
+
+## 6. The adjoint
+
+Every operator has a partner, defined by how it can be moved across a bracket.
+
+<Eq
+  id="adjoint-definition"
+  label="Defining the adjoint"
+  latex={String.raw`\braoket{\phi}{\hat{A}}{\psi} = \braoket{\psi}{\hat{A}^{\dagger}}{\phi}^{*}`}
+/>
+
+Read it as: acting with $\hat{A}$ to the right is the same as acting with $\hat{A}^{\dagger}$ to
+the left, once you conjugate. In components it is the plainest thing imaginable — transpose and
+conjugate:
+
+<Eq
+  id="adjoint-matrix"
+  label="The adjoint in components"
+  latex={String.raw`\left(A^{\dagger}\right)_{mn} = \left(A_{nm}\right)^{*}`}
+/>
+
+<Axioms
+  caption="Rules for the dagger"
+  items={[
+    ['\\left(\\hat{A}^{\\dagger}\\right)^{\\dagger} = \\hat{A}', 'applying it twice returns the original'],
+    ['\\left(\\hat{A} + \\hat{B}\\right)^{\\dagger} = \\hat{A}^{\\dagger} + \\hat{B}^{\\dagger}', 'it distributes over sums'],
+    ['\\left(c\\hat{A}\\right)^{\\dagger} = c^{*}\\hat{A}^{\\dagger}', 'scalars come out conjugated'],
+    ['\\left(\\hat{A}\\hat{B}\\right)^{\\dagger} = \\hat{B}^{\\dagger}\\hat{A}^{\\dagger}', 'products reverse order'],
+  ]}
+/>
+
+<Callout kind="warning">
+The last rule catches people out. $(\hat{A}\hat{B})^{\dagger}$ is $\hat{B}^{\dagger}\hat{A}^{\dagger}$,
+**not** $\hat{A}^{\dagger}\hat{B}^{\dagger}$. The same reversal you already know from transposing
+a matrix product.
+</Callout>
+
+## 7. The families worth naming
+
+Three special cases carry almost all the physics, and each gets its own topic later.
+
+<Compare
+  caption="Operator families"
+  columns={['Family', 'Condition', 'What it means physically']}
+  rows={[
+    ['Hermitian', '$\\hat{A}^{\\dagger} = \\hat{A}$', 'observables — real measured values'],
+    ['Unitary', '$\\hat{U}^{\\dagger}\\hat{U} = \\mathbb{1}$', 'symmetries and time evolution — probability preserved'],
+    ['Projector', '$\\hat{P}^2 = \\hat{P} = \\hat{P}^{\\dagger}$', 'measurement outcomes, basis components'],
+  ]}
+/>
+
+One line of argument shows why observables must be Hermitian. Set $\phi = \psi$ in the definition
+of the adjoint:
+
+<Derivation caption="Why Hermitian means real">
+  <Step
+    why="Take the expectation value and apply the adjoint definition with phi = psi."
+    latex={String.raw`\braoket{\psi}{\hat{A}}{\psi} = \braoket{\psi}{\hat{A}^{\dagger}}{\psi}^{*}`}
+  />
+  <Step
+    why="If A is Hermitian the two operators are the same, so the number equals its own conjugate."
+    latex={String.raw`\hat{A}^{\dagger} = \hat{A} \implies \langle \hat{A} \rangle = \langle \hat{A} \rangle^{*}`}
+  />
+  <Step
+    why="Only real numbers equal their own conjugate. A measured average had better be real."
+    latex={String.raw`\implies \langle \hat{A} \rangle \in \mathbb{R}`}
+  />
+</Derivation>
+
+Unitarity has an equally short story: if $\hat{U}^{\dagger}\hat{U} = \mathbb{1}$ then
+$\braket{\hat{U}\phi}{\hat{U}\psi} = \braket{\phi}{\psi}$, so every overlap survives the
+transformation unchanged. Total probability is one overlap among many, so it survives too — which
+is why time evolution and every change of basis is unitary.
+
+<Callout kind="forward">
+Next: **matrix representation**. Choose a basis, compute $A_{mn} = \braoket{e_m}{\hat{A}}{e_n}$,
+and every abstract statement above becomes an array of numbers you can hand to a computer. That
+is the step that turns the optical model from a page of operators into a calculation.
+</Callout>

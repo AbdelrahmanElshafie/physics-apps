@@ -1,0 +1,216 @@
+# Exercises for Module 1.1 — Linear operators.
+#
+# Set B is the one that matters: computing both orderings by hand is the only way the
+# non-commutativity stops being a slogan.
+
+schemaVersion: 1
+topic: m1.1-linear-operators
+intro: >-
+  Sixteen questions. Set A tests the definition, Set B makes you apply operators in both orders,
+  and Set C is the dagger algebra you will use constantly once matrices appear.
+
+exercises:
+  # ---- Set A: Is it linear? ----
+  - id: o1
+    set: A
+    label: Q1
+    kind: truefalse
+    prompt: True or false — the rule $\hat{A}f = x f(x)$ is a linear operator.
+    check: { type: exact, value: true }
+    solution: >-
+      TRUE. $x(f+g) = xf + xg$ and $x(cf) = c(xf)$, so both halves of the linearity condition hold.
+
+  - id: o2
+    set: A
+    label: Q2
+    kind: truefalse
+    prompt: True or false — the rule $\hat{A}f = f^2$ is a linear operator.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Test it on a sum. }
+    solution: >-
+      FALSE. $(f+g)^2 = f^2 + 2fg + g^2 \neq f^2 + g^2$. The cross term is exactly the failure of
+      linearity.
+
+  - id: o3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: True or false — the rule $\hat{A}f = f + 1$ is a linear operator.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Check scaling as well as addition. }
+    solution: >-
+      FALSE. It fails scaling: $\hat{A}(cf) = cf + 1$, but $c\hat{A}f = cf + c$. It also sends the
+      zero function to 1, and a linear operator must map zero to zero.
+
+  - id: o4
+    set: A
+    label: Q4
+    kind: text
+    prompt: >-
+      Complex conjugation, $\hat{K}f = f^{*}$, survives addition but is still not linear. What
+      exactly fails, and what is such an operator called?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Scaling fails with a twist: $\hat{K}(cf) = c^{*}f^{*} = c^{*}\hat{K}f$, so the scalar comes
+      out conjugated rather than unchanged. An operator like this is called **antilinear**. Time
+      reversal is the physical example.
+
+  - id: o5
+    set: A
+    label: Q5
+    kind: truefalse
+    prompt: >-
+      True or false — the parity operator $\hat{P}f(x) = f(-x)$ is linear.
+    check: { type: exact, value: true }
+    solution: >-
+      TRUE. Relabelling the argument does not mix or rescale terms:
+      $\hat{P}(\alpha f + \beta g)(x) = \alpha f(-x) + \beta g(-x)$.
+
+  # ---- Set B: Order matters ----
+  - id: o6
+    set: B
+    label: Q6
+    kind: vector
+    prompt: >-
+      With $\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$, compute
+      $\sigma_x \begin{pmatrix} 1 \\ 0 \end{pmatrix}$.
+    scaffold: (,)
+    check:
+      type: numeric-list
+      value: [0, 1]
+    solution: >-
+      $(0, 1)$. Row 1 gives $(0)(1) + (1)(0) = 0$; row 2 gives $(1)(1) + (0)(0) = 1$. The operator
+      flips the spin.
+
+  - id: o7
+    set: B
+    label: Q7
+    kind: latex
+    prompt: >-
+      Compute $\left(\hat{x}\dfrac{d}{dx}\right) f$ — differentiate first, then multiply by $x$.
+    check:
+      type: symbolic
+      value: x f'
+      accept: ['x \frac{df}{dx}', 'xf''']
+    solution: $x f'(x)$. Nothing surprising happens in this order.
+
+  - id: o8
+    set: B
+    label: Q8
+    kind: latex
+    prompt: >-
+      Now compute $\left(\dfrac{d}{dx}\hat{x}\right) f$ — multiply by $x$ first, then
+      differentiate. Watch the product rule.
+    check:
+      type: symbolic
+      value: f + x f'
+      accept: ['f + x \frac{df}{dx}', 'xf'' + f']
+    solution: >-
+      $\frac{d}{dx}(xf) = f + xf'$. The product rule produces an extra whole copy of $f$ — that
+      extra term is the entire source of the non-commutativity.
+
+  - id: o9
+    set: B
+    label: Q9
+    kind: numeric
+    prompt: >-
+      Using your last two answers, what is the commutator $\left[\hat{x}, \frac{d}{dx}\right]$ as
+      a number?
+    check: { type: numeric, value: -1 }
+    explain: { required: true }
+    solution: >-
+      $xf' - (f + xf') = -f$ for every $f$, so the commutator is the operator $-1$. It is a
+      statement about the operators, not about any particular function.
+
+  - id: o10
+    set: B
+    label: Q10
+    kind: latex
+    prompt: >-
+      With $\hat{p} = -i\hbar \frac{d}{dx}$, what is $\left[\hat{x}, \hat{p}\right]$?
+    check:
+      type: latex-equivalent
+      value: i\hbar
+      accept: ['i \hbar', '\hbar i', 'i\hslash']
+    solution: >-
+      $i\hbar$. Multiply the previous result by $-i\hbar$:
+      $[\hat{x}, -i\hbar \frac{d}{dx}] = -i\hbar(-1) = i\hbar$. This is the canonical commutation
+      relation, and the uncertainty principle is a theorem about it.
+
+  - id: o11
+    set: B
+    label: Q11
+    kind: truefalse
+    prompt: >-
+      True or false — if $[\hat{A}, \hat{B}] = 0$ then applying the two operators in either order
+      gives the same result.
+    check: { type: exact, value: true }
+    explain: { required: true }
+    solution: >-
+      TRUE — that is what the commutator vanishing means: $\hat{A}\hat{B} = \hat{B}\hat{A}$.
+      Physically, such observables can be measured simultaneously to arbitrary precision.
+
+  # ---- Set C: The adjoint ----
+  - id: o12
+    set: C
+    label: Q12
+    kind: text
+    prompt: In components, how do you get $\hat{A}^{\dagger}$ from $\hat{A}$?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Transpose and conjugate: $(A^{\dagger})_{mn} = (A_{nm})^{*}$. Swap the indices and take the
+      complex conjugate of each entry.
+
+  - id: o13
+    set: C
+    label: Q13
+    kind: truefalse
+    prompt: >-
+      True or false — $\left(\hat{A}\hat{B}\right)^{\dagger} = \hat{A}^{\dagger}\hat{B}^{\dagger}$.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Compare with transposing a matrix product. }
+    solution: >-
+      FALSE. The order reverses: $(\hat{A}\hat{B})^{\dagger} =
+      \hat{B}^{\dagger}\hat{A}^{\dagger}$, exactly as for the transpose of a matrix product.
+
+  - id: o14
+    set: C
+    label: Q14
+    kind: latex
+    prompt: If $\hat{A}$ is Hermitian, what is $\hat{A}^{\dagger}$?
+    check:
+      type: latex-equivalent
+      value: \hat{A}
+      accept: ['A', '\hat A']
+    solution: $\hat{A}^{\dagger} = \hat{A}$ — that is the definition of Hermitian.
+
+  - id: o15
+    set: C
+    label: Q15
+    kind: text
+    prompt: >-
+      Show in one or two lines why a Hermitian operator has a real expectation value.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Setting $\phi = \psi$ in the adjoint definition gives $\braoket{\psi}{\hat{A}}{\psi} =
+      \braoket{\psi}{\hat{A}^{\dagger}}{\psi}^{*}$. If $\hat{A}^{\dagger} = \hat{A}$ the two sides
+      involve the same operator, so the number equals its own complex conjugate — and only real
+      numbers do that.
+
+  - id: o16
+    set: C
+    label: Q16
+    kind: text
+    prompt: >-
+      A unitary operator satisfies $\hat{U}^{\dagger}\hat{U} = \mathbb{1}$. Why does that make it
+      the right description of a symmetry or of time evolution?
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      Because it preserves every inner product: $\braket{\hat{U}\phi}{\hat{U}\psi} =
+      \braoket{\phi}{\hat{U}^{\dagger}\hat{U}}{\psi} = \braket{\phi}{\psi}$. Total probability is
+      one such overlap, so it is preserved too — states stay normalised and no probability leaks
+      away as the system evolves.
