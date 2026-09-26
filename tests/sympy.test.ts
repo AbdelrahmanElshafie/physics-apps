@@ -39,6 +39,24 @@ describe('SympyAnswerChecker', () => {
     expect(await sympy.equal('(x-1)(x+1)', 'x^2-1')).toBe(true)
   })
 
+  it.runIf(workerUp)('accepts the Dirac exponent written any of the usual ways', async () => {
+    // Topic 11.1 Q8 asks for gamma = sqrt(1 - (Z alpha)^2). Its `accept` list cannot enumerate
+    // every spelling a reader might use, so the grade has to rest on SymPy deciding equivalence
+    // rather than on the list. A reordered product is a right answer and must not be marked wrong.
+    const expected = String.raw`\sqrt{1-(Z\alpha)^2}`
+
+    for (const spelling of [
+      String.raw`\sqrt{1 - Z^{2}\alpha^{2}}`,
+      String.raw`\sqrt{1-\alpha^2 Z^2}`,
+      String.raw`\sqrt{1 - \alpha^{2} Z^{2}}`,
+    ]) {
+      expect(await sympy.equal(spelling, expected), spelling).toBe(true)
+    }
+
+    // And a plausible near-miss is still a miss.
+    expect(await sympy.equal(String.raw`\sqrt{1+(Z\alpha)^2}`, expected)).toBe(false)
+  })
+
   it.runIf(workerUp)('recognises a genuine mismatch', async () => {
     expect(await sympy.equal('2+1', '4')).toBe(false)
   })

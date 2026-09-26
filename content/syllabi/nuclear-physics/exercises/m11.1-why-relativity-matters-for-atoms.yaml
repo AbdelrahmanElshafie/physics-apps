@@ -1,0 +1,245 @@
+# Exercises for Topic 11.1 — Why relativity matters for atoms.
+#
+# Sets A to C are arithmetic you should be able to do on a phone, because the whole argument of the
+# lesson is carried by a handful of numbers and you should own them. Set D is where the reasoning
+# lives, and those come to me.
+#
+# Constants used throughout: alpha = 1/137.036, Ry = 109737.3 cm^-1, alpha^2 = 5.3251e-5.
+
+schemaVersion: 1
+topic: m11.1-why-relativity-matters-for-atoms
+intro: >-
+  Fourteen questions. If you can do Set A without looking anything up, you have the one fact this
+  whole module is built on.
+
+exercises:
+  # ---- Set A: How fast, and what it costs ----
+  - id: rel1
+    set: A
+    label: Q1
+    kind: numeric
+    prompt: >-
+      What is $v/c$ for the $1s$ electron of a hydrogen-like molybdenum ion, $Z = 42$? Give four
+      decimal places.
+    check:
+      type: numeric
+      value: 0.3065
+      tolerance: 0.002
+    hint: Equation 11.1, with $n = 1$.
+    solution: >-
+      $v/c = Z\alpha/n = 42/137.036 = 0.3065$. Just over thirty per cent of the speed of light,
+      which is the number the rest of the module answers to.
+
+  - id: rel2
+    set: A
+    label: Q2
+    kind: numeric
+    prompt: >-
+      What is the Lorentz factor $\gamma_L$ for that electron? Give four decimal places.
+    check:
+      type: numeric
+      value: 1.0506
+      tolerance: 0.003
+    solution: >-
+      $\gamma_L = 1/\sqrt{1 - (0.3065)^2} = 1/\sqrt{0.9061} = 1.0506$. The electron behaves as
+      though it were five per cent heavier, and a heavier electron orbits tighter — that is the
+      contraction in one sentence.
+
+  - id: rel3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: >-
+      True or false: a $1s$ electron in Mo XXXVI moves at more than a quarter of the speed of
+      light.
+    check: { type: exact, value: true }
+    solution: >-
+      True. $0.3065 > 0.25$. Worth saying out loud once, because it is the sort of statement that
+      sounds like exaggeration until you do the division.
+
+  - id: rel4
+    set: A
+    label: Q4
+    kind: numeric
+    prompt: >-
+      What is the smallest $Z$ for which the $1s$ electron exceeds half the speed of light?
+    check:
+      type: numeric
+      value: 69
+      tolerance: 0.5
+    hint: Solve $Z\alpha > 0.5$.
+    solution: >-
+      $Z > 0.5 \times 137.036 = 68.5$, so $Z = 69$ — thulium. Above this the electron is more
+      than half-light-speed and even the word "correction" has stopped being honest.
+
+  # ---- Set B: The Dirac exponent and the two components ----
+  - id: rel5
+    set: B
+    label: Q5
+    kind: numeric
+    prompt: >-
+      Compute the Dirac radial exponent $\gamma = \sqrt{1 - (Z\alpha)^2}$ for zirconium,
+      $Z = 40$. Four decimal places.
+    check:
+      type: numeric
+      value: 0.9565
+      tolerance: 0.001
+    solution: >-
+      $Z\alpha = 0.2919$, so $(Z\alpha)^2 = 0.0852$ and $\gamma = \sqrt{0.9148} = 0.9565$. Note
+      $\gamma < 1$: the relativistic $r^{\gamma}$ rises more steeply at the origin than the
+      non-relativistic $r^{1}$.
+
+  - id: rel6
+    set: B
+    label: Q6
+    kind: numeric
+    prompt: >-
+      For molybdenum, $Z = 42$, what percentage of the large component is the small component?
+      That is, give $100 \lvert Q/P \rvert$.
+    check:
+      type: numeric
+      value: 15.7
+      tolerance: 0.3
+    hint: $\lvert Q/P \rvert = \sqrt{(1-\gamma)/(1+\gamma)}$, and you need $\gamma$ first.
+    solution: >-
+      $\gamma = \sqrt{1 - 0.0939} = 0.9519$, so
+      $\lvert Q/P \rvert = \sqrt{0.0481/1.9519} = \sqrt{0.0247} = 0.157$, that is $15.7\%$.
+      A "small" component that is a sixth of the large one.
+
+  - id: rel7
+    set: B
+    label: Q7
+    kind: numeric
+    prompt: >-
+      Compute $\gamma$ for uranium, $Z = 92$. Four decimal places.
+    check:
+      type: numeric
+      value: 0.7412
+      tolerance: 0.001
+    solution: >-
+      $Z\alpha = 0.6713$, $(Z\alpha)^2 = 0.4507$, $\gamma = \sqrt{0.5493} = 0.7412$. The exponent
+      is heading for trouble: at $Z\alpha = 1$, around $Z = 137$, $\gamma$ goes imaginary and the
+      point-nucleus Dirac solution ceases to exist. The finite nuclear size is what rescues it,
+      which is why `rnucleus` runs before anything else.
+
+  - id: rel8
+    set: B
+    label: Q8
+    kind: latex
+    prompt: >-
+      Write the Dirac radial exponent $\gamma$ in terms of $Z$ and $\alpha$.
+    scaffold: \sqrt{}
+    check:
+      type: latex-equivalent
+      value: '\sqrt{1-(Z\alpha)^2}'
+      accept:
+        - '\sqrt{1 - (Z\alpha)^{2}}'
+        - '\sqrt{1-Z^2\alpha^2}'
+        - '\sqrt{1 - Z^{2}\alpha^{2}}'
+    solution: >-
+      $\gamma = \sqrt{1 - (Z\alpha)^2}$. This one expression carries the whole lesson: it is the
+      power of $r$ near the nucleus, it fixes the small-to-large ratio, and it is where the theory
+      breaks down at high $Z$.
+
+  # ---- Set C: Fine structure and the fourth power ----
+  - id: rel9
+    set: C
+    label: Q9
+    kind: numeric
+    prompt: >-
+      Going from carbon, $Z = 6$, to zirconium, $Z = 40$, by roughly what factor does the
+      hydrogenic $2p$ fine-structure splitting grow?
+    check:
+      type: numeric
+      value: 1975
+      tolerance: 80
+    hint: The splitting goes as $Z^4$.
+    solution: >-
+      $(40/6)^4 = 6.667^4 \approx 1975$. Three orders of magnitude, while the binding energies —
+      going as $Z^2$ — grow by only $(40/6)^2 \approx 44$.
+
+  - id: rel10
+    set: C
+    label: Q10
+    kind: numeric
+    prompt: >-
+      Using $\Delta E_{\text{fs}}(2p) = Z^4 \alpha^2 \mathrm{Ry}/16$ with
+      $\mathrm{Ry} = 109737.3\ \text{cm}^{-1}$ and $\alpha^2 = 5.3251 \times 10^{-5}$, compute the
+      hydrogenic $2p$ fine-structure splitting for iron, $Z = 26$, in cm$^{-1}$.
+    check:
+      type: numeric
+      value: 166900
+      tolerance: 6000
+    solution: >-
+      $26^4 = 456976$. Times $5.3251 \times 10^{-5}$ gives $24.34$; times $109737.3$ gives
+      $2.671 \times 10^6$; divided by 16 gives $1.67 \times 10^5\ \text{cm}^{-1}$. Compare
+      hydrogen's $0.37\ \text{cm}^{-1}$ — same physics, six orders of magnitude apart.
+
+  - id: rel11
+    set: C
+    label: Q11
+    kind: multichoice
+    prompt: Which of these grows fastest as $Z$ increases?
+    choices:
+      - { id: binding, label: The binding energy of a given shell }
+      - { id: coulomb, label: The residual Coulomb repulsion between two 2p electrons }
+      - { id: spinorbit, label: The spin-orbit splitting within the 2p shell }
+      - { id: radius, label: The nuclear radius }
+    check: { type: exact, value: spinorbit }
+    solution: >-
+      Spin-orbit, going as $Z^4$. Binding energy goes as $Z^2$, the residual Coulomb integral
+      roughly as $Z$, and the nuclear radius as $A^{1/3}$ — which barely moves at all. The ratio
+      of the third to the second, going as $Z^3$, is what flips $LS$ coupling into $jj$.
+
+  # ---- Set D: The reasoning ----
+  - id: rel12
+    set: D
+    label: Q12
+    kind: truefalse
+    prompt: >-
+      True or false: since $(Z\alpha)^2 \approx 0.09$ at $Z = 42$ — under ten per cent —
+      spin-orbit coupling can safely be added as a perturbation to an $LS$-coupled calculation.
+    check: { type: exact, value: false }
+    explain:
+      required: true
+      hint: Small compared to what?
+    solution: >-
+      False, and the reason matters more than the answer. $(Z\alpha)^2$ being small tells you the
+      relativistic term is small *compared to the rest energy*. Perturbation theory needs it to be
+      small compared to the spacing of the states it is perturbing — and the spin-orbit splitting
+      in Zr XXXV is larger than the $LS$ term separations it would have to perturb. When the
+      correction is bigger than the structure it corrects, it is choosing the zeroth-order states,
+      not adjusting them.
+
+  - id: rel13
+    set: D
+    label: Q13
+    kind: text
+    prompt: >-
+      Explain in your own words why the ratio of spin-orbit coupling to residual Coulomb repulsion
+      goes as $Z^3$, and what that does to the coupling scheme.
+    check: { type: tutor }
+    solution: >-
+      Spin-orbit goes as $Z^4$ and the residual Coulomb integral goes roughly as $Z$, so the ratio
+      goes as $Z^3$. At low $Z$ Coulomb dominates: $L$ and $S$ couple first and spin-orbit splits
+      the resulting terms — $LS$ coupling. At high $Z$ the order reverses: each electron forms its
+      own $j$, and the $j$'s then couple to $J$ — $jj$ coupling. It is not that the answer changes
+      by a few per cent; it is that a different set of quantum numbers becomes the good one.
+
+  - id: rel14
+    set: D
+    label: Q14
+    kind: text
+    prompt: >-
+      Relativity contracts the $s$ orbitals. Why, then, do the $d$ and $f$ orbitals expand?
+    check: { type: tutor }
+    explain:
+      hint: Nothing acts on the d orbital directly. Ask what changed in its environment.
+    solution: >-
+      The $d$ and $f$ orbitals are held away from the nucleus by their centrifugal barrier, so
+      they have little amplitude in the fast region and feel almost no direct relativistic effect.
+      What changes for them is screening: the contracted $s$ and $p_{1/2}$ shells now sit closer
+      in and shield the nuclear charge more effectively, so the $d$ and $f$ electrons see a
+      smaller effective $Z$ and move outward. This is the indirect relativistic effect, and it is
+      responsible for the colour of gold and the liquidity of mercury as well as for level
+      orderings in these ions.

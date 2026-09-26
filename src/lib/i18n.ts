@@ -106,6 +106,47 @@ const en = {
   'checkpoint.markButton': 'Mark complete',
   'checkpoint.saving': 'Saving...',
 
+  // Callout headings. The MDX <Callout> falls back to these when the author gives no title, so
+  // an untitled callout inside an Arabic lesson would otherwise be headed in English.
+  'callout.why': 'Why this matters',
+  'callout.note': 'Note',
+  'callout.warning': 'Careful',
+  'callout.forward': 'Where this leads',
+
+  // Teaching widgets. These sit inside the lesson prose, so leaving them in English would put
+  // English chrome in the middle of an Arabic paragraph — the exact mixing the settings exist to
+  // prevent.
+  'predict.label': 'Predict first',
+  'predict.right': 'Right — here is why',
+  'predict.wrong': 'Not this time — here is why',
+
+  'faded.label': 'Worked example',
+  'faded.supportLevel': 'Support level',
+  'faded.worked': 'Worked',
+  'faded.faded': 'Faded',
+  'faded.alone': 'Alone',
+  'faded.workedHint': 'Every step shown. Read for the shape of the argument.',
+  'faded.fadedHint': 'The later steps are yours. Uncover one only when you are stuck.',
+  'faded.aloneHint': 'Only the starting point. Work it on paper, then check.',
+  'faded.reveal': 'Your turn — click to check',
+
+  'dirac.charge': 'Nuclear charge',
+  'dirac.chargeLabel': 'Nuclear charge Z',
+  'dirac.alt':
+    'Dirac 1s radial functions at Z = {z}. The small component is {percent} of the large one.',
+  'dirac.negligible':
+    'The small component is {percent} of the large one. At this charge a non-relativistic treatment loses almost nothing — the dashed curve sits nearly on top of the solid one.',
+  'dirac.noticeable':
+    'The small component has reached {percent} and the orbital has visibly pulled inward. Fine structure is no longer a small correction you can bolt on afterwards.',
+  'dirac.large':
+    '{percent}. The “small” component is nothing of the kind. A calculation that drops it is not approximate, it is answering a different question — which is why both El-Sayed papers are fully relativistic from the start rather than corrected at the end.',
+  'dirac.keyLarge': 'P(r), large component',
+  'dirac.keySmall': 'Q(r), small component',
+  'dirac.keyClassical': 'non-relativistic 1s',
+  'dirac.mark2020': 'Zr — the 2020 paper',
+  'dirac.mark2021': 'Mo — the 2021 paper',
+  'dirac.markTungsten': 'W — fusion walls',
+
   // Equations
   'equation.copy': 'Copy LaTeX',
   'equation.copied': 'LaTeX copied',
@@ -203,6 +244,42 @@ const ar: Record<StringKey, string> = {
   'equation.copy': 'انسخ LaTeX',
   'equation.copied': 'اتنسخت',
   'equation.ask': 'اسأل عن المعادلة دي',
+
+  'callout.why': 'ليه ده مهم',
+  'callout.note': 'ملاحظة',
+  'callout.warning': 'خلي بالك',
+  'callout.forward': 'رايحين فين بعد كده',
+
+  'predict.label': 'توقّع الأول',
+  'predict.right': 'صح — ودي السبب',
+  'predict.wrong': 'مش المرة دي — ودي السبب',
+
+  'faded.label': 'مثال محلول',
+  'faded.supportLevel': 'مستوى المساعدة',
+  'faded.worked': 'محلول',
+  'faded.faded': 'ناقص',
+  'faded.alone': 'لوحدك',
+  'faded.workedHint': 'كل الخطوات باينة. اقراها عشان تشوف شكل الحجة.',
+  'faded.fadedHint': 'الخطوات اللي بعدين عليك إنت. اكشف واحدة بس لما تقف.',
+  'faded.aloneHint': 'نقطة البداية بس. اشتغلها على ورقة وبعدين راجع.',
+  'faded.reveal': 'دورك — دوس عشان تراجع',
+
+  'dirac.charge': 'شحنة النواة',
+  'dirac.chargeLabel': 'شحنة النواة Z',
+  'dirac.alt':
+    'الدوال القطرية لحالة ديراك 1s عند Z = {z}. المركبة الصغيرة بتساوي {percent} من الكبيرة.',
+  'dirac.negligible':
+    'المركبة الصغيرة بتساوي {percent} من الكبيرة. عند الشحنة دي المعالجة اللا نسبية مش بتخسر حاجة تقريباً — المنحنى المتقطع واقع تقريباً فوق المتصل.',
+  'dirac.noticeable':
+    'المركبة الصغيرة وصلت لـ {percent} والمدار انكمش بشكل واضح. البنية الدقيقة بطّلت تكون تصحيح صغير تلزقه ف الآخر.',
+  'dirac.large':
+    '{percent}. المركبة «الصغيرة» دي مش صغيرة خالص. الحسبة اللي بترميها مش تقريبية — دي بترد على سؤال تاني خالص، وعشان كده بحثي السيد الاتنين نسبيين بالكامل من الأول مش متصلحين ف الآخر.',
+  'dirac.keyLarge': 'P(r)، المركبة الكبيرة',
+  'dirac.keySmall': 'Q(r)، المركبة الصغيرة',
+  'dirac.keyClassical': '1s اللا نسبي',
+  'dirac.mark2020': 'Zr — بحث 2020',
+  'dirac.mark2021': 'Mo — بحث 2021',
+  'dirac.markTungsten': 'W — جدران الاندماج',
 }
 
 const DICTIONARIES: Record<Locale, Record<StringKey, string>> = { en, ar }

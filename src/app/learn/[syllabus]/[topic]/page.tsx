@@ -195,6 +195,10 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
                 components={mdxComponents({
                   topicId: String(topicId),
                   glossary,
+                  // The language the lesson was actually served in, not the one requested. An
+                  // untranslated topic falls back to English prose, and Arabic widget chrome
+                  // around English text would be the mixing this is meant to prevent.
+                  locale: lesson.servedLocale,
                 })}
                 options={{
                   parseFrontmatter: false,

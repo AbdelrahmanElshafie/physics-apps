@@ -1,0 +1,285 @@
+---
+title: Why Relativity Matters for Atoms
+summary: >-
+  A 1s electron in molybdenum moves at over 30% of the speed of light. That single number decides the
+  method: not Schrodinger with corrections bolted on, but Dirac from the first line.
+readingMinutes: 45
+updated: 2026-09-26
+keyEquations:
+  - latex: \frac{v}{c} \approx \frac{Z\alpha}{n}
+    label: Speed of a bound electron
+  - latex: \gamma = \sqrt{1 - (Z\alpha)^2}
+    label: Dirac radial exponent
+  - latex: \Delta E_{\text{fs}} \propto Z^4 \alpha^2 \, \mathrm{Ry}
+    label: Fine-structure scaling
+---
+
+<Callout kind="why">
+Both papers you are working towards are about highly charged ions: **Zr XXXV**, carbon-like
+zirconium at $Z = 40$, and **Mo XXXVI**, nitrogen-like molybdenum at $Z = 42$. Every methodological
+choice in them — MCDHF rather than Hartree–Fock, Dirac orbitals rather than Schrodinger ones, $jj$
+labels rather than $LS$ ones, a Breit term, a QED term — follows from one fact established in this
+lesson. Get this fact and the rest of the method stops looking like a pile of acronyms and starts
+looking like the only sensible thing to do.
+</Callout>
+
+## 1. How fast is a bound electron?
+
+Start with the crudest possible estimate, because it turns out to be right to within a few per
+cent. Take a hydrogen-like ion — one electron, nuclear charge $Z$ — and ask how fast that electron
+is moving.
+
+<Faded
+  caption="The Bohr estimate. Crude, but the Z-scaling it gives is exact."
+  steps={[
+    {
+      why: 'Bohr quantisation: angular momentum comes in units of hbar.',
+      latex: String.raw`m v r = n \hbar`,
+    },
+    {
+      why: 'The Coulomb attraction supplies the centripetal force.',
+      latex: String.raw`\frac{Z e^{2}}{4\pi\varepsilon_{0} r^{2}} = \frac{m v^{2}}{r}`,
+    },
+    {
+      why: 'Use the first equation to write r in terms of v, then substitute.',
+      latex: String.raw`r = \frac{n\hbar}{m v} \quad\Longrightarrow\quad \frac{Z e^{2}}{4\pi\varepsilon_{0}} \cdot \frac{m v}{n \hbar} = m v^{2} \cdot \frac{m v}{n\hbar} \cdot \frac{1}{m v}`,
+    },
+    {
+      why: 'The masses and one power of v cancel, leaving v alone.',
+      latex: String.raw`v = \frac{Z e^{2}}{4\pi\varepsilon_{0} n \hbar}`,
+    },
+    {
+      why: 'Divide by c. The whole combination is the fine-structure constant.',
+      latex: String.raw`\frac{v}{c} = \frac{Z e^{2}}{4\pi\varepsilon_{0}\hbar c \, n} = \frac{Z\alpha}{n}, \qquad \alpha \approx \frac{1}{137.036}`,
+    },
+    {
+      why: 'Put molybdenum in the 1s shell: Z = 42, n = 1.',
+      latex: String.raw`\frac{v}{c} = \frac{42}{137.036} = 0.3065`,
+    },
+  ]}
+/>
+
+<Eq
+  id="v-over-c"
+  label="Speed of a bound electron"
+  number="11.1"
+  latex={String.raw`\frac{v}{c} \approx \frac{Z\alpha}{n}`}
+/>
+
+Thirty per cent of the speed of light. That is not a regime where you apply a correction; it
+is a regime where you change equations.
+
+<Callout kind="note">
+Two things make this estimate trustworthy despite the Bohr model being wrong. First, the virial
+theorem gives the same answer for the *root-mean-square* speed in a proper quantum treatment — the
+Bohr model gets the scale right even when it gets the picture wrong. Second, nothing here depended
+on the details: $v/c = Z\alpha/n$ came out of the Coulomb force and $\hbar$, and those survive into
+the real theory unchanged.
+</Callout>
+
+## 2. What that speed costs you
+
+Turn the speed into the two numbers that actually enter a calculation.
+
+The **Lorentz factor** tells you how far the electron's mass has departed from $m_e$:
+
+<Eq
+  id="lorentz"
+  label="Lorentz factor for the 1s electron"
+  latex={String.raw`\gamma_{L} = \frac{1}{\sqrt{1 - (Z\alpha)^{2}}}`}
+/>
+
+The **fine-structure scale** tells you how large the purely relativistic terms are in energy. For a
+hydrogen-like ion the splitting between $2p_{1/2}$ and $2p_{3/2}$ comes out of the Dirac energy
+formula as
+
+<Eq
+  id="fs-scaling"
+  label="Hydrogenic 2p fine structure"
+  number="11.2"
+  latex={String.raw`\Delta E_{\text{fs}}(2p) = \frac{Z^{4}\alpha^{2}}{16}\,\mathrm{Ry}`}
+/>
+
+The $Z^4$ is the whole story of this lesson. Run it across the periodic table:
+
+<Compare
+  caption="Relativity across Z. The last column is the hydrogenic 2p fine structure from equation 11.2."
+  columns={['Ion', 'Z', 'v / c', 'Lorentz factor', 'Q / P', '2p fine structure / cm⁻¹']}
+  rows={[
+    ['H', '1', '0.0073', '1.00003', '0.36%', '0.365'],
+    ['C', '6', '0.0438', '1.00096', '2.19%', '473'],
+    ['Fe', '26', '0.1897', '1.01850', '9.57%', '1.67 × 10⁵'],
+    ['Zr — the 2020 paper', '40', '0.2919', '1.04553', '14.92%', '9.35 × 10⁵'],
+    ['Mo — the 2021 paper', '42', '0.3065', '1.05056', '15.70%', '1.14 × 10⁶'],
+    ['U', '92', '0.6714', '1.34928', '38.56%', '2.62 × 10⁷'],
+  ]}
+/>
+
+Read the last column again. In hydrogen the $2p$ fine structure is about a third of a wavenumber — a
+detail you need a good spectrometer to see. In molybdenum it is over a **million** wavenumbers.
+Between those two rows, "fine structure" stopped being fine.
+
+<Callout kind="warning">
+A tempting mistake: $(Z\alpha)^2 = 0.094$ at $Z = 42$, which is under ten per cent, so surely
+perturbation theory is fine? No — and section 5 is about why. The size of the correction is not
+what decides it. What decides it is whether the correction is small *compared to the other terms it
+has to compete with*, and in these ions it is not.
+</Callout>
+
+## 3. The small component is not small
+
+The Dirac equation replaces the single Schrodinger wavefunction with a four-component spinor. For a
+central field it collapses to two radial functions: the **large component** $P(r)$, which goes over
+to the Schrodinger radial function as $c \to \infty$, and the **small component** $Q(r)$, which has
+no non-relativistic counterpart at all. It vanishes in that limit — hence the name.
+
+For the hydrogen-like ground state both components have exactly the same radial shape,
+
+<Eq
+  id="dirac-1s"
+  label="Hydrogenic Dirac 1s"
+  number="11.3"
+  latex={String.raw`P(r) \propto \sqrt{1+\gamma}\; r^{\gamma} e^{-Zr}, \qquad Q(r) \propto -\sqrt{1-\gamma}\; r^{\gamma} e^{-Zr}, \qquad \gamma = \sqrt{1 - (Z\alpha)^{2}}`}
+/>
+
+so their ratio is a pure number, independent of $r$:
+
+<Eq
+  id="qp-ratio"
+  label="Small-to-large ratio"
+  number="11.4"
+  latex={String.raw`\left\lvert \frac{Q}{P} \right\rvert = \sqrt{\frac{1-\gamma}{1+\gamma}}`}
+/>
+
+Drag $Z$ and watch it. Two separate things are happening. The orange curve grows — that is
+equation 11.4. And the peak of the large component moves in from $1/Z$ to $\gamma/Z$: a
+**4.8%** contraction at molybdenum, **25.9%** at uranium. Both are the same $\gamma$.
+
+<DiracRadial
+  initialZ={42}
+  caption="Hydrogenic Dirac 1s radial functions. The dashed curve is the non-relativistic 1s. The relativistic large component goes as r^gamma with gamma < 1 rather than r^1, which is the contraction; the small component is what a Schrodinger calculation throws away."
+/>
+
+Two observations worth carrying forward:
+
+- At $Z = 1$ the small component is 0.36% of the large one and the dashed curve lies almost on top
+  of the solid one. Non-relativistic quantum mechanics is not an approximation for hydrogen so much
+  as an accurate theory of it.
+- At $Z = 42$ the small component is **15.7%**. A method that does not have a $Q(r)$ is not
+  approximating this system badly; it does not have the degrees of freedom to describe it.
+
+## 4. Predict before you read on
+
+<Predict
+  question="Neutral carbon and Zr XXXV have the same ground configuration, $1s^2 2s^2 2p^2$. Going from carbon ($Z=6$) to zirconium ($Z=40$), roughly what factor does the $2p_{1/2}$–$2p_{3/2}$ splitting grow by?"
+  options={[
+    'About 7 — it tracks the nuclear charge',
+    'About 45 — it goes as $Z^2$, like the binding energy',
+    'About 300 — it goes as $Z^3$',
+    'About 2000 — it goes as $Z^4$',
+  ]}
+  answer={3}
+>
+Equation 11.2 has $Z^4$ in it, and $(40/6)^4 \approx 1975$. Binding energies go as $Z^2$;
+fine structure goes as $Z^4$. That extra factor of $Z^2$ is precisely $(Z\alpha)^2$ — the
+relativistic correction — and it is why a term that is invisible in carbon dominates in zirconium.
+
+In the real many-electron ion the screening softens the exponent somewhat, but the conclusion does
+not move: the splitting grows by three orders of magnitude while everything else grows by two.
+</Predict>
+
+## 5. The coupling scheme itself changes
+
+This is the point where relativity stops being a correction and becomes the organising principle,
+and it is the argument the previous callout promised.
+
+A $2p^2$ configuration has two competing energies deciding how the levels arrange themselves:
+
+<Compare
+  caption="The competition that sets the coupling scheme"
+  columns={['Interaction', 'What it does', 'How it scales with Z']}
+  rows={[
+    [
+      'Residual Coulomb repulsion between the 2p electrons',
+      'Splits the configuration into $LS$ terms — $^3P$, $^1D$, $^1S$',
+      '$\\propto Z$',
+    ],
+    [
+      'Spin–orbit coupling $\\zeta_{2p}$',
+      'Splits each electron into $2p_{1/2}$ and $2p_{3/2}$',
+      '$\\propto Z^4$',
+    ],
+  ]}
+/>
+
+Their ratio therefore goes as $Z^3$. At low $Z$ the Coulomb term wins: the electrons first couple
+their orbital angular momenta into $L$ and their spins into $S$, and spin–orbit then splits the
+resulting term into a small multiplet. That is **$LS$ coupling**, the scheme every undergraduate
+course teaches.
+
+Now multiply by $(40/6)^3 \approx 296$. In Zr XXXV the spin–orbit term is hundreds of times more
+important relative to the Coulomb term than it is in carbon, and the order reverses: each electron
+couples its *own* spin and orbital momentum into $j$ first, and only then do the $j$'s couple to
+$J$. That is **$jj$ coupling**.
+
+<Callout kind="warning" title="Why this kills perturbative spin–orbit">
+Perturbation theory assumes the perturbation does not reorganise the states it acts on. When
+spin–orbit coupling is *larger* than the interaction that defined your basis, the "correction" is
+what chooses the zeroth-order states. You cannot compute $LS$ terms and then perturb them, because
+in this regime the $LS$ terms were never the right starting point. There is nothing to perturb
+*from*.
+</Callout>
+
+This is why both papers report levels with $jj$ labels transformed to $LSJ$ ones after the fact,
+using `jj2lsj`, and why the $LSJ$ label so often comes with a composition percentage rather than a
+clean name. The $LS$ label is a translation, offered for comparison with older literature and with
+the NIST tables — not the physics. The physics is $jj$.
+
+## 6. Three consequences you will meet in every calculation
+
+<Axioms
+  caption="What relativity does to an orbital, and where you will see it"
+  items={[
+    [
+      String.raw`\text{s and } p_{1/2} \text{ contract}`,
+      'They have amplitude at the nucleus, where the electron is fastest. Higher mass means a tighter orbit. This is the direct effect, and it is what the r^gamma exponent in equation 11.3 is describing.',
+    ],
+    [
+      String.raw`\text{d and f expand}`,
+      'They are kept away from the nucleus by their centrifugal barrier, so they feel little direct effect — but the contracted s and p shells screen the nucleus better, so d and f see less charge and move out. This is the indirect effect, and it is why relativity changes chemistry as well as spectra.',
+    ],
+    [
+      String.raw`n\ell \to n\ell_{j}`,
+      'A single non-relativistic 2p orbital becomes two independent relativistic orbitals, 2p- and 2p+, with different radial functions. In GRASP you will see them listed separately, and the CSF count grows accordingly.',
+    ],
+  ]}
+/>
+
+That last line is the one with computational teeth. Every relativistic orbital you add is a
+separate function to optimise, and the configuration state functions built from them multiply
+faster than in the non-relativistic case. The expansions in these papers run to hundreds of
+thousands of CSFs, and this is where that number starts.
+
+## 7. So what does the method have to look like?
+
+Everything above forces the shape of the calculation:
+
+| Fact established | What the method must therefore do |
+| --- | --- |
+| $v/c \approx 0.3$ | Solve the Dirac equation, not Schrodinger's |
+| $\lvert Q/P \rvert \approx 16\%$ | Carry both radial components through every step |
+| Spin–orbit $\gg$ residual Coulomb | Build the basis in $jj$ coupling from the start |
+| $n\ell \to n\ell_j$ | Optimise $2p_{1/2}$ and $2p_{3/2}$ as separate orbitals |
+| Levels are strongly mixed | Use a multiconfiguration expansion, not a single determinant |
+
+Those five lines are, in order, the Dirac equation, the large/small component pair, $jj$ coupling,
+the relativistic orbital set, and multiconfiguration — which is to say, **MCDHF**. The acronym is
+not a choice of technique among several. It is the list of things this ion leaves you no option
+about.
+
+<Callout kind="forward">
+Next: *Failures of the Schrodinger equation* makes the case negatively — what specifically breaks,
+and how it breaks — before we build the replacement. Then the Klein–Gordon detour (instructive
+because it fails), then the Dirac equation itself, where $\gamma = \sqrt{1-(Z\alpha)^2}$ stops
+being a number quoted at you and starts being something you derive.
+</Callout>
