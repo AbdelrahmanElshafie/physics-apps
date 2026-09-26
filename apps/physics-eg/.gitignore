@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Runtime state — regenerated, machine-local.
+data/.cache/
+data/events.jsonl
+
+.env*
+!.env.example
+.DS_Store

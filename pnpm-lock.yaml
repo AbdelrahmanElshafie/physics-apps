@@ -10,6 +10,9 @@ importers:
 
   apps/physics-eg:
     dependencies:
+      '@physics/checker':
+        specifier: workspace:*
+        version: link:../../packages/checker
       '@physics/circuit-sim':
         specifier: workspace:*
         version: link:../../packages/circuit-sim
@@ -49,6 +52,9 @@ importers:
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.7.0
+      ulid:
+        specifier: ^3.0.1
+        version: 3.0.2
       yaml:
         specifier: ^2.8.1
         version: 2.9.1

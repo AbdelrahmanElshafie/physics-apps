@@ -1,0 +1,108 @@
+# تمارين: شدة التيار الكهربي
+#
+# مجموعة أ: تطبيق مباشر لـ I = Q/t. مجموعة ب: عدد الإلكترونات N = Q/e. مجموعة ج: مفاهيم.
+
+schemaVersion: 1
+topic: current-and-charge
+intro: تسعة أسئلة. الإجابات الرقمية بتتحقق فورًا.
+
+exercises:
+  - id: cc1
+    set: أ
+    label: س١
+    kind: numeric
+    prompt: سلك بيعدي فيه شحنة مقدارها 6 كولوم خلال 3 ثواني. احسب شدة التيار.
+    check: { type: numeric, value: 2, tolerance: 0.01 }
+    solution: $I = Q/t = 6/3 = 2\ A$.
+
+  - id: cc2
+    set: أ
+    label: س٢
+    kind: numeric
+    prompt: تيار شدته 5 أمبير سرى في موصل لمدة 4 ثواني. احسب كمية الشحنة اللي عدّت.
+    check: { type: numeric, value: 20, tolerance: 0.01 }
+    hint: اعكس القانون — Q = I × t.
+    solution: $Q = It = 5 \times 4 = 20\ C$.
+
+  - id: cc3
+    set: أ
+    label: س٣
+    kind: numeric
+    prompt: >-
+      الرسم البياني للعلاقة بين الشحنة والزمن لموصل عبارة عن خط مستقيم من نقطة الأصل لنقطة عندها
+      $t = 5\ \text{s}$ و $Q = 15\ \text{C}$. احسب شدة التيار.
+    check: { type: numeric, value: 3, tolerance: 0.01 }
+    hint: شدة التيار هي ميل الخط، أي Q/t عند أي نقطة عليه.
+    solution: $I = \text{slope} = 15/5 = 3\ A$.
+
+  - id: cc4
+    set: ب
+    label: س٤
+    kind: numeric
+    prompt: >-
+      موصل بيسري فيه تيار شدته 20 أمبير لمدة 2 ثانية. احسب عدد الإلكترونات اللي عدّت
+      ($e = 1.6 \times 10^{-19}\ \text{C}$).
+    check: { type: numeric, value: 2.5e20, tolerance: 1e18 }
+    solution: >-
+      $Q = It = 40\ C$، وبعدين $N = Q/e = 40 / (1.6 \times 10^{-19}) = 2.5 \times 10^{20}$
+      إلكترون.
+
+  - id: cc5
+    set: ب
+    label: س٥
+    kind: numeric
+    prompt: كمية شحنة مقدارها 3.2 كولوم عدّت في سلك. كام عدد الإلكترونات المكافئ لها؟
+    check: { type: numeric, value: 2e19, tolerance: 5e17 }
+    solution: $N = Q/e = 3.2 / (1.6 \times 10^{-19}) = 2 \times 10^{19}$ إلكترون.
+
+  - id: cc6
+    set: ب
+    label: س٦
+    kind: numeric
+    prompt: >-
+      موصل بيمر بيه $1.25 \times 10^{19}$ إلكترون خلال ثانيتين. احسب شدة التيار المقابلة.
+    check: { type: numeric, value: 1, tolerance: 0.02 }
+    hint: احسب الشحنة الكلية أولاً من N × e، وبعدين اقسمها على الزمن.
+    solution: >-
+      $Q = Ne = 1.25 \times 10^{19} \times 1.6 \times 10^{-19} = 2\ C$، وبعدين
+      $I = Q/t = 2/2 = 1\ A$.
+
+  - id: cc7
+    set: ج
+    label: س٧
+    kind: multichoice
+    prompt: الاتجاه المتعارف عليه للتيار الكهربي جوه الموصل هو نفس اتجاه حركة...
+    choices:
+      - { id: electrons, label: الإلكترونات فعليًا }
+      - { id: conventional, label: الشحنة الموجبة الافتراضية (عكس الإلكترونات) }
+      - { id: neutrons, label: النيوترونات }
+      - { id: none, label: لا شيء مما سبق — التيار ثابت الاتجاه دايمًا }
+    check: { type: exact, value: conventional }
+    solution: >-
+      عكس اتجاه الإلكترونات فعليًا. الاتفاق التاريخي افترض حاملات شحنة موجبة قبل ما نكتشف
+      الإلكترون، والاتفاق ده فضل مستخدم لحد دلوقتي.
+
+  - id: cc8
+    set: ج
+    label: س٨
+    kind: truefalse
+    prompt: >-
+      صح ولا غلط: لو ضاعفنا زمن مرور التيار مع ثبات شدته، عدد الإلكترونات اللي بتعدي بيتضاعف
+      هو كمان.
+    check: { type: exact, value: true }
+    explain: { required: true, hint: ارجع لمعادلة N = It/e وشوف علاقة N بـ t. }
+    solution: صح. $N = It/e$، و $I$ و $e$ ثابتين، فـ $N$ متناسبة طرديًا مع $t$ فقط.
+
+  - id: cc9
+    set: ج
+    label: س٩
+    kind: text
+    prompt: >-
+      اشرح بكلامك ليه شدة التيار في نقطتين مختلفتين على نفس السلك (مش فيه تفريعات) بتكون متساوية
+      دايمًا، حتى لو السلك اتغير سمكه بين النقطتين.
+    check: { type: tutor }
+    solution: >-
+      الشحنة محفوظة — أي إلكترون بيدخل من طرف السلك لازم يخرج من الطرف التاني، مفيش مكان
+      "يختفي" فيه أو "يتجمع" فيه (طالما مفيش تفريع). فعدد الإلكترونات اللي بتعدي أي مقطع في
+      السلك خلال زمن معين لازم يكون واحد، بغض النظر عن سمك السلك في اللحظة دي — وبالتالي شدة
+      التيار ($I = Q/t$) نفسها في كل نقطة على طول السلك.

@@ -1,0 +1,181 @@
+# Chapter 1 of the 3rd-secondary physics syllabus (Egypt): DC circuits, start to Kirchhoff's laws.
+# Structure follows the textbook's own four lessons; each becomes a phase here, broken into the
+# finer topics a single sitting can actually cover.
+
+schemaVersion: 1
+id: electricity
+title: التيار الكهربي
+subtitle: الوحدة الأولى — فيزياء الصف الثالث الثانوي
+description: >-
+  من شحنة الإلكترون لقوانين كيرشوف: التيار وفرق الجهد، قانون أوم، توصيل المقاومات، القوة الدافعة
+  الكهربية، وتحليل الدوائر المركبة — بشرح وتمارين محلولة ودوائر تقدر تبنيها بنفسك.
+
+phases:
+  - id: l1
+    title: الدرس الأول — التيار الكهربي وقانون أوم
+    summary: >-
+      من شحنة الإلكترون لمقاومة الموصل — التعريفات الأساسية اللي كل حاجة بعد كده مبنية عليها.
+    modules:
+      - id: m1.1
+        title: 1.1 الشحنة والتيار الكهربي
+        topics:
+          - id: current-and-charge
+            title: شدة التيار الكهربي
+            critical: true
+            estimatedMinutes: 35
+          - id: potential-difference
+            title: فرق الجهد الكهربي
+            critical: true
+            requires: [current-and-charge]
+            estimatedMinutes: 30
+
+      - id: m1.2
+        title: 1.2 قانون أوم والمقاومة
+        topics:
+          - id: ohms-law
+            title: قانون أوم والمقاومة الكهربية
+            critical: true
+            requires: [potential-difference]
+            estimatedMinutes: 35
+          - id: resistivity
+            title: المقاومة النوعية والتوصيلية
+            critical: true
+            requires: [ohms-law]
+            estimatedMinutes: 40
+
+      - id: m1.3
+        title: 1.3 القدرة والطاقة الكهربية
+        topics:
+          - id: power-and-energy
+            title: القدرة والطاقة الكهربية
+            critical: true
+            requires: [ohms-law]
+            estimatedMinutes: 30
+          - id: checkpoint-l1
+            kind: checkpoint
+            title: نقطة مراجعة — الدرس الأول
+            critical: true
+            requires: [resistivity, power-and-energy]
+            estimatedMinutes: 20
+
+  - id: l2
+    title: الدرس الثاني — توصيل المقاومات
+    summary: نفس المقاومات، ترتيب مختلف — التوالي والتوازي، والدوائر المركبة اللي بتجمع بينهم.
+    modules:
+      - id: m2.1
+        title: 2.1 التوالي والتوازي
+        topics:
+          - id: series-resistors
+            title: توصيل المقاومات على التوالي
+            critical: true
+            requires: [checkpoint-l1]
+            estimatedMinutes: 30
+          - id: parallel-resistors
+            title: توصيل المقاومات على التوازي
+            critical: true
+            requires: [series-resistors]
+            estimatedMinutes: 30
+          - id: series-vs-parallel
+            title: مقارنة بين التوالي والتوازي
+            requires: [parallel-resistors]
+            estimatedMinutes: 20
+
+      - id: m2.2
+        title: 2.2 الدوائر المركبة
+        topics:
+          - id: mixed-circuits
+            title: اختزال الدوائر المركبة
+            critical: true
+            requires: [series-vs-parallel]
+            estimatedMinutes: 40
+          - id: bridge-circuits
+            title: دوائر الجسر (وتستون)
+            requires: [mixed-circuits]
+            estimatedMinutes: 35
+          - id: switches-in-circuits
+            title: أثر المفاتيح على الدائرة
+            requires: [mixed-circuits]
+            estimatedMinutes: 30
+
+      - id: m2.3
+        title: 2.3 القدرة في الدوائر
+        topics:
+          - id: lamps-brightness
+            title: سطوع المصابيح على التوالي والتوازي
+            requires: [switches-in-circuits]
+            estimatedMinutes: 25
+          - id: checkpoint-l2
+            kind: checkpoint
+            title: نقطة مراجعة — الدرس الثاني
+            critical: true
+            requires: [bridge-circuits, lamps-brightness]
+            estimatedMinutes: 20
+
+  - id: l3
+    title: الدرس الثالث — قانون أوم للدائرة المغلقة
+    summary: البطارية نفسها مش مصدر جهد مثالي — المقاومة الداخلية بتفرق، وهنشوف إزاي.
+    modules:
+      - id: m3.1
+        title: 3.1 القوة الدافعة الكهربية
+        topics:
+          - id: emf-and-internal-resistance
+            title: القوة الدافعة الكهربية والمقاومة الداخلية
+            critical: true
+            requires: [checkpoint-l2]
+            estimatedMinutes: 35
+          - id: terminal-voltage-graphs
+            title: قراءة العلاقة البيانية بين الجهد والتيار
+            requires: [emf-and-internal-resistance]
+            estimatedMinutes: 25
+
+      - id: m3.2
+        title: 3.2 توصيل الخلايا
+        topics:
+          - id: cells-aiding-opposing
+            title: توصيل الخلايا متفقة ومختلفة القطبية
+            critical: true
+            requires: [terminal-voltage-graphs]
+            estimatedMinutes: 30
+          - id: checkpoint-l3
+            kind: checkpoint
+            title: نقطة مراجعة — الدرس الثالث
+            critical: true
+            requires: [cells-aiding-opposing]
+            estimatedMinutes: 20
+
+  - id: l4
+    title: الدرس الرابع — قوانين كيرشوف
+    summary: لما دائرة معندهاش شكل توالي أو توازي واضح، قانونا كيرشوف هما الطريقة اللي بتشتغل دايمًا.
+    modules:
+      - id: m4.1
+        title: 4.1 قانون كيرشوف الأول
+        topics:
+          - id: kirchhoff-current-law
+            title: قانون كيرشوف الأول (قانون التفرع)
+            critical: true
+            requires: [checkpoint-l3]
+            estimatedMinutes: 30
+
+      - id: m4.2
+        title: 4.2 قانون كيرشوف الثاني
+        topics:
+          - id: kirchhoff-voltage-law
+            title: قانون كيرشوف الثاني (قانون الدائرة المغلقة)
+            critical: true
+            requires: [kirchhoff-current-law]
+            estimatedMinutes: 35
+
+      - id: m4.3
+        title: 4.3 حل مسائل كيرشوف
+        topics:
+          - id: solving-kirchhoff-problems
+            title: خطوات حل مسائل كيرشوف خطوة بخطوة
+            critical: true
+            requires: [kirchhoff-voltage-law]
+            estimatedMinutes: 40
+          - id: checkpoint-l4
+            kind: checkpoint
+            title: نقطة مراجعة — الدرس الرابع
+            critical: true
+            requires: [solving-kirchhoff-problems]
+            estimatedMinutes: 25
