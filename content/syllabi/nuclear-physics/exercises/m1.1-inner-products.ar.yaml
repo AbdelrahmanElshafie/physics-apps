@@ -1,0 +1,221 @@
+# تمارين الوحدة 1.1 — الضرب الداخلي (النسخة العربية).
+#
+# الـ id والـ check مطابقين للنسخة الإنجليزية بالظبط.
+
+schemaVersion: 1
+topic: m1.1-inner-products
+intro: >-
+  سبعتاشر سؤال. المجموعتين A و B تكاملات المفروض تحلها في دماغك أول ما حجة التماثل تظبط في راسك؛
+  والمجموعة E بتمشّيك في بناء جرام-شميت اللي بينتج كثيرات حدود ليجاندر.
+
+exercises:
+  # ---- المجموعة A: الضرب الداخلي للدوال ----
+  - id: i1
+    set: A
+    label: س1
+    kind: numeric
+    prompt: >-
+      مع $f(x) = 1$ و $g(x) = x$ على $[-1, 1]$ ووزن 1، احسب $\braket{f}{g}$.
+    check: { type: numeric, value: 0 }
+    explain: { required: true, hint: "مش المفروض تحتاج تكامل أصلًا." }
+    solution: >-
+      صفر. المكامل $x$ دالة فردية والفترة متماثلة حوالين الصفر، فالنصين بيلغوا بعض. يعني الدالة
+      الثابتة و $x$ متعامدين على $[-1,1]$.
+
+  - id: i2
+    set: A
+    label: س2
+    kind: numeric
+    prompt: مع $f(x) = 1$ على $[-1, 1]$، احسب $\braket{f}{f}$.
+    check: { type: numeric, value: 2 }
+    solution: $\int_{-1}^{1} 1 \, dx = 2$ — طول الفترة.
+
+  - id: i3
+    set: A
+    label: س3
+    kind: numeric
+    prompt: مع $g(x) = x$ على $[-1, 1]$، احسب $\braket{g}{g}$.
+    check: { type: numeric, value: 0.6666666667, tolerance: 0.000001 }
+    solution: $\int_{-1}^{1} x^2 \, dx = \left[\tfrac{x^3}{3}\right]_{-1}^{1} = \tfrac{2}{3}$.
+
+  - id: i4
+    set: A
+    label: س4
+    kind: latex
+    prompt: >-
+      طبّع $f(x) = 1$ على $[-1, 1]$. هات الثابت $c$ اللي يخلّي $c \cdot 1$ معياره واحد.
+    check:
+      type: symbolic
+      value: \frac{1}{\sqrt{2}}
+    solution: >-
+      $c = 1/\sqrt{2}$، لأن $\lVert 1 \rVert = \sqrt{2}$. وتكتبها $\sqrt{2}/2$ يبقى نفس العدد.
+
+  - id: i5
+    set: A
+    label: س5
+    kind: truefalse
+    prompt: >-
+      صح ولا غلط — لو دالتين متعامدين على $[-1, 1]$، يبقى متعامدين على $[0, 1]$ برضه.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: "جرّب الزوج بتاع س1." }
+    solution: >-
+      غلط. التعامد بيعتمد على الفترة. $1$ و $x$ متعامدين على $[-1,1]$، بس على $[0,1]$ الضرب
+      الداخلي بيبقى $\int_0^1 x \, dx = \tfrac{1}{2} \neq 0$. تغيير الفترة بيغيّر الفضاء.
+
+  # ---- المجموعة B: تعامد الدوال المثلثية ----
+  - id: i6
+    set: B
+    label: س6
+    kind: numeric
+    prompt: احسب $\int_{-\pi}^{\pi} \sin x \cos x \, dx$.
+    check: { type: numeric, value: 0 }
+    solution: >-
+      صفر. يا تستخدم $\sin x \cos x = \tfrac{1}{2}\sin 2x$ وتكامل، يا تلاحظ إن المكامل دالة فردية
+      على فترة متماثلة.
+
+  - id: i7
+    set: B
+    label: س7
+    kind: truefalse
+    prompt: صح ولا غلط — $\sin x$ و $\sin 2x$ متعامدين على $[-\pi, \pi]$.
+    check: { type: exact, value: true }
+    explain: { required: true }
+    solution: >-
+      صح. $\int_{-\pi}^{\pi} \sin x \sin 2x \, dx = 0$. أنماط فورييه المختلفة متعامدة على بعض، وده
+      بالظبط اللي بيخلّي كل معامل يتطلّع لوحده.
+
+  - id: i8
+    set: B
+    label: س8
+    kind: latex
+    prompt: احسب $\int_{-\pi}^{\pi} \sin^2 x \, dx$. هات القيمة المضبوطة.
+    check:
+      type: symbolic
+      value: \pi
+    solution: >-
+      $\pi$. استخدم $\sin^2 x = \tfrac{1}{2}(1 - \cos 2x)$: النص الثابت بيكامل لـ $\pi$، وحد جيب
+      التمام بيكامل لصفر على عدد صحيح من الدورات.
+
+  - id: i9
+    set: B
+    label: س9
+    kind: text
+    prompt: ليه تعامد الدوال المثلثية بيخلّي متسلسلة فورييه قابلة للاستخدام أصلًا؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      لأن كل معامل بيتطلّع بتكامل واحد: الضرب الداخلي مع نمط واحد بيفني كل الحدود التانية. من غير
+      التعامد كنت هتواجه نظام لا نهائي من المعادلات المترابطة بدل تكامل واحد لكل معامل.
+
+  # ---- المجموعة C: دوال الوزن ----
+  - id: i10
+    set: C
+    label: س10
+    kind: text
+    prompt: إيه الشرط اللي لازم دالة الوزن $w(x)$ تحققه، وليه؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      لازم تبقى موجبة على الفترة. لو $w$ بقت سالبة في أي مكان، $\braket{f}{f}_w$ ممكن تطلع صفر أو
+      سالبة لدالة $f$ مش صفرية، وده بيكسر بديهية الإيجابية — ومعاها مفهوم الطول نفسه.
+
+  - id: i11
+    set: C
+    label: س11
+    kind: text
+    prompt: >-
+      كثيرات حدود ليجاندر متعامدة على $[-1,1]$ بوزن 1؛ وهيرميت على كل المحور الحقيقي بوزن
+      $e^{-x^2}$. طب ليه العيلة أصلًا محتاجة وزن؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      لأن الفترة لوحدها ممكن متخليش المؤثر التفاضلي ذاتي الإلحاق. الوزن هو العامل اللي بيعمل كده،
+      والمؤثرات ذاتية الإلحاق دوالها الذاتية متعامدة. وعلى فترة لا نهائية الوزن كمان بيدّي الاضمحلال
+      اللي بيخلّي التكاملات تتقارب.
+
+  # ---- المجموعة D: الأسس المتصلة ----
+  - id: i12
+    set: D
+    label: س12
+    kind: latex
+    prompt: اكتب شرط التعامد والتجانس لأساس الموضع المتصل.
+    check:
+      type: latex-equivalent
+      value: \braket{x}{x'} = \delta(x - x')
+      accept:
+        - '\langle x \vert x'' \rangle = \delta(x - x'')'
+        - '\braket{x}{x''} = \delta(x-x'')'
+    solution: >-
+      $\braket{x}{x'} = \delta(x - x')$. دلتا كرونيكر بتاعة الحالة المنفصلة بتبقى دلتا ديراك لما
+      الدليل يبقى متصل.
+
+  - id: i13
+    set: D
+    label: س13
+    kind: latex
+    prompt: اكتب علاقة الاكتمال لأساس الموضع.
+    check:
+      type: latex-equivalent
+      value: \int \ket{x}\bra{x} \dd x = \mathbb{1}
+      accept:
+        - '\int \lvert x \rangle \langle x \rvert dx = 1'
+        - '\int \ket{x}\bra{x} dx = 1'
+        - '\int \ket{x}\bra{x} \, dx = \mathbb{1}'
+    solution: >-
+      $\int \ket{x}\bra{x}\,dx = \mathbb{1}$ — المجموع المنفصل على مؤثرات إسقاط الأساس بيبقى تكامل.
+
+  - id: i14
+    set: D
+    label: س14
+    kind: text
+    prompt: >-
+      ابدأ من $\braket{\phi}{\psi}$، دخّل وحدة الموضع، ووضّح إنك بتسترجع
+      $\int \phi^{*}(x)\psi(x)\,dx$.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $\braket{\phi}{\psi} = \bra{\phi}\left(\int \ket{x}\bra{x}dx\right)\ket{\psi} = \int
+      \braket{\phi}{x}\braket{x}{\psi}\,dx = \int \phi^{*}(x)\psi(x)\,dx$. والمرافق بيظهر لأن
+      $\braket{\phi}{x} = \braket{x}{\phi}^{*}$.
+
+  # ---- المجموعة E: جرام-شميت ----
+  - id: i15
+    set: E
+    label: س15
+    kind: numeric
+    prompt: >-
+      جرام-شميت على $\{1, x, x^2\}$ فوق $[-1,1]$. مع $e_1 = 1/\sqrt{2}$، احسب
+      $\braket{e_1}{x}$.
+    check: { type: numeric, value: 0 }
+    solution: >-
+      صفر — المكامل دالة فردية على فترة متماثلة. يبقى $x$ مش محتاج أي تصحيح؛ هو أصلًا متعامد مع
+      الثابت.
+
+  - id: i16
+    set: E
+    label: س16
+    kind: latex
+    prompt: >-
+      كمّل: اطرح من $x^2$ إسقاطه على $e_1$ (الإسقاط على $e_2$ بصفر). إيه الناتج $u_3$؟
+    check:
+      type: symbolic
+      value: x^2 - \frac{1}{3}
+    explain: { required: true, hint: "ده متناسب مع أنهي كثير حدود معروف؟" }
+    solution: >-
+      $u_3 = x^2 - \tfrac{1}{3}$. وبما إن $P_2(x) = \tfrac{1}{2}(3x^2-1) = \tfrac{3}{2}(x^2 -
+      \tfrac{1}{3})$، يبقى ده كثير حدود ليجاندر التاني ما عدا ثابت — تعميد قوى $x$ على $[-1,1]$
+      بينتج عيلة ليجاندر.
+
+  - id: i17
+    set: E
+    label: س17
+    kind: text
+    prompt: >-
+      بتر التمدد بعد $N$ حد بيدّي أحسن تقريب متاح في الفضاء الجزئي ده. ليه الخطأ المتبقي متعامد على
+      كل اللي احتفظت بيه، وليه ده مهم لمجموع الموجات الجزئية؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      لأن كل معامل احتفظت بيه شال بالفعل المركبة كلها في اتجاه متجه الأساس بتاعه، فمفيش حاجة من
+      الاتجاهات دي فضلت في الباقي. وده مهم لأن حدود $l$ العالية المرمية متعامدة على المحتفظ بيها:
+      البتر مش ممكن يفسد الحدود اللي سيبتها، هو بس بيحذف اللي اترمى — وده اللي بيخليه تقريب محكوم.

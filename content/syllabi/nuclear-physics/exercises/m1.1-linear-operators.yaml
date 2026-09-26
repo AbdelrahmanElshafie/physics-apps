@@ -26,7 +26,7 @@ exercises:
     kind: truefalse
     prompt: True or false — the rule $\hat{A}f = f^2$ is a linear operator.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Test it on a sum. }
+    explain: { required: true, hint: "Test it on a sum." }
     solution: >-
       FALSE. $(f+g)^2 = f^2 + 2fg + g^2 \neq f^2 + g^2$. The cross term is exactly the failure of
       linearity.
@@ -37,7 +37,7 @@ exercises:
     kind: truefalse
     prompt: True or false — the rule $\hat{A}f = f + 1$ is a linear operator.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Check scaling as well as addition. }
+    explain: { required: true, hint: "Check scaling as well as addition." }
     solution: >-
       FALSE. It fails scaling: $\hat{A}(cf) = cf + 1$, but $c\hat{A}f = cf + c$. It also sends the
       zero function to 1, and a linear operator must map zero to zero.
@@ -170,7 +170,7 @@ exercises:
     prompt: >-
       True or false — $\left(\hat{A}\hat{B}\right)^{\dagger} = \hat{A}^{\dagger}\hat{B}^{\dagger}$.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Compare with transposing a matrix product. }
+    explain: { required: true, hint: "Compare with transposing a matrix product." }
     solution: >-
       FALSE. The order reverses: $(\hat{A}\hat{B})^{\dagger} =
       \hat{B}^{\dagger}\hat{A}^{\dagger}$, exactly as for the transpose of a matrix product.

@@ -1,0 +1,264 @@
+# تمارين الوحدة 1.1 — ترميز ديراك (النسخة العربية).
+#
+# الـ id والـ check مطابقين للنسخة الإنجليزية بالظبط. التقدّم متسجّل بالـ id.
+
+schemaVersion: 1
+topic: m1.1-dirac-notation-bra-ket
+intro: >-
+  تمنتاشر سؤال. المجموعة B هي الأهم — التفرقة بين «عدد» و«مؤثر» هي اللي كل الباقي قايم عليها.
+
+exercises:
+  # ---- المجموعة A: قراءة الترميز ----
+  - id: d1
+    set: A
+    label: س1
+    kind: text
+    prompt: بكلامك إنت، إيه الفرق بين $\ket{\psi}$ و $\bra{\psi}$؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $\ket{\psi}$ هو متجه الحالة — عمود في أي أساس تختاره. و $\bra{\psi}$ هو المرافق بتاعه:
+      منقول ومأخود مرافقه، يعني صف. المرافق ساكن في الـ bra، وده اللي بيخلّي
+      $\braket{\psi}{\psi}$ يطلع حقيقي وموجب.
+
+  - id: d2
+    set: A
+    label: س2
+    kind: latex
+    prompt: >-
+      للـ $\ket{\psi} = \begin{pmatrix} 2 \\ 3i \end{pmatrix}$، اكتب $\bra{\psi}$ كصف.
+    scaffold: \begin{pmatrix} & \end{pmatrix}
+    check:
+      type: latex-equivalent
+      value: \begin{pmatrix} 2 & -3i \end{pmatrix}
+      accept:
+        - '(2, -3i)'
+        - '\begin{pmatrix}2 & -3i\end{pmatrix}'
+        - '\begin{bmatrix}2 & -3i\end{bmatrix}'
+    solution: >-
+      $\bra{\psi} = \begin{pmatrix} 2 & -3i \end{pmatrix}$. انقله لصف وخد مرافق كل عنصر: $2$
+      حقيقي فمتغيرش، و $3i$ بقت $-3i$.
+
+  - id: d3
+    set: A
+    label: س3
+    kind: numeric
+    prompt: >-
+      لنفس $\ket{\psi} = \begin{pmatrix} 2 \\ 3i \end{pmatrix}$، احسب $\braket{\psi}{\psi}$.
+    check: { type: numeric, value: 13 }
+    explain: { required: true, hint: "وضّح خطوة المرافق." }
+    solution: >-
+      $\braket{\psi}{\psi} = (2)^{*}(2) + (3i)^{*}(3i) = 4 + (-3i)(3i) = 4 + 9 = 13$. حقيقي وموجب،
+      زي ما لازم يبقى أي مربع طول.
+
+  - id: d4
+    set: A
+    label: س4
+    kind: latex
+    prompt: لو $\braket{\phi}{\psi} = 2 - 5i$، يبقى $\braket{\psi}{\phi}$ تساوي كام؟
+    check:
+      type: latex-equivalent
+      value: 2+5i
+      accept: ['2 + 5i', '(2+5i)']
+    solution: $2 + 5i$ — تبديل الترتيب بياخد مرافق القوس.
+
+  # ---- المجموعة B: عدد ولا مؤثر؟ ----
+  - id: d5
+    set: B
+    label: س5
+    kind: multichoice
+    prompt: $\braket{\phi}{\psi}$ ده نوعه إيه؟
+    choices:
+      - { id: number, label: عدد مركب }
+      - { id: operator, label: مؤثر }
+      - { id: ket, label: ket }
+      - { id: bra, label: bra }
+    check: { type: exact, value: number }
+    solution: عدد مركب. صف مضروب في عمود بينكمش لكمية قياسية واحدة.
+
+  - id: d6
+    set: B
+    label: س6
+    kind: multichoice
+    prompt: $\ket{\psi}\bra{\phi}$ ده نوعه إيه؟
+    choices:
+      - { id: number, label: عدد مركب }
+      - { id: operator, label: مؤثر }
+      - { id: ket, label: ket }
+      - { id: bra, label: bra }
+    check: { type: exact, value: operator }
+    explain: { required: true, hint: "عمود مضروب في صف شكله إيه؟" }
+    solution: >-
+      مؤثر. عمود في صف بيدّي مصفوفة — بتاكل ket وترجّع ket. دي التفرقة اللي الترميز كله متبني
+      حواليها.
+
+  - id: d7
+    set: B
+    label: س7
+    kind: multichoice
+    prompt: $\hat{A}\ket{\psi}$ ده نوعه إيه؟
+    choices:
+      - { id: number, label: عدد مركب }
+      - { id: operator, label: مؤثر }
+      - { id: ket, label: ket }
+      - { id: bra, label: bra }
+    check: { type: exact, value: ket }
+    solution: ket. المؤثر بيحوّل حالات لحالات.
+
+  - id: d8
+    set: B
+    label: س8
+    kind: text
+    prompt: >-
+      اشرح، من غير ما تستخدم مصفوفات، ليه $\braket{\phi}{\psi}$ و $\ket{\psi}\bra{\phi}$ نوعين
+      مختلفين رغم إنهم مبنيين من نفس الحالتين.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      الترتيب بيحدّد مين بيتقلّص مع مين. في $\braket{\phi}{\psi}$ الـ bra بيواجه الـ ket، فالمتجهين
+      بيتقابلوا وبينكمشوا لعدد واحد. أما في $\ket{\psi}\bra{\phi}$ فالأطراف المفتوحة برّه: الـ ket
+      مستني على الشمال والـ bra على اليمين، فالحاجة دي لسه محتاجة حالة تتحط فيها — يعني مؤثر.
+
+  # ---- المجموعة C: الإسقاط ----
+  - id: d9
+    set: C
+    label: س9
+    kind: latex
+    prompt: بسّط $\ket{e}\bra{e}\,\ket{\psi}$ بإعادة تجميع الرموز.
+    check:
+      type: latex-equivalent
+      value: \braket{e}{\psi}\ket{e}
+      accept:
+        - '\ket{e}\braket{e}{\psi}'
+        - '\langle e \vert \psi \rangle \lvert e \rangle'
+        - '\lvert e \rangle \langle e \vert \psi \rangle'
+    solution: >-
+      $\ket{e}\braket{e}{\psi}$ — الـ bra والـ ket اللي في النص بيكوّنوا قوس، وده عدد، فالناتج هو
+      العدد ده مضروب في $\ket{e}$.
+
+  - id: d10
+    set: C
+    label: س10
+    kind: text
+    prompt: المؤثر $\hat{P} = \ket{e}\bra{e}$ بيعمل إيه في الحالة، بكلام بسيط؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      بيعمل إسقاط: بيرمي كل حاجة ما عدا الجزء من الحالة اللي بيشاور ناحية $\ket{e}$. الناتج دايمًا
+      بيشاور ناحية $\ket{e}$، مضروب في التداخل $\braket{e}{\psi}$.
+
+  - id: d11
+    set: C
+    label: س11
+    kind: truefalse
+    prompt: >-
+      صح ولا غلط — تطبيق مؤثر الإسقاط مرتين بيعمل حاجة مختلفة عن مرة واحدة، يعني
+      $\hat{P}^2 \neq \hat{P}$.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: "استخدم التعامد والتجانس على القوس اللي في النص." }
+    solution: >-
+      غلط. $\hat{P}^2 = \ket{e}\braket{e}{e}\bra{e} = \ket{e}\bra{e} = \hat{P}$، باستخدام
+      $\braket{e}{e} = 1$. أول ما تسقط، الإسقاط تاني مش بيغيّر حاجة — وده بالظبط اللي «الإسقاط»
+      المفروض يعنيه.
+
+  # ---- المجموعة D: الاكتمال ----
+  - id: d12
+    set: D
+    label: س12
+    kind: latex
+    prompt: اكتب علاقة الاكتمال لأساس متعامد متجانس $\{\ket{e_n}\}$.
+    check:
+      type: latex-equivalent
+      value: \sum_n \ket{e_n}\bra{e_n} = \mathbb{1}
+      accept:
+        - '\sum_n \lvert e_n \rangle \langle e_n \rvert = 1'
+        - '\sum_n \ket{e_n}\bra{e_n} = 1'
+        - '\sum_n \ket{e_n}\bra{e_n} = I'
+    solution: >-
+      $\sum_n \ket{e_n}\bra{e_n} = \mathbb{1}$ — مجموع مؤثرات الإسقاط على أساس كامل بيدّي الوحدة.
+
+  - id: d13
+    set: D
+    label: س13
+    kind: text
+    prompt: >-
+      دخّل الوحدة في $\braket{\phi}{\psi}$ واكتب اللي هيطلع كمجموع. وضّح خطوة إعادة التجميع.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $\braket{\phi}{\psi} = \bra{\phi}\left(\sum_n \ket{e_n}\bra{e_n}\right)\ket{\psi} = \sum_n
+      \braket{\phi}{e_n}\braket{e_n}{\psi}$. التداخل بقى مجموع على الأساس من حواصل ضرب عددين
+      عاديين.
+
+  - id: d14
+    set: D
+    label: س14
+    kind: text
+    prompt: ليه إدخال الوحدة مسموح دايمًا، وليه هو مفيد مش بس صحيح؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      مسموح لأن مؤثر الوحدة مش بيغيّر حاجة، فتقدر تحطه في أي مكان. ومفيد لأنه بيحوّل كمية مش قادر
+      تحسبها على طول لمجموع كميات تقدر تحسبها — دي طريقة تغيير الأساس، وبيها بتظهر المجاميع على
+      الحالات الوسيطة في نظرية التشتت.
+
+  # ---- المجموعة E: الحالات مقابل التمثيلات ----
+  - id: d15
+    set: E
+    label: س15
+    kind: text
+    prompt: إيه هي $\braket{x}{\psi}$، وإيه الفرق بينها وبين $\ket{\psi}$؟
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      $\braket{x}{\psi} = \psi(x)$ هي الدالة الموجية: مركبة الحالة في أساس الموضع. أما
+      $\ket{\psi}$ فهي الحالة نفسها، مستقلة عن أي أساس. تغيير الأساس بيغيّر كل رقم في $\psi(x)$
+      وبيسيب $\ket{\psi}$ زي ما هي بالظبط.
+
+  - id: d16
+    set: E
+    label: س16
+    kind: latex
+    prompt: >-
+      اكتب تمدد $\ket{\psi}$ في أساس متعامد متجانس، والمعاملات مكتوبة كأقواس.
+    check:
+      type: latex-equivalent
+      value: \ket{\psi} = \sum_n \braket{e_n}{\psi} \ket{e_n}
+      accept:
+        - '\ket{\psi} = \sum_n \ket{e_n} \braket{e_n}{\psi}'
+        - '\lvert \psi \rangle = \sum_n \langle e_n \vert \psi \rangle \lvert e_n \rangle'
+    solution: >-
+      $\ket{\psi} = \sum_n \braket{e_n}{\psi}\ket{e_n}$. دي مجرد الاكتمال مطبّقة على
+      $\ket{\psi}$، وعشان كده الجملتين في الحقيقة جملة واحدة.
+
+  # ---- المجموعة F: المؤثرات ----
+  - id: d17
+    set: F
+    label: س17
+    kind: latex
+    prompt: >-
+      اكتب عنصر المصفوفة لمؤثر $\hat{A}$ بين حالتي الأساس $\ket{e_m}$ و $\ket{e_n}$.
+    check:
+      type: latex-equivalent
+      value: \braoket{e_m}{\hat{A}}{e_n}
+      accept:
+        - 'A_{mn} = \braoket{e_m}{\hat{A}}{e_n}'
+        - '\langle e_m \vert \hat{A} \vert e_n \rangle'
+        - '\bra{e_m}\hat{A}\ket{e_n}'
+    solution: >-
+      $A_{mn} = \braoket{e_m}{\hat{A}}{e_n}$. الأرقام دي مجمّعة على كل $m$ و $n$ هي مصفوفة المؤثر
+      في الأساس ده.
+
+  - id: d18
+    set: F
+    label: س18
+    kind: text
+    prompt: >-
+      القيمة المتوقعة هي $\braoket{\psi}{\hat{A}}{\psi}$. اقرا التعبير ده بصوت عالي بالكلمات، وقول
+      معناه الفيزيائي.
+    explain: { required: true }
+    check: { type: tutor }
+    solution: >-
+      «برا psi، A، كيت psi» — المؤثر $\hat{A}$ بيشتغل على الحالة $\ket{\psi}$، والناتج بيتعمل له
+      تداخل تاني مع $\bra{\psi}$. فيزيائيًا هو متوسط قيمة الكمية $A$ على قياسات كتير لأنظمة
+      متحضّرة بنفس الطريقة في الحالة $\ket{\psi}$.

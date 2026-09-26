@@ -8,7 +8,18 @@
  * miserable. Exits non-zero on error so it can gate CI later.
  */
 
-import { findGraphIssues, parseTopicId, type TopicId } from '../src/core/domain'
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { parse as parseYaml } from 'yaml'
+
+import {
+  LOCALES,
+  DEFAULT_LOCALE,
+  findGraphIssues,
+  localeSuffix,
+  parseTopicId,
+  type TopicId,
+} from '../src/core/domain'
 import { FileSystemContentRepository } from '../src/adapters/content/fs-mdx'
 
 const red = (s: string) => `\x1b[31m${s}\x1b[0m`
@@ -78,6 +89,9 @@ async function main(): Promise<void> {
     }
   }
 
+  // Translations must agree with the English original on ids, kinds and checks.
+  await checkLocaleParity()
+
   // Check the lesson file naming matches what the repository will look for.
   for (const [topicId] of allTopics) {
     const { local } = parseTopicId(topicId)
@@ -101,6 +115,87 @@ async function main(): Promise<void> {
   } else {
     console.log(green(`\nContent is valid.${warnings.length > 0 ? ` (${warnings.length} warning(s))` : ''}\n`))
   }
+}
+
+/**
+ * Translations must keep the same exercise ids, kinds and checks as the English original.
+ *
+ * Progress is recorded against the id, so a renamed one would hide an answer already submitted in
+ * the other language. A differing `check` is worse: the same question would be marked correct in
+ * one language and wrong in the other.
+ */
+async function checkLocaleParity(): Promise<void> {
+  const root = path.join(process.cwd(), 'content', 'syllabi')
+
+  let syllabusDirs: string[]
+  try {
+    syllabusDirs = (await fs.readdir(root, { withFileTypes: true }))
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name)
+  } catch {
+    return
+  }
+
+  for (const syllabus of syllabusDirs) {
+    const exercisesDir = path.join(root, syllabus, 'exercises')
+    let names: string[]
+    try {
+      names = await fs.readdir(exercisesDir)
+    } catch {
+      continue
+    }
+
+    const englishFiles = names.filter(
+      (n) => n.endsWith('.yaml') && !LOCALES.some((l) => l !== DEFAULT_LOCALE && n.endsWith(`${localeSuffix(l)}.yaml`)),
+    )
+
+    for (const englishName of englishFiles) {
+      const english = parseExercises(await fs.readFile(path.join(exercisesDir, englishName), 'utf8'))
+
+      for (const locale of LOCALES) {
+        if (locale === DEFAULT_LOCALE) continue
+
+        const translatedName = englishName.replace(/\.yaml$/, `${localeSuffix(locale)}.yaml`)
+        let raw: string
+        try {
+          raw = await fs.readFile(path.join(exercisesDir, translatedName), 'utf8')
+        } catch {
+          continue // No translation is fine; it falls back to English.
+        }
+
+        const translated = parseExercises(raw)
+        const stem = englishName.replace(/\.yaml$/, '')
+
+        for (const id of Object.keys(english)) {
+          if (!(id in translated)) {
+            errors.push(`${stem} [${locale}]: missing exercise "${id}".`)
+            continue
+          }
+          if (JSON.stringify(english[id]!.check) !== JSON.stringify(translated[id]!.check)) {
+            errors.push(
+              `${stem} [${locale}]: exercise "${id}" has a different check than the English version.`,
+            )
+          }
+          if (english[id]!.kind !== translated[id]!.kind) {
+            errors.push(`${stem} [${locale}]: exercise "${id}" has a different kind.`)
+          }
+        }
+
+        for (const id of Object.keys(translated)) {
+          if (!(id in english)) {
+            errors.push(`${stem} [${locale}]: exercise "${id}" does not exist in English.`)
+          }
+        }
+      }
+    }
+  }
+}
+
+function parseExercises(raw: string): Record<string, { check: unknown; kind: unknown }> {
+  const parsed = parseYaml(raw) as { exercises?: { id: string; check: unknown; kind: unknown }[] }
+  return Object.fromEntries(
+    (parsed.exercises ?? []).map((e) => [e.id, { check: e.check, kind: e.kind }]),
+  )
 }
 
 main().catch((error: unknown) => {

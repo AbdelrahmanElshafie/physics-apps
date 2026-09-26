@@ -123,8 +123,13 @@ Content is per-locale sibling files: `m1.1-hilbert-spaces.ar.mdx` next to the En
 for `.ar.yaml` exercises. **Adding a translation is adding a file.** A missing one falls back to
 English and the page says so — never a blank.
 
-Keep exercise `id` and `check` identical across locales. Progress is recorded against the id, so
-renaming one would hide an answer already submitted in the other language.
+Keep exercise `id`, `kind` and `check` identical across locales — `pnpm validate:content` enforces
+this and fails the run otherwise. Progress is recorded against the id, so a renamed one would hide
+an answer already submitted in the other language, and a differing `check` would mark the same
+question correct in one language and wrong in the other.
+
+Quote `hint:` values that sit inside a flow mapping (`{ required: true, hint: "..." }`). An
+unquoted `?` or `:` there is ambiguous YAML: the JS parser tolerates it, other parsers do not.
 
 Resolution order: `?lang=` in the URL (the per-page override, and shareable) beats the `pi_locale`
 cookie (the global setting, written by the store). Interface strings live in `src/lib/i18n.ts`,

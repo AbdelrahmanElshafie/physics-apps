@@ -53,7 +53,7 @@ exercises:
     label: Q3
     kind: text
     prompt: A vector in $\mathbb{C}^3$ has how many complex numbers? Give an example.
-    explain: { required: true, hint: State the count, then write one out. }
+    explain: { required: true, hint: "State the count, then write one out." }
     check: { type: tutor }
     solution: >-
       Three. For example the column with entries $3 + 2i$, $1 - i$ and $4i$.
@@ -104,7 +104,7 @@ exercises:
     kind: truefalse
     prompt: True or false — the vector $(3, 2, 1)$ belongs to $\mathbb{R}^2$.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Count the components. }
+    explain: { required: true, hint: "Count the components." }
     solution: FALSE — it has three components, and $\mathbb{R}^2$ requires exactly two.
 
   - id: q7b
@@ -143,7 +143,7 @@ exercises:
     label: Q9
     kind: text
     prompt: I take any two vectors from $\mathbb{R}^2$ and add them. Will the result always be in $\mathbb{R}^2$?
-    explain: { required: true, hint: There is a name for this property. }
+    explain: { required: true, hint: "There is a name for this property." }
     check: { type: tutor }
     solution: >-
       Yes. Adding two pairs of real numbers gives another pair of real numbers, so the result
@@ -269,7 +269,7 @@ exercises:
     kind: numeric
     prompt: The vector $(-3, 0)$ — what is its length?
     check: { type: numeric, value: 3 }
-    explain: { required: true, hint: Also say which way it points. }
+    explain: { required: true, hint: "Also say which way it points." }
     solution: >-
       Length 3, pointing left. Length is $\sqrt{(-3)^2 + 0^2} = 3$ — magnitude is never negative.
 

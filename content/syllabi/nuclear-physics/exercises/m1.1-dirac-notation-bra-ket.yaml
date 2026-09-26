@@ -50,7 +50,7 @@ exercises:
       For that same $\ket{\psi} = \begin{pmatrix} 2 \\ 3i \end{pmatrix}$, compute
       $\braket{\psi}{\psi}$.
     check: { type: numeric, value: 13 }
-    explain: { required: true, hint: Show the conjugation. }
+    explain: { required: true, hint: "Show the conjugation." }
     solution: >-
       $\braket{\psi}{\psi} = (2)^{*}(2) + (3i)^{*}(3i) = 4 + (-3i)(3i) = 4 + 9 = 13$. Real and
       positive, as a squared length must be.
@@ -91,7 +91,7 @@ exercises:
       - { id: ket, label: A ket }
       - { id: bra, label: A bra }
     check: { type: exact, value: operator }
-    explain: { required: true, hint: What shape is column times row? }
+    explain: { required: true, hint: "What shape is column times row?" }
     solution: >-
       An operator. A column times a row is a matrix — it eats a ket and returns a ket. This is the
       distinction the whole notation is built around.
@@ -162,7 +162,7 @@ exercises:
       True or false — applying a projector twice does something different from applying it once,
       that is $\hat{P}^2 \neq \hat{P}$.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Use orthonormality on the middle bracket. }
+    explain: { required: true, hint: "Use orthonormality on the middle bracket." }
     solution: >-
       FALSE. $\hat{P}^2 = \ket{e}\braket{e}{e}\bra{e} = \ket{e}\bra{e} = \hat{P}$, using
       $\braket{e}{e} = 1$. Once you have projected, projecting again changes nothing — which is

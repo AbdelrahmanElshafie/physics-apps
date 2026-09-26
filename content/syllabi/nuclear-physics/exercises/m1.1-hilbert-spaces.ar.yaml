@@ -119,7 +119,7 @@ exercises:
     kind: truefalse
     prompt: صح ولا غلط — $(1, 2)$ و $(2, 4)$ متعامدين.
     check: { type: exact, value: false }
-    explain: { required: true, hint: طب علاقتهم إيه بقى؟ }
+    explain: { required: true, hint: "طب علاقتهم إيه بقى؟" }
     solution: >-
       غلط. $(1)(2) + (2)(4) = 10 \neq 0$. بالعكس، $(2,4) = 2(1,2)$، يعني معتمدين خطيًا — الطرف
       المقابل تمامًا للتعامد. التوازي معناه أقصى تداخل ممكن.
@@ -141,7 +141,7 @@ exercises:
     prompt: >-
       صح ولا غلط — المجموعة $\{(1, 0),\; (1, 1)\}$ أساس متعامد متجانس لـ $\mathbb{R}^2$.
     check: { type: exact, value: false }
-    explain: { required: true, hint: راجع الشرطين كل واحد لوحده. }
+    explain: { required: true, hint: "راجع الشرطين كل واحد لوحده." }
     solution: >-
       غلط. هي أساس كويس فعلًا، بس مش متعامد متجانس: بتفشل في الشرطين. $(1,0) \cdot (1,1) = 1 \neq 0$
       يعني مش متعامدين، و $\lVert (1,1) \rVert = \sqrt{2} \neq 1$ يعني التاني مش مطبّع.
@@ -175,7 +175,7 @@ exercises:
       لسه مع $v = (5, 0)$ و $c_1 = 3$ و $c_2 = -4$ — احسب $c_1^2 + c_2^2$ وقارنه بـ
       $\lVert v \rVert^2$.
     check: { type: numeric, value: 25 }
-    explain: { required: true, hint: هما متساويين. ليه لازم يبقوا كده؟ }
+    explain: { required: true, hint: "هما متساويين. ليه لازم يبقوا كده؟" }
     solution: >-
       $9 + 16 = 25$، و $\lVert v \rVert^2 = 25$ برضه. دي متطابقة بارسيفال (Parseval): في أساس
       متعامد متجانس مربع الطول هو مجموع مربعات المعاملات. وفيزيائيًا ده سبب إن الاحتمالات على كل
@@ -202,7 +202,7 @@ exercises:
     kind: truefalse
     prompt: صح ولا غلط — مجموعة الأعداد النسبية مكتملة.
     check: { type: exact, value: false }
-    explain: { required: true, hint: فكّر في متتالية نسبية بتقرب من عدد أصم. }
+    explain: { required: true, hint: "فكّر في متتالية نسبية بتقرب من عدد أصم." }
     solution: >-
       غلط. المتتالية $1,\; 1.4,\; 1.41,\; 1.414,\; \ldots$ متتالية كوشي — حدودها بتقرب من بعض لأي
       درجة — بس نهايتها $\sqrt{2}$ عدد أصم، يعني بتتقارب لنقطة بره المجموعة. الأعداد النسبية فيها
@@ -241,7 +241,7 @@ exercises:
       لحالتين مطبّعتين، إيه أكبر قيمة ممكنة لـ
       $\lvert \langle \phi \vert \psi \rangle \rvert$؟
     check: { type: numeric, value: 1 }
-    explain: { required: true, hint: استخدم كوشي-شفارتز. }
+    explain: { required: true, hint: "استخدم كوشي-شفارتز." }
     solution: >-
       $1$. كوشي-شفارتز بتدّي $\lvert\langle \phi \vert \psi \rangle\rvert \leq \lVert \phi
       \rVert \lVert \psi \rVert = 1 \cdot 1 = 1$. والحد ده بالظبط هو اللي بيخلّي

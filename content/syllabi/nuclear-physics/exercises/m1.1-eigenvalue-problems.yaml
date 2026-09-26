@@ -20,7 +20,7 @@ exercises:
       True or false — $(1, 1)$ is an eigenvector of
       $\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.
     check: { type: exact, value: true }
-    explain: { required: true, hint: Apply the matrix and compare with the original. }
+    explain: { required: true, hint: "Apply the matrix and compare with the original." }
     solution: >-
       TRUE. $\sigma_x(1,1) = (1,1)$, which is $1 \times (1,1)$ — the same direction, rescaled by
       $\lambda = 1$.
@@ -69,7 +69,7 @@ exercises:
     check:
       type: symbolic
       value: (2-\lambda)^2 - 1
-    explain: { required: true, hint: Expand it if you like — either form is accepted. }
+    explain: { required: true, hint: "Expand it if you like — either form is accepted." }
     solution: >-
       $(2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3$. Subtract $\lambda$ from each diagonal entry,
       then take the determinant.
@@ -104,7 +104,7 @@ exercises:
       # Any non-zero multiple is the same eigenvector, and the prompt says so.
       type: parallel
       value: [1, 1]
-    explain: { required: true, hint: Substitute and solve the resulting row. }
+    explain: { required: true, hint: "Substitute and solve the resulting row." }
     solution: >-
       Substituting gives $\begin{pmatrix} -1 & 1 \\ 1 & -1 \end{pmatrix}v = 0$, so $v_2 = v_1$ and
       $(1,1)$ works. Any multiple of it is equally valid.
@@ -158,7 +158,7 @@ exercises:
     prompt: >-
       True or false — a real matrix always has real eigenvalues.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Think about a rotation. }
+    explain: { required: true, hint: "Think about a rotation." }
     solution: >-
       FALSE. The rotation $\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$ has characteristic
       polynomial $\lambda^2 + 1$, so $\lambda = \pm i$. It rotates every direction, so no real

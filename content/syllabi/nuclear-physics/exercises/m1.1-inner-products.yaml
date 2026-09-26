@@ -19,7 +19,7 @@ exercises:
     prompt: >-
       With $f(x) = 1$ and $g(x) = x$ on $[-1, 1]$ and weight 1, compute $\braket{f}{g}$.
     check: { type: numeric, value: 0 }
-    explain: { required: true, hint: You should not need to integrate. }
+    explain: { required: true, hint: "You should not need to integrate." }
     solution: >-
       Zero. The integrand $x$ is odd and the interval is symmetric about the origin, so the two
       halves cancel. The constant function and $x$ are orthogonal on $[-1,1]$.
@@ -61,7 +61,7 @@ exercises:
       True or false — if two functions are orthogonal on $[-1, 1]$, they are orthogonal on
       $[0, 1]$ as well.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Try the pair from Q1. }
+    explain: { required: true, hint: "Try the pair from Q1." }
     solution: >-
       FALSE. Orthogonality depends on the interval. $1$ and $x$ are orthogonal on $[-1,1]$, but on
       $[0,1]$ the inner product is $\int_0^1 x \, dx = \tfrac{1}{2} \neq 0$. Changing the interval
@@ -210,7 +210,7 @@ exercises:
     check:
       type: symbolic
       value: x^2 - \frac{1}{3}
-    explain: { required: true, hint: Which standard polynomial is this proportional to? }
+    explain: { required: true, hint: "Which standard polynomial is this proportional to?" }
     solution: >-
       $u_3 = x^2 - \tfrac{1}{3}$. Since $P_2(x) = \tfrac{1}{2}(3x^2-1) = \tfrac{3}{2}(x^2 -
       \tfrac{1}{3})$, this is the second Legendre polynomial up to a constant — orthogonalising the

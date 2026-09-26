@@ -98,7 +98,7 @@ exercises:
     check:
       type: latex-equivalent
       value: 3+2i
-      accept: ['3 + 2i', '3+2\i', '(3+2i)']
+      accept: ['3 + 2i', '(3+2i)']
     solution: >-
       $3 + 2i$. Conjugate symmetry says
       $\langle v \vert u \rangle = \langle u \vert v \rangle^{*}$ — swapping the order conjugates
@@ -120,7 +120,7 @@ exercises:
     kind: truefalse
     prompt: True or false — $(1, 2)$ and $(2, 4)$ are orthogonal.
     check: { type: exact, value: false }
-    explain: { required: true, hint: What is their relationship instead? }
+    explain: { required: true, hint: "What is their relationship instead?" }
     solution: >-
       FALSE. $(1)(2) + (2)(4) = 10 \neq 0$. In fact $(2,4) = 2(1,2)$, so they are linearly
       dependent — the opposite extreme from orthogonal. Parallel means maximum overlap.
@@ -142,7 +142,7 @@ exercises:
     prompt: >-
       True or false — the set $\{(1, 0),\; (1, 1)\}$ is an orthonormal basis for $\mathbb{R}^2$.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Check both conditions separately. }
+    explain: { required: true, hint: "Check both conditions separately." }
     solution: >-
       FALSE. It is a perfectly good basis, but not an orthonormal one: it fails both conditions.
       $(1,0) \cdot (1,1) = 1 \neq 0$, so they are not orthogonal, and
@@ -177,7 +177,7 @@ exercises:
       Still with $v = (5, 0)$ and $c_1 = 3$, $c_2 = -4$ — compute $c_1^2 + c_2^2$. Compare it with
       $\lVert v \rVert^2$.
     check: { type: numeric, value: 25 }
-    explain: { required: true, hint: They are equal. Why must they be? }
+    explain: { required: true, hint: "They are equal. Why must they be?" }
     solution: >-
       $9 + 16 = 25$, and $\lVert v \rVert^2 = 25$ too. This is Parseval's identity: in an
       orthonormal basis the squared length is the sum of the squared coefficients. Physically it
@@ -205,7 +205,7 @@ exercises:
     kind: truefalse
     prompt: True or false — the set of rational numbers is complete.
     check: { type: exact, value: false }
-    explain: { required: true, hint: Think of a sequence of rationals approaching an irrational. }
+    explain: { required: true, hint: "Think of a sequence of rationals approaching an irrational." }
     solution: >-
       FALSE. The sequence $1,\; 1.4,\; 1.41,\; 1.414,\; \ldots$ is Cauchy — its terms crowd
       arbitrarily close together — but its limit $\sqrt{2}$ is irrational, so it converges to a
@@ -246,7 +246,7 @@ exercises:
       For two normalised states, what is the largest possible value of
       $\lvert \langle \phi \vert \psi \rangle \rvert$?
     check: { type: numeric, value: 1 }
-    explain: { required: true, hint: Use Cauchy-Schwarz. }
+    explain: { required: true, hint: "Use Cauchy-Schwarz." }
     solution: >-
       $1$. Cauchy-Schwarz gives $\lvert\langle \phi \vert \psi \rangle\rvert \leq \lVert \phi
       \rVert \lVert \psi \rVert = 1 \cdot 1 = 1$. This bound is exactly what lets

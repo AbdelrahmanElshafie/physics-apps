@@ -131,7 +131,7 @@ exercises:
     check:
       type: numeric-matrix
       value: [[0, 1], [-1, 0]]
-    explain: { required: true, hint: Compare with your answer to Q9. }
+    explain: { required: true, hint: "Compare with your answer to Q9." }
     solution: >-
       $\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$, which is minus the previous answer. These
       two operators *anticommute*: $\sigma_x\sigma_z = -\sigma_z\sigma_x$, so their commutator is
@@ -191,7 +191,7 @@ exercises:
       In the basis $\{\ket{+}, \ket{-}\}$ the same operator is
       $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$. What is its trace now?
     check: { type: numeric, value: 0 }
-    explain: { required: true, hint: Compare with Q14 and say why. }
+    explain: { required: true, hint: "Compare with Q14 and say why." }
     solution: >-
       $1 + (-1) = 0$, the same as before. The trace is invariant under a change of basis, so it is
       a property of the operator rather than of the way you wrote it down.
