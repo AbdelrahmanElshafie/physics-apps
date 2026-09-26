@@ -3,7 +3,13 @@ import path from 'node:path'
 import { parse as parseYaml } from 'yaml'
 import { describe, expect, it } from 'vitest'
 
-import { currentFromCharge, electronCount } from '@core/domain'
+import {
+  currentFromCharge,
+  electronCount,
+  potentialDifference,
+  potentialDifferenceBetweenPoints,
+  workFromChargeAndVoltage,
+} from '@core/domain'
 
 /**
  * A number the lesson prints is a number a test checks — same discipline as physics-instructor's
@@ -14,6 +20,16 @@ import { currentFromCharge, electronCount } from '@core/domain'
 
 const CONTENT = path.join(process.cwd(), 'content', 'syllabi', 'electricity')
 const TOPIC = 'current-and-charge'
+const TOPIC2 = 'potential-difference'
+
+/** Reads one topic's exercise file, keyed by exercise id. */
+function readExercises(topic: string) {
+  const raw = fs.readFileSync(path.join(CONTENT, 'exercises', `${topic}.yaml`), 'utf8')
+  const parsed = parseYaml(raw) as {
+    exercises: { id: string; check: { type: string; value?: unknown; tolerance?: number } }[]
+  }
+  return new Map(parsed.exercises.map((e) => [e.id, e.check]))
+}
 
 describe('electricity formulas', () => {
   it('reproduces the textbook worked example: I = 20 A, t = 2 s gives N = 2.5e20', () => {
@@ -43,11 +59,7 @@ describe('the lesson quotes what the formulas give', () => {
 })
 
 describe('the exercise answers are the values the formulas give', () => {
-  const raw = fs.readFileSync(path.join(CONTENT, 'exercises', `${TOPIC}.yaml`), 'utf8')
-  const parsed = parseYaml(raw) as {
-    exercises: { id: string; check: { type: string; value?: unknown; tolerance?: number } }[]
-  }
-  const checks = new Map(parsed.exercises.map((e) => [e.id, e.check]))
+  const checks = readExercises(TOPIC)
 
   const expected: Record<string, number> = {
     cc1: currentFromCharge(6, 3),
@@ -56,6 +68,73 @@ describe('the exercise answers are the values the formulas give', () => {
     cc4: electronCount(20 * 2),
     cc5: electronCount(3.2),
     cc6: currentFromCharge(1.25e19 * 1.6e-19, 2),
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('potential-difference formulas', () => {
+  it('V = W/Q and its inverse W = QV round-trip', () => {
+    expect(potentialDifference(100, 20)).toBeCloseTo(5, 6)
+    expect(workFromChargeAndVoltage(4, 12)).toBe(48)
+    // Round-trip: the work implied by a voltage must give the same voltage back.
+    expect(potentialDifference(workFromChargeAndVoltage(4, 12), 4)).toBeCloseTo(12, 6)
+  })
+
+  it('V_AB = V_A - V_B, including the sign flip for a negative V_B', () => {
+    expect(potentialDifferenceBetweenPoints(20, -30)).toBe(50)
+    expect(potentialDifferenceBetweenPoints(5, -15)).toBe(20)
+  })
+
+  it('is invariant under shifting the reference point (adding the same constant to both)', () => {
+    const shift = 1000
+    const original = potentialDifferenceBetweenPoints(20, -30)
+    const shifted = potentialDifferenceBetweenPoints(20 + shift, -30 + shift)
+    expect(shifted).toBe(original)
+  })
+})
+
+describe('the second lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC2}.mdx`), 'utf8')
+
+  it('states the V = W/Q worked example (100 J / 20 C = 5 V)', () => {
+    expect(potentialDifference(100, 20)).toBe(5)
+    expect(mdx).toContain('frac{100\\ \\text{J}}{20\\ \\text{C}}')
+    expect(mdx).toContain('V = 5\\ \\text{V}')
+  })
+
+  it('states the V_AB worked example (20 - (-30) = 50 V)', () => {
+    expect(potentialDifferenceBetweenPoints(20, -30)).toBe(50)
+    expect(mdx).toContain('V_{AB} = 50\\ \\text{V}')
+  })
+
+  it('states the W = QV worked example (4 x 12 = 48 J)', () => {
+    expect(workFromChargeAndVoltage(4, 12)).toBe(48)
+    expect(mdx).toContain('W = 48\\ \\text{J}')
+  })
+})
+
+describe('the second lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC2)
+
+  const expected: Record<string, number> = {
+    pd1: potentialDifference(100, 20),
+    pd2: workFromChargeAndVoltage(4, 12),
+    pd3: workFromChargeAndVoltage(0.5, 220),
+    pd4: potentialDifferenceBetweenPoints(20, -30),
+    pd5: potentialDifferenceBetweenPoints(5, -15),
   }
 
   it('every numeric answer is within its own stated tolerance', () => {

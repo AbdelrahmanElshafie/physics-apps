@@ -23,6 +23,16 @@ export function potentialDifference(workJoules: number, chargeCoulombs: number):
   return workJoules / chargeCoulombs
 }
 
+/** W = QV — work done moving a charge through a potential difference (V's own inverse). */
+export function workFromChargeAndVoltage(chargeCoulombs: number, volts: number): number {
+  return chargeCoulombs * volts
+}
+
+/** The potential difference between two points, each given as an absolute potential: V_AB = V_A - V_B. */
+export function potentialDifferenceBetweenPoints(vA: number, vB: number): number {
+  return vA - vB
+}
+
 /** Ohm's law: R = V / I. */
 export function resistanceFromOhmsLaw(volts: number, amps: number): number {
   return volts / amps

@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 
 import {
   COMPONENT_KINDS,
+  computeLanes,
   defaultComponent,
   pointsInUse,
   samePoint,
@@ -78,6 +79,11 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
   const result = useMemo(() => solveCircuit(toCircuit(components, ground)), [components, ground])
   const selected = components.find((c) => c.id === selectedId) ?? null
   const usedPoints = useMemo(() => pointsInUse(components), [components])
+
+  // A voltmeter across a resistor (or an ammeter alongside a wire) shares its exact two endpoints
+  // with another component — physically correct, but drawn as two overlapping lines and two
+  // overlapping labels unless each one is fanned out to its own lane.
+  const laneOf = useMemo(() => computeLanes(components), [components])
 
   const handlePointClick = (point: GridPoint) => {
     if (readOnly) return
@@ -218,6 +224,7 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
               key={c.id}
               component={c}
               selected={c.id === selectedId}
+              lane={laneOf.get(c.id) ?? 0}
               current={result.ok ? result.current.get(c.id) : undefined}
               voltage={result.ok ? result.voltage.get(c.id) : undefined}
               onSelect={() => !readOnly && setSelectedId(c.id)}
@@ -323,15 +330,21 @@ function GroundMark({ point }: { point: GridPoint }) {
   )
 }
 
+/** Pixels of perpendicular offset per whole lane — how far apart two components sharing an edge are fanned. */
+const LANE_SPACING = 24
+
 function ComponentGlyph({
   component,
   selected,
+  lane,
   current,
   voltage,
   onSelect,
 }: {
   component: PlacedComponent
   selected: boolean
+  /** 0 for the common case (this edge belongs to only one component); ±0.5, ±1, ... when shared. */
+  lane: number
   current: number | undefined
   voltage: number | undefined
   onSelect: () => void
@@ -341,6 +354,26 @@ function ComponentGlyph({
   const mx = (pa.x + pb.x) / 2
   const my = (pa.y + pb.y) / 2
   const angle = (Math.atan2(pb.y - pa.y, pb.x - pa.x) * 180) / Math.PI
+
+  // Bow the connecting line out from the straight a-b line by `lane` lanes, via a quadratic
+  // Bezier — both endpoints stay exactly on their grid dots either way, only the middle moves.
+  // This is what keeps a voltmeter drawn across a resistor from sitting directly on top of it.
+  const length = Math.hypot(pb.x - pa.x, pb.y - pa.y) || 1
+  const perpX = (-(pb.y - pa.y) / length) * lane * LANE_SPACING
+  const perpY = ((pb.x - pa.x) / length) * lane * LANE_SPACING
+  const controlX = mx + perpX * 2
+  const controlY = my + perpY * 2
+  const curveMidX = mx + perpX
+  const curveMidY = my + perpY
+  const pathD = `M ${pa.x} ${pa.y} Q ${controlX} ${controlY} ${pb.x} ${pb.y}`
+
+  // The value label's default spot is straight above the line's own midpoint — true for every
+  // component that isn't sharing an edge, regardless of the line's orientation, and simpler than a
+  // perpendicular-normal calculation that would put a vertical component's label to one side
+  // instead. Only when an edge *is* shared (a voltmeter across a resistor) does the label need to
+  // follow that component's own bow outward, or the two labels land on top of each other.
+  const labelX = lane === 0 ? mx : curveMidX
+  const labelY = lane === 0 ? my - 16 : curveMidY + Math.sign(lane) * 14
 
   const strokeColour = selected
     ? 'var(--color-accent)'
@@ -353,19 +386,10 @@ function ComponentGlyph({
 
   return (
     <g onClick={onSelect} className="cursor-pointer">
-      <line x1={pa.x} y1={pa.y} x2={pb.x} y2={pb.y} stroke={strokeColour} strokeWidth={selected ? 3 : 2} />
+      <path d={pathD} fill="none" stroke={strokeColour} strokeWidth={selected ? 3 : 2} />
 
       {flowing && (
-        <line
-          x1={pa.x}
-          y1={pa.y}
-          x2={pb.x}
-          y2={pb.y}
-          stroke="var(--color-success)"
-          strokeWidth={2}
-          strokeDasharray="2 6"
-          opacity={0.85}
-        >
+        <path d={pathD} fill="none" stroke="var(--color-success)" strokeWidth={2} strokeDasharray="2 6" opacity={0.85}>
           <animate
             attributeName="stroke-dashoffset"
             // A negative current (a to b defined direction) means real current flows b to a —
@@ -376,10 +400,10 @@ function ComponentGlyph({
             dur={`${Math.max(0.2, 1.4 / Math.min(3, Math.max(0.15, magnitude!)))}s`}
             repeatCount="indefinite"
           />
-        </line>
+        </path>
       )}
 
-      <g transform={`translate(${mx}, ${my}) rotate(${angle})`}>
+      <g transform={`translate(${curveMidX}, ${curveMidY}) rotate(${angle})`}>
         <rect
           x={-16}
           y={-9}
@@ -404,8 +428,8 @@ function ComponentGlyph({
 
       {(magnitude !== undefined || voltage !== undefined) && (
         <text
-          x={mx}
-          y={my - 16}
+          x={labelX}
+          y={labelY}
           textAnchor="middle"
           fontSize={10}
           fontFamily="var(--font-mono)"

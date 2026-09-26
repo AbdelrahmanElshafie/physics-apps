@@ -96,3 +96,28 @@ export function pointsInUse(components: readonly PlacedComponent[]): GridPoint[]
   }
   return [...seen.values()]
 }
+
+/**
+ * A signed "lane" per component id: 0 for the ordinary case of an edge only one component uses,
+ * and evenly spaced fractional values (e.g. -0.5, 0.5 for a pair) when two or more components sit
+ * on the exact same pair of grid points — a voltmeter measuring across a resistor, most commonly.
+ *
+ * Drawing every component on this edge along a straight line through the shared endpoints is what
+ * causes one to sit invisibly on top of the other; the canvas uses this value to bow each one's
+ * line, and each one's value label, out to its own lane instead. Direction is not part of the key
+ * (a-b and b-a are the same edge), since sharing electrical endpoints is symmetric.
+ */
+export function computeLanes(components: readonly PlacedComponent[]): Map<string, number> {
+  const groups = new Map<string, string[]>()
+  for (const c of components) {
+    const key = [keyOf(c.a), keyOf(c.b)].sort().join('|')
+    const list = groups.get(key) ?? []
+    list.push(c.id)
+    groups.set(key, list)
+  }
+  const lanes = new Map<string, number>()
+  for (const ids of groups.values()) {
+    ids.forEach((id, i) => lanes.set(id, i - (ids.length - 1) / 2))
+  }
+  return lanes
+}

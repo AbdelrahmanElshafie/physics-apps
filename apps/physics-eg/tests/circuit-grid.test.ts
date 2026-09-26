@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
 import { solveCircuit } from '@physics/circuit-sim'
-import { defaultComponent, keyOf, pointsInUse, toCircuit, type PlacedComponent } from '@/components/circuit/grid'
+import {
+  computeLanes,
+  defaultComponent,
+  keyOf,
+  pointsInUse,
+  toCircuit,
+  type PlacedComponent,
+} from '@/components/circuit/grid'
 
 /**
  * The grid layer is a thin translation from "two dots on a breadboard" to a solver `Circuit`.
@@ -63,5 +70,53 @@ describe('grid → circuit translation', () => {
       defaultComponent('wire', 'w2', { col: 1, row: 0 }, { col: 2, row: 0 }),
     ]
     expect(pointsInUse(components)).toHaveLength(3)
+  })
+})
+
+describe('computeLanes', () => {
+  // Regression test: a voltmeter drawn across a resistor rendered directly on top of it — same
+  // line, same badge position, same value-label position — until every component on a shared
+  // edge got fanned out to its own lane. Found by actually looking at the rendered lesson page.
+  it('gives an unshared edge lane 0', () => {
+    const components: PlacedComponent[] = [
+      defaultComponent('resistor', 'r1', { col: 0, row: 0 }, { col: 1, row: 0 }),
+      defaultComponent('wire', 'w1', { col: 1, row: 0 }, { col: 2, row: 0 }),
+    ]
+    const lanes = computeLanes(components)
+    expect(lanes.get('r1')).toBe(0)
+    expect(lanes.get('w1')).toBe(0)
+  })
+
+  it('gives two components on the same two points opposite, evenly spaced lanes', () => {
+    const components: PlacedComponent[] = [
+      defaultComponent('resistor', 'r1', { col: 0, row: 0 }, { col: 3, row: 0 }),
+      defaultComponent('voltmeter', 'v1', { col: 0, row: 0 }, { col: 3, row: 0 }),
+    ]
+    const lanes = computeLanes(components)
+    expect(lanes.get('r1')).toBe(-0.5)
+    expect(lanes.get('v1')).toBe(0.5)
+  })
+
+  it('treats a-b and b-a as the same shared edge', () => {
+    const components: PlacedComponent[] = [
+      defaultComponent('resistor', 'r1', { col: 0, row: 0 }, { col: 3, row: 0 }),
+      // Same two points, endpoints reversed — still the same electrical edge.
+      defaultComponent('voltmeter', 'v1', { col: 3, row: 0 }, { col: 0, row: 0 }),
+    ]
+    const lanes = computeLanes(components)
+    expect(lanes.get('r1')).not.toBe(lanes.get('v1'))
+  })
+
+  it('spaces three components on one edge symmetrically about zero', () => {
+    const a = { col: 0, row: 0 }
+    const b = { col: 1, row: 0 }
+    const components: PlacedComponent[] = [
+      defaultComponent('resistor', 'r1', a, b),
+      defaultComponent('voltmeter', 'v1', a, b),
+      defaultComponent('ammeter', 'a1', a, b),
+    ]
+    const lanes = computeLanes(components)
+    const values = [lanes.get('r1')!, lanes.get('v1')!, lanes.get('a1')!].sort((x, y) => x - y)
+    expect(values).toEqual([-1, 0, 1])
   })
 })
