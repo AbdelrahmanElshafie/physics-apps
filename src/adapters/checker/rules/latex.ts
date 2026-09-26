@@ -24,6 +24,11 @@ const COSMETIC: RegExp[] = [
   /\\text(?:rm|it|bf)?\b/g,
   // Escaped space: a backslash followed by an actual space character.
   /\\[ ]/g,
+  // MathLive leaves this token where a palette template's slot has not been filled in. It carries
+  // no mathematical content, so strip it and let the surrounding parse fail honestly, rather than
+  // letting the token leak into a stored answer or a question sent to the tutor.
+  /\\placeholder\{\}/g,
+  /\\placeholder\b/g,
 ]
 
 /** Wrappers whose braces carry no meaning for comparison, so that \mathbb{R} equals R. */

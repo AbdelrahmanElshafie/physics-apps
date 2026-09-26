@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useImperativeHandle, useRef, type Ref } from 'react'
 
 import type { MathfieldElement } from 'mathlive'
 
@@ -15,7 +15,19 @@ import type { MathfieldElement } from 'mathlive'
  * or write most properties before the element is in the document. So the sequence is strictly
  * construct -> insert -> configure, and configuration is wrapped so one unsupported option can
  * never leave the page with no input field at all.
+ *
+ * The imperative handle exists so a palette can insert into *this* field. Looking the element up
+ * from the document would find the first one on the page, which on a lesson with twenty exercises
+ * means typing into the wrong card.
  */
+
+export interface MathFieldHandle {
+  /** Inserts at the caret, through MathLive's own command so undo and events behave. */
+  insert: (latex: string) => void
+  focus: () => void
+  getValue: () => string
+}
+
 export function MathField({
   value,
   onChange,
@@ -23,6 +35,7 @@ export function MathField({
   placeholder,
   ariaLabel,
   autoFocus = false,
+  ref,
 }: {
   value: string
   onChange: (latex: string) => void
@@ -30,6 +43,7 @@ export function MathField({
   placeholder?: string
   ariaLabel?: string
   autoFocus?: boolean
+  ref?: Ref<MathFieldHandle>
 }) {
   const host = useRef<HTMLDivElement>(null)
   const field = useRef<MathfieldElement | null>(null)
@@ -40,6 +54,28 @@ export function MathField({
   const onEnterRef = useRef(onEnter)
   onChangeRef.current = onChange
   onEnterRef.current = onEnter
+
+  useImperativeHandle(
+    ref,
+    (): MathFieldHandle => ({
+      insert: (latex) => {
+        const element = field.current
+        if (!element) return
+        try {
+          element.focus()
+          element.executeCommand(['insert', latex])
+          // MathLive does not always emit `input` for a programmatic insert, and the React state
+          // above is the source of truth for the answer, so push the new value up explicitly.
+          onChangeRef.current(element.value)
+        } catch (error) {
+          console.warn('[MathField] insert failed', error)
+        }
+      },
+      focus: () => field.current?.focus(),
+      getValue: () => field.current?.value ?? '',
+    }),
+    [],
+  )
 
   // Mount-only: `value` is synced by the second effect. Re-running this would destroy the editor
   // mid-keystroke.

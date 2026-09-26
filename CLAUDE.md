@@ -190,6 +190,11 @@ stale copy of the module: a new `check.type` will validate fine under `pnpm vali
 values. If a brand-new lesson URL 404s or 500s while existing ones work, it is the same thing —
 `rm -rf .next` and restart.
 
+**Never reach for a component's DOM node with `document.querySelector`.** A lesson page has ~20
+math fields and the scratchpad has one per step, so a global lookup silently targets the first one
+— the palette inserted into the wrong card and the symptom read as "nothing happens". Use a ref;
+`MathField` exposes an imperative handle for exactly this.
+
 One SSE connection per page, never per component. Browsers allow about six per origin over
 HTTP/1.1, so a stream per exercise card exhausts the pool and stalls ordinary requests. Consumers
 use `useThreadMessages` from `TutorStream`, which fans out a single topic-scoped stream.

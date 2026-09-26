@@ -28,6 +28,12 @@ describe('normaliseLatex', () => {
   it('removes math-mode delimiters', () => {
     expect(normaliseLatex('$x+1$')).toBe('x+1')
   })
+
+  it('strips the placeholder token a palette template leaves behind', () => {
+    // MathLive emits \placeholder{} for an unfilled slot; it carries no mathematical content.
+    expect(normaliseLatex(String.raw`\left(\placeholder{}\right)`)).toBe('()')
+    expect(normaliseLatex(String.raw`\left(6,2\right)`)).toBe('(6,2)')
+  })
 })
 
 describe('parseScalar', () => {
@@ -178,6 +184,17 @@ describe('RulesAnswerChecker', () => {
 
   it('returns unverified for a tutor-graded check', async () => {
     expect(await verdict({ type: 'tutor' }, 'anything at all')).toBe('unverified')
+  })
+
+  it('does not mark a half-filled template wrong', async () => {
+    // Submitting a template with an empty slot is incomplete, not incorrect.
+    const check: Check = { type: 'numeric-list', value: [6, 2], tolerance: 0 }
+    expect(await verdict(check, String.raw`\left(6,\placeholder{}\right)`)).toBe('unverified')
+  })
+
+  it('accepts an answer typed into a palette template', async () => {
+    const check: Check = { type: 'numeric-list', value: [6, 2], tolerance: 0 }
+    expect(await verdict(check, String.raw`\left(6,2\right)`)).toBe('correct')
   })
 
   it('returns unverified for a blank answer rather than marking it wrong', async () => {

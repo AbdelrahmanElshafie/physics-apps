@@ -5,7 +5,7 @@ import { Keyboard, SquareFunction } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-import { MathField } from './MathField'
+import { MathField, type MathFieldHandle } from './MathField'
 
 /**
  * The answer field: a MathLive editor and a raw-LaTeX editor over the same value.
@@ -51,6 +51,10 @@ export function MathInput({
   const [mode, setMode] = useState<'visual' | 'latex'>('visual')
   const [preview, setPreview] = useState('')
   const textarea = useRef<HTMLTextAreaElement>(null)
+  // A ref to *this* component's editor. Looking it up from the document would find the first
+  // math field on the page, so on a lesson with twenty exercises the palette would insert into
+  // the wrong card.
+  const fieldRef = useRef<MathFieldHandle>(null)
 
   // The LaTeX mode's live preview renders through the server so there is exactly one KaTeX
   // configuration (macros included) rather than a second, subtly different one on the client.
@@ -100,14 +104,8 @@ export function MathInput({
       return
     }
 
-    // In visual mode MathLive owns the caret, so route the insertion through the element.
-    const field = document.querySelector('math-field')
-    if (field && 'executeCommand' in field) {
-      ;(field as unknown as { executeCommand: (cmd: [string, string]) => void }).executeCommand([
-        'insert',
-        latex,
-      ])
-    }
+    // In visual mode MathLive owns the caret, so route the insertion through this field.
+    fieldRef.current?.insert(latex)
   }
 
   return (
@@ -149,6 +147,7 @@ export function MathInput({
 
       {mode === 'visual' ? (
         <MathField
+          ref={fieldRef}
           value={value}
           onChange={onChange}
           {...(onSubmit ? { onEnter: onSubmit } : {})}
