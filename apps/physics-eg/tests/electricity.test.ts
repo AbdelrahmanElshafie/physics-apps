@@ -33,6 +33,7 @@ const TOPIC5 = 'series-resistors'
 const TOPIC6 = 'parallel-resistors'
 const TOPIC7 = 'series-vs-parallel'
 const TOPIC8 = 'mixed-circuits'
+const TOPIC9 = 'bridge-circuits'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -573,6 +574,65 @@ describe('the eighth lesson’s exercise answers are the values the formulas giv
     mc4: parallelResistance([r12, 6]),
     mc5: 12 / parallelResistance([r12, 6]),
     mc6: (12 / r12) * 2,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('bridge-circuits formulas', () => {
+  it('the balance condition R1 R4 = R2 R3 holds for the lesson’s own bridge (10/20/5/10)', () => {
+    expect(10 * 10).toBe(20 * 5)
+  })
+
+  it('a balanced bridge’s two arms behave as independent series dividers (10/20 and 5/10 at 12 V)', () => {
+    const i1 = 12 / seriesResistance([10, 20])
+    const i2 = 12 / seriesResistance([5, 10])
+    expect(i1).toBeCloseTo(0.4, 6)
+    expect(i2).toBeCloseTo(0.8, 6)
+  })
+
+  it('solves the unknown-resistance worked example: Rx = R2 R3 / R1', () => {
+    const rx = (40 * 15) / 10
+    expect(rx).toBe(60)
+  })
+})
+
+describe('the ninth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC9}.mdx`), 'utf8')
+
+  it('states the balance-condition derivation and the numeric confirmation', () => {
+    expect(mdx).toContain('R_2(R_3 + R_4) = R_4(R_1 + R_2) \\;\\Rightarrow\\; R_2 R_3 = R_1 R_4')
+    expect(mdx).toContain('R_1 R_4 = 10 \\times 10 = 100, \\qquad R_2 R_3 = 20 \\times 5 = 100')
+  })
+
+  it('states the unknown-resistance worked example (Rx = 60 ohm)', () => {
+    expect((40 * 15) / 10).toBe(60)
+    expect(mdx).toContain('R_x = \\frac{40 \\times 15}{10} = 60\\ \\Omega')
+  })
+})
+
+describe('the ninth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC9)
+
+  const expected: Record<string, number> = {
+    bc1: (18 * 8) / 6,
+    bc2: (15 * 12) / 5,
+    bc3: (8 * 10) / 4,
+    bc4: 12 / seriesResistance([10, 20]),
+    bc5: 12 / seriesResistance([5, 10]),
+    bc6: 0,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
