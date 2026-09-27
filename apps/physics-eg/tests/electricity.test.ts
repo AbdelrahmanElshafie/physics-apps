@@ -4,10 +4,12 @@ import { parse as parseYaml } from 'yaml'
 import { describe, expect, it } from 'vitest'
 
 import {
+  conductivity,
   currentFromCharge,
   electronCount,
   potentialDifference,
   potentialDifferenceBetweenPoints,
+  resistanceFromGeometry,
   resistanceFromOhmsLaw,
   workFromChargeAndVoltage,
 } from '@core/domain'
@@ -23,6 +25,7 @@ const CONTENT = path.join(process.cwd(), 'content', 'syllabi', 'electricity')
 const TOPIC = 'current-and-charge'
 const TOPIC2 = 'potential-difference'
 const TOPIC3 = 'ohms-law'
+const TOPIC4 = 'resistivity'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -202,6 +205,92 @@ describe('the second lesson’s exercise answers are the values the formulas giv
     pd3: workFromChargeAndVoltage(0.5, 220),
     pd4: potentialDifferenceBetweenPoints(20, -30),
     pd5: potentialDifferenceBetweenPoints(5, -15),
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('resistivity formulas', () => {
+  it('R = rho L / A, and inverting for L is consistent', () => {
+    const R = resistanceFromGeometry(2e-8, 10, 2e-6)
+    expect(R).toBeCloseTo(0.1, 10)
+    const L = (6 * 1e-6) / 3e-8
+    expect(L).toBeCloseTo(200, 6)
+  })
+
+  it('conductivity is the exact reciprocal of resistivity', () => {
+    expect(conductivity(1e-7)).toBeCloseTo(1e7, 0)
+    expect(conductivity(resistanceFromGeometry(1, 1, 1))).toBeCloseTo(1, 10) // rho=1 round trip
+  })
+
+  it('doubling length and area together leaves resistance unchanged', () => {
+    const R1 = resistanceFromGeometry(5e-8, 10, 3e-6)
+    const R2 = resistanceFromGeometry(5e-8, 20, 6e-6)
+    expect(R2).toBeCloseTo(R1, 10)
+  })
+
+  it('the two-wire ratio problems reduce correctly (resistivity cancels)', () => {
+    // Wire X: 2L, A/2. Wire Y: L, A. Same material.
+    const rho = 4e-8
+    const L = 3
+    const A = 1e-6
+    const Rx = resistanceFromGeometry(rho, 2 * L, A / 2)
+    const Ry = resistanceFromGeometry(rho, L, A)
+    expect(Rx / Ry).toBeCloseTo(4, 6)
+  })
+})
+
+describe('the fourth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC4}.mdx`), 'utf8')
+
+  it('states the R = rho L / A worked example (0.1 ohm)', () => {
+    expect(resistanceFromGeometry(2e-8, 10, 2e-6)).toBeCloseTo(0.1, 10)
+    expect(mdx).toContain('R = 0.1\\ \\Omega')
+  })
+
+  it('the nichrome exercise value matches the formula (rs2 is checked separately below)', () => {
+    // This exact example (rho=1e-6, L=2, A=0.5e-6 -> 4 ohm) appears only as exercise rs2, not
+    // as lesson prose — nothing to assert against the mdx here beyond the formula itself.
+    expect(resistanceFromGeometry(1e-6, 2, 0.5e-6)).toBeCloseTo(4, 10)
+  })
+
+  it('states the slope-to-resistivity worked example (2e-8 ohm.m)', () => {
+    const slope = 0.5 / 50
+    const rho = slope * 2e-6
+    expect(rho).toBeCloseTo(2e-8, 12)
+    expect(mdx).toContain('times10^{-8}\\ \\Omega\\cdot\\text{m}')
+  })
+
+  it('states the two-wire ratio worked example (R_A/R_B = 4)', () => {
+    const ratio = (2 / 1) / (1 / 2)
+    expect(ratio).toBe(4)
+    expect(mdx).toContain('R_A}{R_B} = 4')
+  })
+})
+
+describe('the fourth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC4)
+
+  const expected: Record<string, number> = {
+    rs1: resistanceFromGeometry(2e-8, 10, 2e-6),
+    rs2: resistanceFromGeometry(1e-6, 2, 0.5e-6),
+    rs3: (6 * 1e-6) / 3e-8,
+    rs4: (0.5 / 50) * 2e-6,
+    rs5: conductivity(1e-7),
+    rs7: resistanceFromGeometry(1, 2, 0.5) / resistanceFromGeometry(1, 1, 1),
+    rs8: 3,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {

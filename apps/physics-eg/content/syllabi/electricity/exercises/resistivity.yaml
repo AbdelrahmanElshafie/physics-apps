@@ -1,0 +1,129 @@
+# تمارين: المقاومة النوعية والتوصيلية
+#
+# مجموعة أ: R = ρL/A مباشرة. مجموعة ب: قراءة الرسم البياني والتوصيلية. مجموعة ج: مقارنة بين سلكين.
+
+schemaVersion: 1
+topic: resistivity
+intro: عشرة أسئلة. الإجابات الرقمية والاختيارية بتتحقق فورًا.
+
+exercises:
+  - id: rs1
+    set: أ
+    label: س١
+    kind: numeric
+    prompt: >-
+      سلك مقاومته النوعية $2\times10^{-8}\ \Omega\cdot\text{m}$، طوله 10 متر، ومساحة مقطعه
+      $2\times10^{-6}\ \text{m}^2$. احسب مقاومته.
+    check: { type: numeric, value: 0.1, tolerance: 0.001 }
+    solution: $R = \rho L / A = (2\times10^{-8} \times 10) / (2\times10^{-6}) = 0.1\ \Omega$.
+
+  - id: rs2
+    set: أ
+    label: س٢
+    kind: numeric
+    prompt: >-
+      سلك نيكروم مقاومته النوعية $1\times10^{-6}\ \Omega\cdot\text{m}$، طوله 2 متر، ومساحة مقطعه
+      $0.5\times10^{-6}\ \text{m}^2$. احسب مقاومته.
+    check: { type: numeric, value: 4, tolerance: 0.01 }
+    solution: $R = \rho L / A = (1\times10^{-6} \times 2) / (0.5\times10^{-6}) = 4\ \Omega$.
+
+  - id: rs3
+    set: أ
+    label: س٣
+    kind: numeric
+    prompt: >-
+      سلك مقاومته 6 أوم، مقاومته النوعية $3\times10^{-8}\ \Omega\cdot\text{m}$، ومساحة مقطعه
+      $1\times10^{-6}\ \text{m}^2$. احسب طول السلك بالمتر.
+    check: { type: numeric, value: 200, tolerance: 1 }
+    hint: اعكس القانون — L = RA/ρ.
+    solution: $L = RA/\rho = (6 \times 1\times10^{-6}) / (3\times10^{-8}) = 200\ \text{m}$.
+
+  - id: rs4
+    set: ب
+    label: س٤
+    kind: numeric
+    prompt: >-
+      رسم بياني للعلاقة بين R و L لأسلاك من نفس المادة (مساحة مقطعها الثابتة
+      $2\times10^{-6}\ \text{m}^2$) عدّى من نقطة الأصل لنقطة عندها $L = 50\ \text{m}$ و
+      $R = 0.5\ \Omega$. احسب المقاومة النوعية للمادة.
+    check: { type: numeric, value: 2e-8, tolerance: 5e-10 }
+    hint: الميل = ρ/A، فاحسب الميل الأول وبعدين اضربه في A.
+    solution: >-
+      الميل $= 0.5/50 = 0.01\ \Omega/\text{m}$. إذن
+      $\rho = \text{slope} \times A = 0.01 \times 2\times10^{-6} = 2\times10^{-8}\ \Omega\cdot\text{m}$.
+
+  - id: rs5
+    set: ب
+    label: س٥
+    kind: numeric
+    prompt: >-
+      مادة مقاومتها النوعية $1\times10^{-7}\ \Omega\cdot\text{m}$. احسب توصيليتها الكهربية
+      (بوحدة $(\Omega\cdot\text{m})^{-1}$).
+    check: { type: numeric, value: 1e7, tolerance: 1e5 }
+    solution: $\sigma = 1/\rho = 1/(1\times10^{-7}) = 1\times10^{7}\ (\Omega\cdot\text{m})^{-1}$.
+
+  - id: rs6
+    set: ب
+    label: س٦
+    kind: multichoice
+    prompt: المادة اللي مقاومتها النوعية كبيرة جدًا (زي النيكروم) بتُستخدم عادة في...
+    choices:
+      - { id: heating, label: عناصر التسخين وسخّانات المياه }
+      - { id: wiring, label: أسلاك التوصيل المنزلية }
+      - { id: superconducting, label: التوصيل الفائق }
+      - { id: insulation, label: عزل الأسلاك الكهربية }
+    check: { type: exact, value: heating }
+    solution: >-
+      عناصر التسخين. المقاومة النوعية العالية معناها إنتاج حرارة أكبر عند مرور تيار معين
+      ($P = I^2R$)، وده بالظبط اللي محتاجينه في السخّان، عكس أسلاك التوصيل اللي عايزينها
+      مقاومة صغيرة قد الإمكان.
+
+  - id: rs7
+    set: ج
+    label: س٧
+    kind: numeric
+    prompt: >-
+      سلك (X) طوله ضعف طول سلك (Y)، ومساحة مقطع (X) نص مساحة مقطع (Y)، وكلاهما من نفس المادة.
+      احسب النسبة $R_X / R_Y$.
+    check: { type: numeric, value: 4, tolerance: 0.01 }
+    hint: اكتب كل مقاومة بدلالة نفس ρ، ثم اقسم — ρ هتتشال.
+    solution: >-
+      $R_X/R_Y = \dfrac{\rho(2L)/(A/2)}{\rho L/A} = \dfrac{2L/(A/2)}{L/A} = \dfrac{4L/A}{L/A} = 4$.
+
+  - id: rs8
+    set: ج
+    label: س٨
+    kind: numeric
+    prompt: >-
+      سلكان من نفس المادة ونفس الطول، لكن مساحة مقطع الأول ثلث مساحة مقطع الثاني. احسب النسبة
+      $R_1 / R_2$.
+    check: { type: numeric, value: 3, tolerance: 0.01 }
+    solution: $R_1/R_2 = A_2/A_1 = 3$ (نفس الطول، فالنسبة عكسية مع المساحة فقط).
+
+  - id: rs9
+    set: ج
+    label: س٩
+    kind: truefalse
+    prompt: >-
+      صح ولا غلط — لو ضاعفنا طول السلك ومساحة مقطعه معًا بنفس المعامل، فإن مقاومته تفضل بدون
+      تغيير.
+    check: { type: exact, value: true }
+    explain: { required: true, hint: اكتب R الجديدة بدلالة L و A الأصليتين وبسّط. }
+    solution: >-
+      صح. $R = \rho L/A$، ولو $L$ و $A$ اتضاعفوا معًا فالنسبة $L/A$ تفضل زي ما هي بالظبط —
+      $2L/2A = L/A$ — فمقاومة السلك الجديد نفس مقاومة القديم.
+
+  - id: rs10
+    set: ج
+    label: س١٠
+    kind: text
+    prompt: >-
+      اشرح ليه المقاومة النوعية ($\rho$) بتُعتبر خاصية للمادة، بينما المقاومة ($R$) بتُعتبر
+      خاصية للقطعة المحددة (بطولها ومساحتها).
+    check: { type: tutor }
+    solution: >-
+      المقاومة النوعية ثابتة لنوع المادة عند درجة حرارة معينة، بغض النظر عن شكل أو حجم القطعة —
+      قطعة نحاس صغيرة وقطعة نحاس كبيرة عندهم نفس $\rho$ بالظبط. المقاومة $R$ نفسها بتتغيّر مع
+      طول القطعة ومساحة مقطعها ($R = \rho L/A$)، فسلكين من نفس المادة بأبعاد مختلفة عندهم
+      مقاومتين مختلفتين تمامًا رغم إن $\rho$ عندهم واحد. ده بالظبط سبب وجود المفهومين
+      منفصلين: واحد بيوصف "المادة نفسها" والتاني بيوصف "القطعة اللي عاملينها من المادة دي".

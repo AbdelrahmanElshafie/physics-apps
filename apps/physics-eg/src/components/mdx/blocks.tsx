@@ -61,6 +61,29 @@ export function Compare({ columns, rows, caption }: { columns: string[]; rows: s
   )
 }
 
+/** A list of laws or facts: typeset statement paired with its plain-language meaning. */
+export function Axioms({ items, caption }: { items: [string, string][]; caption?: string }) {
+  return (
+    <figure className="my-6 overflow-hidden rounded-panel border border-border">
+      <dl className="divide-y divide-border">
+        {items.map(([latex, meaning], i) => (
+          <div key={i} className="grid gap-1.5 px-4 py-3 odd:bg-surface/40 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-6">
+            <dt className="min-w-0" data-ltr>
+              <DisplayMath latex={latex} />
+            </dt>
+            <dd className="text-xs text-fg-subtle">{meaning}</dd>
+          </div>
+        ))}
+      </dl>
+      {caption && (
+        <figcaption className="border-t border-border bg-surface/60 px-4 py-2 text-xs text-fg-subtle">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  )
+}
+
 export function Derivation({ caption, children }: { caption?: string; children: ReactNode }) {
   return (
     <figure className="my-6 overflow-hidden rounded-panel border border-border bg-surface-sunken/40">

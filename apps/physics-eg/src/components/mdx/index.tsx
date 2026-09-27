@@ -6,7 +6,7 @@ import { M } from '@/components/math/Math'
 import { CircuitCanvas } from '@/components/circuit/CircuitCanvas'
 import type { GridPoint, PlacedComponent } from '@/components/circuit/grid'
 
-import { Callout, Compare, Derivation, Step } from './blocks'
+import { Axioms, Callout, Compare, Derivation, Step } from './blocks'
 import { Predict } from './Predict'
 
 /** The component vocabulary available to lesson authors. */
@@ -19,6 +19,7 @@ export function mdxComponents(): MDXComponents {
 
     Callout,
     Compare,
+    Axioms,
     Derivation,
     Step,
     Predict,
