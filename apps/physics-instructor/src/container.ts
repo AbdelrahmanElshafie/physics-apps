@@ -13,8 +13,8 @@ import { RulesAnswerChecker } from '@adapters/checker/rules'
 import { SympyAnswerChecker } from '@adapters/checker/sympy'
 import { FileSystemContentRepository } from '@adapters/content/fs-mdx'
 import { FileSystemProgressRepository } from '@adapters/progress/fs-events'
-import { FileSystemScratchpadRepository } from '@adapters/scratch/fs-json'
-import { ClaudeCodeTutorTransport } from '@adapters/tutor/claude-code'
+import { FileSystemScratchpadRepository } from '@physics/scratchpad'
+import { ClaudeCodeTutorTransport } from '@physics/tutor-bridge'
 
 /**
  * Composition root — the one place adapters are chosen.

@@ -113,6 +113,18 @@ importers:
 
   apps/physics-instructor:
     dependencies:
+      '@physics/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@physics/math-ui':
+        specifier: workspace:*
+        version: link:../../packages/math-ui
+      '@physics/scratchpad':
+        specifier: workspace:*
+        version: link:../../packages/scratchpad
+      '@physics/tutor-bridge':
+        specifier: workspace:*
+        version: link:../../packages/tutor-bridge
       '@radix-ui/react-collapsible':
         specifier: ^1.1.12
         version: 1.1.20(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)

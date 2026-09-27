@@ -20,7 +20,7 @@ import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import { ExerciseCard } from "@/components/exercise/ExerciseCard";
 import { CheckpointPanel } from "@/components/workspace/CheckpointPanel";
 import { TopicViewTracker } from "@/components/workspace/TopicViewTracker";
-import { TutorStreamProvider } from "@/components/workspace/TutorStream";
+import { TutorStreamProvider } from "@physics/tutor-bridge/react";
 import { KATEX_MACROS, renderMath } from "@/lib/katex";
 import { resolveLocale } from "@/lib/server-locale";
 import { LOCALE_INFO, DEFAULT_LOCALE } from "@core/domain";

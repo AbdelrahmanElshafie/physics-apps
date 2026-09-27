@@ -21,6 +21,10 @@
     "grasp:script": "tsx scripts/grasp-script.ts"
   },
   "dependencies": {
+    "@physics/core": "workspace:*",
+    "@physics/math-ui": "workspace:*",
+    "@physics/scratchpad": "workspace:*",
+    "@physics/tutor-bridge": "workspace:*",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.3",

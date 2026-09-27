@@ -248,11 +248,18 @@ stale copy of the module: a new `check.type` will validate fine under `pnpm vali
 values. If a brand-new lesson URL 404s or 500s while existing ones work, it is the same thing —
 `rm -rf .next` and restart.
 
-**The equation palette lives in `src/components/math/palette.ts`**, one table serving both
+**`MathField`, `MathInput`, `palette.ts` and `EquationActions` live in `@physics/math-ui`**, shared
+with physics-eg — see that package's README. The equation palette is one table serving both
 editors. MathLive's insert tokens are `#@` (the selection, or the item before the caret) and `#?`
 (a placeholder the caret jumps into) — *not* `#0`, which is macro-argument syntax and silently
 produces an empty slot. So the superscript button is `#@^{#?}`: it takes what you just typed as
-the base and drops you in the exponent. `tests/palette.test.ts` enforces this and rejects `#0`.
+the base and drops you in the exponent. `packages/math-ui/tests/palette.test.ts` enforces this and
+rejects `#0`. This app's own bra-ket notation (`\ket`, `\bra`, `\braket`) is passed into
+`MathField`/`MathInput` via the `macros` prop from `src/lib/mathfield-macros.ts` — it is not baked
+into the shared package, since it is specific to this syllabus, not to equation input in general.
+`EquationActions`'s "ask about this" button takes an `onAskAbout` callback rather than reaching
+into a store directly; `src/components/math/AskAboutEquation.tsx` is the small client wrapper that
+supplies this app's workspace store as that callback.
 
 **Never reach for a component's DOM node with `document.querySelector`.** A lesson page has ~20
 math fields and the scratchpad has one per step, so a global lookup silently targets the first one
@@ -261,4 +268,16 @@ math fields and the scratchpad has one per step, so a global lookup silently tar
 
 One SSE connection per page, never per component. Browsers allow about six per origin over
 HTTP/1.1, so a stream per exercise card exhausts the pool and stalls ordinary requests. Consumers
-use `useThreadMessages` from `TutorStream`, which fans out a single topic-scoped stream.
+use `useThreadMessages` from `@physics/tutor-bridge/react`, which fans out a single topic-scoped
+stream — as does physics-eg, over its own `/api/tutor/stream` route.
+
+**`ClaudeCodeTutorTransport` (the file bridge), `FileSystemScratchpadRepository` and
+`checkWorking`** now live in `@physics/tutor-bridge` and `@physics/scratchpad` respectively,
+shared with physics-eg. `src/core/domain/ids.ts` and `src/core/domain/scratchpad.ts` (and the
+matching port files) are thin re-exports of `@physics/core`'s copies rather than local
+declarations — the `TopicId`/`ThreadId`/`MessageId` brands use a `unique symbol`, which is only
+equal to itself by declaration, so this app's types have to be the *same* declaration as the
+packages' for anything passed into `askTutor`/`checkWorking` to type-check. `scripts/tutor.ts`
+(the `pnpm tutor` CLI) stays local to this app — it needs this app's own content/exercise lookup
+to show a question with its exercise and expected answer, which physics-eg's version does
+differently for its own exercise shape.

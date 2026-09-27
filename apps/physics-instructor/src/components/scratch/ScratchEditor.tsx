@@ -16,8 +16,9 @@ import {
 
 import type { ScratchStep } from '@core/domain'
 import type { StepVerdict, WorkingReport } from '@core/services'
-import { MathInput } from '@/components/math/MathInput'
-import { useThreadMessages } from '@/components/workspace/TutorStream'
+import { MathInput } from '@physics/math-ui'
+import { MATHFIELD_MACROS } from '@/lib/mathfield-macros'
+import { useThreadMessages } from '@physics/tutor-bridge/react'
 import { checkScratchpad, deleteScratchpad, requestScratchReview, saveScratchpad } from '@/app/scratch/actions'
 import { cn, formatRelative } from '@/lib/utils'
 
@@ -356,6 +357,7 @@ function StepRow({
         onSubmit={onAdd}
         ariaLabel={`Step ${index + 1}`}
         placeholder="Your working"
+        macros={MATHFIELD_MACROS}
       />
 
       {showNote && (

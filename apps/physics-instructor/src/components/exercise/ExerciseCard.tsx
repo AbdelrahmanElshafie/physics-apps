@@ -5,9 +5,10 @@ import { CheckCircle2, ChevronDown, Clock, Eye, HelpCircle, Lightbulb, XCircle }
 
 import type { Exercise } from '@core/domain'
 import type { ExerciseProgress } from '@core/domain'
-import { MathInput } from '@/components/math/MathInput'
+import { MathInput } from '@physics/math-ui'
+import { MATHFIELD_MACROS } from '@/lib/mathfield-macros'
 import { revealSolution, submitAnswer } from '@/app/actions'
-import { useThreadMessages } from '@/components/workspace/TutorStream'
+import { useThreadMessages } from '@physics/tutor-bridge/react'
 import { useWorkspace } from '@/stores/workspace'
 import { cn } from '@/lib/utils'
 
@@ -189,6 +190,7 @@ export function ExerciseCard({
             ariaLabel={`Answer to ${exercise.label ?? exercise.id}`}
             placeholder="Your answer"
             disabled={pending}
+            macros={MATHFIELD_MACROS}
           />
         )}
 

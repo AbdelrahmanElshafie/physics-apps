@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { asSyllabusId, parseTopicId, type TopicId } from '@core/domain'
 import { container } from '@/container'
 import { ScratchEditor } from '@/components/scratch/ScratchEditor'
-import { TutorStreamProvider } from '@/components/workspace/TutorStream'
+import { TutorStreamProvider } from '@physics/tutor-bridge/react'
 
 /** One piece of working. Read per request so a pad edited elsewhere shows up on refresh. */
 export const dynamic = 'force-dynamic'

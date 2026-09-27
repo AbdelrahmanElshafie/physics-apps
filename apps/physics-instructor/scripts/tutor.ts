@@ -20,7 +20,7 @@ import path from 'node:path'
 import { spawn } from 'node:child_process'
 import { ulid } from 'ulid'
 
-import { ClaudeCodeTutorTransport, type BridgeMessage } from '../src/adapters/tutor/claude-code'
+import { ClaudeCodeTutorTransport, type BridgeMessage } from '@physics/tutor-bridge'
 import { FileSystemContentRepository } from '../src/adapters/content/fs-mdx'
 import { FileSystemProgressRepository } from '../src/adapters/progress/fs-events'
 import { recordGrade } from '../src/core/services/submit-attempt'

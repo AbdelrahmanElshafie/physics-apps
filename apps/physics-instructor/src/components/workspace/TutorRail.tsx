@@ -7,7 +7,7 @@ import { readThread, sendQuestion } from '@/app/actions'
 import { useWorkspace } from '@/stores/workspace'
 import { cn, formatRelative } from '@/lib/utils'
 
-import { useThreadMessages, useTutorStream, type ThreadMessage } from './TutorStream'
+import { useThreadMessages, useTutorStream, type ThreadMessage } from '@physics/tutor-bridge/react'
 
 /**
  * The tutor conversation.

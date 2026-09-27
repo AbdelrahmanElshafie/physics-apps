@@ -1,5 +1,5 @@
+import { AskAboutEquation } from './AskAboutEquation'
 import { DisplayMath } from './Math'
-import { EquationActions } from './EquationActions'
 
 /**
  * A referenceable display equation.
@@ -40,7 +40,7 @@ export function Eq({
         </figcaption>
       )}
 
-      <EquationActions
+      <AskAboutEquation
         latex={latex}
         equationId={id}
         {...(label !== undefined ? { label } : {})}
