@@ -1,0 +1,101 @@
+# تمارين: القوة الدافعة الكهربية والمقاومة الداخلية
+#
+# مجموعة أ: I = ε/(R+r) وV = ε - R مباشرة. مجموعة ب: حالة القصر (short circuit). مجموعة ج: مفاهيم.
+
+schemaVersion: 1
+topic: emf-and-internal-resistance
+intro: تسعة أسئلة. الإجابات الرقمية والاختيارية بتتحقق فورًا.
+
+exercises:
+  - id: ei1
+    set: أ
+    label: س١
+    kind: numeric
+    prompt: >-
+      خلية EMF = 6 فولت، مقاومتها الداخلية 0.5 أوم، متصلة بمقاومة خارجية 2.5 أوم (زي مثال الدرس).
+      احسب شدة التيار في الدائرة.
+    check: { type: numeric, value: 2, tolerance: 0.01 }
+    solution: $I = \varepsilon/(R+r) = 6/(2.5+0.5) = 2\ A$.
+
+  - id: ei2
+    set: أ
+    label: س٢
+    kind: numeric
+    prompt: نفس الدائرة (I = 2 أمبير). احسب فرق الجهد الطرفي على الخلية.
+    check: { type: numeric, value: 5, tolerance: 0.01 }
+    solution: $V = \varepsilon - Ir = 6 - 2 \times 0.5 = 5\ V$.
+
+  - id: ei3
+    set: أ
+    label: س٣
+    kind: numeric
+    prompt: خلية EMF = 12 فولت، مقاومتها الداخلية 1 أوم، متصلة بمقاومة خارجية 5 أوم. احسب شدة التيار.
+    check: { type: numeric, value: 2, tolerance: 0.01 }
+    solution: $I = \varepsilon/(R+r) = 12/(5+1) = 2\ A$.
+
+  - id: ei4
+    set: ب
+    label: س٤
+    kind: numeric
+    prompt: نفس خلية مثال الدرس (EMF = 6 فولت، r = 0.5 أوم). احسب أقصى تيار ممكن تدّيه (حالة القصر).
+    check: { type: numeric, value: 12, tolerance: 0.01 }
+    hint: في حالة القصر، R = 0، فالمقاومة الوحيدة اللي بتحدد التيار هي r.
+    solution: $I_{short} = \varepsilon/r = 6/0.5 = 12\ A$.
+
+  - id: ei5
+    set: ب
+    label: س٥
+    kind: numeric
+    prompt: خلية EMF = 9 فولت، مقاومتها الداخلية 0.3 أوم، متصلة بمقاومة خارجية 2.7 أوم. احسب شدة التيار.
+    check: { type: numeric, value: 3, tolerance: 0.01 }
+    solution: $I = 9/(2.7+0.3) = 3\ A$.
+
+  - id: ei6
+    set: ب
+    label: س٦
+    kind: numeric
+    prompt: نفس الدائرة (I = 3 أمبير). احسب فرق الجهد الطرفي.
+    check: { type: numeric, value: 8.1, tolerance: 0.01 }
+    solution: $V = \varepsilon - Ir = 9 - 3 \times 0.3 = 8.1\ V$.
+
+  - id: ei7
+    set: ج
+    label: س٧
+    kind: multichoice
+    prompt: فرق الجهد الطرفي على الخلية بيساوي القوة الدافعة الكهربية (EMF) بالظبط...
+    choices:
+      - { id: open_circuit, label: بس لو مفيش تيار بيتسحب من الخلية (دائرة مفتوحة) }
+      - { id: always, label: في كل الحالات، أيًا كان التيار }
+      - { id: short_circuit, label: بس في حالة القصر (short circuit) }
+      - { id: never, label: مينفعش أبدًا يتساووا }
+    check: { type: exact, value: open_circuit }
+    solution: >-
+      بس لو مفيش تيار بيتسحب (I = 0)، لأن $V = \varepsilon - Ir$ بتساوي $\varepsilon$ بالظبط عند
+      $I=0$.
+
+  - id: ei8
+    set: ج
+    label: س٨
+    kind: truefalse
+    prompt: >-
+      صح ولا غلط — زيادة المقاومة الخارجية R (مع ثبات كل حاجة تانية) بتقلل شدة التيار، وبالتالي
+      بتقرّب فرق الجهد الطرفي من قيمة الـEMF.
+    check: { type: exact, value: true }
+    explain: { required: true, hint: فكّر في تأثير تقليل I على حد $Ir$ في معادلة V. }
+    solution: >-
+      صح. زيادة R بتقلل I من خلال $I = \varepsilon/(R+r)$، والتيار الأقل معناه فقد داخلي أقل
+      ($Ir$)، فـ$V = \varepsilon - Ir$ بتقرب أكتر من $\varepsilon$.
+
+  - id: ei9
+    set: ج
+    label: س٩
+    kind: text
+    prompt: >-
+      ليه توصيل طرفَي بطارية حقيقية ببعض مباشرة (short circuit) بيدّي تيار كبير جدًا لكن **محدود**،
+      مش تيار لا نهائي؟ وإيه اللي بيحدد أقصى قيمة ممكنة له؟
+    check: { type: tutor }
+    solution: >-
+      لو كانت الخلية مثالية تمامًا (بدون أي مقاومة داخلية)، توصيل طرفيها ببعض كان هيدّي تيار لا
+      نهائي نظريًا لأن المقاومة الكلية للدائرة صفر. لكن كل خلية حقيقية عندها مقاومة داخلية r، وحتى
+      لو R الخارجية اتساوت صفر تمامًا (قصر)، لسه فيه r موجودة في الدائرة. أقصى تيار ممكن بيتحدد
+      بـ$I_{short} = \varepsilon/r$ — كل ما r كانت أصغر، كل ما التيار الأقصى الممكن كان أكبر.

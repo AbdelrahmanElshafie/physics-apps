@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest'
 import {
   conductivity,
   currentFromCharge,
+  currentWithInternalResistance,
   electronCount,
   parallelResistance,
   potentialDifference,
@@ -16,6 +17,7 @@ import {
   resistanceFromGeometry,
   resistanceFromOhmsLaw,
   seriesResistance,
+  terminalVoltage,
   workFromChargeAndVoltage,
 } from '@core/domain'
 
@@ -38,6 +40,7 @@ const TOPIC8 = 'mixed-circuits'
 const TOPIC9 = 'bridge-circuits'
 const TOPIC10 = 'switches-in-circuits'
 const TOPIC11 = 'lamps-brightness'
+const TOPIC12 = 'emf-and-internal-resistance'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -766,6 +769,71 @@ describe('the eleventh lesson’s exercise answers are the values the formulas g
     lb4: powerFromIR(12 / seriesResistance([2, 4]), 2),
     lb5: powerFromIR(12 / seriesResistance([2, 4]), 4),
     lb6: powerFromVR(12, 2),
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('emf-and-internal-resistance formulas', () => {
+  it('reproduces the worked example: emf=6V, r=0.5, R=2.5 gives I=2A, V=5V', () => {
+    const I = currentWithInternalResistance(6, 2.5, 0.5)
+    expect(I).toBe(2)
+    const V = terminalVoltage(6, I, 0.5)
+    expect(V).toBe(5)
+    expect(I * 2.5).toBe(V)
+  })
+
+  it('short-circuit current is emf/r, far larger than the normal operating current', () => {
+    const iShort = currentWithInternalResistance(6, 0, 0.5)
+    expect(iShort).toBe(12)
+    expect(iShort).toBeGreaterThan(currentWithInternalResistance(6, 2.5, 0.5))
+  })
+
+  it('terminal voltage approaches emf as external resistance grows', () => {
+    const vSmallR = terminalVoltage(6, currentWithInternalResistance(6, 2.5, 0.5), 0.5)
+    const vBigR = terminalVoltage(6, currentWithInternalResistance(6, 250, 0.5), 0.5)
+    expect(vBigR).toBeGreaterThan(vSmallR)
+    expect(vBigR).toBeCloseTo(6, 1)
+  })
+})
+
+describe('the twelfth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC12}.mdx`), 'utf8')
+
+  it('states the worked example’s current, terminal voltage and cross-check', () => {
+    expect(mdx).toContain('I = \\frac{\\varepsilon}{R + r} = \\frac{6}{2.5 + 0.5} = 2\\ \\text{A}')
+    expect(mdx).toContain('V = \\varepsilon - I r = 6 - 2 \\times 0.5 = 5\\ \\text{V}')
+    expect(mdx).toContain('I R = 2 \\times 2.5 = 5\\ \\text{V} \\quad \\checkmark')
+  })
+
+  it('states the short-circuit current worked example (12 A)', () => {
+    expect(currentWithInternalResistance(6, 0, 0.5)).toBe(12)
+    expect(mdx).toContain('I_{short} = \\frac{\\varepsilon}{r} = \\frac{6}{0.5} = 12\\ \\text{A}')
+  })
+})
+
+describe('the twelfth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC12)
+
+  const expected: Record<string, number> = {
+    ei1: currentWithInternalResistance(6, 2.5, 0.5),
+    ei2: terminalVoltage(6, currentWithInternalResistance(6, 2.5, 0.5), 0.5),
+    ei3: currentWithInternalResistance(12, 5, 1),
+    ei4: currentWithInternalResistance(6, 0, 0.5),
+    ei5: currentWithInternalResistance(9, 2.7, 0.3),
+    ei6: terminalVoltage(9, currentWithInternalResistance(9, 2.7, 0.3), 0.3),
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
