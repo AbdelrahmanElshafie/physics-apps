@@ -101,3 +101,14 @@ export function lineFromTwoPoints(x1: number, y1: number, x2: number, y2: number
   const intercept = y1 - slope * x1
   return { slope, intercept }
 }
+
+/**
+ * Net EMF of cells in series, each signed for its orientation relative to a chosen reference
+ * direction: positive when it pushes current the same way as the others ("matching poles"),
+ * negative when it opposes them ("differing poles"). A cell's internal resistance has no
+ * orientation — it always adds (use `seriesResistance` for that), which is what makes flipping one
+ * cell change the current so much more than flipping one resistor ever could.
+ */
+export function seriesEmf(signedEmfsVolts: readonly number[]): number {
+  return signedEmfsVolts.reduce((sum, e) => sum + e, 0)
+}

@@ -17,6 +17,7 @@ import {
   powerFromVR,
   resistanceFromGeometry,
   resistanceFromOhmsLaw,
+  seriesEmf,
   seriesResistance,
   terminalVoltage,
   workFromChargeAndVoltage,
@@ -43,6 +44,7 @@ const TOPIC10 = 'switches-in-circuits'
 const TOPIC11 = 'lamps-brightness'
 const TOPIC12 = 'emf-and-internal-resistance'
 const TOPIC13 = 'terminal-voltage-graphs'
+const TOPIC14 = 'cells-aiding-opposing'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -901,6 +903,70 @@ describe('the thirteenth lesson’s exercise answers are the values the formulas
     tv4: line2.slope,
     tv5: Math.abs(line2.slope),
     tv6: line2.intercept,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('cells-aiding-opposing formulas', () => {
+  it('matching poles: emf adds, internal resistance adds, same as any series resistors', () => {
+    const emfTotal = seriesEmf([6, 3])
+    expect(emfTotal).toBe(9)
+    const rTotal = seriesResistance([0.5, 0.5])
+    expect(rTotal).toBe(1)
+    const I = emfTotal / (3.5 + rTotal)
+    expect(I).toBe(2)
+  })
+
+  it('opposing poles: emf subtracts, but internal resistance is unaffected by orientation', () => {
+    const emfNet = seriesEmf([6, -3])
+    expect(emfNet).toBe(3)
+    const rTotal = seriesResistance([0.5, 0.5])
+    expect(rTotal).toBe(1) // identical to the matching-poles case — orientation never touches r
+    const I = emfNet / (3.5 + rTotal)
+    expect(I).toBeCloseTo(2 / 3, 10)
+  })
+})
+
+describe('the fourteenth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC14}.mdx`), 'utf8')
+
+  it('states the matching-poles worked example (9 V, 1 ohm, 2 A)', () => {
+    expect(mdx).toContain('\\varepsilon_{total} = 6 + 3 = 9\\ \\text{V}')
+    expect(mdx).toContain('r_{total} = 0.5 + 0.5 = 1\\ \\Omega')
+    expect(mdx).toContain('I = \\frac{\\varepsilon_{total}}{R + r_{total}} = \\frac{9}{3.5 + 1} = 2\\ \\text{A}')
+  })
+
+  it('states the opposing-poles worked example (3 V net, same 1 ohm, 2/3 A)', () => {
+    expect(mdx).toContain('\\varepsilon_{net} = |6 - 3| = 3\\ \\text{V}')
+    expect(mdx).toContain(
+      'I = \\frac{\\varepsilon_{net}}{R + r_{total}} = \\frac{3}{3.5 + 1} = \\frac{2}{3}\\ \\text{A} \\approx 0.67\\ \\text{A}',
+    )
+  })
+})
+
+describe('the fourteenth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC14)
+
+  const expected: Record<string, number> = {
+    ca1: seriesEmf([6, 3]),
+    ca2: seriesResistance([0.5, 0.5]),
+    ca3: seriesEmf([6, 3]) / (3.5 + seriesResistance([0.5, 0.5])),
+    ca4: Math.abs(seriesEmf([6, -3])),
+    ca5: seriesResistance([0.5, 0.5]),
+    ca6: seriesEmf([6, -3]) / (3.5 + seriesResistance([0.5, 0.5])),
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
