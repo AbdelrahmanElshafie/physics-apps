@@ -34,6 +34,7 @@ const TOPIC6 = 'parallel-resistors'
 const TOPIC7 = 'series-vs-parallel'
 const TOPIC8 = 'mixed-circuits'
 const TOPIC9 = 'bridge-circuits'
+const TOPIC10 = 'switches-in-circuits'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -633,6 +634,66 @@ describe('the ninth lesson’s exercise answers are the values the formulas give
     bc4: 12 / seriesResistance([10, 20]),
     bc5: 12 / seriesResistance([5, 10]),
     bc6: 0,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('switches-in-circuits formulas', () => {
+  it('a branch switch only affects its own branch: opening S2 leaves I1 on the 6-ohm branch unchanged', () => {
+    const i1Closed = 12 / 6
+    const i1Open = 12 / 6 // voltage across the branch is unaffected by the other branch's switch
+    expect(i1Closed).toBe(i1Open)
+    expect(i1Closed).toBe(2)
+  })
+
+  it('a bypass switch across R2 (8 ohm) triples the total current: 2 A open, 6 A closed', () => {
+    const iOpen = 24 / seriesResistance([4, 8])
+    const iClosed = 24 / 4 // R2 shorted out, only R1 remains
+    expect(iOpen).toBe(2)
+    expect(iClosed).toBe(6)
+    expect(iClosed / iOpen).toBe(3)
+  })
+})
+
+describe('the tenth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC10}.mdx`), 'utf8')
+
+  it('states the branch-switch worked example (2 A unaffected, 1 A, then 0 A)', () => {
+    expect(mdx).toContain('I_1 = \\frac{12}{6} = 2\\ \\text{A}, \\quad I_2 = \\frac{12}{12} = 1\\ \\text{A}')
+    expect(mdx).toContain('I_2 = 0\\ \\text{A}')
+    expect(mdx).toContain('لكن فرق الجهد على الفرع الأول (اللي فيه R₁ وS₁) لسه نفسه')
+  })
+
+  it('states the bypass-switch worked example (2 A open, 6 A closed)', () => {
+    expect(mdx).toContain('I = \\frac{V}{R_1 + R_2} = \\frac{24}{4 + 8} = 2\\ \\text{A}')
+    expect(mdx).toContain('I = \\frac{24}{4} = 6\\ \\text{A}')
+    expect(mdx).toContain('I_{R_2} = 0\\ \\text{A}')
+  })
+})
+
+describe('the tenth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC10)
+
+  const expected: Record<string, number> = {
+    sw1: 12 / 6,
+    sw2: 12 / 6,
+    sw3: 0,
+    sw4: 24 / seriesResistance([4, 8]),
+    sw5: 24 / 4,
+    sw6: 0,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
