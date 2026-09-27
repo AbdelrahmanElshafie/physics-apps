@@ -31,8 +31,8 @@ describe('LaTeX never carries Arabic text inside \\text{}', () => {
 
   it.each(files)('%s', (file) => {
     const content = fs.readFileSync(file, 'utf8')
-    const match = ARABIC_IN_TEXT_CMD.exec(content)
-    expect(match, `Found Arabic inside \\text{}: ${match?.[0]}`).toBeNull()
+    const matches = [...content.matchAll(new RegExp(ARABIC_IN_TEXT_CMD, 'g'))].map((m) => m[0])
+    expect(matches, `Found Arabic inside \\text{}: ${matches.join(', ')}`).toEqual([])
   })
 })
 
