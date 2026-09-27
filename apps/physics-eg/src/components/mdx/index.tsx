@@ -8,6 +8,7 @@ import type { GridPoint, PlacedComponent } from '@/components/circuit/grid'
 
 import { Axioms, Callout, Compare, Derivation, Step } from './blocks'
 import { Predict } from './Predict'
+import { TerminalVoltagePlot } from './TerminalVoltagePlot'
 
 /** The component vocabulary available to lesson authors. */
 export function mdxComponents(): MDXComponents {
@@ -23,6 +24,7 @@ export function mdxComponents(): MDXComponents {
     Derivation,
     Step,
     Predict,
+    TerminalVoltagePlot,
 
     // A fixed, read-only circuit diagram embedded in a lesson: `<Circuit components={[...]} />`.
     Circuit: ({

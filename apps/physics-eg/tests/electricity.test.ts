@@ -8,6 +8,7 @@ import {
   currentFromCharge,
   currentWithInternalResistance,
   electronCount,
+  lineFromTwoPoints,
   parallelResistance,
   potentialDifference,
   potentialDifferenceBetweenPoints,
@@ -41,6 +42,7 @@ const TOPIC9 = 'bridge-circuits'
 const TOPIC10 = 'switches-in-circuits'
 const TOPIC11 = 'lamps-brightness'
 const TOPIC12 = 'emf-and-internal-resistance'
+const TOPIC13 = 'terminal-voltage-graphs'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -834,6 +836,71 @@ describe('the twelfth lesson’s exercise answers are the values the formulas gi
     ei4: currentWithInternalResistance(6, 0, 0.5),
     ei5: currentWithInternalResistance(9, 2.7, 0.3),
     ei6: terminalVoltage(9, currentWithInternalResistance(9, 2.7, 0.3), 0.3),
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('lineFromTwoPoints', () => {
+  it('recovers slope and intercept exactly for a simple line', () => {
+    const { slope, intercept } = lineFromTwoPoints(2, 8, 5, 5)
+    expect(slope).toBe(-1)
+    expect(intercept).toBe(10)
+  })
+
+  it('reproduces the emf/r cell from the previous lesson from two different data points', () => {
+    const { slope, intercept } = lineFromTwoPoints(0.5, 5.75, 2.5, 4.75)
+    expect(slope).toBe(-0.5)
+    expect(Math.abs(slope)).toBe(0.5)
+    expect(intercept).toBe(6)
+  })
+})
+
+describe('terminal-voltage-graphs formulas', () => {
+  it('the lesson’s own two data points (1,5.5) and (3,4.5) give r=0.5, emf=6 — matching the prior lesson', () => {
+    const { slope, intercept } = lineFromTwoPoints(1, 5.5, 3, 4.5)
+    expect(slope).toBe(-0.5)
+    expect(Math.abs(slope)).toBe(0.5)
+    expect(intercept).toBe(6)
+  })
+})
+
+describe('the thirteenth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC13}.mdx`), 'utf8')
+
+  it('states the worked example’s slope, r and emf', () => {
+    expect(mdx).toContain('m = \\frac{4.5 - 5.5}{3 - 1} = \\frac{-1}{2} = -0.5')
+    expect(mdx).toContain('r = |{-0.5}| = 0.5\\ \\Omega')
+    expect(mdx).toContain('\\varepsilon = V_1 - m I_1 = 5.5 - (-0.5)(1) = 6\\ \\text{V}')
+    expect(mdx).toContain('V_2 = \\varepsilon + m I_2 = 6 + (-0.5)(3) = 4.5\\ \\text{V} \\quad \\checkmark')
+  })
+})
+
+describe('the thirteenth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC13)
+
+  const line1 = lineFromTwoPoints(2, 8, 5, 5)
+  const line2 = lineFromTwoPoints(0.5, 5.75, 2.5, 4.75)
+
+  const expected: Record<string, number> = {
+    tv1: line1.slope,
+    tv2: Math.abs(line1.slope),
+    tv3: line1.intercept,
+    tv4: line2.slope,
+    tv5: Math.abs(line2.slope),
+    tv6: line2.intercept,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {

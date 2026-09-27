@@ -90,3 +90,14 @@ export function currentWithInternalResistance(emfVolts: number, externalOhms: nu
 export function terminalVoltage(emfVolts: number, amps: number, internalOhms: number): number {
   return emfVolts - amps * internalOhms
 }
+
+/**
+ * Slope and V-intercept of the straight line through two (I, V) data points. A terminal-voltage
+ * graph for a real cell is exactly this line (V = emf - I r), so the intercept reads off as the
+ * emf and the slope's magnitude as the internal resistance.
+ */
+export function lineFromTwoPoints(x1: number, y1: number, x2: number, y2: number): { slope: number; intercept: number } {
+  const slope = (y2 - y1) / (x2 - x1)
+  const intercept = y1 - slope * x1
+  return { slope, intercept }
+}
