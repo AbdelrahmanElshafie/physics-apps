@@ -32,6 +32,7 @@ const TOPIC4 = 'resistivity'
 const TOPIC5 = 'series-resistors'
 const TOPIC6 = 'parallel-resistors'
 const TOPIC7 = 'series-vs-parallel'
+const TOPIC8 = 'mixed-circuits'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -493,6 +494,85 @@ describe('the seventh lesson’s exercise answers are the values the formulas gi
     sp4: 12 / seriesResistance([6, 6]),
     sp5: 12 / parallelResistance([6, 6]),
     sp6: (12 / parallelResistance([6, 6])) / (12 / seriesResistance([6, 6])),
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('mixed-circuits formulas', () => {
+  it('worked example 1: R1 series with (R2 parallel R3), 5/10/10 ohm at 20 V', () => {
+    const r23 = parallelResistance([10, 10])
+    expect(r23).toBe(5)
+    const rTotal = seriesResistance([5, r23])
+    expect(rTotal).toBe(10)
+    const I = 20 / rTotal
+    expect(I).toBe(2)
+    const v23 = I * r23
+    expect(v23).toBe(10)
+    const i2 = v23 / 10
+    const i3 = v23 / 10
+    expect(i2 + i3).toBe(I)
+  })
+
+  it('worked example 2: (R1 series R2) parallel with R3, 2/4/6 ohm at 12 V', () => {
+    const r12 = seriesResistance([2, 4])
+    expect(r12).toBe(6)
+    const rTotal = parallelResistance([r12, 6])
+    expect(rTotal).toBe(3)
+    const I = 12 / rTotal
+    expect(I).toBe(4)
+    const i12 = 12 / r12
+    expect(i12).toBe(2)
+    const v1 = i12 * 2
+    const v2 = i12 * 4
+    expect(v1 + v2).toBe(12)
+  })
+})
+
+describe('the eighth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC8}.mdx`), 'utf8')
+
+  it('states worked example 1’s reduction chain (5 -> 10 ohm, 2 A, 10 V, 1+1 A)', () => {
+    expect(mdx).toContain('R_{23} = \\left(\\frac{1}{10} + \\frac{1}{10}\\right)^{-1} = 5\\ \\Omega')
+    expect(mdx).toContain('R_{total} = R_1 + R_{23} = 5 + 5 = 10\\ \\Omega')
+    expect(mdx).toContain('I = \\frac{V}{R_{total}} = \\frac{20}{10} = 2\\ \\text{A}')
+    expect(mdx).toContain('V_{23} = I_{23} R_{23} = 2 \\times 5 = 10\\ \\text{V}')
+    expect(mdx).toContain('I_2 + I_3 = 1 + 1 = 2\\ \\text{A} = I')
+  })
+
+  it('states worked example 2’s reduction chain (6 -> 3 ohm, 4 A, 4+8 V)', () => {
+    expect(mdx).toContain('R_{12} = R_1 + R_2 = 2 + 4 = 6\\ \\Omega')
+    expect(mdx).toContain('R_{total} = \\left(\\frac{1}{6} + \\frac{1}{6}\\right)^{-1} = 3\\ \\Omega')
+    expect(mdx).toContain('I = \\frac{V}{R_{total}} = \\frac{12}{3} = 4\\ \\text{A}')
+    expect(mdx).toContain('V_1 + V_2 = 4 + 8 = 12\\ \\text{V}')
+  })
+})
+
+describe('the eighth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC8)
+
+  const r23 = parallelResistance([10, 10])
+  const r12 = seriesResistance([2, 4])
+
+  const expected: Record<string, number> = {
+    mc1: seriesResistance([5, r23]),
+    mc2: 20 / seriesResistance([5, r23]),
+    mc3: (20 / seriesResistance([5, r23])) * r23,
+    mc4: parallelResistance([r12, 6]),
+    mc5: 12 / parallelResistance([r12, 6]),
+    mc6: (12 / r12) * 2,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
