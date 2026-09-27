@@ -10,7 +10,9 @@ import {
   parallelResistance,
   potentialDifference,
   potentialDifferenceBetweenPoints,
+  powerFromIR,
   powerFromVI,
+  powerFromVR,
   resistanceFromGeometry,
   resistanceFromOhmsLaw,
   seriesResistance,
@@ -35,6 +37,7 @@ const TOPIC7 = 'series-vs-parallel'
 const TOPIC8 = 'mixed-circuits'
 const TOPIC9 = 'bridge-circuits'
 const TOPIC10 = 'switches-in-circuits'
+const TOPIC11 = 'lamps-brightness'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -694,6 +697,75 @@ describe('the tenth lesson’s exercise answers are the values the formulas give
     sw4: 24 / seriesResistance([4, 8]),
     sw5: 24 / 4,
     sw6: 0,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('lamps-brightness formulas', () => {
+  it('identical 4-ohm lamps at 12 V: 36 W alone, 9 W in series, 36 W in parallel', () => {
+    const pAlone = powerFromVR(12, 4)
+    expect(pAlone).toBe(36)
+    const iSeries = 12 / seriesResistance([4, 4])
+    const pSeries = powerFromIR(iSeries, 4)
+    expect(pSeries).toBe(9)
+    const pParallel = powerFromVR(12, 4)
+    expect(pParallel).toBe(pAlone)
+  })
+
+  it('different lamps (2/4 ohm) at 12 V: bigger R wins in series, smaller R wins in parallel', () => {
+    const i = 12 / seriesResistance([2, 4])
+    const p1Series = powerFromIR(i, 2)
+    const p2Series = powerFromIR(i, 4)
+    expect(p1Series).toBe(8)
+    expect(p2Series).toBe(16)
+    expect(p2Series).toBeGreaterThan(p1Series)
+
+    const p1Parallel = powerFromVR(12, 2)
+    const p2Parallel = powerFromVR(12, 4)
+    expect(p1Parallel).toBe(72)
+    expect(p2Parallel).toBe(36)
+    expect(p1Parallel).toBeGreaterThan(p2Parallel)
+  })
+})
+
+describe('the eleventh lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC11}.mdx`), 'utf8')
+
+  it('states the identical-lamps worked example (36 W, 9 W, 36 W)', () => {
+    expect(mdx).toContain('P_{alone} = \\frac{V^2}{R} = \\frac{12^2}{4} = 36\\ \\text{W}')
+    expect(mdx).toContain('P_{series} = I^2 R = 1.5^2 \\times 4 = 9\\ \\text{W}')
+    expect(mdx).toContain('P_{parallel} = \\frac{V^2}{R} = \\frac{12^2}{4} = 36\\ \\text{W}')
+  })
+
+  it('states the different-lamps series and parallel worked examples (8/16 W, then 72/36 W)', () => {
+    expect(mdx).toContain('P_1 = I^2 R_1 = 2^2 \\times 2 = 8\\ \\text{W}, \\quad P_2 = I^2 R_2 = 2^2 \\times 4 = 16\\ \\text{W}')
+    expect(mdx).toContain('P_1 = \\frac{V^2}{R_1} = \\frac{12^2}{2} = 72\\ \\text{W}, \\quad P_2 = \\frac{V^2}{R_2} = \\frac{12^2}{4} = 36\\ \\text{W}')
+  })
+})
+
+describe('the eleventh lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC11)
+
+  const expected: Record<string, number> = {
+    lb1: powerFromVR(12, 4),
+    lb2: powerFromIR(12 / seriesResistance([4, 4]), 4),
+    lb3: powerFromVR(12, 4),
+    lb4: powerFromIR(12 / seriesResistance([2, 4]), 2),
+    lb5: powerFromIR(12 / seriesResistance([2, 4]), 4),
+    lb6: powerFromVR(12, 2),
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
