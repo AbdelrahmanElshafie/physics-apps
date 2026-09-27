@@ -7,6 +7,7 @@ import {
   conductivity,
   currentFromCharge,
   electronCount,
+  parallelResistance,
   potentialDifference,
   potentialDifferenceBetweenPoints,
   resistanceFromGeometry,
@@ -28,6 +29,7 @@ const TOPIC2 = 'potential-difference'
 const TOPIC3 = 'ohms-law'
 const TOPIC4 = 'resistivity'
 const TOPIC5 = 'series-resistors'
+const TOPIC6 = 'parallel-resistors'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -363,6 +365,70 @@ describe('the fifth lesson’s exercise answers are the values the formulas give
     sr4: 20 - 6 - 9,
     sr5: 45 / seriesResistance([25, 70, 85]),
     sr6: (45 / seriesResistance([25, 70, 85])) * 70,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('parallel-resistors formulas', () => {
+  it('reproduces the same 25/70/85 ohm trio as the series lesson, now in parallel', () => {
+    const req = parallelResistance([25, 70, 85])
+    expect(req).toBeCloseTo(15.1398, 3)
+    const I = 1.8 + 45 / 70 + 45 / 85
+    expect(I).toBeCloseTo(2.9723, 3)
+    expect(45 / req).toBeCloseTo(I, 6) // total current two ways must agree
+  })
+
+  it('equivalent resistance is always at most the smallest individual resistor', () => {
+    expect(parallelResistance([4, 4])).toBeLessThan(4)
+  })
+})
+
+describe('the sixth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC6}.mdx`), 'utf8')
+
+  it('states the worked example’s equivalent resistance (approx 15.14 ohm)', () => {
+    expect(parallelResistance([25, 70, 85])).toBeCloseTo(15.1398, 3)
+    expect(mdx).toContain('R_{eq} \\approx 15.14\\ \\Omega')
+  })
+
+  it('states the worked example’s branch currents (1.8, 0.643, 0.529 A)', () => {
+    expect(45 / 25).toBe(1.8)
+    expect(45 / 70).toBeCloseTo(0.643, 3)
+    expect(45 / 85).toBeCloseTo(0.529, 3)
+    expect(mdx).toContain(
+      'I_1 = \\frac{45}{25} = 1.8\\ \\text{A}, \\quad I_2 = \\frac{45}{70} \\approx 0.643\\ \\text{A}, \\quad I_3 = \\frac{45}{85} \\approx 0.529\\ \\text{A}',
+    )
+  })
+
+  it('states the worked example’s total current (approx 2.97 A)', () => {
+    expect(1.8 + 45 / 70 + 45 / 85).toBeCloseTo(2.97, 2)
+    expect(mdx).toContain('I = 1.8 + 0.643 + 0.529 \\approx 2.97\\ \\text{A}')
+  })
+})
+
+describe('the sixth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC6)
+
+  const expected: Record<string, number> = {
+    pr1: parallelResistance([4, 4]),
+    pr2: 8 / parallelResistance([4, 4]),
+    pr3: 8 / 4,
+    pr4: parallelResistance([25, 70, 85]),
+    pr5: 45 / parallelResistance([25, 70, 85]),
+    pr6: 45 / 70,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
