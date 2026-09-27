@@ -45,6 +45,7 @@ const TOPIC11 = 'lamps-brightness'
 const TOPIC12 = 'emf-and-internal-resistance'
 const TOPIC13 = 'terminal-voltage-graphs'
 const TOPIC14 = 'cells-aiding-opposing'
+const TOPIC15 = 'kirchhoff-current-law'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -967,6 +968,65 @@ describe('the fourteenth lesson’s exercise answers are the values the formulas
     ca4: Math.abs(seriesEmf([6, -3])),
     ca5: seriesResistance([0.5, 0.5]),
     ca6: seriesEmf([6, -3]) / (3.5 + seriesResistance([0.5, 0.5])),
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('kirchhoff-current-law formulas', () => {
+  it('a junction with two branches in and one out balances (5+2=7)', () => {
+    expect(5 + 2).toBe(7)
+  })
+
+  it('a junction with two in and two out balances (6+4 = 7+3)', () => {
+    const i3 = 6 + 4 - 3
+    expect(i3).toBe(7)
+    expect(6 + 4).toBe(i3 + 3)
+  })
+
+  it('the lesson’s own circuit: 12 V across 4/6 ohm branches gives 3 A + 2 A = 5 A total', () => {
+    const i1 = 12 / 4
+    const i2 = 12 / 6
+    expect(i1).toBe(3)
+    expect(i2).toBe(2)
+    expect(i1 + i2).toBe(5)
+  })
+})
+
+describe('the fifteenth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC15}.mdx`), 'utf8')
+
+  it('states the simple-junction worked example (I3 = 7 A)', () => {
+    expect(mdx).toContain('I_3 = 5 + 2 = 7\\ \\text{A}')
+  })
+
+  it('states the multi-branch junction worked example (I3 = 7 A from 6+4=I3+3)', () => {
+    expect(mdx).toContain('6 + 4 = I_3 + 3 \\;\\Rightarrow\\; I_3 = 7\\ \\text{A}')
+  })
+})
+
+describe('the fifteenth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC15)
+
+  const expected: Record<string, number> = {
+    kcl1: 5 + 2,
+    kcl2: 6 + 9 - 10,
+    kcl3: 8 - 3,
+    kcl4: 12 / 4,
+    kcl5: 12 / 6,
+    kcl6: 12 / 4 + 12 / 6,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
