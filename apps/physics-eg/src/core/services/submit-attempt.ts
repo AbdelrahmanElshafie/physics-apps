@@ -1,5 +1,6 @@
-import type { AnswerChecker, AutoVerdict, ProgressRepository } from '@core/ports'
-import type { Exercise, LearningEvent, TopicId } from '@core/domain'
+import { threadFor } from '@physics/tutor-bridge'
+import type { AnswerChecker, AutoVerdict, OutboundMessage, ProgressRepository, TutorTransport } from '@core/ports'
+import { needsTutorReview, type Exercise, type LearningEvent, type TopicId } from '@core/domain'
 
 export interface Clock {
   now(): Date
@@ -11,6 +12,7 @@ export interface IdGenerator {
 export interface SubmitAttemptDeps {
   readonly progress: ProgressRepository
   readonly checker: AnswerChecker
+  readonly tutor: TutorTransport
   readonly clock: Clock
   readonly ids: IdGenerator
 }
@@ -26,21 +28,18 @@ export interface SubmitAttemptResult {
   readonly attemptId: string
   readonly autoVerdict: AutoVerdict
   readonly detail?: string
-  /**
-   * True when nobody has settled this one yet — the checker returned `unverified`, or the
-   * exercise demands a written justification. There is no tutor transport in this app yet, so
-   * "queued" means "sitting in the event log for a human to read", not "sent anywhere".
-   */
+  /** True when the attempt was forwarded to the instructor's queue for review. */
   readonly awaitingReview: boolean
 }
 
 /**
- * Records an attempt: check what can be checked, log the event.
+ * Records an attempt: check what can be checked, log the event, and escalate to the instructor
+ * when the answer needs judgement.
  *
  * The one rule that matters: an `unverified` result is never reported as wrong — the checker
- * simply has nothing to say. `needsTutorReview` (an exercise with `explain.required`) also leaves
- * it awaiting review even when the value itself checks out, because the reasoning is the thing
- * being taught, not the number.
+ * simply has nothing to say, so it goes to the instructor. `explain.required` also always
+ * escalates, even when the value itself checks out, because the reasoning is the thing being
+ * taught, not the number.
  */
 export async function submitAttempt(
   deps: SubmitAttemptDeps,
@@ -65,7 +64,16 @@ export async function submitAttempt(
   }
   await deps.progress.append(event)
 
-  const awaitingReview = outcome.verdict !== 'correct' || (exercise.explain.required && explanation === undefined)
+  const awaitingReview = needsTutorReview(exercise) || outcome.verdict !== 'correct'
+
+  if (awaitingReview) {
+    const message: OutboundMessage = {
+      threadId: threadFor({ topicId, exerciseId: exercise.id }),
+      body: buildReviewRequest(exercise, answer, explanation, outcome.verdict),
+      context: { topicId, exerciseId: exercise.id, draftAnswer: answer },
+    }
+    await deps.tutor.send(message)
+  }
 
   return {
     attemptId,
@@ -73,4 +81,47 @@ export async function submitAttempt(
     ...(outcome.detail !== undefined ? { detail: outcome.detail } : {}),
     awaitingReview,
   }
+}
+
+/** Records the instructor's grade for an attempt. Called from the tutor CLI. */
+export async function recordGrade(
+  deps: Pick<SubmitAttemptDeps, 'progress' | 'clock' | 'ids'>,
+  input: {
+    topicId: TopicId
+    exerciseId: string
+    attemptId: string
+    verdict: 'correct' | 'partial' | 'incorrect'
+    feedback: string
+    gradedBy: 'tutor' | 'auto'
+  },
+): Promise<void> {
+  await deps.progress.append({
+    v: 1,
+    id: deps.ids.next(),
+    ts: deps.clock.now().toISOString(),
+    type: 'attempt.graded',
+    ...input,
+  })
+}
+
+function buildReviewRequest(
+  exercise: Exercise,
+  answer: string,
+  explanation: string | undefined,
+  verdict: AutoVerdict,
+): string {
+  const lines = [
+    `من فضلك راجع إجابتي على ${exercise.label ?? exercise.id}.`,
+    '',
+    `السؤال: ${exercise.prompt}`,
+    `إجابتي: ${answer || '(فاضية)'}`,
+  ]
+  if (explanation) lines.push(`تفسيري: ${explanation}`)
+  lines.push(
+    '',
+    verdict === 'unverified'
+      ? 'المصحح التلقائي مقدرش يحكم على الإجابة دي.'
+      : `المصحح التلقائي قال: ${verdict}.`,
+  )
+  return lines.join('\n')
 }

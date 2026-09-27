@@ -6,6 +6,7 @@ import { CheckCircle2, Eye, HelpCircle, Lightbulb, XCircle } from 'lucide-react'
 import type { Exercise, ExerciseProgress } from '@core/domain'
 import { submitExercise, revealSolution } from '@/app/actions'
 import { MixedText } from '@/components/math/Math'
+import { ExerciseTutor } from './ExerciseTutor'
 import { cn } from '@/lib/utils'
 
 type Verdict = 'correct' | 'incorrect' | 'unverified'
@@ -40,19 +41,29 @@ export function ExerciseCard({
   choiceHtml?: Record<string, string>
 }) {
   const [answer, setAnswer] = useState(progress?.lastAnswer ?? '')
+  const [explanation, setExplanation] = useState(progress?.lastExplanation ?? '')
   const [result, setResult] = useState<SubmissionState | null>(null)
   const [showSolution, setShowSolution] = useState(progress?.solutionRevealed ?? false)
   const [pending, startTransition] = useTransition()
 
-  const canSubmit = answer.trim().length > 0 && !pending
+  const needsExplanation = exercise.explain.required
+  const canSubmit =
+    answer.trim().length > 0 && (!needsExplanation || explanation.trim().length > 0) && !pending
 
   const settled: Verdict | null =
     result?.verdict ?? (progress?.autoVerdict === 'correct' ? 'correct' : null)
 
+  const awaitingReview = result?.awaitingReview ?? progress?.awaitingReview ?? false
+
   const submit = () => {
     if (!canSubmit) return
     startTransition(async () => {
-      const outcome = await submitExercise({ topicId, exerciseId: exercise.id, answer })
+      const outcome = await submitExercise({
+        topicId,
+        exerciseId: exercise.id,
+        answer,
+        ...(needsExplanation ? { explanation } : {}),
+      })
       setResult({
         verdict: outcome.autoVerdict,
         ...(outcome.detail !== undefined ? { detail: outcome.detail } : {}),
@@ -134,6 +145,17 @@ export function ExerciseCard({
         />
       )}
 
+      {needsExplanation && (
+        <textarea
+          value={explanation}
+          onChange={(e) => setExplanation(e.target.value)}
+          placeholder="وضّح إجابتك — السبب هو اللي بيتقيّم هنا"
+          disabled={pending}
+          rows={2}
+          className="mt-2 w-full resize-y rounded-lg border border-border-strong bg-surface-sunken px-3 py-2 text-sm text-fg outline-none placeholder:text-fg-subtle focus:border-accent"
+        />
+      )}
+
       <div className="mt-3 flex flex-wrap items-center gap-2">
         <button
           type="button"
@@ -187,6 +209,8 @@ export function ExerciseCard({
           />
         </div>
       )}
+
+      {awaitingReview && <ExerciseTutor topicId={topicId} exerciseId={exercise.id} />}
     </div>
   )
 }

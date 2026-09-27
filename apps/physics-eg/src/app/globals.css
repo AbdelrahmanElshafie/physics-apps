@@ -29,6 +29,8 @@
   --color-warning-muted: oklch(0.36 0.07 85);
   --color-danger: oklch(0.68 0.18 25);
   --color-danger-muted: oklch(0.34 0.09 25);
+  --color-pending: oklch(0.72 0.12 300);
+  --color-pending-muted: oklch(0.34 0.06 300);
 
   --font-sans: var(--font-cairo), 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', monospace;
@@ -60,6 +62,8 @@
   --color-warning-muted: oklch(0.95 0.05 85);
   --color-danger: oklch(0.54 0.19 25);
   --color-danger-muted: oklch(0.95 0.04 25);
+  --color-pending: oklch(0.5 0.14 300);
+  --color-pending-muted: oklch(0.95 0.04 300);
 
   --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.06), 0 8px 24px oklch(0 0 0 / 0.06);
 }
@@ -121,6 +125,35 @@
 
 .katex-display > .katex {
   white-space: nowrap;
+}
+
+/* ---- MathLive integration (scratchpad only — exercises stay plain-text) --- */
+
+math-field {
+  --caret-color: var(--color-accent);
+  --selection-background-color: var(--color-accent-muted);
+  --contains-highlight-background-color: transparent;
+  --smart-fence-color: var(--color-fg-muted);
+  --placeholder-color: var(--color-fg-subtle);
+
+  display: block;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  font-size: 1.05rem;
+  color: var(--color-fg);
+  background-color: var(--color-surface-sunken);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0.5rem;
+  outline: none;
+}
+
+math-field:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-muted);
+}
+
+math-field::part(virtual-keyboard-toggle) {
+  color: var(--color-fg-subtle);
 }
 
 /* ---- Reading column -------------------------------------------------------
@@ -231,6 +264,7 @@
 code,
 pre,
 .latex-source,
+math-field,
 [data-ltr] {
   direction: ltr;
   unicode-bidi: isolate;

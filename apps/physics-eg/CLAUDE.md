@@ -9,16 +9,40 @@ deployment, separate content, sharing what is genuinely subject-agnostic via `pa
 - **Arabic only.** No locale toggle, no fallback chain — `dir="rtl"` and Arabic strings from the
   root layout down. If a second language is ever needed, that is a real feature to design, not a
   flag to flip.
-- **No tutor bridge yet.** Exercises grade themselves (`@physics/checker`) or sit `awaitingReview`
-  in the event log for a human to read later — there is no Claude Code file-bridge wired up. Adding
-  one later is additive: implement `TutorTransport` from `@physics/core/ports`, wire it into
-  `container.ts`, nothing above that changes.
+- **No SymPy sidecar.** The tutor bridge and scratchpad (below) run on the same shared packages
+  physics-instructor uses, but this app's `checker` is `RulesAnswerChecker` alone — a symbolic
+  derivation step the rules checker cannot parse comes back `unchecked`, honestly, rather than
+  guessing. Adding a CAS later is additive, same as physics-instructor's.
 - **A real circuit simulator**, not diagrams. `@physics/circuit-sim` solves arbitrary DC resistive
   networks by modified nodal analysis; `CircuitCanvas` is a breadboard-style dot grid where a
   student clicks two points to place a wire/resistor/battery/switch/ammeter/voltmeter, and the
   circuit re-solves on every change. The same component renders a fixed, read-only worked example
   inside a lesson (`<Circuit components={...} readOnly />` via the MDX registry) or a free sandbox
   at `/sandbox`.
+
+## Watching a student solve, not just grading the final answer
+
+Two mechanisms, both shared with physics-instructor via `@physics/tutor-bridge` and
+`@physics/scratchpad` (see each package's README) and rooted under this app's own `data/`:
+
+- **The tutor bridge.** `submitAttempt` escalates to the instructor whenever `needsTutorReview`
+  (an exercise with `explain.required`, or `check.type: 'tutor'`) or the checker returns anything
+  other than `correct` — never just when the checker fails to parse an answer. `pnpm tutor` lists
+  what's waiting, `pnpm tutor <n>` shows the question with its exercise and expected answer,
+  `pnpm tutor:reply <n> "…"` answers it and the reply streams into the open page with no refresh
+  (`ExerciseTutor.tsx`, backed by `@physics/tutor-bridge/react`'s `useThreadMessages`, inside a
+  `TutorStreamProvider` wrapping the lesson page).
+- **The scratchpad**, at `/scratch`. A derivation, one LaTeX step per line, checked against the
+  step before it (`checkWorking` from `@physics/scratchpad`) — the failure this catches (a sign
+  lost in step three, built on faithfully for five more steps) is invisible to an answer-only
+  check. "Ask your instructor" sends the whole derivation, inlined, to the same queue.
+
+Both need `MathInput` from `@physics/math-ui` for LaTeX entry — `/api/render` (POST `{latex}` ->
+`{html}`, using this app's own `renderMath`/`KATEX_MACROS` from `lib/katex.ts`) backs its LaTeX-mode
+live preview, and `predev`/`prebuild` sync MathLive's fonts into `public/mathlive/fonts` the same
+way physics-instructor does. Exercise answers themselves stay plain text/numeric — only the
+scratchpad needs LaTeX entry, so `ExerciseCard`'s explanation field for `explain.required` is a
+plain `<textarea>`, not a math field.
 
 ## Commands
 
@@ -27,6 +51,10 @@ pnpm dev                  # localhost:3200
 pnpm validate:content     # schema + prerequisite-graph check
 pnpm test
 pnpm lint && pnpm typecheck
+pnpm tutor                # list student questions waiting on you   <- check this every session
+pnpm tutor <n>            # read question n in full, with its exercise and expected answer
+pnpm tutor:reply <n> "…"  # answer it; appears in their browser immediately, no refresh
+pnpm tutor grade <n> correct|partial|incorrect "feedback"
 ```
 
 ## What comes from packages/

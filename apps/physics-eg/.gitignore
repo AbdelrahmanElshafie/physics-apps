@@ -8,6 +8,13 @@ next-env.d.ts
 # Runtime state — regenerated, machine-local.
 data/.cache/
 data/events.jsonl
+data/bridge/threads/
+
+# Scratchpads are per-machine working, not content.
+data/scratch/
+
+# Synced from node_modules by scripts/sync-mathlive-fonts.ts
+public/mathlive/
 
 .env*
 !.env.example

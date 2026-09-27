@@ -2,7 +2,8 @@
 
 import { revalidatePath } from 'next/cache'
 
-import type { TopicId } from '@core/domain'
+import { askTutor, threadFor } from '@physics/tutor-bridge'
+import { asThreadId, type TopicId } from '@core/domain'
 import { submitAttempt, type SubmitAttemptResult } from '@core/services'
 import { container } from '@/container'
 
@@ -29,8 +30,9 @@ export async function submitExercise(input: {
   topicId: string
   exerciseId: string
   answer: string
+  explanation?: string
 }): Promise<SubmitAttemptResult> {
-  const { content, progress, checker, clock, ids } = container
+  const { content, progress, checker, tutor, clock, ids } = container
   const topicId = input.topicId as TopicId
 
   const exercises = await content.getExercises(topicId)
@@ -41,7 +43,15 @@ export async function submitExercise(input: {
 
   // No revalidatePath here: the card renders the verdict from this return value directly, and
   // revalidating would recompile the lesson MDX for nothing the learner would see change.
-  return submitAttempt({ progress, checker, clock, ids }, { topicId, exercise, answer: input.answer })
+  return submitAttempt(
+    { progress, checker, tutor, clock, ids },
+    {
+      topicId,
+      exercise,
+      answer: input.answer,
+      ...(input.explanation !== undefined ? { explanation: input.explanation } : {}),
+    },
+  )
 }
 
 export async function revealSolution(topicId: string, exerciseId: string): Promise<void> {
@@ -54,6 +64,46 @@ export async function revealSolution(topicId: string, exerciseId: string): Promi
     topicId,
     exerciseId,
   })
+}
+
+export async function sendQuestion(input: {
+  body: string
+  topicId?: string
+  exerciseId?: string
+  draftAnswer?: string
+}): Promise<{ threadId: string; messageId: string }> {
+  const { tutor } = container
+
+  const threadId = threadFor({
+    ...(input.topicId !== undefined ? { topicId: input.topicId as TopicId } : {}),
+    ...(input.exerciseId !== undefined ? { exerciseId: input.exerciseId } : {}),
+  })
+
+  const messageId = await askTutor(tutor, {
+    threadId,
+    body: input.body,
+    context: {
+      ...(input.topicId !== undefined ? { topicId: input.topicId as TopicId } : {}),
+      ...(input.exerciseId !== undefined ? { exerciseId: input.exerciseId } : {}),
+      ...(input.draftAnswer !== undefined ? { draftAnswer: input.draftAnswer } : {}),
+    },
+  })
+
+  return { threadId: String(threadId), messageId: String(messageId) }
+}
+
+/** Reads a thread for a fresh page load, before the live stream has anything of its own. */
+export async function readThread(threadId: string) {
+  const { tutor } = container
+  const messages = await tutor.history(asThreadId(threadId))
+  return messages.map((m) => ({
+    id: String(m.id),
+    role: m.role,
+    body: m.body,
+    ts: m.ts,
+    pending: m.pending ?? false,
+    context: m.context ?? {},
+  }))
 }
 
 export async function passCheckpoint(topicId: string): Promise<void> {

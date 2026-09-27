@@ -19,6 +19,15 @@ importers:
       '@physics/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@physics/math-ui':
+        specifier: workspace:*
+        version: link:../../packages/math-ui
+      '@physics/scratchpad':
+        specifier: workspace:*
+        version: link:../../packages/scratchpad
+      '@physics/tutor-bridge':
+        specifier: workspace:*
+        version: link:../../packages/tutor-bridge
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -28,6 +37,9 @@ importers:
       lucide-react:
         specifier: ^0.544.0
         version: 0.544.0(react@19.3.0)
+      mathlive:
+        specifier: ^0.105.3
+        version: 0.105.3
       next:
         specifier: ^15.5.4
         version: 15.5.26(@babel/core@7.29.7)(@types/node@22.20.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)

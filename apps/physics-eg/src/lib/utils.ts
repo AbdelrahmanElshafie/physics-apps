@@ -11,17 +11,17 @@ export function formatRelative(iso: string, now: Date = new Date()): string {
   const seconds = Math.round((now.getTime() - then.getTime()) / 1000)
 
   if (!Number.isFinite(seconds)) return ''
-  if (seconds < 45) return 'just now'
-  if (seconds < 90) return 'a minute ago'
+  if (seconds < 45) return 'دلوقتي'
+  if (seconds < 90) return 'من دقيقة'
 
   const minutes = Math.round(seconds / 60)
-  if (minutes < 60) return `${minutes} min ago`
+  if (minutes < 60) return `من ${minutes} دقيقة`
 
   const hours = Math.round(minutes / 60)
-  if (hours < 24) return `${hours} hr ago`
+  if (hours < 24) return `من ${hours} ساعة`
 
   const days = Math.round(hours / 24)
-  if (days < 30) return `${days} day${days === 1 ? '' : 's'} ago`
+  if (days < 30) return `من ${days} يوم`
 
-  return then.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+  return then.toLocaleDateString('ar-EG', { month: 'short', day: 'numeric', year: 'numeric' })
 }

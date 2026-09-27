@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "tsx scripts/sync-mathlive-fonts.ts",
+    "prebuild": "tsx scripts/sync-mathlive-fonts.ts",
     "dev": "next dev -p 3200",
     "build": "next build",
     "start": "next start -p 3200",
@@ -11,13 +13,19 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate:content": "tsx scripts/validate-content.ts"
+    "validate:content": "tsx scripts/validate-content.ts",
+    "tutor": "tsx scripts/tutor.ts",
+    "tutor:reply": "tsx scripts/tutor.ts reply"
   },
   "dependencies": {
     "@physics/core": "workspace:*",
     "@physics/circuit-sim": "workspace:*",
     "@physics/checker": "workspace:*",
+    "@physics/scratchpad": "workspace:*",
+    "@physics/tutor-bridge": "workspace:*",
+    "@physics/math-ui": "workspace:*",
     "katex": "^0.16.22",
+    "mathlive": "^0.105.3",
     "next": "^15.5.4",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.1.1",

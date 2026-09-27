@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
+import { TutorStreamProvider } from '@physics/tutor-bridge/react'
 import { asSyllabusId, groupBySet, qualifyTopicId } from '@core/domain'
 import { container } from '@/container'
 import { mdxComponents } from '@/components/mdx'
@@ -47,84 +48,86 @@ export default async function LessonPage({ params }: PageProps) {
   const groups = groupBySet(exercises)
 
   return (
-    <div className="flex h-dvh flex-col">
-      <Header />
-      <div className="grid min-h-0 flex-1 grid-cols-[260px_1fr]">
-        <Sidebar syllabus={syllabus} progress={progressState} activeTopicId={topicId} />
+    <TutorStreamProvider topicId={topicId}>
+      <div className="flex h-dvh flex-col">
+        <Header />
+        <div className="grid min-h-0 flex-1 grid-cols-[260px_1fr]">
+          <Sidebar syllabus={syllabus} progress={progressState} activeTopicId={topicId} />
 
-        <main className="pane-scroll overflow-y-auto">
-          <TopicViewTracker topicId={topicId} />
-          <div className="mx-auto max-w-3xl px-6 py-8">
-            {lesson ? (
-              <>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-accent">
-                  {syllabus.modules.get(syllabus.topics.get(topicId)!.moduleId)?.title}
-                </p>
-                <h1 className="mb-2 text-2xl font-bold text-fg">{lesson.frontmatter.title}</h1>
-                {lesson.frontmatter.summary && (
-                  <p className="mb-6 text-sm leading-relaxed text-fg-muted">{lesson.frontmatter.summary}</p>
-                )}
+          <main className="pane-scroll overflow-y-auto">
+            <TopicViewTracker topicId={topicId} />
+            <div className="mx-auto max-w-3xl px-6 py-8">
+              {lesson ? (
+                <>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-accent">
+                    {syllabus.modules.get(syllabus.topics.get(topicId)!.moduleId)?.title}
+                  </p>
+                  <h1 className="mb-2 text-2xl font-bold text-fg">{lesson.frontmatter.title}</h1>
+                  {lesson.frontmatter.summary && (
+                    <p className="mb-6 text-sm leading-relaxed text-fg-muted">{lesson.frontmatter.summary}</p>
+                  )}
 
-                <div className="lesson-prose">
-                  <MDXRemote
-                    source={lesson.body}
-                    components={mdxComponents()}
-                    options={{
-                      parseFrontmatter: false,
-                      mdxOptions: {
-                        remarkPlugins: [remarkGfm, remarkMath],
-                        rehypePlugins: [[rehypeKatex, { macros: KATEX_MACROS, strict: false, trust: false }]],
-                      },
-                    }}
-                  />
-                </div>
+                  <div className="lesson-prose">
+                    <MDXRemote
+                      source={lesson.body}
+                      components={mdxComponents()}
+                      options={{
+                        parseFrontmatter: false,
+                        mdxOptions: {
+                          remarkPlugins: [remarkGfm, remarkMath],
+                          rehypePlugins: [[rehypeKatex, { macros: KATEX_MACROS, strict: false, trust: false }]],
+                        },
+                      }}
+                    />
+                  </div>
 
-                {exercises.length > 0 && (
-                  <section className="mt-12 border-t border-border pt-8">
-                    <h2 className="mb-1 text-lg font-semibold text-fg">تمارين</h2>
-                    <p className="mb-6 text-sm text-fg-subtle">
-                      الإجابات الرقمية والاختيارية بتتحقق فورًا.
-                    </p>
-                    <div className="space-y-8">
-                      {groups.map((group) => (
-                        <div key={group.set}>
-                          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-fg-subtle">
-                            مجموعة {group.set}
-                          </h3>
-                          <div className="space-y-3">
-                            {group.exercises.map((exercise) => (
-                              <ExerciseCard
-                                key={exercise.id}
-                                exercise={exercise}
-                                topicId={topicId}
-                                {...(progressByExercise?.get(exercise.id)
-                                  ? { progress: progressByExercise.get(exercise.id)! }
-                                  : {})}
-                                promptHtml={renderInlineMath(exercise.prompt)}
-                                solutionHtml={renderInlineMath(exercise.solution)}
-                                {...(exercise.choices
-                                  ? {
-                                      choiceHtml: Object.fromEntries(
-                                        exercise.choices.map((c) => [c.id, renderInlineMath(c.label)]),
-                                      ),
-                                    }
-                                  : {})}
-                              />
-                            ))}
+                  {exercises.length > 0 && (
+                    <section className="mt-12 border-t border-border pt-8">
+                      <h2 className="mb-1 text-lg font-semibold text-fg">تمارين</h2>
+                      <p className="mb-6 text-sm text-fg-subtle">
+                        الإجابات الرقمية والاختيارية بتتحقق فورًا.
+                      </p>
+                      <div className="space-y-8">
+                        {groups.map((group) => (
+                          <div key={group.set}>
+                            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-fg-subtle">
+                              مجموعة {group.set}
+                            </h3>
+                            <div className="space-y-3">
+                              {group.exercises.map((exercise) => (
+                                <ExerciseCard
+                                  key={exercise.id}
+                                  exercise={exercise}
+                                  topicId={topicId}
+                                  {...(progressByExercise?.get(exercise.id)
+                                    ? { progress: progressByExercise.get(exercise.id)! }
+                                    : {})}
+                                  promptHtml={renderInlineMath(exercise.prompt)}
+                                  solutionHtml={renderInlineMath(exercise.solution)}
+                                  {...(exercise.choices
+                                    ? {
+                                        choiceHtml: Object.fromEntries(
+                                          exercise.choices.map((c) => [c.id, renderInlineMath(c.label)]),
+                                        ),
+                                      }
+                                    : {})}
+                                />
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                )}
-              </>
-            ) : (
-              <NotWrittenYet title={syllabus.topics.get(topicId)?.title ?? topicParam} />
-            )}
-          </div>
-        </main>
+                        ))}
+                      </div>
+                    </section>
+                  )}
+                </>
+              ) : (
+                <NotWrittenYet title={syllabus.topics.get(topicId)?.title ?? topicParam} />
+              )}
+            </div>
+          </main>
+        </div>
       </div>
-    </div>
+    </TutorStreamProvider>
   )
 }
 
