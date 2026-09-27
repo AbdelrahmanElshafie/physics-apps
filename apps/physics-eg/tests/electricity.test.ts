@@ -11,6 +11,7 @@ import {
   potentialDifferenceBetweenPoints,
   resistanceFromGeometry,
   resistanceFromOhmsLaw,
+  seriesResistance,
   workFromChargeAndVoltage,
 } from '@core/domain'
 
@@ -26,6 +27,7 @@ const TOPIC = 'current-and-charge'
 const TOPIC2 = 'potential-difference'
 const TOPIC3 = 'ohms-law'
 const TOPIC4 = 'resistivity'
+const TOPIC5 = 'series-resistors'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -291,6 +293,76 @@ describe('the fourth lesson’s exercise answers are the values the formulas giv
     rs5: conductivity(1e-7),
     rs7: resistanceFromGeometry(1, 2, 0.5) / resistanceFromGeometry(1, 1, 1),
     rs8: 3,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('series-resistors formulas', () => {
+  it('reproduces the textbook worked example: 25+70+85 ohm at 45 V gives I = 0.25 A', () => {
+    const req = seriesResistance([25, 70, 85])
+    expect(req).toBe(180)
+    const I = 45 / req
+    expect(I).toBeCloseTo(0.25, 10)
+  })
+
+  it('the per-resistor voltage drops sum back to the total', () => {
+    const I = 0.25
+    const v1 = I * 25
+    const v2 = I * 70
+    const v3 = I * 85
+    expect(v1 + v2 + v3).toBeCloseTo(45, 10)
+  })
+
+  it('equivalent resistance is always at least the largest individual resistor', () => {
+    expect(seriesResistance([4, 6, 10])).toBeGreaterThan(10)
+  })
+})
+
+describe('the fifth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC5}.mdx`), 'utf8')
+
+  it('states the worked example’s equivalent resistance (180 ohm)', () => {
+    expect(seriesResistance([25, 70, 85])).toBe(180)
+    expect(mdx).toContain('R_{eq} = 25 + 70 + 85 = 180\\ \\Omega')
+  })
+
+  it('states the worked example’s current (0.25 A)', () => {
+    expect(45 / seriesResistance([25, 70, 85])).toBeCloseTo(0.25, 10)
+    expect(mdx).toContain('I = \\frac{V}{R_{eq}} = \\frac{45\\ \\text{V}}{180\\ \\Omega} = 0.25\\ \\text{A}')
+  })
+
+  it('states the worked example’s per-resistor voltage drops, summing to 45 V', () => {
+    const I = 0.25
+    expect(I * 25).toBeCloseTo(6.25, 10)
+    expect(I * 70).toBeCloseTo(17.5, 10)
+    expect(I * 85).toBeCloseTo(21.25, 10)
+    expect(mdx).toContain('V_1 + V_2 + V_3 = 6.25 + 17.5 + 21.25 = 45\\ \\text{V}')
+  })
+})
+
+describe('the fifth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC5)
+
+  const expected: Record<string, number> = {
+    sr1: seriesResistance([4, 6, 10]),
+    sr2: 40 / seriesResistance([4, 6, 10]),
+    sr3: 2 * 6,
+    sr4: 20 - 6 - 9,
+    sr5: 45 / seriesResistance([25, 70, 85]),
+    sr6: (45 / seriesResistance([25, 70, 85])) * 70,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
