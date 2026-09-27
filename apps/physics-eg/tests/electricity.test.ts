@@ -8,6 +8,7 @@ import {
   electronCount,
   potentialDifference,
   potentialDifferenceBetweenPoints,
+  resistanceFromOhmsLaw,
   workFromChargeAndVoltage,
 } from '@core/domain'
 
@@ -21,6 +22,7 @@ import {
 const CONTENT = path.join(process.cwd(), 'content', 'syllabi', 'electricity')
 const TOPIC = 'current-and-charge'
 const TOPIC2 = 'potential-difference'
+const TOPIC3 = 'ohms-law'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -68,6 +70,71 @@ describe('the exercise answers are the values the formulas give', () => {
     cc4: electronCount(20 * 2),
     cc5: electronCount(3.2),
     cc6: currentFromCharge(1.25e19 * 1.6e-19, 2),
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('ohms-law formulas', () => {
+  it('R = V/I and its inverses V = IR, I = V/R are mutually consistent', () => {
+    const R = resistanceFromOhmsLaw(12, 3)
+    expect(R).toBe(4)
+    const V = 4 * R // V = IR at I = 4 A
+    const I = 20 / R // I = V/R at V = 20 V
+    expect(V).toBe(16)
+    expect(I).toBe(5)
+  })
+
+  it('constant resistance: current scales with voltage', () => {
+    const R = resistanceFromOhmsLaw(6, 2)
+    expect(R).toBe(3)
+    expect(18 / R).toBe(6) // tripling V triples I when R is held fixed
+  })
+})
+
+describe('the third lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC3}.mdx`), 'utf8')
+
+  it('states the R = V/I worked example (12 V / 3 A = 4 ohm)', () => {
+    expect(resistanceFromOhmsLaw(12, 3)).toBe(4)
+    expect(mdx).toContain('frac{12\\ \\text{V}}{3\\ \\text{A}}')
+    expect(mdx).toContain('R = 4\\ \\Omega')
+  })
+
+  it('states the slope-reading example (8 V / 2 A = 4 ohm)', () => {
+    expect(resistanceFromOhmsLaw(8, 2)).toBe(4)
+    expect(mdx).toContain('frac{8\\ \\text{V}}{2\\ \\text{A}}')
+  })
+
+  it('states the Predict answer (tripling V triples I: 2 A -> 6 A)', () => {
+    const R = resistanceFromOhmsLaw(6, 2)
+    expect(18 / R).toBe(6)
+    expect(mdx).toContain('2 \\times 3 = 6')
+  })
+})
+
+describe('the third lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC3)
+
+  const expected: Record<string, number> = {
+    ol1: resistanceFromOhmsLaw(12, 3),
+    ol2: 20 / 5, // I = V/R
+    ol3: 1.5 * 8, // V = IR
+    ol4: resistanceFromOhmsLaw(8, 2),
+    ol5: 18 / resistanceFromOhmsLaw(6, 2),
+    ol6: 0.5 * resistanceFromOhmsLaw(6, 2),
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
