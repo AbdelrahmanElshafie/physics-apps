@@ -15,6 +15,12 @@ packages/
   checker/               The rule-based AnswerChecker (numerics, vectors, matrices, LaTeX).
   circuit-sim/           DC resistive-circuit solver (modified nodal analysis) — physics-eg's,
                           but subject-agnostic in principle if a future app needs circuits too.
+  scratchpad/            Step-by-step derivation checking (each line against the one before it)
+                          plus the filesystem repository for saved pads.
+  tutor-bridge/          The claude-code file-bridge TutorTransport, the SSE stream helper, and
+                          the React hooks that fan one stream out to a page's exercises.
+  math-ui/               Equation *input* — MathLive wrapper, the visual/LaTeX toggle, the
+                          insert-token palette. (Read-only KaTeX rendering stays per-app.)
 ```
 
 **Read the app's own CLAUDE.md before working in it** — that is where the commands, content rules
