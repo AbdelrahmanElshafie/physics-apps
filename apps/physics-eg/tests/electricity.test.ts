@@ -10,6 +10,7 @@ import {
   parallelResistance,
   potentialDifference,
   potentialDifferenceBetweenPoints,
+  powerFromVI,
   resistanceFromGeometry,
   resistanceFromOhmsLaw,
   seriesResistance,
@@ -30,6 +31,7 @@ const TOPIC3 = 'ohms-law'
 const TOPIC4 = 'resistivity'
 const TOPIC5 = 'series-resistors'
 const TOPIC6 = 'parallel-resistors'
+const TOPIC7 = 'series-vs-parallel'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -429,6 +431,68 @@ describe('the sixth lesson’s exercise answers are the values the formulas give
     pr4: parallelResistance([25, 70, 85]),
     pr5: 45 / parallelResistance([25, 70, 85]),
     pr6: 45 / 70,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('series-vs-parallel formulas', () => {
+  it('the same two 6-ohm resistors give 12 ohm in series and 3 ohm in parallel', () => {
+    expect(seriesResistance([6, 6])).toBe(12)
+    expect(parallelResistance([6, 6])).toBe(3)
+    expect(seriesResistance([6, 6]) / parallelResistance([6, 6])).toBe(4)
+  })
+
+  it('the same 25/70/85 ohm trio at 45 V draws far more total power in parallel than in series', () => {
+    const pSeries = powerFromVI(45, 45 / seriesResistance([25, 70, 85]))
+    const pParallel = powerFromVI(45, 45 / parallelResistance([25, 70, 85]))
+    expect(pSeries).toBeCloseTo(11.25, 6)
+    expect(pParallel).toBeCloseTo(133.75, 1)
+    expect(pParallel).toBeGreaterThan(pSeries)
+  })
+})
+
+describe('the seventh lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC7}.mdx`), 'utf8')
+
+  it('states the 6-ohm-pair equivalent resistances (12 and 3 ohm) and their ratio', () => {
+    expect(seriesResistance([6, 6])).toBe(12)
+    expect(parallelResistance([6, 6])).toBe(3)
+    expect(mdx).toContain('R_{series} = 6 + 6 = 12\\ \\Omega')
+    expect(mdx).toContain('\\frac{1}{R_{parallel}} = \\frac{1}{6} + \\frac{1}{6} = \\frac{1}{3} \\Rightarrow R_{parallel} = 3\\ \\Omega')
+    expect(mdx).toContain('\\frac{R_{series}}{R_{parallel}} = \\frac{12}{3} = 4')
+  })
+
+  it('states the worked power comparison (11.25 W vs approx 133.75 W)', () => {
+    const pSeries = powerFromVI(45, 45 / seriesResistance([25, 70, 85]))
+    expect(pSeries).toBeCloseTo(11.25, 6)
+    expect(mdx).toContain('P_{series} = V I = 45 \\times 0.25 = 11.25\\ \\text{W}')
+    expect(mdx).toContain('P_{parallel} = V I \\approx 45 \\times 2.97 \\approx 133.75\\ \\text{W}')
+  })
+})
+
+describe('the seventh lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC7)
+
+  const expected: Record<string, number> = {
+    sp1: seriesResistance([6, 6]),
+    sp2: parallelResistance([6, 6]),
+    sp3: seriesResistance([6, 6]) / parallelResistance([6, 6]),
+    sp4: 12 / seriesResistance([6, 6]),
+    sp5: 12 / parallelResistance([6, 6]),
+    sp6: (12 / parallelResistance([6, 6])) / (12 / seriesResistance([6, 6])),
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
