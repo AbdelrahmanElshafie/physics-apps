@@ -188,7 +188,26 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
           className="max-w-full rounded-lg bg-canvas"
           style={{ minWidth: WIDTH * 0.55 }}
         >
-          {/* Dot grid */}
+          {components.map((c) => (
+            <ComponentGlyph
+              key={c.id}
+              component={c}
+              selected={c.id === selectedId}
+              lane={laneOf.get(c.id) ?? 0}
+              current={result.ok ? result.current.get(c.id) : undefined}
+              voltage={result.ok ? result.voltage.get(c.id) : undefined}
+              onSelect={() => !readOnly && setSelectedId(c.id)}
+            />
+          ))}
+
+          {/*
+           * Dot grid — drawn *after* the components, not before, so a point where two components
+           * already meet stays clickable. An SVG element on top wins hit-testing regardless of
+           * size, so with the components underneath, clicking a shared terminal used to select
+           * whichever component's glyph happened to cover that pixel instead of registering the
+           * point click needed to start a third connection there — silently blocking exactly the
+           * "click a shared point to connect" model this whole tool is built on.
+           */}
           {!readOnly &&
             Array.from({ length: COLS }).map((_, col) =>
               Array.from({ length: ROWS }).map((_, row) => {
@@ -218,18 +237,6 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
                 )
               }),
             )}
-
-          {components.map((c) => (
-            <ComponentGlyph
-              key={c.id}
-              component={c}
-              selected={c.id === selectedId}
-              lane={laneOf.get(c.id) ?? 0}
-              current={result.ok ? result.current.get(c.id) : undefined}
-              voltage={result.ok ? result.voltage.get(c.id) : undefined}
-              onSelect={() => !readOnly && setSelectedId(c.id)}
-            />
-          ))}
 
           {ground && <GroundMark point={ground} />}
         </svg>
