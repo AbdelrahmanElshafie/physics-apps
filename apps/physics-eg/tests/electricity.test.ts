@@ -47,6 +47,7 @@ const TOPIC13 = 'terminal-voltage-graphs'
 const TOPIC14 = 'cells-aiding-opposing'
 const TOPIC15 = 'kirchhoff-current-law'
 const TOPIC16 = 'kirchhoff-voltage-law'
+const TOPIC17 = 'solving-kirchhoff-problems'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -1089,6 +1090,77 @@ describe('the sixteenth lesson’s exercise answers are the values the formulas 
     kvl4: seriesEmf([6, 3]) / r2,
     kvl5: (seriesEmf([6, 3]) / r2) * 3.5,
     kvl6: (seriesEmf([6, 3]) / r2) * r2,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('solving-kirchhoff-problems formulas', () => {
+  it('the lesson’s own two-loop circuit (R3=2 ohm) solves to I1=2, I2=1, I3=3', () => {
+    // 8 = 3*I1 + 2*I2, 7 = 2*I1 + 3*I2 -- solved by elimination
+    const i1 = 2
+    const i2 = 1
+    const i3 = i1 + i2
+    expect(3 * i1 + 2 * i2).toBe(8)
+    expect(2 * i1 + 3 * i2).toBe(7)
+    expect(i3).toBe(3)
+  })
+
+  it('the unbalanced-bridge table values satisfy KCL at every node (matches circuit-sim’s own verified solve)', () => {
+    const iR1 = 5 / 11
+    const iR2 = 3 / 11
+    const iR3 = 3 / 11
+    const iR4 = 5 / 11
+    const iR5 = 2 / 11
+    const iBatt = 8 / 11
+    expect(iR1 + iR2).toBeCloseTo(iBatt, 10) // node A
+    expect(iR3 + iR4).toBeCloseTo(iBatt, 10) // node D
+    expect(iR3 + iR5).toBeCloseTo(iR1, 10) // node B
+  })
+})
+
+describe('the seventeenth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC17}.mdx`), 'utf8')
+
+  it('states the two-loop worked example’s equations and solution', () => {
+    expect(mdx).toContain('8 = I_1(1) + I_3(2)')
+    expect(mdx).toContain('7 = I_2(1) + I_3(2)')
+    expect(mdx).toContain('I_1 = 2\\ \\text{A}')
+    expect(mdx).toContain('I_3 = I_1 + I_2 = 2 + 1 = 3\\ \\text{A}')
+  })
+
+  it('states the unbalanced bridge’s fractional currents (elevenths)', () => {
+    // These live inside plain (non-String.raw) Compare-cell strings, so the raw mdx source has
+    // doubled backslashes (JS string-escaping, same as any other plain-string LaTeX in this repo)
+    // — hence four backslashes here to match two literal ones on disk.
+    expect(mdx).toContain('5/11 \\\\approx 0.45\\\\ \\\\text{A}')
+    expect(mdx).toContain('2/11 \\\\approx 0.18\\\\ \\\\text{A}')
+    expect(mdx).toContain('8/11 \\\\approx 0.73\\\\ \\\\text{A}')
+  })
+})
+
+describe('the seventeenth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC17)
+
+  const expected: Record<string, number> = {
+    skp1: 3,
+    skp2: 2,
+    skp3: 5,
+    skp4: 5 / 11 + 3 / 11,
+    skp5: 3 / 11 + 5 / 11,
+    skp6: 3 / 11 + 2 / 11,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
