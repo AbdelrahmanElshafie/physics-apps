@@ -138,7 +138,7 @@ export function ScratchEditor({
       <div className="mb-6 flex items-center gap-3">
         <Link
           href="/scratch"
-          className="flex items-center gap-1.5 text-xs text-fg-subtle transition-colors hover:text-fg"
+          className="flex items-center gap-1.5 text-sm text-fg-subtle transition-colors hover:text-fg"
         >
           <ArrowRight className="size-3.5" aria-hidden />
           كل المسودات
@@ -150,13 +150,13 @@ export function ScratchEditor({
             </span>
             <Link
               href={`/lesson/${topicId.split(':')[0]}/${topicId.split(':')[1]}`}
-              className="truncate text-xs text-accent hover:underline"
+              className="truncate text-sm text-accent hover:underline"
             >
               {topicTitle}
             </Link>
           </>
         )}
-        <span className="mr-auto text-xs text-fg-subtle">
+        <span className="mr-auto text-sm text-fg-subtle">
           {dirty ? 'بتتحفظ...' : savedAt ? `اتحفظت ${formatRelative(savedAt)}` : 'محفوظة'}
         </span>
       </div>
@@ -196,7 +196,7 @@ export function ScratchEditor({
       <button
         type="button"
         onClick={() => addStep(steps.length - 1)}
-        className="mt-3 flex items-center gap-1.5 rounded-lg border border-dashed border-border px-3 py-2 text-xs text-fg-subtle transition-colors hover:border-accent hover:text-accent"
+        className="mt-3 flex items-center gap-1.5 rounded-lg border border-dashed border-border px-3 py-2 text-sm text-fg-subtle transition-colors hover:border-accent hover:text-accent"
       >
         <Plus className="size-3.5" aria-hidden />
         ضيف خطوة
@@ -220,7 +220,7 @@ export function ScratchEditor({
         <button
           type="button"
           onClick={() => void deleteScratchpad(id)}
-          className="mr-auto flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-2 text-xs text-fg-subtle transition-colors hover:border-danger hover:text-danger"
+          className="mr-auto flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-2 text-sm text-fg-subtle transition-colors hover:border-danger hover:text-danger"
         >
           <Trash2 className="size-3.5" aria-hidden />
           امسح
@@ -237,7 +237,7 @@ export function ScratchEditor({
 
       <section className="mt-8 rounded-panel border border-border bg-surface/50 p-4">
         <h2 className="text-sm font-semibold text-fg">اسأل أستاذك</h2>
-        <p className="mt-1 text-xs leading-relaxed text-fg-muted">
+        <p className="mt-1 text-sm leading-relaxed text-fg-muted">
           بيبعت الحل كله للمراجعة — السؤال المناسب لما الجبر يطلع صح بس مش متأكد إن الطريقة نفسها
           صح.
         </p>
@@ -263,7 +263,7 @@ export function ScratchEditor({
         </div>
 
         {awaitingReview && !reply && (
-          <p className="mt-3 rounded-lg border border-dashed border-pending/50 bg-pending-muted/20 px-3 py-2 text-xs leading-relaxed text-fg-muted">
+          <p className="mt-3 rounded-lg border border-dashed border-pending/50 bg-pending-muted/20 px-3 py-2 text-sm leading-relaxed text-fg-muted">
             اتبعت. هو في طابور أستاذك دلوقتي —{' '}
             <code dir="ltr" className="font-mono text-fg-muted">
               pnpm tutor
@@ -274,7 +274,7 @@ export function ScratchEditor({
 
         {reply && (
           <div className="mt-3 rounded-lg border border-accent/40 bg-accent-muted/25 px-3 py-2.5">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-accent">
+            <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-accent">
               الأستاذ
             </p>
             <p className="whitespace-pre-wrap text-sm leading-relaxed text-fg-muted">{reply.body}</p>
@@ -363,14 +363,14 @@ function StepRow({
           onChange={(e) => onChange({ note: e.target.value })}
           placeholder="ليه الخطوة دي جايّة صح؟"
           aria-label={`سبب خطوة ${index + 1}`}
-          className="mt-2 w-full rounded-lg border border-border bg-surface-sunken px-3 py-1.5 text-xs text-fg placeholder:text-fg-subtle focus:border-accent focus:outline-none"
+          className="mt-2 w-full rounded-lg border border-border bg-surface-sunken px-3 py-1.5 text-sm text-fg placeholder:text-fg-subtle focus:border-accent focus:outline-none"
         />
       )}
 
       {verdict?.detail && (
         <p
           className={cn(
-            'mt-2 text-xs',
+            'mt-2 text-sm',
             verdict.status === 'broken' ? 'text-danger' : 'text-fg-subtle',
           )}
         >
@@ -428,7 +428,7 @@ function ReportSummary({ report }: { report: WorkingReport }) {
             ? 'كل خطوة اتحققنا منها جايّة صح من اللي قبلها.'
             : 'مفيش حاجة قدرنا نتحقق منها تلقائيًا.'}
       </p>
-      <p className="mt-1 text-xs leading-relaxed text-fg-muted">
+      <p className="mt-1 text-sm leading-relaxed text-fg-muted">
         {report.checked} خطوة اتحقق منها
         {report.unchecked > 0 && `، و${report.unchecked} معرفناش نقرأها تلقائيًا`}.
         {broken && ' كل خطوة بعد الغلطة مبنية عليها، فصلّح السطر ده الأول.'}

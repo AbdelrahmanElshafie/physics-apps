@@ -34,7 +34,7 @@ export default async function HomePage() {
                 <div>
                   <p className="font-semibold text-fg">{s.title}</p>
                   {s.subtitle && <p className="mt-0.5 text-sm text-fg-muted">{s.subtitle}</p>}
-                  <p className="mt-1 text-xs text-fg-subtle">{s.topics.size} موضوع</p>
+                  <p className="mt-1 text-sm text-fg-subtle">{s.topics.size} موضوع</p>
                 </div>
               </Link>
             )

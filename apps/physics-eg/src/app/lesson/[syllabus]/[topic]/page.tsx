@@ -59,7 +59,7 @@ export default async function LessonPage({ params }: PageProps) {
             <div className="mx-auto max-w-3xl px-6 py-8">
               {lesson ? (
                 <>
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-accent">
+                  <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-accent">
                     {syllabus.modules.get(syllabus.topics.get(topicId)!.moduleId)?.title}
                   </p>
                   <h1 className="mb-2 text-2xl font-bold text-fg">{lesson.frontmatter.title}</h1>
@@ -90,7 +90,7 @@ export default async function LessonPage({ params }: PageProps) {
                       <div className="space-y-8">
                         {groups.map((group) => (
                           <div key={group.set}>
-                            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-fg-subtle">
+                            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-fg-subtle">
                               مجموعة {group.set}
                             </h3>
                             <div className="space-y-3">

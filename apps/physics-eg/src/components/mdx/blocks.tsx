@@ -20,7 +20,7 @@ export function Callout({ kind = 'note', title, children }: { kind?: CalloutKind
   const Icon = config.icon
   return (
     <aside className={cn('my-6 rounded-panel border px-4 py-3.5', config.className)}>
-      <p className="mb-1.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-fg">
+      <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-fg">
         <Icon className={cn('size-3.5', config.iconClass)} aria-hidden />
         {title ?? config.label}
       </p>
@@ -37,7 +37,7 @@ export function Compare({ columns, rows, caption }: { columns: string[]; rows: s
           <thead>
             <tr className="bg-surface-raised">
               {columns.map((col) => (
-                <th key={col} scope="col" className="border-b border-border px-3.5 py-2.5 text-xs font-semibold uppercase tracking-wide text-fg-subtle">
+                <th key={col} scope="col" className="border-b border-border px-3.5 py-2.5 text-sm font-semibold uppercase tracking-wide text-fg-subtle">
                   {col}
                 </th>
               ))}
@@ -56,7 +56,7 @@ export function Compare({ columns, rows, caption }: { columns: string[]; rows: s
           </tbody>
         </table>
       </div>
-      {caption && <figcaption className="bg-surface/60 px-3.5 py-2 text-xs text-fg-subtle">{caption}</figcaption>}
+      {caption && <figcaption className="bg-surface/60 px-3.5 py-2 text-sm text-fg-subtle">{caption}</figcaption>}
     </figure>
   )
 }
@@ -71,12 +71,12 @@ export function Axioms({ items, caption }: { items: [string, string][]; caption?
             <dt className="min-w-0" data-ltr>
               <DisplayMath latex={latex} />
             </dt>
-            <dd className="text-xs text-fg-subtle">{meaning}</dd>
+            <dd className="text-sm text-fg-subtle">{meaning}</dd>
           </div>
         ))}
       </dl>
       {caption && (
-        <figcaption className="border-t border-border bg-surface/60 px-4 py-2 text-xs text-fg-subtle">
+        <figcaption className="border-t border-border bg-surface/60 px-4 py-2 text-sm text-fg-subtle">
           {caption}
         </figcaption>
       )}
@@ -88,7 +88,7 @@ export function Derivation({ caption, children }: { caption?: string; children: 
   return (
     <figure className="my-6 overflow-hidden rounded-panel border border-border bg-surface-sunken/40">
       {caption && (
-        <figcaption className="border-b border-border bg-surface-raised/60 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-fg-subtle">
+        <figcaption className="border-b border-border bg-surface-raised/60 px-4 py-2.5 text-sm font-semibold uppercase tracking-wide text-fg-subtle">
           {caption}
         </figcaption>
       )}
@@ -105,7 +105,7 @@ export function Step({ latex, why }: { latex: string; why?: string }) {
       </span>
       <div className="min-w-0">
         <DisplayMath latex={latex} />
-        {why && <p className="mt-1.5 text-xs leading-relaxed text-fg-subtle">{why}</p>}
+        {why && <p className="mt-1.5 text-sm leading-relaxed text-fg-subtle">{why}</p>}
       </div>
     </li>
   )

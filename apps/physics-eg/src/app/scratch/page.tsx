@@ -16,7 +16,7 @@ export default async function ScratchListPage() {
     <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <Link
         href="/"
-        className="flex items-center gap-1.5 text-xs text-fg-subtle transition-colors hover:text-fg"
+        className="flex items-center gap-1.5 text-sm text-fg-subtle transition-colors hover:text-fg"
       >
         <ArrowRight className="size-3.5" aria-hidden />
         رجوع للدروس
@@ -66,7 +66,7 @@ export default async function ScratchListPage() {
                 <NotebookPen className="size-4 shrink-0 text-fg-subtle" aria-hidden />
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium text-fg">{pad.title}</p>
-                  <p className="text-xs text-fg-subtle">
+                  <p className="text-sm text-fg-subtle">
                     {pad.stepCount} خطوة · اتعدّلت {formatRelative(pad.updatedAt)}
                   </p>
                 </div>

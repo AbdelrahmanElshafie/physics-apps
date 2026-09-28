@@ -161,7 +161,7 @@ export function ExerciseCard({
           type="button"
           onClick={submit}
           disabled={!canSubmit}
-          className="rounded-lg bg-accent px-3.5 py-1.5 text-xs font-semibold text-canvas transition disabled:opacity-40"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-canvas transition disabled:opacity-40"
         >
           {pending ? 'جاري التحقق...' : 'تحقق'}
         </button>
@@ -170,7 +170,7 @@ export function ExerciseCard({
           <button
             type="button"
             onClick={reveal}
-            className="flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs text-fg-subtle hover:bg-surface"
+            className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm text-fg-subtle hover:bg-surface"
           >
             <Eye className="size-3.5" aria-hidden />
             وريني الحل
@@ -178,19 +178,19 @@ export function ExerciseCard({
         )}
 
         {settled === 'correct' && (
-          <span className="flex items-center gap-1 text-xs font-medium text-success">
+          <span className="flex items-center gap-1.5 text-sm font-medium text-success">
             <CheckCircle2 className="size-3.5" aria-hidden />
             صح
           </span>
         )}
         {settled === 'incorrect' && (
-          <span className="flex items-center gap-1 text-xs font-medium text-danger">
+          <span className="flex items-center gap-1.5 text-sm font-medium text-danger">
             <XCircle className="size-3.5" aria-hidden />
             {result?.detail ?? 'مش كده'}
           </span>
         )}
         {result?.verdict === 'unverified' && (
-          <span className="flex items-center gap-1 text-xs font-medium text-fg-subtle">
+          <span className="flex items-center gap-1.5 text-sm font-medium text-fg-subtle">
             <HelpCircle className="size-3.5" aria-hidden />
             مش قادر أتحقق من الصيغة دي — جرّب تكتبها رقم بس
           </span>
@@ -199,7 +199,7 @@ export function ExerciseCard({
 
       {showSolution && (
         <div className="mt-3 rounded-lg border border-border bg-surface-sunken/60 px-3.5 py-2.5">
-          <p className="mb-1 flex items-center gap-1.5 text-xs font-semibold text-fg-subtle">
+          <p className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold text-fg-subtle">
             <Lightbulb className="size-3.5" aria-hidden />
             الحل
           </p>

@@ -83,7 +83,7 @@ export function TerminalVoltagePlot({
           </text>
         </svg>
       </div>
-      {caption && <figcaption className="border-t border-border px-4 py-2.5 text-xs text-fg-subtle">{caption}</figcaption>}
+      {caption && <figcaption className="border-t border-border px-4 py-2.5 text-sm text-fg-subtle">{caption}</figcaption>}
     </figure>
   )
 }

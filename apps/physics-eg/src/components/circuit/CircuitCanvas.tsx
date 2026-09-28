@@ -173,7 +173,7 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
           >
             حدّد الأرضي (0V)
           </button>
-          <span className="ms-auto text-xs text-fg-subtle">
+          <span className="ms-auto text-sm text-fg-subtle">
             {pending ? 'دوس على النقطة التانية عشان توصل' : 'دوس نقطة، وبعدين التانية'}
           </span>
         </div>
@@ -236,17 +236,17 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
       </div>
 
       {!readOnly && !result.ok && components.length > 0 && (
-        <p className="border-t border-danger/30 bg-danger-muted/20 px-4 py-2.5 text-xs text-danger">
+        <p className="border-t border-danger/30 bg-danger-muted/20 px-4 py-2.5 text-sm text-danger">
           {result.error}
         </p>
       )}
 
       {!readOnly && selected && (
         <div className="flex flex-wrap items-center gap-3 border-t border-border bg-surface/60 px-4 py-2.5">
-          <span className="text-xs font-semibold text-fg">{TOOL_META[selected.kind].label}</span>
+          <span className="text-sm font-semibold text-fg">{TOOL_META[selected.kind].label}</span>
 
           {selected.kind === 'resistor' && (
-            <label className="flex items-center gap-1.5 text-xs text-fg-muted">
+            <label className="flex items-center gap-1.5 text-sm text-fg-muted">
               R =
               <input
                 type="number"
@@ -262,7 +262,7 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
 
           {selected.kind === 'battery' && (
             <>
-              <label className="flex items-center gap-1.5 text-xs text-fg-muted">
+              <label className="flex items-center gap-1.5 text-sm text-fg-muted">
                 V =
                 <input
                   type="number"
@@ -273,7 +273,7 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
                 />
                 فولت
               </label>
-              <label className="flex items-center gap-1.5 text-xs text-fg-muted">
+              <label className="flex items-center gap-1.5 text-sm text-fg-muted">
                 r =
                 <input
                   type="number"
@@ -292,7 +292,7 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
             <button
               type="button"
               onClick={() => updateSelected({ closed: !selected.closed })}
-              className="rounded-md border border-border-strong bg-surface-sunken px-2.5 py-1 text-xs text-fg"
+              className="rounded-md border border-border-strong bg-surface-sunken px-2.5 py-1 text-sm text-fg"
             >
               {selected.closed ? 'مقفول — دوس تفتحه' : 'مفتوح — دوس تقفله'}
             </button>
@@ -301,7 +301,7 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
           <button
             type="button"
             onClick={deleteSelected}
-            className="ms-auto flex items-center gap-1 rounded-md px-2 py-1 text-xs text-danger hover:bg-danger-muted/30"
+            className="ms-auto flex items-center gap-1 rounded-md px-2 py-1 text-sm text-danger hover:bg-danger-muted/30"
           >
             <Trash2 className="size-3.5" aria-hidden />
             امسح
@@ -310,7 +310,7 @@ export function CircuitCanvas({ initial, ground: initialGround, readOnly = false
       )}
 
       {caption && (
-        <figcaption className="border-t border-border bg-surface/60 px-4 py-2.5 text-xs leading-relaxed text-fg-subtle">
+        <figcaption className="border-t border-border bg-surface/60 px-4 py-2.5 text-sm leading-relaxed text-fg-subtle">
           {caption}
         </figcaption>
       )}

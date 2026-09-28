@@ -1,12 +1,50 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens — same shape as physics-instructor's (semantic names, OKLCH, dark by default),
- * copied and adapted rather than shared, since there is no UI package yet (see
- * packages/core/README.md on why: prove the shape against this app before extracting it).
+ * Design tokens — light by default, on purpose: this app is for 3rd-secondary students, not a
+ * developer tool, and a dark-by-default reading surface tested badly for a textbook-style page of
+ * dense Arabic prose and worked examples. Warm-tinted neutrals (a touch of hue in the grays,
+ * rather than clinical pure gray) and a livelier, higher-chroma accent than a typical dashboard
+ * blue — this should read as a bright, approachable study app, not enterprise software.
+ *
+ * The previous dark palette is kept under [data-theme='dark'] for whenever a toggle is wired up;
+ * nothing sets that attribute today, so light is what every page actually renders.
  */
 
 @theme {
+  --color-canvas: oklch(0.975 0.008 80);
+  --color-surface: oklch(1 0 0);
+  --color-surface-raised: oklch(0.99 0.005 80);
+  --color-surface-sunken: oklch(0.955 0.009 80);
+  --color-border: oklch(0.9 0.011 75);
+  --color-border-strong: oklch(0.78 0.016 75);
+
+  --color-fg: oklch(0.27 0.025 265);
+  --color-fg-muted: oklch(0.46 0.022 265);
+  --color-fg-subtle: oklch(0.58 0.018 265);
+
+  --color-accent: oklch(0.56 0.19 262);
+  --color-accent-strong: oklch(0.47 0.2 262);
+  --color-accent-muted: oklch(0.93 0.045 262);
+  --color-accent-fg: oklch(1 0 0);
+
+  --color-success: oklch(0.56 0.15 155);
+  --color-success-muted: oklch(0.94 0.055 155);
+  --color-warning: oklch(0.65 0.16 65);
+  --color-warning-muted: oklch(0.95 0.06 70);
+  --color-danger: oklch(0.57 0.21 25);
+  --color-danger-muted: oklch(0.95 0.05 25);
+  --color-pending: oklch(0.53 0.16 300);
+  --color-pending-muted: oklch(0.95 0.05 300);
+
+  --font-sans: var(--font-cairo), 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', monospace;
+
+  --radius-panel: 0.85rem;
+  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 22px oklch(0.4 0.03 262 / 0.08);
+}
+
+[data-theme='dark'] {
   --color-canvas: oklch(0.17 0.012 265);
   --color-surface: oklch(0.21 0.014 265);
   --color-surface-raised: oklch(0.25 0.016 265);
@@ -32,40 +70,7 @@
   --color-pending: oklch(0.72 0.12 300);
   --color-pending-muted: oklch(0.34 0.06 300);
 
-  --font-sans: var(--font-cairo), 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', monospace;
-
-  --radius-panel: 0.75rem;
   --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.3), 0 8px 24px oklch(0 0 0 / 0.22);
-}
-
-[data-theme='light'] {
-  --color-canvas: oklch(0.985 0.003 265);
-  --color-surface: oklch(1 0 0);
-  --color-surface-raised: oklch(0.975 0.004 265);
-  --color-surface-sunken: oklch(0.95 0.006 265);
-  --color-border: oklch(0.9 0.006 265);
-  --color-border-strong: oklch(0.8 0.01 265);
-
-  --color-fg: oklch(0.22 0.014 265);
-  --color-fg-muted: oklch(0.44 0.014 265);
-  --color-fg-subtle: oklch(0.58 0.012 265);
-
-  --color-accent: oklch(0.52 0.16 245);
-  --color-accent-strong: oklch(0.44 0.17 245);
-  --color-accent-muted: oklch(0.92 0.04 245);
-  --color-accent-fg: oklch(1 0 0);
-
-  --color-success: oklch(0.5 0.14 155);
-  --color-success-muted: oklch(0.93 0.05 155);
-  --color-warning: oklch(0.58 0.13 75);
-  --color-warning-muted: oklch(0.95 0.05 85);
-  --color-danger: oklch(0.54 0.19 25);
-  --color-danger-muted: oklch(0.95 0.04 25);
-  --color-pending: oklch(0.5 0.14 300);
-  --color-pending-muted: oklch(0.95 0.04 300);
-
-  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.06), 0 8px 24px oklch(0 0 0 / 0.06);
 }
 
 @layer base {
@@ -74,11 +79,11 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
-  [data-theme='light'] {
-    color-scheme: light;
+  [data-theme='dark'] {
+    color-scheme: dark;
   }
 
   body {
@@ -164,30 +169,34 @@ math-field::part(virtual-keyboard-toggle) {
  */
 
 .lesson-prose {
-  font-size: 1.09rem;
+  font-size: 1.125rem;
   line-height: 1.95;
   color: var(--color-fg-muted);
 }
 
 .lesson-prose > * + * {
-  margin-top: 1.1rem;
+  margin-top: 1.15rem;
 }
 
+/* A short accent-colored rule before each section heading — a scannable "here's a new section"
+   marker, since the sidebar tree alone isn't enough wayfinding once a lesson runs to ten sections. */
 .lesson-prose h2 {
-  margin-top: 2.75rem;
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1.1rem;
+  padding-right: 0.85rem;
+  border-right: 3px solid var(--color-accent);
+  font-size: 1.45rem;
+  font-weight: 700;
   line-height: 1.3;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
 }
 
 .lesson-prose h3 {
-  margin-top: 2rem;
-  margin-bottom: 0.65rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  margin-top: 2.25rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
 }
