@@ -46,6 +46,7 @@ const TOPIC12 = 'emf-and-internal-resistance'
 const TOPIC13 = 'terminal-voltage-graphs'
 const TOPIC14 = 'cells-aiding-opposing'
 const TOPIC15 = 'kirchhoff-current-law'
+const TOPIC16 = 'kirchhoff-voltage-law'
 
 /** Reads one topic's exercise file, keyed by exercise id. */
 function readExercises(topic: string) {
@@ -1027,6 +1028,67 @@ describe('the fifteenth lesson’s exercise answers are the values the formulas 
     kcl4: 12 / 4,
     kcl5: 12 / 6,
     kcl6: 12 / 4 + 12 / 6,
+  }
+
+  it('every numeric answer is within its own stated tolerance', () => {
+    for (const [id, truth] of Object.entries(expected)) {
+      const check = checks.get(id)
+      expect(check, `${id} missing`).toBeDefined()
+      expect(check!.type).toBe('numeric')
+      const stated = check!.value as number
+      const tolerance = check!.tolerance ?? 0
+      expect(
+        Math.abs(stated - truth),
+        `${id}: answer ${stated} is off from the true ${truth} by more than tolerance ${tolerance}`,
+      ).toBeLessThanOrEqual(tolerance)
+    }
+  })
+})
+
+describe('kirchhoff-voltage-law formulas', () => {
+  it('single-cell loop: 10 - I(0.2+1.8+3) = 0 gives I = 2 A', () => {
+    const rTotal = seriesResistance([0.2, 1.8, 3])
+    const I = 10 / rTotal
+    expect(I).toBe(2)
+    expect(I * rTotal).toBe(10) // sum of IR drops equals the emf, per KVL
+  })
+
+  it('two-cell loop reproduces the cells-aiding-opposing result via KVL directly', () => {
+    const emfTotal = seriesEmf([6, 3])
+    const rTotal = seriesResistance([0.5, 0.5, 3.5])
+    const I = emfTotal / rTotal
+    expect(I).toBe(2)
+    expect(I * rTotal).toBe(emfTotal)
+  })
+})
+
+describe('the sixteenth lesson quotes what the formulas give', () => {
+  const mdx = fs.readFileSync(path.join(CONTENT, 'lessons', `${TOPIC16}.mdx`), 'utf8')
+
+  it('states the single-cell worked example (I = 2 A)', () => {
+    expect(mdx).toContain('10 - I(0.2 + 1.8 + 3) = 0')
+    expect(mdx).toContain('I = \\frac{10}{5} = 2\\ \\text{A}')
+  })
+
+  it('states the two-cell worked example (I = 2 A)', () => {
+    expect(mdx).toContain('6 + 3 - I(0.5 + 0.5 + 3.5) = 0')
+    expect(mdx).toContain('I = \\frac{9}{4.5} = 2\\ \\text{A}')
+  })
+})
+
+describe('the sixteenth lesson’s exercise answers are the values the formulas give', () => {
+  const checks = readExercises(TOPIC16)
+
+  const r1 = seriesResistance([0.2, 1.8, 3])
+  const r2 = seriesResistance([0.5, 0.5, 3.5])
+
+  const expected: Record<string, number> = {
+    kvl1: 10 / r1,
+    kvl2: (10 / r1) * 3,
+    kvl3: (10 / r1) * r1,
+    kvl4: seriesEmf([6, 3]) / r2,
+    kvl5: (seriesEmf([6, 3]) / r2) * 3.5,
+    kvl6: (seriesEmf([6, 3]) / r2) * r2,
   }
 
   it('every numeric answer is within its own stated tolerance', () => {
