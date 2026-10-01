@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { AlertTriangle, ArrowRight, Info, Lightbulb } from 'lucide-react'
 
+import { containsHanzi } from '@core/domain'
 import { SpeakButton } from '@/components/audio/SpeakButton'
 import { cn } from '@/lib/utils'
 
@@ -55,7 +56,10 @@ export function Compare({ columns, rows, caption }: { columns: string[]; rows: s
                       j === 0 ? 'font-medium text-fg' : 'text-fg-muted',
                     )}
                   >
-                    {cell}
+                    <span className="inline-flex items-center gap-1">
+                      {cell}
+                      {containsHanzi(cell) && <SpeakButton text={cell} />}
+                    </span>
                   </td>
                 ))}
               </tr>
@@ -130,8 +134,26 @@ export function Dialogue({
   )
 }
 
-/** A grammar pattern: the template, then the explanation in `children`. */
-export function GrammarPoint({ pattern, title, children }: { pattern: string; title?: string; children: ReactNode }) {
+/**
+ * A grammar pattern: the template, then the explanation in `children`.
+ *
+ * `speak` is a separate, optional override for the audio button: `pattern` is often written as
+ * pinyin or an abstract template ("3rd + 3rd → 2nd + 3rd", "Subject + 是 + Noun") rather than real
+ * hanzi, and a text-to-speech voice tuned for Chinese reads romanized pinyin badly or not at all.
+ * When `pattern` itself is hanzi, it doubles as the thing spoken and `speak` can be omitted.
+ */
+export function GrammarPoint({
+  pattern,
+  title,
+  speak,
+  children,
+}: {
+  pattern: string
+  title?: string
+  speak?: string
+  children: ReactNode
+}) {
+  const spoken = speak ?? (containsHanzi(pattern) ? pattern : undefined)
   return (
     <figure className="my-6 overflow-hidden rounded-panel border border-border">
       {title && (
@@ -139,10 +161,11 @@ export function GrammarPoint({ pattern, title, children }: { pattern: string; ti
           {title}
         </figcaption>
       )}
-      <div className="bg-surface px-4 py-3">
+      <div className="flex items-center justify-center gap-1.5 bg-surface px-4 py-3">
         <p className="hanzi-display rounded-lg bg-accent-muted/30 px-3 py-2 text-center text-lg font-medium text-accent-strong">
           {pattern}
         </p>
+        {spoken && <SpeakButton text={spoken} />}
       </div>
       <div className="border-t border-border px-4 py-3.5 text-sm leading-relaxed text-fg-muted [&>*+*]:mt-2">
         {children}
