@@ -1,0 +1,118 @@
+# Exercises: pinyin and the four tones.
+#
+# Set A: recognizing tones from the mā/má/mǎ/mà/ma set already taught in the lesson.
+# Set B: typing numbered pinyin — the form every typed answer in this course uses.
+# Set C: concepts.
+
+schemaVersion: 1
+topic: pinyin-and-tones
+intro: Nine questions. Multiple-choice and typed answers are checked instantly.
+
+exercises:
+  - id: pt1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: 妈 (mother) is said with which tone?
+    choices:
+      - { id: first, label: First tone — flat and high }
+      - { id: second, label: Second tone — rising }
+      - { id: third, label: Third tone — falls then rises }
+      - { id: fourth, label: Fourth tone — falls sharply }
+    check: { type: exact, value: first }
+    solution: 妈 is mā — first tone, held flat and steady.
+
+  - id: pt2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: 马 (horse) is said with which tone?
+    choices:
+      - { id: first, label: First tone — flat and high }
+      - { id: second, label: Second tone — rising }
+      - { id: third, label: Third tone — falls then rises }
+      - { id: fourth, label: Fourth tone — falls sharply }
+    check: { type: exact, value: third }
+    solution: 马 is mǎ — third tone, dipping low before rising back up.
+
+  - id: pt3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: Which tone shape rises, the way the pitch rises at the end of an English question ("Really?")?
+    choices:
+      - { id: first, label: First tone }
+      - { id: second, label: Second tone }
+      - { id: third, label: Third tone }
+      - { id: fourth, label: Fourth tone }
+    check: { type: exact, value: second }
+    solution: Second tone (á) rises from low to high, like the pitch of "Really?"
+
+  - id: pt4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Type the numbered pinyin for 骂 (to scold). Example format for a different word — "hǎo" would be typed "hao3".
+    check: { type: exact, value: ma4 }
+    hint: 骂 rhymes with 妈, 麻, 马 — only the tone differs.
+    solution: "ma4 — fourth tone, falling sharply."
+
+  - id: pt5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 麻 (hemp / numb).
+    check: { type: exact, value: ma2 }
+    solution: "ma2 — second tone, rising."
+
+  - id: pt6
+    set: B
+    label: Q6
+    kind: text
+    prompt: 吗 is the question particle from the tone-comparison table. Type its numbered pinyin.
+    check: { type: exact, value: ma5 }
+    hint: It's the one with no tone mark at all.
+    solution: "ma5 — the neutral tone, conventionally numbered 5."
+
+  - id: pt7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: >-
+      True or false — if you say a word with the wrong tone, Mandarin speakers can usually tell
+      what you meant from context, so getting the tone exactly right doesn't matter much in
+      practice.
+    check: { type: exact, value: false }
+    explain: { required: true, hint: What actually happens to the word itself when the tone changes — not just whether a listener can guess around it? }
+    solution: >-
+      False. A wrong tone doesn't produce "the same word with an accent" — it usually produces a
+      genuinely different, real word (mǎ "horse" instead of mā "mother"). Context sometimes rescues
+      the sentence, the same way a typo sometimes doesn't block understanding in English, but
+      relying on that is not the same as the tone "not mattering."
+
+  - id: pt8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: What does a pinyin syllable with no tone mark at all, like "ma" in 吗, indicate?
+    choices:
+      - { id: first, label: It's silent }
+      - { id: neutral, label: It's said with the neutral tone — light and quick }
+      - { id: error, label: The pinyin is incomplete or wrong }
+      - { id: foreign, label: It's a loanword from another language }
+    check: { type: exact, value: neutral }
+    solution: No mark means the neutral tone — said lightly and quickly, borrowing its pitch from the syllable before it.
+
+  - id: pt9
+    set: C
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why doesn't it make sense to think of Mandarin tone the way you might
+      think of a regional accent in English?
+    check: { type: tutor }
+    solution: >-
+      An accent changes how a word sounds without changing which word it is — a Scottish and an
+      American "car" are still both "car". Mandarin tone changes which word a syllable actually is:
+      mā, má, mǎ, mà and ma are five different words that happen to share the same consonant and
+      vowel. Treating tone as decorative is treating five different words as one.

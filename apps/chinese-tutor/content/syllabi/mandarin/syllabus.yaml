@@ -1,0 +1,169 @@
+# Mandarin, from scratch — a personal course roadmap. Only the first two topics have lessons
+# written so far (pinyin-and-tones, greetings); everything else is a real, ordered plan for what
+# comes next, so progress always has a visible "what's after this" even before the content exists.
+
+schemaVersion: 1
+id: mandarin
+title: Mandarin, from scratch
+subtitle: A personal course — sounds, characters, grammar, and real sentences
+goal: Read, write, and hold a basic conversation in Mandarin Chinese.
+
+phases:
+  - id: foundations
+    title: 'Phase 1 — Foundations'
+    summary: The sound system and the writing system, before any vocabulary leans on them.
+    modules:
+      - id: sounds
+        title: 'Module 1.1 — Sounds of Mandarin'
+        topics:
+          - id: pinyin-and-tones
+            title: Pinyin and the four tones
+            critical: true
+            estimatedMinutes: 25
+            summary: How Mandarin sounds are spelled, and why tone is not optional decoration.
+          - id: tone-pairs
+            title: Tone pairs and tone sandhi
+            requires: [pinyin-and-tones]
+            estimatedMinutes: 20
+            summary: What happens when two tones collide — especially two third tones in a row.
+      - id: writing-basics
+        title: 'Module 1.2 — The Writing System'
+        topics:
+          - id: strokes-and-radicals
+            title: Strokes, stroke order, and radicals
+            requires: [pinyin-and-tones]
+            estimatedMinutes: 25
+            summary: Characters are built from a small set of strokes and reusable pieces, not drawn freehand.
+          - id: simplified-vs-traditional
+            title: Simplified vs. traditional characters
+            requires: [strokes-and-radicals]
+            estimatedMinutes: 10
+            summary: Why 中国 and 中國 are the same word, and which one this course uses.
+
+  - id: everyday-basics
+    title: 'Phase 2 — Everyday Basics'
+    summary: The first real conversations — greetings, names, numbers, and time.
+    modules:
+      - id: greetings-module
+        title: 'Module 2.1 — Greetings and Introductions'
+        topics:
+          - id: greetings
+            title: Hello, goodbye, and thank you
+            requires: [pinyin-and-tones]
+            critical: true
+            estimatedMinutes: 25
+            summary: The handful of phrases that open and close almost every interaction.
+          - id: introducing-yourself
+            title: Saying who you are
+            requires: [greetings]
+            estimatedMinutes: 20
+            summary: Names, nationality, and the verb 是 (shì) — "to be".
+          - id: how-are-you
+            title: Asking how someone is
+            requires: [introducing-yourself]
+            estimatedMinutes: 15
+            summary: 你好吗? and the adjective-as-predicate pattern that trips up English speakers.
+      - id: numbers-time
+        title: 'Module 2.2 — Numbers and Time'
+        topics:
+          - id: numbers-0-99
+            title: Numbers 0 to 99
+            requires: [pinyin-and-tones]
+            estimatedMinutes: 20
+            summary: Mandarin numbers are almost entirely regular once you learn ten of them.
+          - id: dates-and-days
+            title: Dates and days of the week
+            requires: [numbers-0-99]
+            estimatedMinutes: 15
+            summary: Years, months, and days all built the same logical way.
+          - id: telling-time
+            title: Telling the time
+            requires: [numbers-0-99]
+            estimatedMinutes: 15
+            summary: Hours, minutes, and the handful of time words that aren't just numbers.
+
+  - id: people-things
+    title: 'Phase 3 — People and Things'
+    summary: Talking about who and what — family, pronouns, possession, and measure words.
+    modules:
+      - id: family-module
+        title: 'Module 3.1 — Family and People'
+        topics:
+          - id: family-members
+            title: Family members
+            requires: [introducing-yourself]
+            estimatedMinutes: 20
+            summary: Chinese family terms encode relative age and side of the family — more precise than English.
+          - id: pronouns-and-measure-words
+            title: Pronouns and measure words
+            requires: [numbers-0-99]
+            estimatedMinutes: 25
+            summary: Why you can't just say "three book" — every noun needs its own counting word.
+      - id: possession-module
+        title: 'Module 3.2 — Objects and Possession'
+        topics:
+          - id: this-that-de
+            title: "This, that, and the particle 的"
+            requires: [pronouns-and-measure-words]
+            estimatedMinutes: 20
+            summary: 这 vs 那, and 的 — the one particle that does the work of English's apostrophe-s.
+          - id: have-and-want
+            title: "有 (to have) and 要 (to want)"
+            requires: [this-that-de]
+            estimatedMinutes: 15
+            summary: Two of the most-used verbs in the language, and how they build simple sentences.
+
+  - id: daily-life
+    title: 'Phase 4 — Daily Life'
+    summary: Ordering, shopping, and finding your way around.
+    modules:
+      - id: food-module
+        title: 'Module 4.1 — Food and Drink'
+        topics:
+          - id: ordering-food
+            title: Ordering food and drink
+            requires: [have-and-want]
+            estimatedMinutes: 20
+            summary: 我要... and the vocabulary of a restaurant table.
+          - id: likes-and-dislikes
+            title: "Likes and dislikes — 喜欢"
+            requires: [ordering-food]
+            estimatedMinutes: 15
+            summary: Saying what you do and don't enjoy, and why 喜欢 takes a verb object just as easily as a noun.
+      - id: places-module
+        title: 'Module 4.2 — Places and Directions'
+        topics:
+          - id: places-in-town
+            title: Places around town
+            requires: [this-that-de]
+            estimatedMinutes: 15
+            summary: Shops, stations, and the vocabulary for "where is...?"
+          - id: asking-directions
+            title: Asking for and giving directions
+            requires: [places-in-town]
+            estimatedMinutes: 20
+            summary: Left, right, straight ahead, and the sentence patterns that string them together.
+
+  - id: building-sentences
+    title: 'Phase 5 — Building Real Sentences'
+    summary: The grammar patterns that turn a vocabulary list into actual conversation.
+    modules:
+      - id: core-grammar
+        title: 'Module 5.1 — Core Grammar Patterns'
+        topics:
+          - id: word-order
+            title: Mandarin word order
+            requires: [have-and-want]
+            critical: true
+            estimatedMinutes: 25
+            summary: Subject-Verb-Object, mostly — and the handful of places it isn't.
+          - id: questions-ma-ne
+            title: "Yes/no questions with 吗, and 呢"
+            requires: [word-order]
+            estimatedMinutes: 15
+            summary: Turning any statement into a question by adding one syllable at the end.
+          - id: negation
+            title: "Negation with 不 and 没"
+            requires: [word-order]
+            estimatedMinutes: 15
+            summary: Two different "not"s, and the rule for which one a sentence needs.

@@ -1,0 +1,95 @@
+# Exercises: hello, goodbye, and thank you.
+
+schemaVersion: 1
+topic: greetings
+intro: Eight questions. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: gr1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: Someone says 谢谢 (xièxie) to you. What's the standard reply?
+    choices:
+      - { id: a, label: 你好 }
+      - { id: b, label: 不客气 }
+      - { id: c, label: 再见 }
+      - { id: d, label: 对不起 }
+    check: { type: exact, value: b }
+    solution: 不客气 (bú kèqi) — "you're welcome" — is the standard reply to thanks.
+
+  - id: gr2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Which phrase is a greeting used when you first see someone, not a reply to anything?
+    choices:
+      - { id: a, label: 不客气 }
+      - { id: b, label: 对不起 }
+      - { id: c, label: 你好 }
+      - { id: d, label: 再见 }
+    check: { type: exact, value: c }
+    solution: 你好 (nǐ hǎo) is the opening greeting — the other three are each a reply to a specific situation.
+
+  - id: gr3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: You bump into a stranger lightly in a shop. Which is the more natural, lighter thing to say?
+    choices:
+      - { id: a, label: 对不起 — a heavier apology }
+      - { id: b, label: 不好意思 — a lighter "excuse me" }
+      - { id: c, label: 不客气 }
+      - { id: d, label: 您好 }
+    check: { type: exact, value: b }
+    solution: 不好意思 (bù hǎoyìsi) is the lighter, more casual phrase — fine for small things like a light bump.
+
+  - id: gr4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Type the numbered pinyin for 你好.
+    check: { type: exact, value: ni3hao3 }
+    solution: "ni3 hao3 — both third tone."
+
+  - id: gr5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 再见.
+    check: { type: exact, value: zai4jian4 }
+    solution: "zai4 jian4 — both fourth tone."
+
+  - id: gr6
+    set: C
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — 您好 (nín hǎo) and 你好 (nǐ hǎo) are interchangeable in every situation, with no difference in meaning or politeness.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Who is 您 (nín) specifically used for, compared to 你 (nǐ)? }
+    solution: >-
+      False. 您 is the polite/respectful form of "you", used for elders, teachers, or anyone
+      addressed formally. Using 你好 isn't rude, but 您好 is the more deliberate, respectful choice —
+      they are not fully interchangeable.
+
+  - id: gr7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: "对不起 and 不好意思 both roughly mean \"sorry\" — what mainly distinguishes them?"
+    choices:
+      - { id: a, label: One is formal vocabulary, the other is slang }
+      - { id: b, label: "One is heavier (a real apology), the other is lighter (a small \"excuse me\")" }
+      - { id: c, label: They are regional variants with no difference }
+      - { id: d, label: "对不起 is only used in writing, never in speech" }
+    check: { type: exact, value: b }
+    solution: "对不起 carries more weight (a genuine apology); 不好意思 is lighter, closer to \"excuse me\" or \"my bad\"."
+
+  - id: gr8
+    set: D
+    label: Q8
+    kind: text
+    prompt: 'Translate into Chinese: "Hello! Thank you! Goodbye!" — write it however feels natural; your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: You can write it as three short phrases, the way the dialogue in the lesson did. }
+    solution: "你好!谢谢!再见! (Nǐ hǎo! Xièxie! Zàijiàn!) — any reasonable phrasing along these lines is fine."

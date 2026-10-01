@@ -1,0 +1,100 @@
+# Mandarin, from scratch
+
+A personal Mandarin-learning app: an English-interface course that teaches Chinese from zero —
+pinyin and tones, vocabulary, grammar, and writing — built on the same tutor-bridge architecture
+as the physics apps in this monorepo. Sibling app to `physics-instructor` and `physics-eg`, same
+pnpm workspace, sharing what is genuinely subject-agnostic via `packages/`.
+
+## What makes this app different from the physics apps
+
+- **English interface, Mandarin subject.** Unlike `physics-eg` (Arabic UI for an Arabic-speaking
+  audience), the learner here is an English speaker, so the app chrome, exercise prompts, and
+  tutor messages are in English — only the content being taught is Chinese. No RTL, no bidi
+  overrides: Chinese and English are both left-to-right.
+- **No math.** No KaTeX, no MathLive, no `@physics/math-ui`, no `@physics/circuit-sim` — exercises
+  are multiple-choice, true/false, and typed text (pinyin or characters), which the shared
+  `exact`/`multichoice`/`truefalse`/`tutor` check types already cover without any LaTeX-specific
+  normalization getting in the way.
+- **Typed answers are numbered pinyin.** A learner types `ni3 hao3`, not `nǐ hǎo` — no diacritic
+  keyboard required. Lessons *display* the toned form, produced by `toneMarkPinyin` in
+  `src/core/domain/pinyin.ts` from the same numbered string an exercise checks against, so a
+  pinyin a lesson prints is a pinyin a test checks — the same discipline the physics apps apply to
+  worked numeric values, applied here to transcription instead.
+- **Practice, not a scratchpad.** `@physics/scratchpad`'s storage and schema are reused as-is (a
+  pad is a title plus an ordered list of text entries), but *not* its step-by-step "does this line
+  follow from the last" checker — that's built for algebra, where a line is judged against the one
+  before it. A written sentence has no "previous line" to be consistent with; it just needs a
+  human read. So `/practice` is free writing + "ask your tutor", with no local verdict.
+
+## Watching a student write, not just grading multiple choice
+
+Same two mechanisms as the physics apps, via `@physics/tutor-bridge` (the npm scope is a
+historical artifact of which app existed first, not a claim the code is physics-specific — see
+the package's own README):
+
+- **The tutor bridge.** `submitAttempt` escalates to the tutor whenever `needsTutorReview` (an
+  exercise with `explain.required`, or `check.type: 'tutor'` — translations and short-answer
+  explanations) or the checker returns anything other than `correct`. `pnpm tutor` lists what's
+  waiting, `pnpm tutor <n>` shows the question with its exercise and expected answer, `pnpm
+  tutor:reply <n> "…"` answers it and the reply streams into the open page with no refresh.
+- **Practice pads**, at `/practice`. Free-form writing — a sentence, a short dialogue, an attempt
+  at a translation — with "ask your tutor" sending the whole pad, inlined, to the same queue.
+
+## Commands
+
+```bash
+pnpm dev                  # localhost:3300
+pnpm validate:content     # schema + prerequisite-graph check
+pnpm test
+pnpm lint && pnpm typecheck
+pnpm tutor                # list questions waiting on you   <- check this every session
+pnpm tutor <n>            # read question n in full, with its exercise and expected answer
+pnpm tutor:reply <n> "…"  # answer it; appears in their browser immediately, no refresh
+pnpm tutor grade <n> correct|partial|incorrect "feedback"
+```
+
+## What comes from packages/
+
+`@physics/core` — syllabus/graph/exercise/progress/scratchpad/ports, fully subject-agnostic.
+`@physics/checker` — the rule-based `AnswerChecker`; only its `exact`/`multichoice`/`truefalse`/
+`tutor` check types are used here (`numeric`/`vector`/`matrix`/`latex` exist in the shared schema
+but nothing in this app's content uses them). `@physics/scratchpad` — storage only, see above.
+`@physics/tutor-bridge` — the file-bridge transport, the SSE stream, and the React hooks, used
+exactly as both physics apps use them. This app's own `src/core/domain` adds one pure helper,
+`pinyin.ts` (numbered pinyin -> tone-marked pinyin) — see `tests/pinyin.test.ts`.
+
+## Content
+
+Same shape as the physics apps:
+
+```
+content/syllabi/<id>/
+  syllabus.yaml            phases > modules > topics, with a prerequisite DAG
+  lessons/<topicId>.mdx
+  exercises/<topicId>.yaml
+```
+
+The `mandarin` syllabus (`content/syllabi/mandarin/syllabus.yaml`) is a full roadmap — five
+phases, HSK1-ish in scope — but only `pinyin-and-tones` and `greetings` have lessons written so
+far. Every other topic is real (ordered, with real prerequisites and summaries) but shows "this
+lesson hasn't been written yet" until its `.mdx` file exists — adding a lesson is adding that one
+file plus its matching exercises YAML, same as either physics app.
+
+### Content rules
+
+**Every typed pinyin answer is the numbered form**, e.g. `check: { type: exact, value: ni3hao3 }`
+— the `exact` checker's normalization strips whitespace, so `ni3 hao3` and `ni3hao3` compare
+equal; write exercises with spaces for readability, the comparison doesn't care. **Avoid neutral
+tone in typed-pinyin exercises where the numbering is ambiguous** (e.g. the second syllable of
+谢谢) — dictionaries disagree on whether to number an unstressed repeated syllable, and an exact
+string match has no room for that disagreement. Stick to syllables with an unambiguous dictionary
+tone.
+
+**Simplified characters only**, matching `simplified-vs-traditional`'s own content — don't mix in
+traditional forms elsewhere in the syllabus without a reason tied to that lesson.
+
+## Architecture
+
+Same ports-and-adapters shape as both physics apps, enforced the same way (`no-restricted-imports`
+on `src/core/**`): `src/core/domain` and `src/core/ports` stay pure; `src/adapters/*` are the only
+things touching the filesystem; `src/container.ts` is the only place naming a concrete adapter.
