@@ -1,0 +1,124 @@
+# Exercises: the Cyrillic alphabet.
+
+schemaVersion: 1
+topic: cyrillic-alphabet
+intro: Nine questions. The false-friend letters (Set A) are worth getting solid before moving on.
+
+exercises:
+  - id: ca1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: В в looks like a Latin B. What sound does it actually make?
+    choices:
+      - { id: v, label: '"v" in "van"' }
+      - { id: b, label: '"b" in "bat"' }
+      - { id: w, label: '"w" in "wet"' }
+      - { id: f, label: '"f" in "fun"' }
+    check: { type: exact, value: v }
+    solution: В sounds like "v" — a classic false friend, despite the B shape.
+
+  - id: ca2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Р р looks like a Latin P. What sound does it actually make?
+    choices:
+      - { id: p, label: '"p" in "pot"' }
+      - { id: r, label: 'a rolled "r"' }
+      - { id: y, label: '"y" in "yes"' }
+      - { id: n, label: '"n" in "net"' }
+    check: { type: exact, value: r }
+    solution: Р sounds like a rolled "r" — the P shape is coincidence.
+
+  - id: ca3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: Н н looks like a Latin H. What sound does it actually make?
+    choices:
+      - { id: h, label: '"h" in "hat"' }
+      - { id: n, label: '"n" in "net"' }
+      - { id: p, label: '"p" in "pot"' }
+      - { id: silent, label: 'silent' }
+    check: { type: exact, value: n }
+    solution: Н sounds like "n" — not "h" despite the shape.
+
+  - id: ca4
+    set: A
+    label: Q4
+    kind: multichoice
+    prompt: У у looks like a Latin Y. What sound does it actually make?
+    choices:
+      - { id: oo, label: '"oo" in "boot"' }
+      - { id: y, label: '"y" in "yes"' }
+      - { id: uh, label: '"u" in "cup"' }
+      - { id: v, label: '"v" in "van"' }
+    check: { type: exact, value: oo }
+    solution: У sounds like "oo" — one of the furthest false friends from its Latin look-alike.
+
+  - id: ca5
+    set: B
+    label: Q5
+    kind: text
+    prompt: 'Sound it out letter by letter and type it in English spelling: КОТ'
+    check: { type: exact, value: kot }
+    hint: К, О, and Т are all true friends — no false-friend letters in this one.
+    solution: "kot — К=k, О=o, Т=t. This word means \"cat.\""
+
+  - id: ca6
+    set: B
+    label: Q6
+    kind: text
+    prompt: 'Sound it out letter by letter and type it in English spelling: МАМА'
+    check: { type: exact, value: mama }
+    solution: "mama — all four letters (М, А, М, А) are true friends."
+
+  - id: ca7
+    set: B
+    label: Q7
+    kind: text
+    prompt: 'Sound it out letter by letter and type it in English spelling: ВОТ'
+    check: { type: exact, value: vot }
+    hint: 'В is the false friend here — it sounds like "v", not "b" or "w".'
+    solution: "vot — В=v (false friend), О=o, Т=t. This word means \"here is / there is.\""
+
+  - id: ca8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — since В looks exactly like the Latin letter B, it''s a safe shortcut to just read it as "b".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: What does В actually sound like, and is that the same as "b"? }
+    solution: >-
+      False. В is one of the clearest false friends in the alphabet — it sounds like "v", not "b".
+      Reading it as "b" produces a wrong pronunciation every single time it appears.
+
+  - id: ca9
+    set: C
+    label: Q9
+    kind: multichoice
+    prompt: What does ь (the soft sign) represent on its own?
+    choices:
+      - { id: a, label: 'The vowel sound "uh"' }
+      - { id: b, label: 'No sound of its own — it softens the consonant before it' }
+      - { id: c, label: 'The letter "b"' }
+      - { id: d, label: 'A marker for where the stress falls' }
+    check: { type: exact, value: b }
+    solution: ь has no sound of its own — it's an instruction to soften whatever consonant comes right before it.
+
+  - id: ca10
+    set: D
+    label: Q10
+    kind: text
+    prompt: >-
+      In your own words: why is it a mistake to read a Cyrillic letter based on which Latin
+      letter it resembles, rather than what it actually represents?
+    check: { type: tutor }
+    explain: { required: true, hint: Think about В, Р, Н, С, У, Х specifically — what goes wrong if you read them as their Latin look-alikes? }
+    solution: >-
+      Cyrillic and Latin developed from a shared ancestor alphabet, so some letter shapes survived
+      in both while the sounds they represent drifted apart independently in each. В, Н, Р, С, У,
+      and Х are the clearest cases — same shape, unrelated sound today. Reading by shape instead of
+      by what the letter actually represents in Russian produces a confidently wrong pronunciation,
+      not a close approximation.

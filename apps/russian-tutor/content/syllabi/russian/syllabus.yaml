@@ -1,0 +1,171 @@
+# Russian, from scratch — a personal course roadmap. Only the first three topics have lessons
+# written so far (cyrillic-alphabet, greetings, stress-and-vowel-reduction); everything else is a
+# real, ordered plan for what comes next, so progress always has a visible "what's after this"
+# even before the content exists.
+
+schemaVersion: 1
+id: russian
+title: Russian, from scratch
+subtitle: A personal course — the alphabet, cases, verbs, and real sentences
+goal: Read, write, and hold a basic conversation in Russian.
+
+phases:
+  - id: foundations
+    title: 'Phase 1 — Foundations'
+    summary: The alphabet and the sound system, before any vocabulary leans on them.
+    modules:
+      - id: alphabet-sounds
+        title: 'Module 1.1 — The Alphabet and Sounds'
+        topics:
+          - id: cyrillic-alphabet
+            title: The Cyrillic alphabet
+            critical: true
+            estimatedMinutes: 25
+            summary: Most letters aren't as foreign as they look — a handful of true look-alikes and false friends cover almost everything new.
+          - id: stress-and-vowel-reduction
+            title: Word stress and vowel reduction
+            requires: [cyrillic-alphabet]
+            estimatedMinutes: 20
+            summary: Stress isn't written down, lands on any syllable, and changes how unstressed vowels are even pronounced.
+      - id: basic-grammar-concepts
+        title: 'Module 1.2 — Basic Grammar Concepts'
+        topics:
+          - id: gender-of-nouns
+            title: Noun gender
+            requires: [cyrillic-alphabet]
+            estimatedMinutes: 20
+            summary: Every Russian noun is masculine, feminine, or neuter — and the ending almost always gives it away.
+          - id: introduction-to-cases
+            title: Why Russian has cases
+            requires: [gender-of-nouns]
+            estimatedMinutes: 20
+            summary: A noun's ending changes with its job in the sentence — what English does with word order, Russian does with endings.
+
+  - id: everyday-basics
+    title: 'Phase 2 — Everyday Basics'
+    summary: The first real conversations — greetings, names, numbers, and time.
+    modules:
+      - id: greetings-module
+        title: 'Module 2.1 — Greetings and Introductions'
+        topics:
+          - id: greetings
+            title: Hello, goodbye, and thank you
+            requires: [cyrillic-alphabet]
+            critical: true
+            estimatedMinutes: 25
+            summary: The handful of phrases that open and close almost every interaction.
+          - id: introducing-yourself
+            title: Saying who you are
+            requires: [greetings]
+            estimatedMinutes: 20
+            summary: Names, nationality, and the verb "to be" — which Russian simply drops in the present tense.
+          - id: how-are-you
+            title: Asking how someone is
+            requires: [introducing-yourself]
+            estimatedMinutes: 15
+            summary: Как дела? and the handful of ways to answer it.
+      - id: numbers-time
+        title: 'Module 2.2 — Numbers and Time'
+        topics:
+          - id: numbers-0-20
+            title: Numbers 0 to 20
+            requires: [cyrillic-alphabet]
+            estimatedMinutes: 20
+            summary: The numbers that build every larger one, plus the case-agreement quirk that starts right at "one."
+          - id: dates-and-time
+            title: Dates and telling the time
+            requires: [numbers-0-20]
+            estimatedMinutes: 20
+            summary: Days, months, and hours — built from the same numbers, with their own small rules.
+
+  - id: case-system
+    title: 'Phase 3 — The Case System'
+    summary: The six cases, one or two at a time — the single biggest structural difference from English.
+    modules:
+      - id: core-cases
+        title: 'Module 3.1 — Nominative and Accusative'
+        topics:
+          - id: nominative-case
+            title: The nominative case
+            requires: [introduction-to-cases]
+            estimatedMinutes: 15
+            summary: The dictionary form — the case every noun starts in, and the subject of a sentence.
+          - id: accusative-case
+            title: The accusative case
+            requires: [nominative-case]
+            estimatedMinutes: 20
+            summary: Marking the direct object — what the verb is actually acting on.
+      - id: oblique-cases
+        title: 'Module 3.2 — Genitive, Dative, Instrumental, Prepositional'
+        topics:
+          - id: genitive-case
+            title: The genitive case
+            requires: [accusative-case]
+            estimatedMinutes: 20
+            summary: Possession, negation, and "of" — one case doing three jobs English keeps separate.
+          - id: dative-and-instrumental
+            title: Dative and instrumental
+            requires: [genitive-case]
+            estimatedMinutes: 20
+            summary: The indirect object, and the case for "by means of" or "together with."
+          - id: prepositional-case
+            title: The prepositional case
+            requires: [dative-and-instrumental]
+            estimatedMinutes: 15
+            summary: The case that only ever shows up after a preposition — true to its name.
+
+  - id: verbs
+    title: 'Phase 4 — Verbs'
+    summary: Conjugation, tense, and the perfective/imperfective distinction English doesn't have.
+    modules:
+      - id: present-tense-module
+        title: 'Module 4.1 — Present Tense'
+        topics:
+          - id: present-tense-conjugation
+            title: Present tense conjugation
+            requires: [introducing-yourself]
+            critical: true
+            estimatedMinutes: 25
+            summary: Two conjugation patterns cover almost every verb you'll meet early on.
+          - id: verb-aspect-intro
+            title: 'Verb aspect: perfective vs. imperfective'
+            requires: [present-tense-conjugation]
+            estimatedMinutes: 25
+            summary: Whether an action is ongoing or completed changes the verb itself, not just a tense marker.
+      - id: past-future-module
+        title: 'Module 4.2 — Past and Future'
+        topics:
+          - id: past-tense
+            title: The past tense
+            requires: [present-tense-conjugation]
+            estimatedMinutes: 15
+            summary: Past tense agrees with gender, not person — a different agreement rule than the present tense uses.
+          - id: future-tense
+            title: The future tense
+            requires: [past-tense]
+            estimatedMinutes: 20
+            summary: Two different future tenses, one for each aspect from the lesson before last.
+
+  - id: building-sentences
+    title: 'Phase 5 — Building Real Sentences'
+    summary: The grammar patterns that turn a vocabulary list into actual conversation.
+    modules:
+      - id: sentence-patterns
+        title: 'Module 5.1 — Word Order and Questions'
+        topics:
+          - id: word-order
+            title: Russian word order
+            requires: [present-tense-conjugation]
+            critical: true
+            estimatedMinutes: 20
+            summary: Freer than English, because the case endings — not position — carry the grammatical meaning.
+          - id: negation
+            title: Negation
+            requires: [word-order]
+            estimatedMinutes: 15
+            summary: "Не before the verb, and the double-negative rule that English doesn't have."
+          - id: questions-recap
+            title: Asking questions
+            requires: [word-order]
+            estimatedMinutes: 15
+            summary: Question words, intonation-only questions, and everything from earlier lessons in one place.

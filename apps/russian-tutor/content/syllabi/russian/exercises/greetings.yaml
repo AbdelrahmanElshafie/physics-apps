@@ -1,0 +1,95 @@
+# Exercises: hello, goodbye, and thank you.
+
+schemaVersion: 1
+topic: greetings
+intro: Eight questions. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: gr1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: Someone says спасибо to you. What's the standard reply?
+    choices:
+      - { id: a, label: привет }
+      - { id: b, label: пожалуйста }
+      - { id: c, label: пока }
+      - { id: d, label: извините }
+    check: { type: exact, value: b }
+    solution: пожалуйста — "you're welcome" — is the standard reply to thanks.
+
+  - id: gr2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: You're meeting your new boss for the first time. Which greeting fits?
+    choices:
+      - { id: a, label: привет }
+      - { id: b, label: пока }
+      - { id: c, label: здравствуйте }
+      - { id: d, label: спасибо }
+    check: { type: exact, value: c }
+    solution: здравствуйте is the formal greeting — the right choice for a first meeting with someone like a boss.
+
+  - id: gr3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: Which pair is split the same way as привет / здравствуйте — casual vs. formal?
+    choices:
+      - { id: a, label: спасибо / извините }
+      - { id: b, label: пока / до свидания }
+      - { id: c, label: да / нет }
+      - { id: d, label: пожалуйста / спасибо }
+    check: { type: exact, value: b }
+    solution: пока (casual) and до свидания (formal) are both "goodbye," split by formality exactly like привет and здравствуйте.
+
+  - id: gr4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Type the Russian word for "thank you".
+    check: { type: exact, value: спасибо }
+    solution: "спасибо."
+
+  - id: gr5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the Russian word for "excuse me / sorry" (the all-purpose polite one).
+    check: { type: exact, value: извините }
+    solution: "извините."
+
+  - id: gr6
+    set: C
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — привет and здравствуйте are interchangeable in every situation, with no real difference.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Who would you use each one with, and would swapping them ever feel out of place? }
+    solution: >-
+      False. привет is casual, for friends and people your own age; здравствуйте is formal, for
+      strangers, elders, or professional settings. Using the wrong one isn't incomprehensible, but
+      it does send the wrong social signal.
+
+  - id: gr7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: пожалуйста does two different jobs depending on context. What are they?
+    choices:
+      - { id: a, label: '"hello" and "goodbye"' }
+      - { id: a2, label: '"please" and "you''re welcome"' }
+      - { id: b, label: '"sorry" and "excuse me"' }
+      - { id: c, label: It only ever means one thing }
+    check: { type: exact, value: a2 }
+    solution: пожалуйста means "please" before a request, and "you're welcome" after спасибо — same word, context tells them apart.
+
+  - id: gr8
+    set: D
+    label: Q8
+    kind: text
+    prompt: 'Translate into Russian: "Hello! Thank you! Goodbye!" — write it however feels natural; your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: You can write it as three short phrases, the way the dialogue in the lesson did. }
+    solution: "Привет! Спасибо! Пока! — any reasonable phrasing along these lines is fine, formal or informal."

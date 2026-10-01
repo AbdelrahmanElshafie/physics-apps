@@ -1,0 +1,93 @@
+# Exercises: word stress and vowel reduction.
+
+schemaVersion: 1
+topic: stress-and-vowel-reduction
+intro: Seven questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: sv1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: за́мок (stress on the first syllable) means...
+    choices:
+      - { id: a, label: castle }
+      - { id: b, label: lock }
+      - { id: c, label: window }
+      - { id: d, label: key }
+    check: { type: exact, value: a }
+    solution: за́мок, stressed on the first syllable, means "castle."
+
+  - id: sv2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: замо́к (stress on the second syllable) means...
+    choices:
+      - { id: a, label: castle }
+      - { id: b, label: lock }
+      - { id: c, label: window }
+      - { id: d, label: key }
+    check: { type: exact, value: b }
+    solution: замо́к, stressed on the second syllable, means "lock."
+
+  - id: sv3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — за́мок ("castle") and замо́к ("lock") are spelled differently, which is how a reader tells them apart.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Write out both words' plain letters (ignoring the stress mark) — are they the same five letters or different ones? }
+    solution: >-
+      False. Both are spelled з-а-м-о-к, identically. Only the stressed syllable — not visible in
+      ordinary writing at all — or surrounding context distinguishes them.
+
+  - id: sv4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: молоко́ is written with three о's. In actual speech, how many are pronounced as a clear "o" sound?
+    choices:
+      - { id: a, label: All three }
+      - { id: b, label: 'Just one — the stressed one' }
+      - { id: c, label: None — "o" never sounds like "o" in Russian }
+      - { id: d, label: Two of the three }
+    check: { type: exact, value: b }
+    solution: Only the stressed о (the last one in молоко́) keeps a clear "o" sound; the other two reduce toward "a".
+
+  - id: sv5
+    set: B
+    label: Q5
+    kind: text
+    prompt: What vowel sound does an unstressed о reduce toward? Type the single English letter.
+    check: { type: exact, value: a }
+    hint: This pattern has a name — akanye, "a-ing".
+    solution: '"a" — this shift is called akanye.'
+
+  - id: sv6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: What does "akanye" describe?
+    choices:
+      - { id: a, label: A rule for where stress falls in a word }
+      - { id: b, label: Unstressed о being pronounced closer to "a" }
+      - { id: c, label: A type of noun ending }
+      - { id: d, label: A verb tense }
+    check: { type: exact, value: b }
+    solution: Akanye is the pattern where unstressed о is pronounced closer to "a" — exactly what happens in молоко́ and хорошо́.
+
+  - id: sv7
+    set: D
+    label: Q7
+    kind: text
+    prompt: >-
+      In your own words: why doesn't it make sense to assume every written "о" in a Russian word
+      is pronounced the same way?
+    check: { type: tutor }
+    explain: { required: true, hint: What determines whether a given о keeps its full "o" sound or reduces — is it the letter itself, or something about its position in the word? }
+    solution: >-
+      Whether an о keeps its full "o" sound depends on stress, not on the letter itself — a
+      stressed о stays "o", while an unstressed one reduces toward "a". The same letter represents
+      a different actual sound depending on where it sits relative to the word's stress, so reading
+      every о the same way regardless of position produces a mispronunciation.

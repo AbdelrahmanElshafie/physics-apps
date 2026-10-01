@@ -1,0 +1,76 @@
+---
+title: Word stress and vowel reduction
+summary: Stress isn't written down, lands on any syllable, and changes how unstressed vowels are even pronounced.
+readingMinutes: 12
+---
+
+Russian spelling doesn't mark which syllable is stressed — you simply have to know, the same way
+an English speaker has to already know that "record" is stressed differently as a noun
+("RE-cord") than as a verb ("re-CORD"). The difference is that in Russian, *every* word has this
+problem, and getting it wrong doesn't just sound foreign — it changes how the surrounding vowels
+are pronounced too.
+
+<Callout kind="note" title="How this course shows stress">
+A lesson's reading line under each word (приве́т, спаси́бо) marks the stressed vowel with an accent
+mark — a convention for learners, not something you'll see in ordinary Russian writing. Dictionaries
+use the same convention for exactly this reason.
+</Callout>
+
+## 1. Stress can change the word entirely
+
+Most of the time, stress just affects pronunciation. Occasionally, it's the only thing
+distinguishing two completely different words that are spelled identically:
+
+<StressDemo
+  items={[
+    { word: 'замок', stressed: 'за́мок', meaning: 'castle (stress on the first syllable)' },
+    { word: 'замок', stressed: 'замо́к', meaning: 'lock (stress on the second syllable)' },
+  ]}
+/>
+
+<Predict
+  question="You read замок with no stress marked, out of context. Can you tell whether it means 'castle' or 'lock' from the spelling alone?"
+  options={['Yes, the spelling makes it obvious', 'No — both readings are spelled identically; only stress (or context) tells them apart', "It's always \"castle\" by default", "It's always \"lock\" by default"]}
+  answer={1}
+>
+  No. замок is spelled exactly the same way for both words — the five letters never change.
+  Only the stressed syllable (carried in speech, not in the spelling) or surrounding context
+  tells a listener which word is meant.
+</Predict>
+
+## 2. Unstressed о sounds like а
+
+This is the single most common pronunciation shift in Russian, usually called **akanye**
+("a-ing"). An unstressed **о** doesn't keep its "o" sound — it reduces toward an "a" sound, or an
+even shorter neutral vowel the further it sits from the stress.
+
+<VocabCard word="молоко" stressed="молоко́" meaning="milk" note={'Three written о\'s, but only the last one (stressed) is actually said as "o". The first two reduce toward "a".'} />
+
+<Compare
+  columns={['Written', 'Stress', 'Actually sounds closer to']}
+  rows={[
+    ['молоко́', 'last syllable', 'ma-la-KO'],
+    ['хорошо́', 'last syllable', 'kha-ra-SHO'],
+    ['до свида́ния', '3rd syllable of свидания', 'da svi-DA-nya'],
+  ]}
+  caption={'Every unstressed о in these words leans toward "a" in actual speech — spelling and pronunciation quietly part ways.'}
+/>
+
+<Callout kind="warning" title="The spelling never changes — only the sound does">
+This is exactly the same kind of gap as Mandarin tone sandhi, if that's a useful comparison: a
+predictable rule that changes *pronunciation*, while the *written word* stays exactly as it's
+spelled. молоко is always spelled with three о's, no matter how it's actually said.
+</Callout>
+
+## 3. Unstressed е and я lean toward "i"
+
+A similar, smaller shift happens to **е** and **я** when they're unstressed — they drift toward an
+"i"-like sound rather than staying as crisp as their stressed version:
+
+<VocabCard word="земля" stressed="земля́" meaning="land / earth" note={'The stressed final я keeps its full "ya" sound; an unstressed е or я elsewhere in a word would lean toward "i".'} />
+
+<Callout kind="forward">
+Next: noun gender — every Russian noun is masculine, feminine, or neuter, and the ending almost
+always gives it away. These same vowel-reduction patterns will keep showing up as real vocabulary
+arrives, starting with greetings right after.
+</Callout>
