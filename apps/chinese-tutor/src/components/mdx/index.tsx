@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 
 import { Callout, Compare, Dialogue, GrammarPoint, VocabCard } from './blocks'
 import { Predict } from './Predict'
+import { ToneDemo } from './ToneDemo'
 
 /** The component vocabulary available to lesson authors. */
 export function mdxComponents(): MDXComponents {
@@ -13,6 +14,7 @@ export function mdxComponents(): MDXComponents {
     Dialogue,
     GrammarPoint,
     Predict,
+    ToneDemo,
 
     table: ({ children }: { children?: ReactNode }) => (
       <div className="pane-scroll my-6 overflow-x-auto rounded-panel border border-border">
