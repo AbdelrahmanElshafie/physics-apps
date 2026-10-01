@@ -1,0 +1,103 @@
+---
+title: Russian word order
+summary: Freer than English, because the case endings — not position — carry the grammatical meaning.
+readingMinutes: 20
+---
+
+Back in "Why Russian has cases," the claim was that case endings free up word order, since the
+endings — not position — mark who's doing what. This lesson cashes that claim in: what word order
+actually does in Russian, now that it isn't needed for marking grammatical roles.
+
+## 1. The neutral order is the same as English
+
+Left to itself, with nothing emphasized, a Russian sentence comes out subject–verb–object, exactly
+like English:
+
+<GrammarPoint pattern="Я чита́ю кни́гу." title="Neutral order: SVO">
+
+Я читаю книгу — "I'm reading a book." Subject (я), verb (читаю), object (книгу). This is what you
+say when nothing in particular is being stressed — the default, not a rule.
+
+</GrammarPoint>
+
+## 2. Rearranging doesn't change who did what
+
+Because книгу is marked accusative by its own ending, it stays the object no matter where it sits:
+
+<Compare
+  columns={['Order', 'Still means', 'But emphasizes']}
+  rows={[
+    ['Я читаю книгу.', "I'm reading a book", 'Nothing in particular — neutral'],
+    ['Книгу читаю я.', "I'm reading a book", "I'm the one reading it (not someone else)"],
+    ['Книгу я читаю.', "I'm reading a book", 'As for the book — that one I am reading'],
+  ]}
+  caption="Three orders, one meaning. Scrambling an English sentence this way would produce nonsense or change who's reading whom."
+/>
+
+<Callout kind="why" title="What word order does instead">
+Freed from marking grammatical roles, Russian word order does a different job: marking **what's
+new or emphasized**. The general tendency is that already-known information comes first and the
+new or stressed information goes last. English does this with stress and intonation ("*I'm* reading
+the book") or with extra constructions ("It's me who's reading the book"); Russian just moves the
+word.
+</Callout>
+
+<Predict
+  question="You want to stress that it's a BOOK you're reading, not a newspaper. Where would you put книгу?"
+  options={['First — Книгу я читаю', 'Last — Я читаю книгу', 'It makes no difference at all', 'Russian cannot express this']}
+  answer={1}
+>
+  Last. New or contrasted information gravitates to the end of a Russian sentence, so leaving
+  книгу in final position (and stressing it in speech) is what marks it as the point of the
+  sentence.
+</Predict>
+
+## 3. When word order *does* carry the meaning after all
+
+The freedom comes entirely from the endings — so where the endings don't distinguish subject from
+object, word order quietly takes the job back:
+
+<GrammarPoint pattern="Мать лю́бит дочь." title="Both nouns look identical in both cases">
+
+мать ("mother") and дочь ("daughter") are both feminine soft-sign nouns, and for those, the
+accusative form is identical to the nominative. Neither word's ending says which one is the
+subject. So this sentence is read the English way — subject first: "The mother loves the
+daughter." Reverse it to Дочь любит мать and you've reversed the meaning, not the emphasis.
+
+</GrammarPoint>
+
+<Callout kind="warning" title="This is the exception that proves the rule">
+Word order in Russian is free *because* the endings do the work. Where the endings genuinely
+can't (identical nominative and accusative forms), the freedom evaporates and position decides —
+which is a good sanity check that it really is the endings carrying grammatical meaning, not some
+general Russian tolerance for scrambled sentences.
+</Callout>
+
+## 4. What is *not* free: adjectives
+
+Adjective placement isn't a stylistic choice the way noun placement is — it changes what you're
+saying:
+
+<Compare
+  columns={['Russian', 'Means']}
+  rows={[
+    ['красная книга', 'a/the red book — adjective describing the noun'],
+    ['Книга красная.', 'The book is red — a complete sentence (with no verb, per the zero-copula rule)'],
+  ]}
+  caption="Before the noun, an adjective describes it. After it, with nothing else in the sentence, the adjective becomes the predicate — exactly the gap быть leaves in the present tense."
+/>
+
+<Predict
+  question="Given there's no present-tense verb 'to be,' how does Книга красная manage to be a full sentence?"
+  options={['It is not a full sentence', 'The adjective after the noun functions as the predicate, with the missing verb implied by the zero-copula rule', 'красная is secretly a verb', 'It needs есть to be complete']}
+  answer={1}
+>
+  The adjective takes the predicate position and the "is" simply isn't there — the same zero-copula
+  rule as Я врач from the introducing-yourself lesson. Position is doing the work that a verb
+  would do in English.
+</Predict>
+
+<Callout kind="forward">
+Next: negation — не before the verb, and the double-negative rule that English treats as an error
+and Russian treats as mandatory.
+</Callout>

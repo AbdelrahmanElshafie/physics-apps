@@ -1,0 +1,113 @@
+# Exercises: asking questions.
+
+schemaVersion: 1
+topic: questions-recap
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: qr1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: How do you turn Она читает книгу into a yes/no question?
+    choices:
+      - { id: a, label: 'Invert the subject and verb' }
+      - { id: b, label: 'Add an auxiliary verb at the front' }
+      - { id: c, label: 'Leave the words exactly as they are and use rising intonation' }
+      - { id: d, label: 'Move книгу to the front' }
+    check: { type: exact, value: c }
+    solution: Nothing structural changes — the same words in the same order, marked as a question by intonation in speech and a question mark in writing.
+
+  - id: qr2
+    set: A
+    label: Q2
+    kind: truefalse
+    prompt: 'True or false — Russian yes/no questions need an auxiliary verb, the way English needs "do".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Compare Ты говоришь по-русски. and Ты говоришь по-русски? — what actually differs between them?' }
+    solution: >-
+      False. Nothing is added at all. Russian can leave the sentence untouched because its grammar
+      is carried by endings, so intonation is free to mark the question.
+
+  - id: qr3
+    set: B
+    label: Q3
+    kind: text
+    prompt: Which question word means "what"? (Type the Russian word.)
+    check: { type: exact, value: что }
+    solution: что — as in Что это? ("What is this?").
+
+  - id: qr4
+    set: B
+    label: Q4
+    kind: text
+    prompt: 'Complete: ___ ты идёшь? (Where are you going?)'
+    check: { type: exact, value: куда }
+    hint: Is this question about a location or a destination?
+    solution: куда — the question is about a destination you are moving toward, which Russian marks with a different word than где.
+
+  - id: qr5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: What is the difference between где and куда?
+    choices:
+      - { id: a, label: 'где is formal, куда is informal' }
+      - { id: b, label: 'где asks about a location; куда asks about a destination you are moving toward' }
+      - { id: c, label: 'They are interchangeable' }
+      - { id: d, label: 'где is for people, куда is for objects' }
+    check: { type: exact, value: b }
+    solution: English uses "where" for both; Russian splits location (где, with the prepositional) from direction (куда, with the accusative).
+
+  - id: qr6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: In Кого ты видишь? ("Whom do you see?"), what case is кого?
+    choices:
+      - { id: a, label: Nominative }
+      - { id: b, label: Accusative }
+      - { id: c, label: Dative }
+      - { id: d, label: 'Question words do not take cases' }
+    check: { type: exact, value: b }
+    solution: кого is the accusative of кто — it is the object of видишь, so it takes the object case like any other noun would.
+
+  - id: qr7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: In Кому ты даёшь книгу?, why is кому in the dative?
+    choices:
+      - { id: a, label: 'All question words are dative' }
+      - { id: b, label: 'It is the indirect object — the person being given to' }
+      - { id: c, label: 'It is the direct object' }
+      - { id: d, label: 'Because книгу is accusative' }
+    check: { type: exact, value: b }
+    solution: кому is whom the book is given to — the indirect object, which is exactly the dative's job.
+
+  - id: qr8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — кто and что are fixed forms that never change, unlike nouns.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Compare кто, кого and кому — are those the same word in different cases, or three unrelated words?' }
+    solution: >-
+      False. They decline like any noun according to their job in the question: кто (nominative),
+      кого (accusative), кому (dative). English keeps a faded trace of the same thing in who/whom.
+
+  - id: qr9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why can Russian form a yes/no question without changing anything, when
+      English has to invert the sentence or add "do"?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What is English word order already busy doing that Russian word order is not?' }
+    solution: >-
+      English word order is already carrying grammatical information — which noun is the subject
+      and which is the object — so it cannot be left to also signal "this is a question" without
+      ambiguity; something structural has to change instead. Russian marks those roles with case
+      endings, leaving word order and intonation free for other jobs, so intonation alone can carry
+      the question with no words moved or added.

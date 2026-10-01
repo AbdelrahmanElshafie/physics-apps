@@ -1,0 +1,115 @@
+# Exercises: negation.
+
+schemaVersion: 1
+topic: negation
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ng1
+    set: A
+    label: Q1
+    kind: text
+    prompt: 'Make this negative: Я читаю. (Type the whole sentence, no capital needed.)'
+    check: { type: exact, value: я не читаю }
+    solution: Я не читаю — не goes straight in front of the verb, with no auxiliary added.
+
+  - id: ng2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: What does English have to add when negating "I read" that Russian does not?
+    choices:
+      - { id: a, label: 'An auxiliary verb — "do" — that was not in the positive sentence' }
+      - { id: b, label: 'A different pronoun' }
+      - { id: c, label: 'A case ending' }
+      - { id: d, label: 'Nothing — the two languages work identically here' }
+    check: { type: exact, value: a }
+    solution: 'English must summon "do" ("I do not read"); Russian simply places не before the unchanged verb.'
+
+  - id: ng3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: What is the difference between Я не читаю книгу and Я читаю не книгу?
+    choices:
+      - { id: a, label: 'No difference — не can go anywhere' }
+      - { id: b, label: "The first denies the reading; the second denies that it's a book" }
+      - { id: c, label: 'The second one is ungrammatical' }
+      - { id: d, label: 'The first is past tense' }
+    check: { type: exact, value: b }
+    solution: не negates whatever follows it — in front of the verb it denies the action, in front of книгу it denies that a book is what is being read.
+
+  - id: ng4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Which is correct for "Nobody knows"?
+    choices:
+      - { id: a, label: 'Никто знает' }
+      - { id: b, label: 'Никто не знает' }
+      - { id: c, label: 'Нет никто знает' }
+      - { id: d, label: 'Никто знает не' }
+    check: { type: exact, value: b }
+    solution: Никто не знает — the negative pronoun никто does not excuse the verb from also carrying не.
+
+  - id: ng5
+    set: B
+    label: Q5
+    kind: truefalse
+    prompt: 'True or false — in Russian, two negatives in one sentence cancel each other out, the way they do in standard English logic.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Is Я ничего не знаю a double negative, and does it mean "I know something"?' }
+    solution: >-
+      False. Russian negation agrees across the sentence rather than cancelling — Я ничего не знаю
+      has two negatives and means "I know nothing," not "I know something." Dropping either one is
+      the actual error.
+
+  - id: ng6
+    set: B
+    label: Q6
+    kind: text
+    prompt: 'Complete: Я никогда ___ был в Москве. (I have never been to Moscow.)'
+    check: { type: exact, value: не }
+    solution: не — никогда still requires не on the verb, exactly like никто and ничего do.
+
+  - id: ng7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: What is the difference between не and нет?
+    choices:
+      - { id: a, label: 'They are interchangeable' }
+      - { id: b, label: 'не negates something inside a sentence; нет is the standalone answer "no" (and the "there isn''t any" word taking the genitive)' }
+      - { id: c, label: 'нет is formal, не is informal' }
+      - { id: d, label: 'не is used only in the past tense' }
+    check: { type: exact, value: b }
+    solution: 'They are two different words: не is the in-sentence negation particle, нет answers "no" and also means "there isn''t any" with a genitive noun.'
+
+  - id: ng8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: Why is "Russian double negation is illogical" a poor description of what is happening?
+    choices:
+      - { id: a, label: 'Because the negatives really do cancel, just silently' }
+      - { id: b, label: 'Because negation is being agreed on by every eligible word, the way case or gender agreement works — not added up arithmetically' }
+      - { id: c, label: 'Because only one of the two words is really negative' }
+      - { id: d, label: 'Because the rule applies only in writing' }
+    check: { type: exact, value: b }
+    solution: Russian marks negation on every element that can show it — agreement, not arithmetic. The sentence is negative once; several words display that fact.
+
+  - id: ng9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does requiring не on the verb alongside ничего fit the general shape
+      of Russian grammar, rather than being an arbitrary quirk?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What else in Russian gets marked redundantly on several words at once — think about adjectives, or past-tense verbs.' }
+    solution: >-
+      Russian systematically marks one grammatical fact on multiple words at once: an adjective
+      repeats its noun's gender, number and case; a past-tense verb repeats its subject's gender.
+      Negation behaves the same way — the sentence is negative, and every word able to show that
+      (the negative pronoun, the particle on the verb) does. It is redundant in the same deliberate
+      way the rest of the agreement system is.

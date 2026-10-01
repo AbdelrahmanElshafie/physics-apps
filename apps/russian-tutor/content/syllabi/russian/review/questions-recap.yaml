@@ -1,0 +1,77 @@
+# Review cards: question words, где vs. куда, and declining кто.
+
+schemaVersion: 1
+topic: questions-recap
+cards:
+  - id: qr-kto
+    kind: word
+    topicId: russian:questions-recap
+    front: кто
+    back: who (nominative — кого is its accusative, кому its dative)
+
+  - id: qr-chto
+    kind: word
+    topicId: russian:questions-recap
+    front: что
+    back: what
+    exerciseIds: [qr3]
+
+  - id: qr-gde
+    kind: word
+    topicId: russian:questions-recap
+    front: где
+    back: where — a location you are in (pairs with the prepositional)
+    exerciseIds: [qr5]
+
+  - id: qr-kuda
+    kind: word
+    topicId: russian:questions-recap
+    front: куда
+    frontPronunciation: куда́
+    back: where to — a destination you move toward (pairs with the accusative)
+    exerciseIds: [qr4, qr5]
+
+  - id: qr-pochemu
+    kind: word
+    topicId: russian:questions-recap
+    front: почему
+    frontPronunciation: почему́
+    back: why
+
+  - id: qr-skolko
+    kind: word
+    topicId: russian:questions-recap
+    front: сколько
+    frontPronunciation: ско́лько
+    back: how much / how many
+
+  - id: qr-kak-dela
+    kind: sentence
+    topicId: russian:questions-recap
+    front: Как дела?
+    frontPronunciation: Как дела́?
+    back: How are things? / How are you?
+
+  - id: qr-ona-chitaet-knigu
+    kind: sentence
+    topicId: russian:questions-recap
+    front: Она читает книгу?
+    frontPronunciation: Она́ чита́ет кни́гу?
+    back: Is she reading a book? — identical words to the statement, only the intonation differs
+    exerciseIds: [qr1, qr2]
+
+  - id: qr-kogo-ty-vidish
+    kind: sentence
+    topicId: russian:questions-recap
+    front: Кого ты видишь?
+    frontPronunciation: Кого́ ты ви́дишь?
+    back: Whom do you see? (кого — the accusative of кто)
+    exerciseIds: [qr6, qr8]
+
+  - id: qr-komu-ty-dayosh
+    kind: sentence
+    topicId: russian:questions-recap
+    front: Кому ты даёшь книгу?
+    frontPronunciation: Кому́ ты даёшь кни́гу?
+    back: To whom are you giving the book? (кому dative, книгу accusative)
+    exerciseIds: [qr7]

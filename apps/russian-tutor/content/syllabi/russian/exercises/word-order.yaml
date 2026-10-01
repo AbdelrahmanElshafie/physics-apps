@@ -1,0 +1,122 @@
+# Exercises: Russian word order.
+
+schemaVersion: 1
+topic: word-order
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: wo1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: What is the neutral, unemphasized word order in a Russian sentence?
+    choices:
+      - { id: a, label: 'Subject–verb–object, the same as English' }
+      - { id: b, label: 'Verb first, always' }
+      - { id: c, label: 'Object first, always' }
+      - { id: d, label: 'There is no neutral order at all' }
+    check: { type: exact, value: a }
+    solution: 'Я читаю книгу — subject, verb, object. Russian defaults to the same order English requires; the difference is that Russian is not stuck with it.'
+
+  - id: wo2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Книгу читаю я means...
+    choices:
+      - { id: a, label: 'The book is reading me' }
+      - { id: b, label: "I'm reading a book, with the emphasis on me being the one doing it" }
+      - { id: c, label: 'It is ungrammatical' }
+      - { id: d, label: 'I will read a book' }
+    check: { type: exact, value: b }
+    solution: книгу is marked accusative by its ending wherever it sits, so the meaning is unchanged — moving it only shifts the emphasis onto я.
+
+  - id: wo3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — rearranging the words of Я читаю книгу changes who is reading whom.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What marks книгу as the object — its position, or its ending?' }
+    solution: >-
+      False. книгу carries its accusative ending with it, so it stays the object in any position.
+      Only the emphasis changes, not the grammatical roles.
+
+  - id: wo4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: If word order is not marking grammatical roles in Russian, what is it marking instead?
+    choices:
+      - { id: a, label: 'Politeness level' }
+      - { id: b, label: 'Tense' }
+      - { id: c, label: 'What information is new or emphasized' }
+      - { id: d, label: 'Nothing at all — it is purely random' }
+    check: { type: exact, value: c }
+    solution: Word order carries emphasis and information structure — known information tends to come first, new or stressed information last.
+
+  - id: wo5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: You want to stress that it is a BOOK you are reading, not a newspaper. Where does книгу go?
+    choices:
+      - { id: a, label: 'First in the sentence' }
+      - { id: b, label: 'Last in the sentence' }
+      - { id: c, label: 'Immediately before the verb' }
+      - { id: d, label: 'Position makes no difference to emphasis' }
+    check: { type: exact, value: b }
+    solution: New or contrasted information gravitates to the end, so Я читаю книгу (with книгу final and stressed in speech) is what marks it as the point.
+
+  - id: wo6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: Why is Мать любит дочь read as "the mother loves the daughter" rather than being ambiguous?
+    choices:
+      - { id: a, label: 'мать is always a subject in Russian' }
+      - { id: b, label: 'Both nouns have identical nominative and accusative forms, so word order takes over the job' }
+      - { id: c, label: 'любит can only take one kind of subject' }
+      - { id: d, label: 'It genuinely is ambiguous and context never helps' }
+    check: { type: exact, value: b }
+    solution: Feminine soft-sign nouns have identical nominative and accusative forms, so no ending distinguishes subject from object here — position does, and the sentence reverts to subject-first.
+
+  - id: wo7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: What is the difference between красная книга and Книга красная?
+    choices:
+      - { id: a, label: 'No difference — adjective placement is free' }
+      - { id: b, label: 'The first is "a red book"; the second is a full sentence, "The book is red"' }
+      - { id: c, label: 'The first is plural, the second singular' }
+      - { id: d, label: 'The second one is ungrammatical' }
+    check: { type: exact, value: b }
+    solution: Before the noun, the adjective describes it. After it, the adjective becomes the predicate — a complete sentence, with the missing "is" supplied by the zero-copula rule.
+
+  - id: wo8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — adjective placement is as free as noun placement in Russian.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Does moving красная after книга leave the meaning intact, the way moving книгу does?' }
+    solution: >-
+      False. Moving a noun shifts emphasis; moving an adjective across the noun changes what the
+      sentence is — from a noun phrase ("a red book") to a complete statement ("The book is red").
+
+  - id: wo9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does the Мать любит дочь example support — rather than undermine —
+      the claim that case endings are what carry grammatical meaning in Russian?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What is different about those two nouns compared with стол or книга, and what happens to word-order freedom as a result?' }
+    solution: >-
+      Russian word order is free precisely because endings normally mark the roles. мать and дочь
+      are the rare case where the endings genuinely cannot — nominative and accusative are
+      identical for those nouns — and exactly there, the freedom disappears and position takes the
+      job back. If word order were free for some general reason unrelated to the endings, that
+      switch would not happen.

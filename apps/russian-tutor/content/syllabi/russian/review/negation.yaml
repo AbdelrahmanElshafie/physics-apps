@@ -1,0 +1,63 @@
+# Review cards: negation — не on the verb, and the obligatory double negatives.
+
+schemaVersion: 1
+topic: negation
+cards:
+  - id: ng-ne
+    kind: word
+    topicId: russian:negation
+    front: не
+    back: not — the negation particle, placed directly before whatever it denies
+
+  - id: ng-net
+    kind: word
+    topicId: russian:negation
+    front: нет
+    back: no (the standalone answer) — and separately "there isn't any", taking the genitive
+    exerciseIds: [ng7]
+
+  - id: ng-ya-ne-chitayu
+    kind: sentence
+    topicId: russian:negation
+    front: Я не читаю.
+    frontPronunciation: Я не чита́ю.
+    back: I don't read / I'm not reading. (no auxiliary verb needed)
+    exerciseIds: [ng1, ng2]
+
+  - id: ng-nichego
+    kind: word
+    topicId: russian:negation
+    front: ничего
+    frontPronunciation: ничего́
+    back: nothing — still requires не on the verb as well
+
+  - id: ng-ya-nichego-ne-znayu
+    kind: sentence
+    topicId: russian:negation
+    front: Я ничего не знаю.
+    frontPronunciation: Я ничего́ не зна́ю.
+    back: I don't know anything. (lit. "I nothing not know" — both negatives obligatory)
+    exerciseIds: [ng5]
+
+  - id: ng-nikto-ne-znaet
+    kind: sentence
+    topicId: russian:negation
+    front: Никто не знает.
+    frontPronunciation: Никто́ не зна́ет.
+    back: Nobody knows.
+    exerciseIds: [ng4]
+
+  - id: ng-nikogda
+    kind: word
+    topicId: russian:negation
+    front: никогда
+    frontPronunciation: никогда́
+    back: never — requires не on the verb too
+    exerciseIds: [ng6]
+
+  - id: ng-ya-nikogda-ne-byl
+    kind: sentence
+    topicId: russian:negation
+    front: Я никогда не был в Москве.
+    frontPronunciation: Я никогда́ не был в Москве́.
+    back: I have never been to Moscow.

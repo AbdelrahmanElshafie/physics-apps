@@ -1,0 +1,44 @@
+# Review cards: word order — same meaning, shifted emphasis, and the two places position still rules.
+
+schemaVersion: 1
+topic: word-order
+cards:
+  - id: wo-ya-chitayu-knigu
+    kind: sentence
+    topicId: russian:word-order
+    front: Я читаю книгу.
+    frontPronunciation: Я чита́ю кни́гу.
+    back: I'm reading a book. (neutral SVO order, nothing emphasized)
+    exerciseIds: [wo1]
+
+  - id: wo-knigu-chitayu-ya
+    kind: sentence
+    topicId: russian:word-order
+    front: Книгу читаю я.
+    frontPronunciation: Кни́гу чита́ю я.
+    back: I'm reading a book — emphasis on me being the one doing it.
+    exerciseIds: [wo2, wo3]
+
+  - id: wo-mat-lyubit-doch
+    kind: sentence
+    topicId: russian:word-order
+    front: Мать любит дочь.
+    frontPronunciation: Мать лю́бит дочь.
+    back: The mother loves the daughter — position decides here, since both nouns' nominative and accusative forms are identical.
+    exerciseIds: [wo6]
+
+  - id: wo-krasnaya-kniga
+    kind: word
+    topicId: russian:word-order
+    front: красная книга
+    frontPronunciation: кра́сная кни́га
+    back: a red book — adjective before the noun describes it
+    exerciseIds: [wo7]
+
+  - id: wo-kniga-krasnaya
+    kind: sentence
+    topicId: russian:word-order
+    front: Книга красная.
+    frontPronunciation: Кни́га кра́сная.
+    back: The book is red — adjective after the noun becomes the predicate (zero copula)
+    exerciseIds: [wo7, wo8]

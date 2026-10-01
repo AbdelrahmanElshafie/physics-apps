@@ -112,13 +112,13 @@ content/syllabi/<id>/
 ```
 
 The `russian` syllabus (`content/syllabi/russian/syllabus.yaml`) is a full five-phase roadmap —
-21 topics, ending with word order and real sentences. Written so far: Phase 1's foundation topics
-(`cyrillic-alphabet`, `stress-and-vowel-reduction`, `gender-of-nouns`), Phase 2's `greetings` and
-`introducing-yourself`, all six Phase 3 case-system topics (`introduction-to-cases` through
-`prepositional-case`), and all of Phase 4 (`present-tense-conjugation`, `verb-aspect-intro`,
-`past-tense`, `future-tense`). The rest is real (ordered, with real prerequisites and summaries)
-but shows "this lesson hasn't been written yet" until its `.mdx` file exists — Phase 5
-(`word-order` through `questions-recap`) is next, see below.
+21 topics, ending with word order and real sentences. **Every structural topic is now written**:
+Phase 1's foundations (`cyrillic-alphabet`, `stress-and-vowel-reduction`, `gender-of-nouns`),
+Phase 2's `greetings` and `introducing-yourself`, all six Phase 3 case-system topics, all of
+Phase 4's verb system, and all of Phase 5 (`word-order`, `negation`, `questions-recap`). Only
+three vocabulary-breadth topics are left unwritten — `how-are-you`, `numbers-0-20`, and
+`dates-and-time` — each of which shows "this lesson hasn't been written yet" until its `.mdx`
+file exists.
 
 ### Content rules
 
@@ -136,14 +136,18 @@ form registered in that test file, the same discipline `tests/stress.test.ts` ap
 prose. A card's `exerciseIds` only needs to name real exercise ids in that topic's exercises YAML
 — `pnpm validate:content` checks this, along with topicId validity and duplicate card ids.
 
-**Phases 3 and 4 are both fully written** — the whole case system, subject pronouns, both
-present-tense conjugation patterns, perfective/imperfective aspect (including why perfective verbs
-have no present tense), gender-agreeing past tense, and both future tenses. **Phase 5
-(`word-order` through `questions-recap`) is now the real content debt**, not polish —
-`word-order` is flagged `critical: true` in the syllabus for good reason: it's where case endings
-(Phase 3) actually pay off as freer word order, and `negation`'s double-negative rule is a genuine
-structural difference from English, not vocabulary. When picking what to write next, these should
-outrank filling in easier vocabulary-only topics (`how-are-you`, numbers, dates) if forced to choose.
+**The structural backbone is finished** — the whole case system (Phase 3), the whole verb system
+(Phase 4: both conjugation patterns, aspect, gender-agreeing past tense, both futures), and
+Phase 5's word order, negation and questions. The lessons deliberately cross-reference each other
+along one spine: cases free up word order, which is why questions need no inversion, which is why
+negation can simply agree across the sentence. **Keep that spine intact when editing** — a change
+to how one of those lessons frames the case system has knock-on claims in four other files.
+
+What's left (`how-are-you`, `numbers-0-20`, `dates-and-time`) is vocabulary breadth, not new
+structure, and can be written in any order. The one structural thing those topics do touch is
+number–case agreement (оди́н/два/пять each govern a noun differently), which `numbers-0-20`'s own
+syllabus summary already flags — treat that as the real content of that lesson rather than a
+counting drill.
 
 ## Architecture
 
