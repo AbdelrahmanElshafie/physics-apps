@@ -1,0 +1,65 @@
+# Review cards: the genitive case — possession, "of", and negation with нет.
+
+schemaVersion: 1
+topic: genitive-case
+cards:
+  - id: gen-stola
+    kind: word
+    topicId: russian:genitive-case
+    front: стола
+    back: of the table / the table's (genitive) — masculine + -а
+    exerciseIds: [gc1]
+
+  - id: gen-knigi
+    kind: word
+    topicId: russian:genitive-case
+    front: книги
+    frontPronunciation: кни́ги
+    back: of the book (genitive) — spelled the same as the nominative plural
+    exerciseIds: [gc2]
+
+  - id: gen-kniga-studenta
+    kind: sentence
+    topicId: russian:genitive-case
+    front: Это книга студента.
+    frontPronunciation: Э́то кни́га студе́нта.
+    back: This is the student's book.
+    exerciseIds: [gc3]
+
+  - id: gen-doma
+    kind: word
+    topicId: russian:genitive-case
+    front: дома (genitive)
+    frontPronunciation: до́ма
+    back: of the house — masculine + -а
+    exerciseIds: [gc4]
+
+  - id: gen-vody
+    kind: word
+    topicId: russian:genitive-case
+    front: воды
+    frontPronunciation: воды́
+    back: of water (genitive) — feminine -а → -ы
+    exerciseIds: [gc5]
+
+  - id: gen-stakan-vody
+    kind: sentence
+    topicId: russian:genitive-case
+    front: стакан воды
+    frontPronunciation: стака́н воды́
+    back: a glass of water
+
+  - id: gen-u-tebya-est-kniga
+    kind: sentence
+    topicId: russian:genitive-case
+    front: У тебя есть книга?
+    frontPronunciation: У тебя́ есть кни́га?
+    back: Do you have a book?
+
+  - id: gen-u-menya-net-knigi
+    kind: sentence
+    topicId: russian:genitive-case
+    front: У меня нет книги.
+    frontPronunciation: У меня́ нет кни́ги.
+    back: I don't have a book.
+    exerciseIds: [gc6, gc7]

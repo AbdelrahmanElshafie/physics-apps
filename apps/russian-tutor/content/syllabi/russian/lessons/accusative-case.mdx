@@ -1,0 +1,106 @@
+---
+title: The accusative case
+summary: Marking the direct object — what the verb is actually acting on.
+readingMinutes: 20
+---
+
+The accusative marks the **direct object** — the thing a verb is actually doing something to.
+"I read **a book**", "I see **the table**" — in English, "book" and "table" are only object
+because of where they sit in the sentence. In Russian, the noun itself changes.
+
+<GrammarPoint pattern="Я чита́ю кни́гу." title="Subject unchanged, object changed">
+
+Я читаю книгу — "I read a/the book." книга (nominative, the dictionary form) becomes книгу the
+moment it's the thing being read. Я ("I") doesn't change — pronouns have their own, separate set
+of forms, covered later. This lesson is about what happens to *nouns*.
+
+</GrammarPoint>
+
+## 1. Feminine nouns: the clearest change
+
+This is the easiest pattern to spot, so it's worth anchoring on first:
+
+<Compare
+  columns={['Nominative', 'Accusative', 'Rule']}
+  rows={[
+    ['книга', 'книгу', '-а → -у'],
+    ['семья', 'семью', '-я → -ю'],
+  ]}
+  caption="Every feminine noun ending in -а or -я follows this pattern, no exceptions worth learning yet."
+/>
+
+<VocabCard word="газету" stressed="газе́ту" meaning="newspaper (accusative) — from газета" />
+
+<Predict
+  question="студентка (female student, feminine, ends in -а) is the object of 'I see the student.' What form does it take?"
+  options={['студентка (unchanged)', 'студентку', 'студентки', 'студентке']}
+  answer={1}
+>
+  студентку — the regular -а → -у pattern. (Note this isn't the 7-letter spelling rule from the
+  last lesson; that rule is about ы specifically, and у is unaffected by it.)
+</Predict>
+
+## 2. Masculine nouns: it depends on whether the noun is alive
+
+This is the part that makes the accusative genuinely tricky, and it's worth sitting with: for
+masculine nouns, the accusative ending depends on **animacy** — whether the noun refers to
+something alive.
+
+<Compare
+  columns={['Type', 'Accusative rule', 'Example']}
+  rows={[
+    ['Masculine, inanimate (things)', 'Same as nominative — no change', 'Я вижу стол. (I see the table.)'],
+    ['Masculine, animate (people, animals)', 'Same as genitive — adds -а', 'Я вижу студента. (I see the student.)'],
+  ]}
+  caption="стол stays стол; студент becomes студента — not студент, even though both are masculine."
+/>
+
+<Callout kind="warning" title="This is genuinely two different rules wearing one name">
+It feels strange that "the accusative case" means two completely different things depending on
+whether the noun is alive — but that's exactly what's happening, and it isn't a simplification
+this course is skipping past. The genitive case (Module 3.2, right after this one) is what
+actually produces that -а ending for студент → студента; animate-masculine accusative nouns are
+borrowing the genitive's form rather than having a true ending of their own.
+</Callout>
+
+<Predict
+  question="соба́ка (dog) in Russian grammar counts as animate. If мужчи́на (man, also animate) takes -а in the accusative like студент does, what do you expect for a masculine animate noun in general?"
+  options={['It stays unchanged, like inanimate masculine nouns', 'It takes the genitive-style -а ending, same pattern as студента', 'It becomes feminine', 'There is no rule — every animate noun is different']}
+  answer={1}
+>
+  It takes the genitive-style ending. Any masculine noun referring to a living thing — person or
+  animal — follows the студент → студента pattern, not the "stays the same" pattern inanimate
+  masculine nouns use.
+</Predict>
+
+## 3. Neuter nouns: unchanged, just like inanimate masculine
+
+Neuter nouns in the accusative are identical to their nominative form — no ending change at all,
+for the same reason stол doesn't change: the overwhelming majority of neuter nouns are things, not
+living beings.
+
+<VocabCard word="окно" stressed="окно́" meaning="window — same in nominative and accusative" />
+
+<GrammarPoint pattern="Я ви́жу окно́." title="Neuter: nominative = accusative">
+
+Я вижу окно — "I see the window." окно is identical whether it's the subject or the object; only
+context (word order, or the verb) tells you which job it's doing here.
+
+</GrammarPoint>
+
+## 4. Putting it together: "Я вижу..." (I see...)
+
+<Dialogue
+  caption="The same verb, four different objects"
+  lines={[
+    { speaker: '', word: 'Я вижу стол.', stressed: 'Я ви́жу стол.', meaning: 'I see the table. (masc. inanimate — unchanged)' },
+    { speaker: '', word: 'Я вижу студента.', stressed: 'Я ви́жу студе́нта.', meaning: 'I see the student. (masc. animate — genitive-style -а)' },
+    { speaker: '', word: 'Я вижу книгу.', stressed: 'Я ви́жу кни́гу.', meaning: 'I see the book. (fem. -а → -у)' },
+    { speaker: '', word: 'Я вижу окно.', stressed: 'Я ви́жу окно́.', meaning: 'I see the window. (neuter — unchanged)' },
+  ]}
+/>
+
+<Callout kind="forward">
+Next: the genitive case — possession and "of," and the exact ending (-а for masculine, -ы/-и for
+feminine) that masculine animate nouns were already secretly borrowing in this lesson.
+</Callout>

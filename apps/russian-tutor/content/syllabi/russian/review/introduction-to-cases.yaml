@@ -1,0 +1,66 @@
+# Review cards: why Russian has cases — the six cases' jobs, plus the subject/object pair that
+# motivates the whole lesson.
+
+schemaVersion: 1
+topic: introduction-to-cases
+cards:
+  - id: cases-sobaka-kusaet
+    kind: sentence
+    topicId: russian:introduction-to-cases
+    front: Собака кусает мужчину.
+    frontPronunciation: Соба́ка куса́ет мужчи́ну.
+    back: The dog bites the man. (мужчину is accusative — the object)
+    exerciseIds: [ic1, ic2]
+
+  - id: cases-muzhchina-nom
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: мужчина (nominative)
+    frontPronunciation: мужчи́на
+    back: the man — as the subject, the dictionary form
+
+  - id: cases-muzhchina-acc
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: мужчину (accusative)
+    frontPronunciation: мужчи́ну
+    back: the man — as the direct object
+
+  - id: cases-nominative
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: Nominative
+    back: the subject / dictionary form — "who or what is doing this?"
+    exerciseIds: [ic3]
+
+  - id: cases-accusative
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: Accusative
+    back: the direct object — "who or what is this being done to?"
+
+  - id: cases-genitive
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: Genitive
+    back: possession / "of" — "whose? of what?"
+    exerciseIds: [ic5]
+
+  - id: cases-dative
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: Dative
+    back: the indirect object — "to whom? for whom?"
+    exerciseIds: [ic4]
+
+  - id: cases-instrumental
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: Instrumental
+    back: "by means of what? with whom?"
+
+  - id: cases-prepositional
+    kind: word
+    topicId: russian:introduction-to-cases
+    front: Prepositional
+    back: only ever appears after certain prepositions

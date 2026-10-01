@@ -1,0 +1,109 @@
+# Exercises: the accusative case.
+
+schemaVersion: 1
+topic: accusative-case
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ac1
+    set: A
+    label: Q1
+    kind: text
+    prompt: What is the accusative of книга (book)?
+    check: { type: exact, value: книгу }
+    solution: книгу — feminine -а nouns take -у in the accusative.
+
+  - id: ac2
+    set: A
+    label: Q2
+    kind: text
+    prompt: What is the accusative of семья (family)?
+    check: { type: exact, value: семью }
+    solution: семью — feminine -я nouns take -ю in the accusative.
+
+  - id: ac3
+    set: B
+    label: Q3
+    kind: multichoice
+    prompt: стол (table) is masculine and inanimate. What is its accusative form?
+    choices:
+      - { id: a, label: стола }
+      - { id: b, label: столу }
+      - { id: c, label: стол (unchanged) }
+      - { id: d, label: столе }
+    check: { type: exact, value: c }
+    solution: Inanimate masculine nouns don't change in the accusative — стол stays стол.
+
+  - id: ac4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: студент (student) is masculine and animate. What is its accusative form?
+    choices:
+      - { id: a, label: студент (unchanged) }
+      - { id: b, label: студента }
+      - { id: c, label: студенту }
+      - { id: d, label: студенте }
+    check: { type: exact, value: b }
+    solution: студента — animate masculine nouns take a genitive-style -а ending in the accusative, unlike inanimate ones.
+
+  - id: ac5
+    set: B
+    label: Q5
+    kind: truefalse
+    prompt: 'True or false — all masculine nouns take the same accusative ending, regardless of whether they refer to something alive.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Compare стол and студент — do they behave the same way in the accusative? }
+    solution: >-
+      False. Masculine nouns split by animacy: inanimate ones (стол) stay unchanged, animate ones
+      (студент → студента) take a genitive-style -а ending. "Masculine accusative" is really two
+      different rules.
+
+  - id: ac6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: окно (window) is neuter. What is its accusative form?
+    choices:
+      - { id: a, label: окну }
+      - { id: b, label: окна }
+      - { id: c, label: окно (unchanged) }
+      - { id: d, label: окне }
+    check: { type: exact, value: c }
+    solution: Neuter nouns are unchanged in the accusative, the same as inanimate masculine nouns.
+
+  - id: ac7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: Why does студент become студента in the accusative, while стол stays стол?
+    choices:
+      - { id: a, label: студент is simply an irregular word }
+      - { id: b, label: 'студент is animate (a person), and animate masculine nouns borrow the genitive ending' }
+      - { id: c, label: Only short words change in the accusative }
+      - { id: d, label: There is no reason — it's random }
+    check: { type: exact, value: b }
+    solution: студент refers to a living person, so as an animate masculine noun it takes the genitive-style -а ending instead of staying unchanged.
+
+  - id: ac8
+    set: D
+    label: Q8
+    kind: text
+    prompt: What is the accusative of газета (newspaper)?
+    check: { type: exact, value: газету }
+    solution: газету — the same feminine -а → -у pattern as книга → книгу.
+
+  - id: ac9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why is it slightly misleading to describe "the masculine accusative" as
+      one single rule?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What two completely different things can happen to a masculine noun in the accusative, and what decides which one happens?' }
+    solution: >-
+      Because masculine nouns don't all behave the same way — an inanimate noun like стол stays
+      identical to its nominative form, while an animate noun like студент instead borrows the
+      genitive case's -а ending. "Masculine accusative" is really a label covering two different
+      underlying rules, split entirely by whether the noun refers to something alive.

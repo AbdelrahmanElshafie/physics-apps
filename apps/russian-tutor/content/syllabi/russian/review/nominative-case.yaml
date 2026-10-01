@@ -1,0 +1,51 @@
+# Review cards: the nominative case — subject, "это", and plural formation.
+
+schemaVersion: 1
+topic: nominative-case
+cards:
+  - id: nom-student
+    kind: word
+    topicId: russian:nominative-case
+    front: студент
+    frontPronunciation: студе́нт
+    back: student (male) — nominative singular
+    exerciseIds: [nc1]
+
+  - id: nom-student-chitaet
+    kind: sentence
+    topicId: russian:nominative-case
+    front: Студент читает.
+    frontPronunciation: Студе́нт чита́ет.
+    back: The student reads. (студент is the subject — nominative)
+    exerciseIds: [nc1]
+
+  - id: nom-eto-stol
+    kind: sentence
+    topicId: russian:nominative-case
+    front: Это стол.
+    frontPronunciation: Э́то стол.
+    back: This is a table. (это doesn't act on стол, so it stays nominative)
+    exerciseIds: [nc2, nc3]
+
+  - id: nom-stoly
+    kind: word
+    topicId: russian:nominative-case
+    front: столы
+    back: tables — plural of стол (masculine, consonant + -ы)
+    exerciseIds: [nc4]
+
+  - id: nom-knigi
+    kind: word
+    topicId: russian:nominative-case
+    front: книги
+    frontPronunciation: кни́ги
+    back: books — plural of книга (7-letter rule blocks ы after г, so -и instead)
+    exerciseIds: [nc5, nc6, nc7]
+
+  - id: nom-okna
+    kind: word
+    topicId: russian:nominative-case
+    front: окна
+    frontPronunciation: о́кна
+    back: windows — plural of окно (stress shifts to the first syllable)
+    exerciseIds: [nc8]

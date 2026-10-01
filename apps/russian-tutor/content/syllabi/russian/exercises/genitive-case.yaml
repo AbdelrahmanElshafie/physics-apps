@@ -1,0 +1,107 @@
+# Exercises: the genitive case.
+
+schemaVersion: 1
+topic: genitive-case
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: gc1
+    set: A
+    label: Q1
+    kind: text
+    prompt: What is the genitive of стол (table)?
+    check: { type: exact, value: стола }
+    solution: стола — masculine consonant-ending nouns add -а in the genitive.
+
+  - id: gc2
+    set: A
+    label: Q2
+    kind: text
+    prompt: What is the genitive of книга (book)?
+    check: { type: exact, value: книги }
+    hint: Same spelling rule as the nominative plural — г blocks ы.
+    solution: книги — identical in spelling to the nominative plural, though they mean different things.
+
+  - id: gc3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: Это книга студента most closely means...
+    choices:
+      - { id: a, label: 'This is a book about the student' }
+      - { id: b, label: "This is the student's book" }
+      - { id: c, label: 'This student has a book' }
+      - { id: d, label: 'This book is for the student' }
+    check: { type: exact, value: b }
+    solution: The genitive marks possession here — "This is the student's book," with no apostrophe-s needed.
+
+  - id: gc4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: "What is the genitive of дом (house), as in \"the window of the house\"?"
+    choices:
+      - { id: a, label: дом (unchanged) }
+      - { id: b, label: дома }
+      - { id: c, label: дому }
+      - { id: d, label: доме }
+    check: { type: exact, value: b }
+    solution: дома — masculine consonant-ending nouns take -а in the genitive, same pattern as стол → стола.
+
+  - id: gc5
+    set: B
+    label: Q5
+    kind: text
+    prompt: "What is the genitive of вода (water), as in \"a glass of water\"?"
+    check: { type: exact, value: воды }
+    solution: воды — regular feminine -а → -ы pattern.
+
+  - id: gc6
+    set: C
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — нет ("there isn''t") takes the nominative case, just like есть ("there is") does.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Compare у меня есть книга and у меня нет книги — is книга the same form in both? }
+    solution: >-
+      False. есть takes a nominative subject (книга), but нет specifically demands the genitive
+      (книги) — the noun itself changes form between the two.
+
+  - id: gc7
+    set: C
+    label: Q7
+    kind: text
+    prompt: 'Complete: У меня нет ___ (стол, table).'
+    check: { type: exact, value: стола }
+    solution: стола — нет always takes the genitive.
+
+  - id: gc8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: Does the genitive case split its ending by animacy, the way the accusative does?
+    choices:
+      - { id: a, label: 'Yes, exactly the same split' }
+      - { id: b, label: 'No — a genitive noun takes the same ending whether it is alive or not' }
+      - { id: c, label: 'Only for feminine nouns' }
+      - { id: d, label: 'Only after нет' }
+    check: { type: exact, value: b }
+    solution: The genitive doesn't split by animacy at all — стола and студента both just follow their gender's regular genitive pattern.
+
+  - id: gc9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: English uses three separate tools for possession ('s), "of", and
+      negation (not/no) — why does it make sense that Russian handles all three with one case?
+    check: { type: tutor }
+    explain:
+      required: true
+      hint: What do "the student's book," "a glass of water," and "there is no book" all have in common structurally?
+    solution: >-
+      All three describe a noun defined in relation to, or in the absence of, something else —
+      "whose", "made of what", and "what doesn't exist" are all variations on one underlying
+      relationship between two nouns, which is exactly what the genitive case marks. English
+      happens to have built three separate surface tools for what is, underneath, one grammatical
+      relationship.

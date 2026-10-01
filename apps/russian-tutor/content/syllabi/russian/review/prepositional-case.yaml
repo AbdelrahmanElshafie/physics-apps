@@ -1,0 +1,59 @@
+# Review cards: the prepositional case — в/на for location, о for "about".
+
+schemaVersion: 1
+topic: prepositional-case
+cards:
+  - id: prep-stole
+    kind: word
+    topicId: russian:prepositional-case
+    front: столе
+    frontPronunciation: столе́
+    back: on/in the table (prepositional) — masculine + -е
+    exerciseIds: [pc1]
+
+  - id: prep-kniga-v-dome
+    kind: sentence
+    topicId: russian:prepositional-case
+    front: Книга в доме.
+    frontPronunciation: Кни́га в до́ме.
+    back: The book is in the house.
+    exerciseIds: [pc2]
+
+  - id: prep-kniga-na-stole
+    kind: sentence
+    topicId: russian:prepositional-case
+    front: Книга на столе.
+    frontPronunciation: Кни́га на столе́.
+    back: The book is on the table.
+
+  - id: prep-knige
+    kind: word
+    topicId: russian:prepositional-case
+    front: книге
+    frontPronunciation: кни́ге
+    back: about/in the book (prepositional) — feminine -а → -е, same form as dative
+    exerciseIds: [pc3, pc4]
+
+  - id: prep-na-rabote
+    kind: sentence
+    topicId: russian:prepositional-case
+    front: на работе
+    frontPronunciation: на рабо́те
+    back: at work (idiomatic на — work isn't a literal surface)
+    exerciseIds: [pc5]
+
+  - id: prep-okne
+    kind: word
+    topicId: russian:prepositional-case
+    front: окне
+    frontPronunciation: окне́
+    back: in the window (prepositional) — neuter -о → -е
+    exerciseIds: [pc6]
+
+  - id: prep-o-knige
+    kind: sentence
+    topicId: russian:prepositional-case
+    front: Я думаю о книге.
+    frontPronunciation: Я ду́маю о кни́ге.
+    back: I'm thinking about the book.
+    exerciseIds: [pc7]

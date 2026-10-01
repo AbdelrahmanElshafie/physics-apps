@@ -1,0 +1,116 @@
+# Exercises: noun gender.
+
+schemaVersion: 1
+topic: gender-of-nouns
+intro: Eight questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: gn1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: стол ends in a consonant. What gender is it?
+    choices:
+      - { id: a, label: Masculine }
+      - { id: b, label: Feminine }
+      - { id: c, label: Neuter }
+      - { id: d, label: Impossible to tell }
+    check: { type: exact, value: a }
+    solution: A consonant ending is masculine — стол (table) is masculine.
+
+  - id: gn2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: окно ends in -о. What gender is it?
+    choices:
+      - { id: a, label: Masculine }
+      - { id: b, label: Feminine }
+      - { id: c, label: Neuter }
+      - { id: d, label: Impossible to tell }
+    check: { type: exact, value: c }
+    solution: -о (and -е/-ё) is the neuter ending — окно (window) is neuter.
+
+  - id: gn3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: семья ends in -я. What gender is it?
+    choices:
+      - { id: a, label: Masculine }
+      - { id: b, label: Feminine }
+      - { id: c, label: Neuter }
+      - { id: d, label: Impossible to tell }
+    check: { type: exact, value: b }
+    solution: -а and -я are the feminine endings — семья (family) is feminine.
+
+  - id: gn4
+    set: B
+    label: Q4
+    kind: truefalse
+    prompt: 'True or false — every noun ending in ь (the soft sign) is feminine.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Compare день and дверь — do they share a gender? }
+    solution: >-
+      False. Soft-sign nouns can be either masculine (день, конь) or feminine (дверь, ночь) — the
+      spelling alone doesn't decide it, unlike every other ending in this lesson.
+
+  - id: gn5
+    set: B
+    label: Q5
+    kind: text
+    prompt: What gender is дверь (door)? Type masculine, feminine, or neuter.
+    check: { type: exact, value: feminine }
+    solution: дверь is feminine — one of the soft-sign nouns that has to be memorized individually.
+
+  - id: gn6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: папа (dad) ends in -а, the typical feminine ending. Why is it actually masculine?
+    choices:
+      - { id: a, label: "It's an exception with no reason" }
+      - { id: b, label: 'It refers to a male person, and natural gender overrides the spelling rule' }
+      - { id: c, label: All family-member nouns are masculine }
+      - { id: d, label: It becomes masculine only in the plural }
+    check: { type: exact, value: b }
+    solution: Natural gender wins for words describing a male person — папа, дядя, and мужчина all follow this, despite their -а/-я endings.
+
+  - id: gn7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — пальто (coat) changes its ending depending on the case, the way most neuter nouns do.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Where does пальто come from, and what does "indeclinable" mean?' }
+    solution: >-
+      False. пальто is an indeclinable loanword — it never changes its ending for any case, and is
+      simply treated as neuter by convention.
+
+  - id: gn8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: What gender is метро (metro)?
+    choices:
+      - { id: a, label: Masculine }
+      - { id: b, label: Feminine }
+      - { id: c, label: Neuter }
+      - { id: d, label: It has no gender at all }
+    check: { type: exact, value: c }
+    solution: метро is one of the indeclinable loanwords, always treated as neuter.
+
+  - id: gn9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does it matter for the rest of this course whether a noun is
+      masculine, feminine, or neuter?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Think about what else in a sentence has to "agree" with a noun — adjectives, pronouns, eventually case endings.' }
+    solution: >-
+      Gender isn't just a label on the noun — adjectives change their ending to match it, pronouns
+      depend on it (он/она/оно), and every case ending taught later in this course has a different
+      form for each gender. Getting a noun's gender wrong means several other words built around it
+      end up wrong too.

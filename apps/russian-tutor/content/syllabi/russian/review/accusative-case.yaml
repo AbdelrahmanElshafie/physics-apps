@@ -1,0 +1,65 @@
+# Review cards: the accusative case — the direct object, split by gender and animacy.
+
+schemaVersion: 1
+topic: accusative-case
+cards:
+  - id: acc-knigu
+    kind: word
+    topicId: russian:accusative-case
+    front: книгу
+    frontPronunciation: кни́гу
+    back: book (accusative) — feminine -а → -у
+    exerciseIds: [ac1]
+
+  - id: acc-semyu
+    kind: word
+    topicId: russian:accusative-case
+    front: семью
+    frontPronunciation: семью́
+    back: family (accusative) — feminine -я → -ю
+    exerciseIds: [ac2]
+
+  - id: acc-stol
+    kind: word
+    topicId: russian:accusative-case
+    front: стол (accusative)
+    back: table — unchanged, inanimate masculine
+    exerciseIds: [ac3]
+
+  - id: acc-studenta
+    kind: word
+    topicId: russian:accusative-case
+    front: студента
+    frontPronunciation: студе́нта
+    back: student (accusative) — animate masculine borrows the genitive -а ending
+    exerciseIds: [ac4, ac7]
+
+  - id: acc-okno
+    kind: word
+    topicId: russian:accusative-case
+    front: окно (accusative)
+    frontPronunciation: окно́
+    back: window — unchanged, neuter
+    exerciseIds: [ac6]
+
+  - id: acc-gazetu
+    kind: word
+    topicId: russian:accusative-case
+    front: газету
+    frontPronunciation: газе́ту
+    back: newspaper (accusative) — feminine -а → -у
+    exerciseIds: [ac8]
+
+  - id: acc-ya-vizhu-stol
+    kind: sentence
+    topicId: russian:accusative-case
+    front: Я вижу стол.
+    frontPronunciation: Я ви́жу стол.
+    back: I see the table.
+
+  - id: acc-ya-vizhu-studenta
+    kind: sentence
+    topicId: russian:accusative-case
+    front: Я вижу студента.
+    frontPronunciation: Я ви́жу студе́нта.
+    back: I see the student.

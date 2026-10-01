@@ -112,10 +112,12 @@ content/syllabi/<id>/
 ```
 
 The `russian` syllabus (`content/syllabi/russian/syllabus.yaml`) is a full five-phase roadmap —
-21 topics, ending with word order and real sentences — but only `cyrillic-alphabet`, `greetings`,
-and `stress-and-vowel-reduction` have lessons written so far. Every other topic is real (ordered,
-with real prerequisites and summaries) but shows "this lesson hasn't been written yet" until its
-`.mdx` file exists.
+21 topics, ending with word order and real sentences. Phase 1's two foundation topics
+(`cyrillic-alphabet`, `stress-and-vowel-reduction`, plus `gender-of-nouns`), `greetings`, and all
+six case-system topics (`introduction-to-cases` through `prepositional-case`) have lessons
+written; the rest is real (ordered, with real prerequisites and summaries) but shows "this lesson
+hasn't been written yet" until its `.mdx` file exists. Verbs (Phase 4) are the next content debt —
+see below.
 
 ### Content rules
 
@@ -133,9 +135,11 @@ form registered in that test file, the same discipline `tests/stress.test.ts` ap
 prose. A card's `exerciseIds` only needs to name real exercise ids in that topic's exercises YAML
 — `pnpm validate:content` checks this, along with topicId validity and duplicate card ids.
 
-**Cases and aspect are the real content debt**, not polish — `introduction-to-cases` through
-`prepositional-case`, and `verb-aspect-intro`, are the topics an actual course cannot skip past
-with placeholders for long. When picking what to write next, these should outrank filling in
+**The case system (Phase 3) is fully written** — `gender-of-nouns` (its gating prerequisite),
+`introduction-to-cases`, and all six cases through `prepositional-case`. **Verbs (Phase 4) are now
+the real content debt**, not polish — `present-tense-conjugation` and `verb-aspect-intro`
+especially, since perfective/imperfective is a structural feature an actual course cannot skip
+past with placeholders for long. When picking what to write next, these should outrank filling in
 easier vocabulary-only topics (numbers, dates) if forced to choose.
 
 ## Architecture

@@ -1,0 +1,96 @@
+# Exercises: the prepositional case.
+
+schemaVersion: 1
+topic: prepositional-case
+intro: Eight questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: pc1
+    set: A
+    label: Q1
+    kind: text
+    prompt: What is the prepositional of стол (table), as in "on the table"?
+    check: { type: exact, value: столе }
+    solution: столе — masculine consonant-ending nouns add -е in the prepositional.
+
+  - id: pc2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: 'Книга в доме means "The book is in the house." What does в + prepositional express here?'
+    choices:
+      - { id: a, label: Possession }
+      - { id: b, label: Location — "in" }
+      - { id: c, label: The direct object }
+      - { id: d, label: Negation }
+    check: { type: exact, value: b }
+    solution: в + prepositional marks location, "in" — one of the two main uses of this case.
+
+  - id: pc3
+    set: A
+    label: Q3
+    kind: text
+    prompt: What is the prepositional of книга (book), as in "about the book"?
+    check: { type: exact, value: книге }
+    solution: книге — feminine -а nouns take -е in the prepositional.
+
+  - id: pc4
+    set: B
+    label: Q4
+    kind: truefalse
+    prompt: 'True or false — the form книге can only ever be the dative case, never anything else.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What ending does книга take in the prepositional, compared to the dative?' }
+    solution: >-
+      False. книге is identical in both the dative and the prepositional — feminine -а nouns use
+      -е for both cases, so only context (which preposition, if any, is involved) tells them apart.
+
+  - id: pc5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: 'на работе ("at work") uses на even though work isn''t a literal flat surface. What does this tell you?'
+    choices:
+      - { id: a, label: The в/на rule is completely reliable with no exceptions }
+      - { id: b, label: 'A handful of common phrases are idiomatic exceptions, learned as fixed phrases' }
+      - { id: c, label: 'работе is always used with в instead' }
+      - { id: d, label: 'на only ever means "on top of," with no other sense' }
+    check: { type: exact, value: b }
+    solution: на работе is a fixed idiomatic exception — most в/на choices follow the enclosed-space-vs-surface pattern, but a few common ones just have to be memorized as-is.
+
+  - id: pc6
+    set: C
+    label: Q6
+    kind: text
+    prompt: What is the prepositional of окно (window)?
+    check: { type: exact, value: окне }
+    solution: окне — neuter -о nouns take -е in the prepositional.
+
+  - id: pc7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: The preposition о ("about") always triggers which case?
+    choices:
+      - { id: a, label: Accusative }
+      - { id: b, label: Genitive }
+      - { id: c, label: Prepositional }
+      - { id: d, label: It varies depending on the verb }
+    check: { type: exact, value: c }
+    solution: о always takes the prepositional — this is literally where the case gets its name.
+
+  - id: pc8
+    set: D
+    label: Q8
+    kind: text
+    prompt: >-
+      In your own words: why is "the prepositional case" named differently from the other five
+      (nominative, accusative, genitive, dative, instrumental), which are named for a grammatical
+      job rather than for needing a preposition?
+    check: { type: tutor }
+    explain: { required: true, hint: Can any of the other five cases ever appear with no preposition at all? Can the prepositional? }
+    solution: >-
+      Every other case can stand on its own without any preposition — nominative as a bare
+      subject, accusative as a bare direct object, and so on. The prepositional is the one case
+      that never appears unless a preposition (в, на, о, and a few others) is governing it, so its
+      name describes that structural fact rather than a role like "subject" or "object."

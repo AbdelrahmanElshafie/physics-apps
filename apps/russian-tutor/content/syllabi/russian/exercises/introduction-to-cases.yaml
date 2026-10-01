@@ -1,0 +1,105 @@
+# Exercises: why Russian has cases.
+
+schemaVersion: 1
+topic: introduction-to-cases
+intro: Eight questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ic1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: In Соба́ка куса́ет мужчи́ну ("The dog bites the man"), what marks мужчину as the one being bitten?
+    choices:
+      - { id: a, label: 'Its position after the verb, exactly like English' }
+      - { id: b, label: Its ending — мужчина changed to мужчину }
+      - { id: c, label: Nothing marks it; you have to guess from context }
+      - { id: d, label: The word до́брый placed before it }
+    check: { type: exact, value: b }
+    solution: The ending change (мужчина → мужчину) marks it as the object — not its position in the sentence.
+
+  - id: ic2
+    set: A
+    label: Q2
+    kind: truefalse
+    prompt: 'True or false — scrambling the word order of a Russian sentence makes it meaningless, exactly like scrambling an English sentence would.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What is actually carrying the grammatical roles in a Russian sentence — order, or something else?' }
+    solution: >-
+      False. Because case endings (not position) mark who is doing what to whom, Russian word order
+      can often scramble while the core meaning survives — only the emphasis shifts. This is
+      exactly what makes Russian word order freer than English's.
+
+  - id: ic3
+    set: B
+    label: Q3
+    kind: multichoice
+    prompt: A noun's dictionary form — the one you'd look it up under — is which case?
+    choices:
+      - { id: a, label: Accusative }
+      - { id: b, label: Genitive }
+      - { id: c, label: Nominative }
+      - { id: d, label: It has no case at all }
+    check: { type: exact, value: c }
+    solution: The dictionary form is the nominative case — every noun always has some case, and this is the baseline one.
+
+  - id: ic4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Which case answers the question "to whom? for whom?"
+    choices:
+      - { id: a, label: Genitive }
+      - { id: b, label: Dative }
+      - { id: c, label: Instrumental }
+      - { id: d, label: Prepositional }
+    check: { type: exact, value: b }
+    solution: The dative case marks the indirect object — "to/for whom" something is done.
+
+  - id: ic5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: Which case answers "whose? of what?"
+    choices:
+      - { id: a, label: Genitive }
+      - { id: b, label: Accusative }
+      - { id: c, label: Dative }
+      - { id: d, label: Nominative }
+    check: { type: exact, value: a }
+    solution: The genitive case covers possession and "of" — "whose" and "of what."
+
+  - id: ic6
+    set: C
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — the same case produces exactly the same ending no matter whether the noun is masculine, feminine, or neuter.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Compare the genitive endings of стол, книга, and окно from the lesson — are they the same?' }
+    solution: >-
+      False. стол → стола, книга → книги, окно → окна — the genitive ending is different for each
+      gender. This is exactly why noun gender had to be taught before the case system.
+
+  - id: ic7
+    set: C
+    label: Q7
+    kind: text
+    prompt: Roughly how many singular case endings does the full case system involve — six cases times how many genders? Type just the number.
+    check: { type: exact, value: '18' }
+    hint: Six cases, three genders.
+    solution: "18 (6 cases × 3 genders) — this course teaches it one or two cases at a time, not as one table."
+
+  - id: ic8
+    set: D
+    label: Q8
+    kind: text
+    prompt: >-
+      In your own words: why does Russian need cases at all if English manages the same ideas with
+      word order and words like "to"?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Think about how many separate roles (subject, object, indirect object) a single Russian sentence can mark using nothing but endings.' }
+    solution: >-
+      It's a genuine trade-off, not a sign Russian "needs" more machinery than English — endings let
+      a single word carry its grammatical role with it, so word order is free to do other work
+      (emphasis, style) instead of being the only thing marking who did what to whom. English pays
+      for its simpler nouns with stricter word order and extra function words like "to".

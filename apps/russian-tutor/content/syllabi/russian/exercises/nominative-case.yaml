@@ -1,0 +1,107 @@
+# Exercises: the nominative case.
+
+schemaVersion: 1
+topic: nominative-case
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: nc1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: In Студент читает ("The student reads"), what role is студент playing?
+    choices:
+      - { id: a, label: Direct object }
+      - { id: b, label: Subject — nominative }
+      - { id: c, label: Indirect object }
+      - { id: d, label: It isn't in any case }
+    check: { type: exact, value: b }
+    solution: студент is the one doing the reading — the subject, in the nominative case.
+
+  - id: nc2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: What case follows Это ("this is")?
+    choices:
+      - { id: a, label: Accusative }
+      - { id: b, label: Genitive }
+      - { id: c, label: Nominative }
+      - { id: d, label: Dative }
+    check: { type: exact, value: c }
+    solution: Это just identifies something, without acting on it, so the noun stays nominative — Это стол, Это книга.
+
+  - id: nc3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — Это acts on the noun that follows it, so that noun changes case.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Does "this is a table" do anything to the table, or just name it?' }
+    solution: >-
+      False. Это only names or points out something — it doesn't act on it, so the noun after it
+      stays in the nominative, unchanged from its dictionary form.
+
+  - id: nc4
+    set: B
+    label: Q4
+    kind: text
+    prompt: What is the plural of стол (table)?
+    check: { type: exact, value: столы }
+    solution: столы — a masculine noun ending in a consonant takes -ы.
+
+  - id: nc5
+    set: B
+    label: Q5
+    kind: text
+    prompt: What is the plural of книга (book)? Watch the spelling rule.
+    check: { type: exact, value: книги }
+    hint: г is one of the seven letters that can never be followed by ы.
+    solution: книги — the basic -а → -ы pattern would give "книгы", but г can never be followed by ы, so it's -и instead.
+
+  - id: nc6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: Why is the plural of книга "книги" and not "книгы"?
+    choices:
+      - { id: a, label: 'книга is simply irregular, with no underlying reason' }
+      - { id: b, label: 'ы can never follow г, к, х, ж, ш, щ, or ч — a pure spelling rule' }
+      - { id: c, label: 'All feminine nouns use -и in the plural, never -ы' }
+      - { id: d, label: It only applies to words for people }
+    check: { type: exact, value: b }
+    solution: This is the 7-letter spelling rule — ы is never written after г, к, х, ж, ш, щ, ч, so -и is used there instead.
+
+  - id: nc7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — the letter ы never follows г, к, х, ж, ш, щ, or ч anywhere in Russian, in any word.'
+    check: { type: exact, value: true }
+    explain: { required: true, hint: 'Is this rule specific to plurals, or a general spelling constraint?' }
+    solution: >-
+      True. This is a general Russian spelling rule, not specific to plurals — it will come up
+      again inside several case endings in later lessons.
+
+  - id: nc8
+    set: C
+    label: Q8
+    kind: text
+    prompt: What is the plural of окно (window)?
+    check: { type: exact, value: окна }
+    solution: окна — a neuter noun ending in -о takes -а in the plural.
+
+  - id: nc9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why is the nominative often called the "base" or "dictionary" case, when
+      the other five are just as real?
+    check: { type: tutor }
+    explain: { required: true, hint: "Which case is the one every noun is first introduced in, and the one every other case's ending is a change relative to?" }
+    solution: >-
+      Every noun is listed under its nominative form, and every other case's ending is naturally
+      described as a *change* starting from that form (стол → стола, not the reverse) — so
+      "base"/"dictionary" describes its role as the reference point, not a claim that it's somehow
+      more fundamental grammatically than accusative or genitive.

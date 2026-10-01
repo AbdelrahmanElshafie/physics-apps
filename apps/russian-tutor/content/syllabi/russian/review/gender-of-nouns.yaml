@@ -1,0 +1,77 @@
+# Review cards: noun gender.
+
+schemaVersion: 1
+topic: gender-of-nouns
+cards:
+  - id: gender-stol
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: стол
+    back: table — masculine (consonant ending)
+    exerciseIds: [gn1]
+
+  - id: gender-okno
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: окно
+    frontPronunciation: окно́
+    back: window — neuter (-о ending)
+    exerciseIds: [gn2]
+
+  - id: gender-semya
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: семья
+    frontPronunciation: семья́
+    back: family — feminine (-я ending)
+    exerciseIds: [gn3]
+
+  - id: gender-den
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: день
+    back: day — masculine (soft-sign noun, memorize individually)
+
+  - id: gender-dver
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: дверь
+    back: door — feminine (soft-sign noun)
+    exerciseIds: [gn5]
+
+  - id: gender-noch
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: ночь
+    back: night — feminine (soft-sign noun)
+
+  - id: gender-papa
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: папа
+    frontPronunciation: па́па
+    back: dad — masculine, despite the -а ending (natural gender wins)
+    exerciseIds: [gn6]
+
+  - id: gender-muzhchina
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: мужчина
+    frontPronunciation: мужчи́на
+    back: man — masculine, despite the -а ending (natural gender wins)
+
+  - id: gender-palto
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: пальто
+    frontPronunciation: пальто́
+    back: coat — neuter, indeclinable loanword
+    exerciseIds: [gn7]
+
+  - id: gender-metro
+    kind: word
+    topicId: russian:gender-of-nouns
+    front: метро
+    frontPronunciation: метро́
+    back: metro — neuter, indeclinable loanword
+    exerciseIds: [gn8]

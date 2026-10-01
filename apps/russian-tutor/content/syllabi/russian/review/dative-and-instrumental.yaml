@@ -1,0 +1,72 @@
+# Review cards: dative (to/for, and нравиться) and instrumental (by means of / with).
+
+schemaVersion: 1
+topic: dative-and-instrumental
+cards:
+  - id: di-stolu
+    kind: word
+    topicId: russian:dative-and-instrumental
+    front: столу
+    back: to/for the table (dative) — masculine + -у
+    exerciseIds: [di1]
+
+  - id: di-ya-dayu
+    kind: sentence
+    topicId: russian:dative-and-instrumental
+    front: Я даю книгу студенту.
+    frontPronunciation: Я даю́ кни́гу студе́нту.
+    back: I give the book to the student.
+    exerciseIds: [di2]
+
+  - id: di-mne
+    kind: word
+    topicId: russian:dative-and-instrumental
+    front: мне
+    back: to me (dative)
+
+  - id: di-tebe
+    kind: word
+    topicId: russian:dative-and-instrumental
+    front: тебе
+    frontPronunciation: тебе́
+    back: to you, informal (dative)
+
+  - id: di-mne-nravitsya-kniga
+    kind: sentence
+    topicId: russian:dative-and-instrumental
+    front: Мне нравится книга.
+    frontPronunciation: Мне нра́вится кни́га.
+    back: I like the book. (lit. "To me, the book is pleasing.")
+    exerciseIds: [di3, di4]
+
+  - id: di-tebe-nravitsya-chay
+    kind: sentence
+    topicId: russian:dative-and-instrumental
+    front: Тебе нравится чай?
+    frontPronunciation: Тебе́ нра́вится чай?
+    back: Do you like tea?
+    exerciseIds: [di5]
+
+  - id: di-knigoy
+    kind: word
+    topicId: russian:dative-and-instrumental
+    front: книгой
+    frontPronunciation: кни́гой
+    back: with/by the book (instrumental) — feminine -а → -ой
+    exerciseIds: [di6]
+
+  - id: di-ya-pishu-ruchkoy
+    kind: sentence
+    topicId: russian:dative-and-instrumental
+    front: Я пишу ручкой.
+    frontPronunciation: Я пишу́ ру́чкой.
+    back: I write with a pen. (bare instrumental — a tool)
+    exerciseIds: [di7]
+
+  - id: di-ya-idu-s-drugom
+    kind: sentence
+    topicId: russian:dative-and-instrumental
+    front: Я иду с другом.
+    frontPronunciation: Я иду́ с дру́гом.
+    back: I'm going with a friend. (с + instrumental — accompaniment)
+    exerciseIds: [di8]

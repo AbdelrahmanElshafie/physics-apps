@@ -1,0 +1,110 @@
+# Exercises: dative and instrumental.
+
+schemaVersion: 1
+topic: dative-and-instrumental
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: di1
+    set: A
+    label: Q1
+    kind: text
+    prompt: What is the dative of стол (table)?
+    check: { type: exact, value: столу }
+    solution: столу — masculine consonant-ending nouns add -у in the dative.
+
+  - id: di2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: In Я даю книгу студенту ("I give the book to the student"), what case is студенту?
+    choices:
+      - { id: a, label: Accusative }
+      - { id: b, label: Genitive }
+      - { id: c, label: Dative }
+      - { id: d, label: Instrumental }
+    check: { type: exact, value: c }
+    solution: студенту is the indirect object — to whom the book is given — marked by the dative.
+
+  - id: di3
+    set: B
+    label: Q3
+    kind: multichoice
+    prompt: In Мне нравится книга ("I like the book"), what is the grammatical subject of нравится?
+    choices:
+      - { id: a, label: Мне }
+      - { id: b, label: книга }
+      - { id: c, label: Neither — there is no subject }
+      - { id: d, label: 'Both, equally' }
+    check: { type: exact, value: b }
+    solution: книга (the thing being liked) is the grammatical subject, which is why it stays nominative — мне is the dative "liker."
+
+  - id: di4
+    set: B
+    label: Q4
+    kind: truefalse
+    prompt: 'True or false — нравится agrees with the person doing the liking (мне), not with the thing being liked.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Which word is in the nominative — мне, or the thing being liked?' }
+    solution: >-
+      False. нравится agrees with the nominative subject — the thing being liked — not with мне,
+      which is in the dative and is grammatically the indirect object of the sentence, not its subject.
+
+  - id: di5
+    set: B
+    label: Q5
+    kind: text
+    prompt: 'Complete: Студенту нравится ___ (чай, tea). What form does чай take?'
+    check: { type: exact, value: чай }
+    hint: What's being liked is the subject — does the subject change case here?
+    solution: чай, unchanged — the liked thing stays nominative; студенту is what's already in the dative.
+
+  - id: di6
+    set: C
+    label: Q6
+    kind: text
+    prompt: What is the instrumental of книга (book)?
+    check: { type: exact, value: книгой }
+    solution: книгой — feminine -а nouns take -ой in the instrumental.
+
+  - id: di7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: Why does Я пишу ручкой ("I write with a pen") need no word for "with"?
+    choices:
+      - { id: a, label: Russian never uses prepositions }
+      - { id: b, label: 'A tool or means is marked by the bare instrumental, no preposition needed' }
+      - { id: c, label: ручка is a special exception }
+      - { id: d, label: '"with" is implied only for feminine nouns' }
+    check: { type: exact, value: b }
+    solution: The bare instrumental (no preposition) already marks "by means of" — that's exactly what a tool is.
+
+  - id: di8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: Why does Я иду с другом ("I'm going with a friend") need с, when ручкой didn't need anything?
+    choices:
+      - { id: a, label: друг is irregular }
+      - { id: b, label: Accompanying a person needs с + instrumental; a tool takes bare instrumental }
+      - { id: c, label: с is required for every instrumental noun }
+      - { id: d, label: There is no real difference }
+    check: { type: exact, value: b }
+    solution: с + instrumental marks "together with" a person; the bare instrumental alone marks "by means of" a tool — same case, different preposition depending on the meaning.
+
+  - id: di9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: what's the actual difference between the bare instrumental (ручкой) and
+      с + instrumental (с другом)?
+    check: { type: tutor }
+    explain: { required: true, hint: One describes using something as a tool; the other describes being alongside someone. Which is which? }
+    solution: >-
+      The bare instrumental, with no preposition, marks the means or tool used to do something
+      ("by means of" — ручкой, with a pen). Adding с in front of the instrumental instead marks
+      accompaniment — doing something together with a person (с другом, with a friend). The case
+      ending is the same either way; с is what supplies the "together" meaning rather than the
+      "using as a tool" meaning.
