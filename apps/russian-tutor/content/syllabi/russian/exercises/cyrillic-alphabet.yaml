@@ -89,7 +89,7 @@ exercises:
     kind: truefalse
     prompt: 'True or false — since В looks exactly like the Latin letter B, it''s a safe shortcut to just read it as "b".'
     check: { type: exact, value: false }
-    explain: { required: true, hint: What does В actually sound like, and is that the same as "b"? }
+    explain: { required: true, hint: 'What does В actually sound like, and is that the same as "b"?' }
     solution: >-
       False. В is one of the clearest false friends in the alphabet — it sounds like "v", not "b".
       Reading it as "b" produces a wrong pronunciation every single time it appears.
@@ -115,7 +115,7 @@ exercises:
       In your own words: why is it a mistake to read a Cyrillic letter based on which Latin
       letter it resembles, rather than what it actually represents?
     check: { type: tutor }
-    explain: { required: true, hint: Think about В, Р, Н, С, У, Х specifically — what goes wrong if you read them as their Latin look-alikes? }
+    explain: { required: true, hint: 'Think about В, Р, Н, С, У, Х specifically — what goes wrong if you read them as their Latin look-alikes?' }
     solution: >-
       Cyrillic and Latin developed from a shared ancestor alphabet, so some letter shapes survived
       in both while the sounds they represent drifted apart independently in each. В, Н, Р, С, У,

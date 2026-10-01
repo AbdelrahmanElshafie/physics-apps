@@ -66,7 +66,7 @@ exercises:
     kind: truefalse
     prompt: 'True or false — привет and здравствуйте are interchangeable in every situation, with no real difference.'
     check: { type: exact, value: false }
-    explain: { required: true, hint: Who would you use each one with, and would swapping them ever feel out of place? }
+    explain: { required: true, hint: 'Who would you use each one with, and would swapping them ever feel out of place?' }
     solution: >-
       False. привет is casual, for friends and people your own age; здравствуйте is formal, for
       strangers, elders, or professional settings. Using the wrong one isn't incomprehensible, but
@@ -91,5 +91,5 @@ exercises:
     kind: text
     prompt: 'Translate into Russian: "Hello! Thank you! Goodbye!" — write it however feels natural; your tutor will check it.'
     check: { type: tutor }
-    explain: { required: true, hint: You can write it as three short phrases, the way the dialogue in the lesson did. }
+    explain: { required: true, hint: 'You can write it as three short phrases, the way the dialogue in the lesson did.' }
     solution: "Привет! Спасибо! Пока! — any reasonable phrasing along these lines is fine, formal or informal."

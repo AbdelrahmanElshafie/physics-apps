@@ -85,7 +85,7 @@ exercises:
       In your own words: why doesn't it make sense to assume every written "о" in a Russian word
       is pronounced the same way?
     check: { type: tutor }
-    explain: { required: true, hint: What determines whether a given о keeps its full "o" sound or reduces — is it the letter itself, or something about its position in the word? }
+    explain: { required: true, hint: 'What determines whether a given о keeps its full "o" sound or reduces — is it the letter itself, or something about its position in the word?' }
     solution: >-
       Whether an о keeps its full "o" sound depends on stress, not on the letter itself — a
       stressed о stays "o", while an unstressed one reduces toward "a". The same letter represents

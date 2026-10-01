@@ -24,7 +24,7 @@ exercises:
     kind: truefalse
     prompt: 'True or false — when third-tone sandhi happens, the pinyin spelling of the affected syllable changes too (e.g. nǐ would be re-written as ní).'
     check: { type: exact, value: false }
-    explain: { required: true, hint: Does this lesson's sandhi rule describe a change in spelling, or a change in something else? }
+    explain: { required: true, hint: "Does this lesson's sandhi rule describe a change in spelling, or a change in something else?" }
     solution: >-
       False. 你好 is still spelled nǐ hǎo — tone sandhi changes the sound that comes out in speech,
       never the written tone marks. A dictionary entry for 你 always shows nǐ.
@@ -87,7 +87,7 @@ exercises:
       In your own words: why doesn't tone sandhi contradict the earlier lesson's point that tone
       is part of a word's identity, not decoration?
     check: { type: tutor }
-    explain: { required: true, hint: Does the word's underlying, dictionary tone actually change, or just its surface pronunciation in one specific context? }
+    explain: { required: true, hint: "Does the word's underlying, dictionary tone actually change, or just its surface pronunciation in one specific context?" }
     solution: >-
       A word's underlying tone — the one in the dictionary, the one that matters for meaning — never
       changes. 你 is always a third-tone word. Sandhi is a surface-level pronunciation rule applied

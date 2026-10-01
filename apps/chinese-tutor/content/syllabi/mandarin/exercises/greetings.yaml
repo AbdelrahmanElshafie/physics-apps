@@ -66,7 +66,7 @@ exercises:
     kind: truefalse
     prompt: 'True or false — 您好 (nín hǎo) and 你好 (nǐ hǎo) are interchangeable in every situation, with no difference in meaning or politeness.'
     check: { type: exact, value: false }
-    explain: { required: true, hint: Who is 您 (nín) specifically used for, compared to 你 (nǐ)? }
+    explain: { required: true, hint: 'Who is 您 (nín) specifically used for, compared to 你 (nǐ)?' }
     solution: >-
       False. 您 is the polite/respectful form of "you", used for elders, teachers, or anyone
       addressed formally. Using 你好 isn't rude, but 您好 is the more deliberate, respectful choice —
@@ -78,7 +78,7 @@ exercises:
     kind: multichoice
     prompt: "对不起 and 不好意思 both roughly mean \"sorry\" — what mainly distinguishes them?"
     choices:
-      - { id: a, label: One is formal vocabulary, the other is slang }
+      - { id: a, label: 'One is formal vocabulary, the other is slang' }
       - { id: b, label: "One is heavier (a real apology), the other is lighter (a small \"excuse me\")" }
       - { id: c, label: They are regional variants with no difference }
       - { id: d, label: "对不起 is only used in writing, never in speech" }
@@ -91,5 +91,5 @@ exercises:
     kind: text
     prompt: 'Translate into Chinese: "Hello! Thank you! Goodbye!" — write it however feels natural; your tutor will check it.'
     check: { type: tutor }
-    explain: { required: true, hint: You can write it as three short phrases, the way the dialogue in the lesson did. }
+    explain: { required: true, hint: 'You can write it as three short phrases, the way the dialogue in the lesson did.' }
     solution: "你好!谢谢!再见! (Nǐ hǎo! Xièxie! Zàijiàn!) — any reasonable phrasing along these lines is fine."
