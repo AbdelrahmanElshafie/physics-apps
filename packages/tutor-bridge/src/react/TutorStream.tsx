@@ -61,35 +61,60 @@ export function TutorStreamProvider({
   useEffect(() => {
     setMessages([])
 
-    const source = new EventSource(`/api/tutor/stream?topic=${encodeURIComponent(topicId)}`)
+    let cancelled = false
+    let current: EventSource | null = null
+    let reconnectTimer: ReturnType<typeof setTimeout> | null = null
 
-    source.addEventListener('ready', (event) => {
-      setConnected(true)
-      try {
-        setCapabilities(JSON.parse((event as MessageEvent).data).capabilities)
-      } catch {
-        // A malformed ready frame is not worth tearing the stream down over.
+    // A dev server restart (or any mid-stream connection reset) does not reliably trigger the
+    // browser's own EventSource auto-reconnect — observed in practice as a stream that logs one
+    // long-lived request, dies, and is never reopened, silently taking "replies show up live"
+    // down with it. Rather than trust that built-in retry, explicitly close the dead connection
+    // on every error and open a fresh one ourselves, so a drop recovers in a bounded few seconds
+    // instead of indefinitely (the tab looking broken until someone thinks to reload it).
+    const RECONNECT_DELAY_MS = 2_000
+
+    const connect = () => {
+      if (cancelled) return
+
+      const source = new EventSource(`/api/tutor/stream?topic=${encodeURIComponent(topicId)}`)
+      current = source
+
+      source.addEventListener('ready', (event) => {
+        setConnected(true)
+        try {
+          setCapabilities(JSON.parse((event as MessageEvent).data).capabilities)
+        } catch {
+          // A malformed ready frame is not worth tearing the stream down over.
+        }
+      })
+
+      source.addEventListener('message', (event) => {
+        try {
+          const incoming = JSON.parse((event as MessageEvent).data) as ThreadMessage
+          setMessages((prev) => {
+            // Replace by id: a question is re-sent once it flips from pending to answered.
+            const next = prev.filter((m) => m.id !== incoming.id)
+            next.push(incoming)
+            return next.sort((a, b) => a.ts.localeCompare(b.ts))
+          })
+        } catch {
+          // Ignore unparseable frames rather than closing the stream.
+        }
+      })
+
+      source.onerror = () => {
+        setConnected(false)
+        source.close()
+        if (!cancelled) reconnectTimer = setTimeout(connect, RECONNECT_DELAY_MS)
       }
-    })
+    }
 
-    source.addEventListener('message', (event) => {
-      try {
-        const incoming = JSON.parse((event as MessageEvent).data) as ThreadMessage
-        setMessages((prev) => {
-          // Replace by id: a question is re-sent once it flips from pending to answered.
-          const next = prev.filter((m) => m.id !== incoming.id)
-          next.push(incoming)
-          return next.sort((a, b) => a.ts.localeCompare(b.ts))
-        })
-      } catch {
-        // Ignore unparseable frames rather than closing the stream.
-      }
-    })
-
-    source.onerror = () => setConnected(false)
+    connect()
 
     return () => {
-      source.close()
+      cancelled = true
+      if (reconnectTimer) clearTimeout(reconnectTimer)
+      current?.close()
       setConnected(false)
     }
   }, [topicId])

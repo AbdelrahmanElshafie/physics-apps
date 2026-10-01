@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import { MessageCircle, Send, X } from 'lucide-react'
 
-import { useThreadMessages } from '@physics/tutor-bridge/react'
+import { useThreadMessages, useTutorStream } from '@physics/tutor-bridge/react'
 import { sendQuestion } from '@/app/actions'
 import { cn } from '@/lib/utils'
 
@@ -23,6 +23,7 @@ const GENERAL_THREAD = 'general'
 export function TutorSidePanel() {
   const [open, setOpen] = useState(false)
   const messages = useThreadMessages(GENERAL_THREAD)
+  const { connected } = useTutorStream()
   const [draft, setDraft] = useState('')
   const [pending, startTransition] = useTransition()
 
@@ -70,6 +71,13 @@ export function TutorSidePanel() {
           <X className="size-4" aria-hidden />
         </button>
       </div>
+
+      {!connected && (
+        <p className="flex items-center gap-1.5 border-b border-warning/30 bg-warning-muted/20 px-4 py-2 text-xs font-medium text-warning">
+          <span className="size-1.5 shrink-0 animate-pulse rounded-full bg-warning" aria-hidden />
+          Reconnecting... replies won&apos;t appear here until this clears.
+        </p>
+      )}
 
       <div className="flex-1 space-y-2 overflow-y-auto px-4 py-3">
         {messages.length === 0 ? (
