@@ -1,0 +1,96 @@
+# Exercises: tone pairs and tone sandhi.
+
+schemaVersion: 1
+topic: tone-pairs
+intro: Eight questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: tp1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: 你好 is written nǐ hǎo (3rd + 3rd tone). How is it actually said in connected speech?
+    choices:
+      - { id: a, label: nǐ hǎo — both stay full third tone }
+      - { id: b, label: ní hǎo — the first becomes second tone }
+      - { id: c, label: nì hào — both become fourth tone }
+      - { id: d, label: ni hao — both become neutral tone }
+    check: { type: exact, value: b }
+    solution: The first of two adjacent third tones becomes a second tone in speech — ní hǎo.
+
+  - id: tp2
+    set: A
+    label: Q2
+    kind: truefalse
+    prompt: 'True or false — when third-tone sandhi happens, the pinyin spelling of the affected syllable changes too (e.g. nǐ would be re-written as ní).'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Does this lesson's sandhi rule describe a change in spelling, or a change in something else? }
+    solution: >-
+      False. 你好 is still spelled nǐ hǎo — tone sandhi changes the sound that comes out in speech,
+      never the written tone marks. A dictionary entry for 你 always shows nǐ.
+
+  - id: tp3
+    set: A
+    label: Q3
+    kind: text
+    prompt: 很好 (hěn hǎo, "very good") is two third tones in a row. Type the numbered pinyin for how it's actually pronounced (not how it's written).
+    check: { type: exact, value: hen2hao3 }
+    hint: Apply the same 3rd+3rd rule from 你好 — only the first syllable's tone changes.
+    solution: "hen2 hao3 — spoken as hén hǎo, even though it's written hěn hǎo (hen3 hao3)."
+
+  - id: tp4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: "不 is normally fourth tone (bù). In 不客气 (\"you're welcome\"), why is it pronounced bú instead?"
+    choices:
+      - { id: a, label: "客气 starts with a vowel" }
+      - { id: b, label: "客 (kè) is also fourth tone, which triggers the shift" }
+      - { id: c, label: "不 is always pronounced bú before a two-syllable word" }
+      - { id: d, label: "There's no reason — it's just irregular" }
+    check: { type: exact, value: b }
+    solution: 不 shifts from bù to bú specifically when the next syllable is also fourth tone — 客 (kè) is fourth tone here.
+
+  - id: tp5
+    set: B
+    label: Q5
+    kind: text
+    prompt: 不是 means "is not" — 是 (shì) is fourth tone. Type the numbered pinyin for how 不是 is actually pronounced.
+    check: { type: exact, value: bu2shi4 }
+    solution: "bu2 shi4 — spoken as bú shì, since 是 is fourth tone."
+
+  - id: tp6
+    set: B
+    label: Q6
+    kind: text
+    prompt: 不来 means "not coming" — 来 (lái) is second tone, not fourth. Type the numbered pinyin for how 不来 is pronounced.
+    check: { type: exact, value: bu4lai2 }
+    hint: Does the sandhi rule for 不 apply here at all?
+    solution: "bu4 lai2 — stays bù, since 来 is not fourth tone. No sandhi here."
+
+  - id: tp7
+    set: B
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — 不 changes tone before any syllable at all, regardless of that syllable''s own tone.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: What specifically triggers the bù → bú shift? }
+    solution: >-
+      False. 不 only shifts to bú immediately before another fourth-tone syllable. Before a
+      first, second, third, or neutral tone, it stays bù (as in 不来, 不好, 不吃).
+
+  - id: tp8
+    set: C
+    label: Q8
+    kind: text
+    prompt: >-
+      In your own words: why doesn't tone sandhi contradict the earlier lesson's point that tone
+      is part of a word's identity, not decoration?
+    check: { type: tutor }
+    explain: { required: true, hint: Does the word's underlying, dictionary tone actually change, or just its surface pronunciation in one specific context? }
+    solution: >-
+      A word's underlying tone — the one in the dictionary, the one that matters for meaning — never
+      changes. 你 is always a third-tone word. Sandhi is a surface-level pronunciation rule applied
+      predictably in specific contexts (two third tones in a row, 不 before a fourth tone), the same
+      way English "a" becomes "an" before a vowel without "a" stopping being the indefinite article.
+      The identity of the tone is untouched; only its realization in connected speech shifts.

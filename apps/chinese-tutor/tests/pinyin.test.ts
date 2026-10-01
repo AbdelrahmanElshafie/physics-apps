@@ -26,6 +26,15 @@ describe('toneMarkPinyin', () => {
     expect(toneMarkPinyin('zai4 jian4')).toBe('zài jiàn')
   })
 
+  it('marks the tone-pairs lesson vocabulary exactly as printed, in both written and sandhi form', () => {
+    expect(toneMarkPinyin('ni2 hao3')).toBe('ní hǎo') // spoken (3rd+3rd sandhi)
+    expect(toneMarkPinyin('hen3 hao3')).toBe('hěn hǎo') // written
+    expect(toneMarkPinyin('hen2 hao3')).toBe('hén hǎo') // spoken (3rd+3rd sandhi)
+    expect(toneMarkPinyin('bu2 shi4')).toBe('bú shì') // bù sandhi before a 4th tone
+    expect(toneMarkPinyin('bu2 qu4')).toBe('bú qù') // bù sandhi before a 4th tone
+    expect(toneMarkPinyin('bu4 lai2')).toBe('bù lái') // no sandhi — lái isn't 4th tone
+  })
+
   it('places the mark on a, then e, over i/u/ü, per the standard pinyin rule', () => {
     expect(toneMarkPinyin('hao3')).toBe('hǎo') // a beats o
     expect(toneMarkPinyin('hen3')).toBe('hěn') // e, only vowel
