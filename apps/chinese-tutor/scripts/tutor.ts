@@ -8,10 +8,16 @@
  *   pnpm tutor grade <n> <verdict> "feedback"
  *                                     grade the attempt behind question n
  *                                     verdict: correct | partial | incorrect
+ *   pnpm tutor profile                 what they know, where they're weak, full mistake history
  *
  * This is the half of the bridge the tutor lives in. It exists so answering a question is one
  * command rather than hand-authoring JSON into a hashed directory — the workflow has to be
  * frictionless or it will not get used.
+ *
+ * `profile` exists because the open-ended chat (the side panel, threaded on `general`) carries no
+ * exercise context the way a graded question does — a student asking "can you explain X" there
+ * gives me nothing about their actual level unless I go look. `list` prints a one-line summary for
+ * the same reason: a glance at every session, not just when something feels worth digging into.
  */
 
 import fs from 'node:fs/promises'
@@ -24,7 +30,7 @@ import { ClaudeCodeTutorTransport, type BridgeMessage } from '@physics/tutor-bri
 import { FileSystemContentRepository } from '../src/adapters/content/fs-mdx'
 import { FileSystemProgressRepository } from '../src/adapters/progress/fs-events'
 import { recordGrade } from '../src/core/services/submit-attempt'
-import type { TopicId } from '../src/core/domain'
+import { topicMastery, type TopicId } from '../src/core/domain'
 
 const transport = new ClaudeCodeTutorTransport()
 const content = new FileSystemContentRepository()
@@ -49,8 +55,32 @@ function relativeTime(iso: string): string {
   return `${Math.round(hours / 24)}d ago`
 }
 
+/** A one-line status line — context for every session, not just when something looks worth digging into. */
+async function summaryLine(): Promise<string> {
+  const state = await progress.state()
+  const topicsViewed = [...state.topics.values()].filter((t) => t.viewed).length
+
+  let attempted = 0
+  let correct = 0
+  let mistakes = 0
+  for (const topic of state.topics.values()) {
+    for (const ex of topic.exercises.values()) {
+      attempted += 1
+      const settled = ex.tutorVerdict ?? (ex.autoVerdict === 'correct' ? 'correct' : undefined)
+      if (settled === 'correct') correct += 1
+      else if (settled === 'incorrect') mistakes += 1
+    }
+  }
+
+  if (attempted === 0) return dim(`${topicsViewed} topic(s) viewed, no exercises attempted yet.`)
+  return dim(
+    `${topicsViewed} topic(s) viewed · ${attempted} exercise(s) attempted, ${correct} correct, ${mistakes} mistake(s). ${bold('pnpm tutor profile')}${dim(' for the full picture.')}`,
+  )
+}
+
 async function list(): Promise<void> {
   const pending = await pendingList()
+  console.log(`\n  ${await summaryLine()}`)
 
   if (pending.length === 0) {
     console.log(green('\n  Nothing waiting. All questions answered.\n'))
@@ -79,6 +109,62 @@ async function list(): Promise<void> {
   console.log(dim('  pnpm tutor <n>                    read one in full'))
   console.log(dim('  pnpm tutor:reply <n> "answer"     reply'))
   console.log(dim('  pnpm tutor grade <n> correct "…"  grade the attempt\n'))
+}
+
+/**
+ * The full picture: every topic touched, mastery, and every exercise currently sitting on a
+ * non-correct verdict — the actual answer to "what are they weak at, and where." This is what
+ * makes a reply in the open-ended chat (threaded on `general`, carrying no exercise context of
+ * its own) informed rather than generic.
+ */
+async function profile(): Promise<void> {
+  const state = await progress.state()
+  const counts = await content.exerciseCounts()
+  const syllabi = await content.listSyllabi()
+  const titles = new Map<string, string>()
+  for (const syllabus of syllabi) {
+    for (const [id, topic] of syllabus.topics) titles.set(String(id), topic.title)
+  }
+
+  const touched = [...state.topics.entries()].filter(([, t]) => t.viewed || t.exercises.size > 0)
+
+  if (touched.length === 0) {
+    console.log(dim('\n  No activity yet — nothing has been viewed or attempted.\n'))
+    return
+  }
+
+  console.log(bold('\n  Progress\n'))
+
+  const mistakes: { topicId: string; exerciseId: string; answer?: string; verdict: string }[] = []
+
+  for (const [topicId, topic] of touched.sort((a, b) => (a[1].lastActivityAt ?? '').localeCompare(b[1].lastActivityAt ?? ''))) {
+    const exerciseCount = counts.get(topicId) ?? 0
+    const mastery = Math.round(topicMastery(topic, exerciseCount) * 100)
+    const title = titles.get(String(topicId)) ?? String(topicId)
+
+    console.log(`  ${title} ${dim(`(${mastery}% mastery, ${topic.exercises.size}/${exerciseCount || '?'} exercises attempted)`)}`)
+
+    for (const ex of topic.exercises.values()) {
+      const settled = ex.tutorVerdict ?? (ex.autoVerdict === 'correct' ? 'correct' : ex.autoVerdict)
+      if (settled === 'correct') continue
+      mistakes.push({
+        topicId: String(topicId),
+        exerciseId: ex.exerciseId,
+        ...(ex.lastAnswer !== undefined ? { answer: ex.lastAnswer } : {}),
+        verdict: settled ?? 'unverified',
+      })
+    }
+  }
+
+  if (mistakes.length > 0) {
+    console.log(yellow(`\n  ${mistakes.length} exercise(s) not yet settled correct:\n`))
+    for (const m of mistakes) {
+      console.log(`  ${cyan(`${m.topicId} / ${m.exerciseId}`)} ${dim(`— ${m.verdict}`)}${m.answer ? dim(`, answered "${m.answer}"`) : ''}`)
+    }
+    console.log()
+  } else {
+    console.log(green('\n  Nothing outstanding — every attempted exercise settled correct.\n'))
+  }
 }
 
 async function show(index: number): Promise<void> {
@@ -267,6 +353,8 @@ async function main(): Promise<void> {
     }
     return reply(index, args.slice(1))
   }
+
+  if (command === 'profile') return profile()
 
   if (command === 'grade') {
     const index = Number(args[0])

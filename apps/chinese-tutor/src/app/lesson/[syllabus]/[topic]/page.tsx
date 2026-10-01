@@ -11,7 +11,6 @@ import { ExerciseCard } from '@/components/exercise/ExerciseCard'
 import { Header } from '@/components/layout/Header'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TopicViewTracker } from '@/components/layout/TopicViewTracker'
-import { LessonTutorChat } from '@/components/tutor/LessonTutorChat'
 
 /** Content is read per request, so an edited lesson shows up on the next refresh — no rebuild. */
 export const dynamic = 'force-dynamic'
@@ -105,8 +104,6 @@ export default async function LessonPage({ params }: PageProps) {
                       </div>
                     </section>
                   )}
-
-                  <LessonTutorChat topicId={topicId} />
                 </>
               ) : (
                 <NotWrittenYet title={syllabus.topics.get(topicId)?.title ?? topicParam} />
