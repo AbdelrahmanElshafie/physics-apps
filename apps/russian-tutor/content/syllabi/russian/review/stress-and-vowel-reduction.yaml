@@ -1,0 +1,42 @@
+# Review cards: word stress and vowel reduction (akanye).
+
+schemaVersion: 1
+topic: stress-and-vowel-reduction
+cards:
+  - id: stress-zamok-castle
+    kind: word
+    topicId: russian:stress-and-vowel-reduction
+    front: замок (castle)
+    frontPronunciation: за́мок
+    back: castle — stress on the first syllable
+    exerciseIds: [sv1, sv3]
+
+  - id: stress-zamok-lock
+    kind: word
+    topicId: russian:stress-and-vowel-reduction
+    front: замок (lock)
+    frontPronunciation: замо́к
+    back: lock — stress on the second syllable
+    exerciseIds: [sv2, sv3]
+
+  - id: stress-moloko
+    kind: word
+    topicId: russian:stress-and-vowel-reduction
+    front: молоко
+    frontPronunciation: молоко́
+    back: milk — only the stressed last о sounds like "o"; the earlier two reduce toward "a" (akanye)
+    exerciseIds: [sv4, sv6]
+
+  - id: stress-horosho
+    kind: word
+    topicId: russian:stress-and-vowel-reduction
+    front: хорошо
+    frontPronunciation: хорошо́
+    back: good / well — same akanye pattern as молоко́
+
+  - id: stress-zemlya
+    kind: word
+    topicId: russian:stress-and-vowel-reduction
+    front: земля
+    frontPronunciation: земля́
+    back: land / earth — an unstressed е or я elsewhere in a word leans toward "i"

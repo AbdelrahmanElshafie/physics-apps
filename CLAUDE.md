@@ -30,6 +30,10 @@ packages/
                           persistent side-panel chat.
   math-ui/               Equation *input* — MathLive wrapper, the visual/LaTeX toggle, the
                           insert-token palette. (Read-only KaTeX rendering stays per-app.)
+  review/                Spaced-repetition review: the card schema, the SM-2-derived scheduler,
+                          the append-only review-event log and its reducer, and a filesystem
+                          adapter — used by both language apps' `/review` (flashcards, a mistakes
+                          bucket, and a cumulative quiz over everything studied so far).
 ```
 
 The `@physics/*` npm scope on shared packages is a historical artifact of which app existed first,

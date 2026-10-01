@@ -47,9 +47,13 @@
 
   html {
     color-scheme: light;
+    height: 100%;
+    overflow: hidden;
   }
 
   body {
+    height: 100%;
+    overflow: hidden;
     background-color: var(--color-canvas);
     color: var(--color-fg);
     font-family: var(--font-sans);

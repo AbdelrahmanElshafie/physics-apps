@@ -1,0 +1,64 @@
+# Review cards: the Cyrillic alphabet's false friends, plus the first few whole words.
+#
+# frontPronunciation is authored as stressed Cyrillic exactly as `markStress` produces it from the
+# apostrophe-marked raw form in tests/review-content.test.ts — never hand-typed independently.
+# Monosyllables (да, кот, вот) carry no stress mark, so they have no frontPronunciation at all.
+
+schemaVersion: 1
+topic: cyrillic-alphabet
+cards:
+  - id: cyrillic-alphabet-letter-v
+    kind: letter
+    topicId: russian:cyrillic-alphabet
+    front: В в
+    back: sounds like "v" in "van" — a false friend, not "b"
+    exerciseIds: [ca1]
+
+  - id: cyrillic-alphabet-letter-r
+    kind: letter
+    topicId: russian:cyrillic-alphabet
+    front: Р р
+    back: a rolled "r" — not "p"
+    exerciseIds: [ca2]
+
+  - id: cyrillic-alphabet-letter-n
+    kind: letter
+    topicId: russian:cyrillic-alphabet
+    front: Н н
+    back: sounds like "n" — not "h"
+    exerciseIds: [ca3]
+
+  - id: cyrillic-alphabet-letter-u
+    kind: letter
+    topicId: russian:cyrillic-alphabet
+    front: У у
+    back: sounds like "oo" in "boot" — not "y"
+    exerciseIds: [ca4]
+
+  - id: cyrillic-alphabet-da
+    kind: word
+    topicId: russian:cyrillic-alphabet
+    front: да
+    back: "yes"
+
+  - id: cyrillic-alphabet-kot
+    kind: word
+    topicId: russian:cyrillic-alphabet
+    front: кот
+    back: cat
+    exerciseIds: [ca5]
+
+  - id: cyrillic-alphabet-mama
+    kind: word
+    topicId: russian:cyrillic-alphabet
+    front: мама
+    frontPronunciation: ма́ма
+    back: mom
+    exerciseIds: [ca6]
+
+  - id: cyrillic-alphabet-vot
+    kind: word
+    topicId: russian:cyrillic-alphabet
+    front: вот
+    back: here is / there is
+    exerciseIds: [ca7]

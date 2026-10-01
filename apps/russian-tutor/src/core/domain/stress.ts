@@ -13,8 +13,7 @@
 const VOWELS = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ'
 const COMBINING_ACUTE = '́'
 
-/** `"молок'о"` -> `"молоко́"`. A missing or misplaced apostrophe leaves the word unchanged. */
-export function markStress(word: string): string {
+function markStressWord(word: string): string {
   const idx = word.indexOf("'")
   if (idx <= 0) return word.replace("'", '')
 
@@ -22,6 +21,18 @@ export function markStress(word: string): string {
   if (!VOWELS.includes(stressedVowel)) return word.replace("'", '')
 
   return word.slice(0, idx) + COMBINING_ACUTE + word.slice(idx + 1)
+}
+
+/**
+ * `"молок'о"` -> `"молоко́"`. A missing or misplaced apostrophe leaves that word unchanged.
+ *
+ * Splits on whitespace and marks each token independently, so a whole apostrophe-authored phrase
+ * (`"приве'т, как дела'?"`) is accepted directly — not just a single word — the same way
+ * `toneMarkPinyin` marks a space-separated run of numbered syllables rather than only one at a
+ * time. A single word with no spaces is unaffected by the split.
+ */
+export function markStress(phrase: string): string {
+  return phrase.split(/(\s+)/).map(markStressWord).join('')
 }
 
 /** True when a string contains at least one Cyrillic letter — used to decide whether a "listen to

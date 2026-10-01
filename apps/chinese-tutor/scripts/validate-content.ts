@@ -9,6 +9,7 @@
 
 import { findGraphIssues } from '@core/domain'
 import { FileSystemContentRepository } from '../src/adapters/content/fs-mdx'
+import { FileSystemReviewContentRepository } from '../src/adapters/content/fs-review'
 
 const red = (s: string) => `\x1b[31m${s}\x1b[0m`
 const green = (s: string) => `\x1b[32m${s}\x1b[0m`
@@ -76,6 +77,35 @@ async function main(): Promise<void> {
 
   console.log(`\n  ${lessons} lesson(s), ${exerciseCount} exercise(s) across ${allTopics.size} topic(s).`)
   console.log(dim(`  ${withoutLesson.length} topic(s) have no lesson written yet.\n`))
+
+  try {
+    const reviewContent = new FileSystemReviewContentRepository()
+    const cards = await reviewContent.allDecks()
+    const seenCardIds = new Set<string>()
+
+    for (const card of cards) {
+      if (seenCardIds.has(card.id)) errors.push(`review: duplicate card id "${card.id}".`)
+      seenCardIds.add(card.id)
+
+      if (!allTopics.has(card.topicId as never)) {
+        errors.push(`review: card "${card.id}" has unknown topicId "${card.topicId}".`)
+      }
+
+      if (card.exerciseIds.length > 0) {
+        const exercises = await content.getExercises(card.topicId as never)
+        const exerciseIds = new Set(exercises.map((e) => e.id))
+        for (const exerciseId of card.exerciseIds) {
+          if (!exerciseIds.has(exerciseId)) {
+            errors.push(`review: card "${card.id}" references unknown exercise "${exerciseId}".`)
+          }
+        }
+      }
+    }
+
+    console.log(`  ${cards.length} review card(s) across ${new Set(cards.map((c) => c.topicId)).size} topic(s).\n`)
+  } catch (error) {
+    errors.push(`review: ${(error as Error).message}`)
+  }
 
   for (const warning of warnings) console.log(`  ${yellow('warn')} ${warning}`)
   for (const error of errors) console.log(`  ${red('error')} ${error}`)

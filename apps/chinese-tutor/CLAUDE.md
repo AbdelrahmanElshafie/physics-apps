@@ -40,6 +40,29 @@ the package's own README):
 - **Practice pads**, at `/practice`. Free-form writing — a sentence, a short dialogue, an attempt
   at a translation — with "ask your tutor" sending the whole pad, inlined, to the same queue.
 
+## Spaced-repetition review, at `/review`
+
+Built on `@physics/review` (SM-2-derived scheduler, append-only review-event log, a filesystem
+adapter) plus this app's own `ReviewContentPort`/`FileSystemReviewContentRepository`
+(`src/core/ports/review-content.ts`, `src/adapters/content/fs-review/`), which reads the fourth
+content file per topic — see **Content** below.
+
+- **Flashcard review** (`/review/session?mode=due`) mixes cards that are due with new ones, capped
+  at 40 per session; grading (Again / Hard / Good / Easy) appends one event, scheduled the Anki way.
+- **Practice mistakes** (`/review/session?mode=mistakes`) is just cards currently lapsed
+  (`isLapsed` from `@physics/review`) — failed recently and not yet recovered — plus, on the
+  `/review` dashboard itself, every lesson exercise still sitting on a non-correct verdict that
+  *isn't* already represented by a card (the same "not yet settled correct" computation
+  `pnpm tutor profile` does on the command line, now surfaced in the UI too, linking back to the
+  exact exercise via the `id="exercise-<id>"` anchor on `ExerciseCard`).
+- **Big quiz** (`/review/quiz`) turns every card from every lesson reached into an auto-generated
+  multichoice question (distractors sampled from other cards of the same kind) — fully
+  computer-graded, no tutor round-trip, and each answer still feeds the same scheduler (correct →
+  `good`, incorrect → `again`).
+- A card's `exerciseIds` links it to the lesson exercise(s) that test the same word, purely by
+  string id declared in the review YAML — the shared `exerciseSchema` never needs to know review
+  cards exist.
+
 ## Commands
 
 ```bash
@@ -60,7 +83,8 @@ pnpm tutor grade <n> correct|partial|incorrect "feedback"
 `tutor` check types are used here (`numeric`/`vector`/`matrix`/`latex` exist in the shared schema
 but nothing in this app's content uses them). `@physics/scratchpad` — storage only, see above.
 `@physics/tutor-bridge` — the file-bridge transport, the SSE stream, and the React hooks, used
-exactly as both physics apps use them. This app's own `src/core/domain` adds one pure helper,
+exactly as both physics apps use them. `@physics/review` — the review-card schema, scheduler, and
+event log behind `/review`; see above. This app's own `src/core/domain` adds one pure helper,
 `pinyin.ts` (numbered pinyin -> tone-marked pinyin) — see `tests/pinyin.test.ts`.
 
 ## Content
@@ -72,6 +96,7 @@ content/syllabi/<id>/
   syllabus.yaml            phases > modules > topics, with a prerequisite DAG
   lessons/<topicId>.mdx
   exercises/<topicId>.yaml
+  review/<topicId>.yaml    optional — flashcard/quiz cards for that topic (see below)
 ```
 
 The `mandarin` syllabus (`content/syllabi/mandarin/syllabus.yaml`) is a full roadmap — five
@@ -92,6 +117,15 @@ tone.
 
 **Simplified characters only**, matching `simplified-vs-traditional`'s own content — don't mix in
 traditional forms elsewhere in the syllabus without a reason tied to that lesson.
+
+**Review cards are hand-authored, not scraped from the lesson MDX.** `review/<topicId>.yaml` is a
+plain list of `{ id, kind: letter|word|sentence, topicId, front, frontPronunciation?, back,
+audioText?, exerciseIds? }` cards, validated by `reviewCardSchema` from `@physics/review`. Author
+`frontPronunciation` as numbered pinyin's *output*, not hand-typed accents — `tests/review-content.test.ts`
+asserts every card's pronunciation matches `toneMarkPinyin` of a raw numbered form registered in
+that test file, the same discipline `tests/pinyin.test.ts` applies to lesson prose. A card's
+`exerciseIds` only needs to name real exercise ids in that topic's exercises YAML —
+`pnpm validate:content` checks this, along with topicId validity and duplicate card ids.
 
 ## Architecture
 

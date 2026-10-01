@@ -1,0 +1,76 @@
+# Review cards: hello, goodbye, and thank you.
+
+schemaVersion: 1
+topic: greetings
+cards:
+  - id: greetings-privet
+    kind: word
+    topicId: russian:greetings
+    front: привет
+    frontPronunciation: приве́т
+    back: hi (informal)
+    exerciseIds: [gr6]
+
+  - id: greetings-zdravstvuyte
+    kind: word
+    topicId: russian:greetings
+    front: здравствуйте
+    frontPronunciation: здра́вствуйте
+    back: hello (formal)
+    exerciseIds: [gr2, gr6]
+
+  - id: greetings-spasibo
+    kind: word
+    topicId: russian:greetings
+    front: спасибо
+    frontPronunciation: спаси́бо
+    back: thank you
+    exerciseIds: [gr1, gr4]
+
+  - id: greetings-pozhaluysta
+    kind: word
+    topicId: russian:greetings
+    front: пожалуйста
+    frontPronunciation: пожа́луйста
+    back: you're welcome / please
+    exerciseIds: [gr1, gr7]
+
+  - id: greetings-izvinite
+    kind: word
+    topicId: russian:greetings
+    front: извините
+    frontPronunciation: извини́те
+    back: excuse me / sorry
+    exerciseIds: [gr5]
+
+  - id: greetings-do-svidaniya
+    kind: word
+    topicId: russian:greetings
+    front: до свидания
+    frontPronunciation: до свида́ния
+    back: goodbye (formal)
+    exerciseIds: [gr3]
+
+  - id: greetings-poka
+    kind: word
+    topicId: russian:greetings
+    front: пока
+    frontPronunciation: пока́
+    back: bye (informal)
+    exerciseIds: [gr3]
+
+  - id: greetings-sentence-hi-thanks
+    kind: sentence
+    topicId: russian:greetings
+    front: Привет! Спасибо!
+    frontPronunciation: Приве́т! Спаси́бо!
+    back: Hi! Thank you!
+    exerciseIds: [gr8]
+
+  - id: greetings-sentence-welcome-bye
+    kind: sentence
+    topicId: russian:greetings
+    front: Пожалуйста. Пока!
+    frontPronunciation: Пожа́луйста. Пока́!
+    back: You're welcome. Bye!
+    exerciseIds: [gr8]

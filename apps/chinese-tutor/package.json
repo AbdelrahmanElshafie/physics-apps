@@ -20,6 +20,7 @@
     "@physics/checker": "workspace:*",
     "@physics/scratchpad": "workspace:*",
     "@physics/tutor-bridge": "workspace:*",
+    "@physics/review": "workspace:*",
     "next": "^15.5.4",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.1.1",

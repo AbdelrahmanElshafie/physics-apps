@@ -3,16 +3,19 @@ import { ulid } from 'ulid'
 import { RulesAnswerChecker } from '@physics/checker'
 import { FileSystemScratchpadRepository } from '@physics/scratchpad'
 import { ClaudeCodeTutorTransport } from '@physics/tutor-bridge'
+import { FileSystemReviewRepository, type ReviewRepository } from '@physics/review'
 import type {
   AnswerChecker,
   ContentRepository,
   ProgressRepository,
+  ReviewContentPort,
   ScratchpadRepository,
   TutorTransport,
 } from '@core/ports'
 import type { Clock, IdGenerator } from '@core/services'
 
 import { FileSystemContentRepository } from '@adapters/content/fs-mdx'
+import { FileSystemReviewContentRepository } from '@adapters/content/fs-review'
 import { FileSystemProgressRepository } from '@adapters/progress/fs-events'
 
 /**
@@ -30,6 +33,8 @@ interface Container {
   scratch: ScratchpadRepository
   tutor: TutorTransport
   checker: AnswerChecker
+  review: ReviewRepository
+  reviewContent: ReviewContentPort
   clock: Clock
   ids: IdGenerator
 }
@@ -56,6 +61,8 @@ function build(): Container {
     scratch: new FileSystemScratchpadRepository(),
     tutor: createTutorTransport(),
     checker: new RulesAnswerChecker(),
+    review: new FileSystemReviewRepository(),
+    reviewContent: new FileSystemReviewContentRepository(),
     clock: { now: () => new Date() },
     ids: { next: () => ulid() },
   }

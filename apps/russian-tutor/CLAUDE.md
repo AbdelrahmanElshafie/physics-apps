@@ -15,7 +15,10 @@ of this app — read that first if something here is unclear, most of the reason
   exports `markStress`, the Russian equivalent of chinese-tutor's `toneMarkPinyin` — content is
   authored with the stressed vowel followed by an apostrophe (`привет` → `прив'ет`), and the
   function produces the properly accented display form (`приве́т`, via a combining acute accent,
-  U+0301). See `tests/stress.test.ts` for the same "a mark a lesson prints is a mark a test
+  U+0301). `markStress` accepts a whole apostrophe-marked phrase, not just one word — it splits on
+  whitespace and marks each token independently, the same way `toneMarkPinyin` marks a
+  space-separated run of numbered syllables — so a multi-word review-card sentence is marked with
+  one call. See `tests/stress.test.ts` for the same "a mark a lesson prints is a mark a test
   checks" discipline chinese-tutor applies to pinyin.
 - **`StressDemo` replaces `ToneDemo`.** Same motivation — a single audio clip doesn't teach an
   ear to compare — but the visual anchor is different: instead of a pitch-contour SVG (Russian
@@ -48,6 +51,29 @@ Pronunciation audio works the same way too: `SpeakButton` (`src/components/audio
 browser's own `speechSynthesis`, picking the best available `ru-RU` voice (Chrome ships a genuine
 Google cloud voice for Russian) rather than any API or hosted audio file.
 
+## Spaced-repetition review, at `/review`
+
+Identical mechanism to chinese-tutor, built on `@physics/review` (SM-2-derived scheduler,
+append-only review-event log, a filesystem adapter) plus this app's own `ReviewContentPort`/
+`FileSystemReviewContentRepository` (`src/core/ports/review-content.ts`,
+`src/adapters/content/fs-review/`), which reads the fourth content file per topic — see **Content**
+below.
+
+- **Flashcard review** (`/review/session?mode=due`) mixes cards that are due with new ones, capped
+  at 40 per session; grading (Again / Hard / Good / Easy) appends one event, scheduled the Anki way.
+- **Practice mistakes** (`/review/session?mode=mistakes`) is cards currently lapsed (`isLapsed`
+  from `@physics/review`), plus — on the `/review` dashboard itself — every lesson exercise still
+  sitting on a non-correct verdict that isn't already represented by a card, the same computation
+  `pnpm tutor profile` does on the command line, now surfaced in the UI and linking back to the
+  exact exercise via the `id="exercise-<id>"` anchor on `ExerciseCard`.
+- **Big quiz** (`/review/quiz`) turns every card from every lesson reached into an auto-generated
+  multichoice question (distractors sampled from other cards of the same kind) — fully
+  computer-graded, and each answer still feeds the same scheduler (correct → `good`, incorrect →
+  `again`).
+- A card's `exerciseIds` links it to the lesson exercise(s) that test the same word, purely by
+  string id declared in the review YAML — the shared `exerciseSchema` never needs to know review
+  cards exist.
+
 ## Commands
 
 ```bash
@@ -70,7 +96,8 @@ pnpm tutor grade <n> correct|partial|incorrect "feedback"
 for algebra, doesn't fit a written sentence — see chinese-tutor's CLAUDE.md for the full
 reasoning, it applies identically here). `@physics/tutor-bridge` — the file-bridge transport, the
 SSE stream (with its own reconnect-on-drop logic — see the package's own history), and the React
-hooks. This app's own `src/core/domain` adds `stress.ts` — see above.
+hooks. `@physics/review` — the review-card schema, scheduler, and event log behind `/review`; see
+above. This app's own `src/core/domain` adds `stress.ts` — see above.
 
 ## Content
 
@@ -81,6 +108,7 @@ content/syllabi/<id>/
   syllabus.yaml            phases > modules > topics, with a prerequisite DAG
   lessons/<topicId>.mdx
   exercises/<topicId>.yaml
+  review/<topicId>.yaml    optional — flashcard/quiz cards for that topic (see below)
 ```
 
 The `russian` syllabus (`content/syllabi/russian/syllabus.yaml`) is a full five-phase roadmap —
@@ -95,6 +123,15 @@ with real prerequisites and summaries) but shows "this lesson hasn't been writte
 `здра'вствуйте`), never a hand-typed combining accent — `markStress` is what produces the display
 form, and content is tested against it the same way pinyin content is tested against
 `toneMarkPinyin`. A monosyllabic word (да, нет) needs no apostrophe at all.
+
+**Review cards are hand-authored, not scraped from the lesson MDX.** `review/<topicId>.yaml` is a
+plain list of `{ id, kind: letter|word|sentence, topicId, front, frontPronunciation?, back,
+audioText?, exerciseIds? }` cards, validated by `reviewCardSchema` from `@physics/review`. Author
+`frontPronunciation` with the apostrophe form and let `markStress` produce the accented display —
+`tests/review-content.test.ts` asserts every card's pronunciation matches `markStress` of a raw
+form registered in that test file, the same discipline `tests/stress.test.ts` applies to lesson
+prose. A card's `exerciseIds` only needs to name real exercise ids in that topic's exercises YAML
+— `pnpm validate:content` checks this, along with topicId validity and duplicate card ids.
 
 **Cases and aspect are the real content debt**, not polish — `introduction-to-cases` through
 `prepositional-case`, and `verb-aspect-intro`, are the topics an actual course cannot skip past

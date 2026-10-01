@@ -1,0 +1,79 @@
+# Review cards: hello, goodbye, and thank you.
+#
+# frontPronunciation is authored as toned pinyin exactly as `toneMarkPinyin` produces it from the
+# numbered form in tests/review-content.test.ts — never hand-typed independently of that function.
+
+schemaVersion: 1
+topic: greetings
+cards:
+  - id: greetings-nihao
+    kind: word
+    topicId: mandarin:greetings
+    front: 你好
+    frontPronunciation: nǐ hǎo
+    back: hello
+    exerciseIds: [gr2, gr4]
+
+  - id: greetings-ninhao
+    kind: word
+    topicId: mandarin:greetings
+    front: 您好
+    frontPronunciation: nín hǎo
+    back: hello (formal / respectful)
+    exerciseIds: [gr6]
+
+  - id: greetings-xiexie
+    kind: word
+    topicId: mandarin:greetings
+    front: 谢谢
+    frontPronunciation: xiè xie
+    back: thank you
+    exerciseIds: [gr1]
+
+  - id: greetings-bukeqi
+    kind: word
+    topicId: mandarin:greetings
+    front: 不客气
+    frontPronunciation: bú kè qi
+    back: you're welcome
+    exerciseIds: [gr1]
+
+  - id: greetings-duibuqi
+    kind: word
+    topicId: mandarin:greetings
+    front: 对不起
+    frontPronunciation: duì bu qǐ
+    back: sorry / I apologize
+    exerciseIds: [gr3]
+
+  - id: greetings-buhaoyisi
+    kind: word
+    topicId: mandarin:greetings
+    front: 不好意思
+    frontPronunciation: bù hǎo yì si
+    back: excuse me / sorry (lighter, more casual)
+    exerciseIds: [gr3]
+
+  - id: greetings-zaijian
+    kind: word
+    topicId: mandarin:greetings
+    front: 再见
+    frontPronunciation: zài jiàn
+    back: goodbye
+    exerciseIds: [gr5]
+
+  - id: greetings-sentence-hello-thanks
+    kind: sentence
+    topicId: mandarin:greetings
+    front: 你好! 谢谢你!
+    frontPronunciation: nǐ hǎo xiè xie nǐ
+    back: Hello! Thank you!
+    exerciseIds: [gr8]
+
+  - id: greetings-sentence-welcome-bye
+    kind: sentence
+    topicId: mandarin:greetings
+    front: 不客气。再见!
+    frontPronunciation: bú kè qi zài jiàn
+    back: You're welcome. Goodbye!
+    exerciseIds: [gr8]

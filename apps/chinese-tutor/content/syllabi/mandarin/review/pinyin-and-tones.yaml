@@ -1,0 +1,44 @@
+# Review cards: the four tones, via the mā/má/mǎ/mà/ma set the lesson teaches them with.
+
+schemaVersion: 1
+topic: pinyin-and-tones
+cards:
+  - id: pinyin-and-tones-ma1
+    kind: word
+    topicId: mandarin:pinyin-and-tones
+    front: 妈
+    frontPronunciation: mā
+    back: mother — first tone, flat and high
+    exerciseIds: [pt1]
+
+  - id: pinyin-and-tones-ma2
+    kind: word
+    topicId: mandarin:pinyin-and-tones
+    front: 麻
+    frontPronunciation: má
+    back: hemp / numb — second tone, rising
+    exerciseIds: [pt5]
+
+  - id: pinyin-and-tones-ma3
+    kind: word
+    topicId: mandarin:pinyin-and-tones
+    front: 马
+    frontPronunciation: mǎ
+    back: horse — third tone, dips then rises
+    exerciseIds: [pt2]
+
+  - id: pinyin-and-tones-ma4
+    kind: word
+    topicId: mandarin:pinyin-and-tones
+    front: 骂
+    frontPronunciation: mà
+    back: to scold — fourth tone, falls sharply
+    exerciseIds: [pt4]
+
+  - id: pinyin-and-tones-ma5
+    kind: word
+    topicId: mandarin:pinyin-and-tones
+    front: 吗
+    frontPronunciation: ma
+    back: question particle — neutral tone, no mark
+    exerciseIds: [pt6]

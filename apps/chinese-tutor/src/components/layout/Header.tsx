@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BookOpen, NotebookPen } from 'lucide-react'
+import { BookOpen, NotebookPen, RotateCcw } from 'lucide-react'
 
 export function Header() {
   return (
@@ -9,6 +9,13 @@ export function Header() {
         中文 · Mandarin
       </Link>
       <span className="mx-1 h-5 w-px bg-border" aria-hidden />
+      <Link
+        href="/review"
+        className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-fg-muted transition-colors hover:bg-accent-muted/50 hover:text-accent-strong"
+      >
+        <RotateCcw className="size-4" aria-hidden />
+        Review
+      </Link>
       <Link
         href="/practice"
         className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-fg-muted transition-colors hover:bg-accent-muted/50 hover:text-accent-strong"

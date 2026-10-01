@@ -1,0 +1,43 @@
+# Review cards: tone sandhi — the spoken form, not the written pinyin, is the front of each card.
+
+schemaVersion: 1
+topic: tone-pairs
+cards:
+  - id: tone-pairs-nihao-spoken
+    kind: word
+    topicId: mandarin:tone-pairs
+    front: 你好 (spoken)
+    frontPronunciation: ní hǎo
+    back: hello — 3rd-tone sandhi, the first syllable rises before another 3rd tone
+    exerciseIds: [tp1]
+
+  - id: tone-pairs-henhao-written
+    kind: word
+    topicId: mandarin:tone-pairs
+    front: 很好 (written)
+    frontPronunciation: hěn hǎo
+    back: very good — written pinyin, both third tone
+
+  - id: tone-pairs-henhao-spoken
+    kind: word
+    topicId: mandarin:tone-pairs
+    front: 很好 (spoken)
+    frontPronunciation: hén hǎo
+    back: very good — same 3rd-tone sandhi as 你好
+    exerciseIds: [tp3]
+
+  - id: tone-pairs-bushi
+    kind: word
+    topicId: mandarin:tone-pairs
+    front: 不是
+    frontPronunciation: bú shì
+    back: is not — 不 shifts to bú before another 4th tone (是)
+    exerciseIds: [tp5]
+
+  - id: tone-pairs-bulai
+    kind: word
+    topicId: mandarin:tone-pairs
+    front: 不来
+    frontPronunciation: bù lái
+    back: not coming — no shift, 来 isn't 4th tone
+    exerciseIds: [tp6]

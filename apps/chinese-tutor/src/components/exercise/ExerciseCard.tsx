@@ -75,8 +75,9 @@ export function ExerciseCard({
 
   return (
     <div
+      id={`exercise-${exercise.id}`}
       className={cn(
-        'rounded-panel border px-4 py-3.5 transition-colors',
+        'scroll-mt-4 rounded-panel border px-4 py-3.5 transition-colors',
         settled === 'correct'
           ? 'border-success/40 bg-success-muted/10'
           : settled === 'incorrect'
