@@ -59,3 +59,9 @@ export function toneMarkPinyin(numbered: string): string {
     .map(toneMarkSyllable)
     .join(' ')
 }
+
+/** True when a string contains at least one CJK ideograph — used to decide whether a "listen to
+ * this" button makes sense, since there is nothing useful to pronounce in plain English text. */
+export function containsHanzi(text: string): boolean {
+  return /[一-鿿]/.test(text)
+}

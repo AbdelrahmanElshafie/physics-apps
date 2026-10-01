@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
-import { AlertTriangle, ArrowRight, Info, Lightbulb, Volume2 } from 'lucide-react'
+import { AlertTriangle, ArrowRight, Info, Lightbulb } from 'lucide-react'
 
+import { SpeakButton } from '@/components/audio/SpeakButton'
 import { cn } from '@/lib/utils'
 
 /** Lesson building blocks for a language course — vocab, dialogue, grammar, asides. */
@@ -84,12 +85,12 @@ export function VocabCard({
 }) {
   return (
     <div className="my-4 flex items-center gap-4 rounded-panel border border-border bg-surface px-4 py-3.5">
-      <p className="hanzi-display shrink-0 text-4xl text-fg">{hanzi}</p>
+      <div className="flex shrink-0 items-center gap-1.5">
+        <p className="hanzi-display text-4xl text-fg">{hanzi}</p>
+        <SpeakButton text={hanzi} />
+      </div>
       <div className="min-w-0">
-        <p className="flex items-center gap-1.5 font-mono text-sm text-accent-strong">
-          <Volume2 className="size-3.5 shrink-0 opacity-60" aria-hidden />
-          {pinyin}
-        </p>
+        <p className="font-mono text-sm text-accent-strong">{pinyin}</p>
         <p className="mt-0.5 text-sm text-fg-muted">{meaning}</p>
         {note && <p className="mt-1 text-xs text-fg-subtle">{note}</p>}
       </div>
@@ -116,7 +117,10 @@ export function Dialogue({
         {lines.map((line, i) => (
           <li key={i} className="px-4 py-3.5">
             <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-fg-subtle">{line.speaker}</p>
-            <p className="hanzi-display text-lg text-fg">{line.hanzi}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="hanzi-display text-lg text-fg">{line.hanzi}</p>
+              <SpeakButton text={line.hanzi} />
+            </div>
             <p className="mt-0.5 font-mono text-sm text-accent-strong">{line.pinyin}</p>
             <p className="mt-0.5 text-sm text-fg-muted">{line.meaning}</p>
           </li>

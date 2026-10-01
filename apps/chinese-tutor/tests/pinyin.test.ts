@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { toneMarkPinyin } from '@core/domain'
+import { containsHanzi, toneMarkPinyin } from '@core/domain'
 
 /**
  * Every toned syllable printed in a lesson is checked here against the numbered form a function
@@ -48,5 +48,18 @@ describe('toneMarkPinyin', () => {
 
   it('leaves non-pinyin tokens untouched', () => {
     expect(toneMarkPinyin('!')).toBe('!')
+  })
+})
+
+describe('containsHanzi', () => {
+  it('detects a CJK ideograph among plain text', () => {
+    expect(containsHanzi('你好')).toBe(true)
+    expect(containsHanzi('say 你好 to greet someone')).toBe(true)
+  })
+
+  it('is false for pinyin, English, and punctuation with no hanzi', () => {
+    expect(containsHanzi('nǐ hǎo')).toBe(false)
+    expect(containsHanzi('First tone — flat and high')).toBe(false)
+    expect(containsHanzi('')).toBe(false)
   })
 })

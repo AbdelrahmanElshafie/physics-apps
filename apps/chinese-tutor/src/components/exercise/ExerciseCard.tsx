@@ -3,8 +3,9 @@
 import { useState, useTransition } from 'react'
 import { CheckCircle2, Eye, HelpCircle, Lightbulb, XCircle } from 'lucide-react'
 
-import type { Exercise, ExerciseProgress } from '@core/domain'
+import { containsHanzi, type Exercise, type ExerciseProgress } from '@core/domain'
 import { submitExercise, revealSolution } from '@/app/actions'
+import { SpeakButton } from '@/components/audio/SpeakButton'
 import { ExerciseTutor } from './ExerciseTutor'
 import { cn } from '@/lib/utils'
 
@@ -93,7 +94,10 @@ export function ExerciseCard({
       </div>
 
       {exercise.given && (
-        <p className="hanzi-display mb-3 text-3xl font-medium text-fg">{exercise.given}</p>
+        <div className="mb-3 flex items-center gap-1.5">
+          <p className="hanzi-display text-3xl font-medium text-fg">{exercise.given}</p>
+          <SpeakButton text={exercise.given} />
+        </div>
       )}
 
       {exercise.kind === 'truefalse' ? (
@@ -142,7 +146,8 @@ export function ExerciseCard({
                 onChange={() => setAnswer(choice.id)}
                 className="size-3.5 accent-[var(--color-accent)]"
               />
-              {choice.label}
+              <span className="flex-1">{choice.label}</span>
+              {containsHanzi(choice.label) && <SpeakButton text={choice.label} />}
             </label>
           ))}
         </fieldset>
