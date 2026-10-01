@@ -1,0 +1,113 @@
+# Exercises: saying who you are.
+
+schemaVersion: 1
+topic: introducing-yourself
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: iy1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: Which is the more natural, everyday way to give your name in Russian?
+    choices:
+      - { id: a, label: Я Анна. }
+      - { id: b, label: Меня зовут Анна. }
+      - { id: c, label: Анна я. }
+      - { id: d, label: Both are equally rare. }
+    check: { type: exact, value: b }
+    solution: Меня зовут Анна ("they call me Anna") is what a native speaker actually says far more often, even though Я Анна is understandable.
+
+  - id: iy2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Меня зовут literally means...
+    choices:
+      - { id: a, label: I am called }
+      - { id: b, label: My name }
+      - { id: c, label: They call me }
+      - { id: d, label: Call me }
+    check: { type: exact, value: c }
+    solution: It's an impersonal construction — literally "[they] call me," not "I am called."
+
+  - id: iy3
+    set: B
+    label: Q3
+    kind: multichoice
+    prompt: A woman wants to say she's Russian. Which form does she use?
+    choices:
+      - { id: a, label: Я русский }
+      - { id: b, label: Я русская }
+      - { id: c, label: Я руский }
+      - { id: d, label: Either form works for anyone }
+    check: { type: exact, value: b }
+    solution: Я русская — the nationality adjective agrees with the speaker's own gender.
+
+  - id: iy4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: The preposition из ("from") governs which case?
+    choices:
+      - { id: a, label: Accusative }
+      - { id: b, label: Genitive }
+      - { id: c, label: Dative }
+      - { id: d, label: Prepositional }
+    check: { type: exact, value: b }
+    solution: из takes the genitive, the same way о, в, and на (from Phase 3) each govern a specific case.
+
+  - id: iy5
+    set: B
+    label: Q5
+    kind: text
+    prompt: 'Complete: Я из ___ (Россия, Russia).'
+    check: { type: exact, value: России }
+    solution: России — the genitive of Россия, required after из.
+
+  - id: iy6
+    set: C
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — Russian has no verb "to be" in any tense at all.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Which specific tense drops "to be" — all of them, or just one?' }
+    solution: >-
+      False. быть ("to be") exists and is used in the past and future tenses — it's specifically
+      the present tense ("am/is/are") that's dropped.
+
+  - id: iy7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: Я врач means...
+    choices:
+      - { id: a, label: 'I am a doctor, with an implied verb only' }
+      - { id: b, label: 'I am a doctor, with no verb at all in the sentence' }
+      - { id: c, label: 'I was a doctor' }
+      - { id: d, label: 'I want to be a doctor' }
+    check: { type: exact, value: b }
+    solution: There is genuinely no verb in this sentence — я and врач simply sit next to each other, and that alone means "I am a doctor."
+
+  - id: iy8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — была is a present-tense form of быть.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Does была describe something happening now, or something that already happened?' }
+    solution: 'False. была is a past-tense form of быть ("she was") — present tense is exactly the one tense that has no "to be" at all.'
+
+  - id: iy9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does Я врач need no verb, while Я был врач ("I was a doctor") does?
+    check: { type: tutor }
+    explain: { required: true, hint: Which specific tense is the "no verb" rule actually about? }
+    solution: >-
+      The zero-copula rule only applies to the present tense — Russian simply omits "am/is/are"
+      and lets the subject and description stand next to each other. The past and future tenses
+      both use a real conjugated form of быть, so Я был врач needs был the same way an English
+      sentence needs "was."

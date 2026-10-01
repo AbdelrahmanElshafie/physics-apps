@@ -1,0 +1,117 @@
+# Exercises: perfective vs. imperfective aspect.
+
+schemaVersion: 1
+topic: verb-aspect-intro
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: va1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: What does the perfective aspect focus on?
+    choices:
+      - { id: a, label: 'The ongoing process of an action' }
+      - { id: b, label: 'The action as a single, completed whole' }
+      - { id: c, label: 'How many times an action repeats' }
+      - { id: d, label: 'Only actions in the future' }
+    check: { type: exact, value: b }
+    solution: Perfective verbs frame an action as a completed whole, like прочитать — reading all the way through.
+
+  - id: va2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: What does the imperfective aspect focus on?
+    choices:
+      - { id: a, label: 'The process — ongoing, repeated, or habitual' }
+      - { id: b, label: 'Only completed actions' }
+      - { id: c, label: 'Only actions in the past' }
+      - { id: d, label: 'Politeness level' }
+    check: { type: exact, value: a }
+    solution: Imperfective verbs like читать describe the process itself, without claiming it's finished.
+
+  - id: va3
+    set: A
+    label: Q3
+    kind: text
+    prompt: What is the perfective partner of читать (to read), formed with the prefix про-?
+    check: { type: exact, value: прочитать }
+    solution: прочитать — adding про- is the most common way to form a perfective partner.
+
+  - id: va4
+    set: B
+    label: Q4
+    kind: truefalse
+    prompt: 'True or false — perfective verbs have a present tense, just like imperfective verbs do.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Can an action be both "happening right now" and "already completed" at the same time?' }
+    solution: >-
+      False. Perfective verbs have no present tense at all — only past and future — because a
+      completed action, by definition, can't also be in progress right now.
+
+  - id: va5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: Why can't a perfective verb have a present-tense form?
+    choices:
+      - { id: a, label: 'It is simply a historical accident with no real reason' }
+      - { id: b, label: 'A completed action cannot also be happening right now, so there is no meaning for it to express' }
+      - { id: c, label: 'Perfective verbs are too rare to need one' }
+      - { id: d, label: 'Russian avoids the present tense entirely' }
+    check: { type: exact, value: b }
+    solution: It's a logical gap, not an arbitrary one — "completed" and "currently in progress" are contradictory, so there's no present-tense meaning for a perfective verb to express.
+
+  - id: va6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: читаю, говоришь, and говорят were all conjugated in the present tense in the last lesson. What aspect must they all be?
+    choices:
+      - { id: a, label: Perfective }
+      - { id: b, label: Imperfective }
+      - { id: c, label: 'It varies verb by verb' }
+      - { id: d, label: 'Aspect only applies to written Russian' }
+    check: { type: exact, value: b }
+    solution: Since perfective verbs structurally cannot appear in the present tense, any verb correctly conjugated there must be imperfective.
+
+  - id: va7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — the perfective future (я прочитаю) conjugates with the same endings as an imperfective present (я читаю).'
+    check: { type: exact, value: true }
+    explain: { required: true, hint: Compare the endings on прочитаю and читаю — are they built the same way? }
+    solution: >-
+      True. The perfective future uses the exact same conjugation patterns as the imperfective
+      present — same endings, different meaning (a completed future event, not an ongoing present one).
+
+  - id: va8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: How does Я буду читать differ from Я прочитаю?
+    choices:
+      - { id: a, label: 'They mean exactly the same thing' }
+      - { id: b, label: 'буду читать is the imperfective future (ongoing/habitual); прочитаю is the perfective future (one completed event)' }
+      - { id: c, label: 'буду читать is past tense' }
+      - { id: d, label: 'прочитаю is informal, буду читать is formal' }
+    check: { type: exact, value: b }
+    solution: буду + infinitive builds the imperfective future (will be doing, ongoing); the perfective verb conjugates directly for a single completed future action.
+
+  - id: va9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why is "perfective verbs have no present tense" a logical fact about
+      meaning, rather than just an arbitrary grammar rule to memorize?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What would a perfective present tense actually have to mean, and does that meaning make sense?' }
+    solution: >-
+      A perfective verb specifically means an action viewed as a single completed whole. The
+      present tense specifically means something happening right now, in progress. Combining them
+      would require an action to be simultaneously "still happening" and "already finished," which
+      isn't a coherent meaning in any language — so the gap in the conjugation table reflects a
+      genuine gap in meaning, not an accident of Russian grammar.

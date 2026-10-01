@@ -1,0 +1,54 @@
+# Review cards: perfective vs. imperfective aspect pairs.
+
+schemaVersion: 1
+topic: verb-aspect-intro
+cards:
+  - id: va-chitat-impf
+    kind: word
+    topicId: russian:verb-aspect-intro
+    front: читать (imperfective)
+    back: to read — ongoing, repeated, or habitual process
+    exerciseIds: [va1, va2]
+
+  - id: va-prochitat-pf
+    kind: word
+    topicId: russian:verb-aspect-intro
+    front: прочитать (perfective)
+    back: to read — a single, completed whole
+    exerciseIds: [va3]
+
+  - id: va-sdelat-pf
+    kind: word
+    topicId: russian:verb-aspect-intro
+    front: сделать (perfective)
+    back: to do/make, completed — делать is its imperfective partner
+
+  - id: va-ya-chital
+    kind: sentence
+    topicId: russian:verb-aspect-intro
+    front: Я читал книгу всё утро.
+    frontPronunciation: Я чита́л кни́гу всё у́тро.
+    back: I was reading a book all morning. (imperfective — ongoing)
+
+  - id: va-prochitayu
+    kind: word
+    topicId: russian:verb-aspect-intro
+    front: прочитаю
+    frontPronunciation: прочита́ю
+    back: I will read [completely] — perfective future, one finished event
+    exerciseIds: [va4, va5, va6, va7]
+
+  - id: va-prochital
+    kind: word
+    topicId: russian:verb-aspect-intro
+    front: прочитал
+    frontPronunciation: прочита́л
+    back: I read [it], finished — perfective past
+
+  - id: va-ya-budu-chitat
+    kind: sentence
+    topicId: russian:verb-aspect-intro
+    front: Я буду читать книгу.
+    frontPronunciation: Я бу́ду чита́ть кни́гу.
+    back: I will be reading / will read the book. (imperfective future — буду + infinitive)
+    exerciseIds: [va8]

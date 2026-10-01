@@ -1,0 +1,98 @@
+# Exercises: present tense conjugation.
+
+schemaVersion: 1
+topic: present-tense-conjugation
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ptc1
+    set: A
+    label: Q1
+    kind: text
+    prompt: Conjugate читать (to read) for я (I).
+    check: { type: exact, value: читаю }
+    solution: читаю — first conjugation, я takes -ю.
+
+  - id: ptc2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Conjugate читать for вы (you, plural/formal).
+    check: { type: exact, value: читаете }
+    solution: читаете — first conjugation, вы takes -ете.
+
+  - id: ptc3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: вы is used for...
+    choices:
+      - { id: a, label: 'Only "you" plural' }
+      - { id: b, label: 'Only formal "you" for one person' }
+      - { id: c, label: 'Both plural "you" and formal singular "you"' }
+      - { id: d, label: Only addressing animals }
+    check: { type: exact, value: c }
+    solution: вы does double duty — plural "you" and the formal way to address one person, the same formality split as привет/здравствуйте.
+
+  - id: ptc4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Conjugate говорить (to speak) for ты (you, informal).
+    check: { type: exact, value: говоришь }
+    solution: говоришь — second conjugation, ты takes -ишь.
+
+  - id: ptc5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Conjugate говорить for они (they).
+    check: { type: exact, value: говорят }
+    solution: говорят — second conjugation, они takes -ят.
+
+  - id: ptc6
+    set: B
+    label: Q6
+    kind: text
+    prompt: Conjugate говорить for мы (we).
+    check: { type: exact, value: говорим }
+    solution: говорим — second conjugation, мы takes -им.
+
+  - id: ptc7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — Russian uses a different verb form for "I read" (habitually) than for "I am reading" (right now).'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: How many different present-tense forms does читаю have to cover both meanings? }
+    solution: >-
+      False. One present-tense form (читаю) covers both "I read" and "I am reading" — Russian
+      doesn't grammatically distinguish habitual from in-progress the way English does.
+
+  - id: ptc8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: An infinitive ending in -ить usually belongs to which conjugation?
+    choices:
+      - { id: a, label: 'First, е-vowel endings' }
+      - { id: b, label: 'Second, и-vowel endings' }
+      - { id: c, label: Neither — -ить verbs are always irregular }
+      - { id: d, label: It depends on the verb's meaning }
+    check: { type: exact, value: b }
+    solution: -ить infinitives usually take second conjugation, with и throughout (-ишь, -ит, -им, -ите, -ят).
+
+  - id: ptc9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: what's the core difference between first and second conjugation endings,
+      beyond just "they're different"?
+    check: { type: tutor }
+    explain: { required: true, hint: Compare читаешь/читает/читаем/читаете against говоришь/говорит/говорим/говорите — what vowel does each set consistently use? }
+    solution: >-
+      First conjugation endings consistently use the vowel е (-ешь, -ет, -ем, -ете, with ю/ют at
+      the я/они ends), while second conjugation consistently uses и (-ишь, -ит, -им, -ите, with
+      ю/ят at the я/они ends). Once that one vowel contrast is internalized, every ending in both
+      tables follows from it rather than needing to be memorized as twelve unrelated forms.

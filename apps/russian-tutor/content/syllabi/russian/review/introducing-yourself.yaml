@@ -1,0 +1,56 @@
+# Review cards: saying who you are — name, nationality, из + genitive, and the missing "to be".
+
+schemaVersion: 1
+topic: introducing-yourself
+cards:
+  - id: intro-menya-zovut
+    kind: sentence
+    topicId: russian:introducing-yourself
+    front: Меня зовут Анна.
+    frontPronunciation: Меня́ зову́т А́нна.
+    back: My name is Anna.
+    exerciseIds: [iy1, iy2]
+
+  - id: intro-ya-russkiy
+    kind: sentence
+    topicId: russian:introducing-yourself
+    front: Я русский.
+    back: I'm Russian. (a man speaking)
+    exerciseIds: [iy3]
+
+  - id: intro-ya-russkaya
+    kind: sentence
+    topicId: russian:introducing-yourself
+    front: Я русская.
+    back: I'm Russian. (a woman speaking)
+    exerciseIds: [iy3]
+
+  - id: intro-iz-rossii
+    kind: word
+    topicId: russian:introducing-yourself
+    front: из России
+    frontPronunciation: из Росси́и
+    back: from Russia — из governs the genitive
+    exerciseIds: [iy4, iy5]
+
+  - id: intro-ya-iz-ameriki
+    kind: sentence
+    topicId: russian:introducing-yourself
+    front: Я из Америки.
+    frontPronunciation: Я из Аме́рики.
+    back: I'm from America.
+
+  - id: intro-ya-vrach
+    kind: sentence
+    topicId: russian:introducing-yourself
+    front: Я врач.
+    back: I am a doctor. (no verb at all — the zero-copula present tense)
+    exerciseIds: [iy7]
+
+  - id: intro-byla
+    kind: word
+    topicId: russian:introducing-yourself
+    front: была
+    frontPronunciation: была́
+    back: was (feminine past tense of быть) — present tense has no equivalent at all
+    exerciseIds: [iy6, iy8]

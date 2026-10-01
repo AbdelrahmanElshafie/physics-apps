@@ -1,0 +1,67 @@
+# Review cards: subject pronouns, and first/second conjugation endings.
+
+schemaVersion: 1
+topic: present-tense-conjugation
+cards:
+  - id: ptc-ya
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: я
+    back: I
+
+  - id: ptc-ty
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: ты
+    back: you (singular, informal)
+
+  - id: ptc-vy
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: вы
+    back: you (plural, or singular formal)
+    exerciseIds: [ptc3]
+
+  - id: ptc-chitayu
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: читаю
+    frontPronunciation: чита́ю
+    back: I read / I am reading (я, first conjugation)
+    exerciseIds: [ptc1]
+
+  - id: ptc-chitaete
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: читаете
+    back: you (вы) read (first conjugation)
+    exerciseIds: [ptc2]
+
+  - id: ptc-govorish
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: говоришь
+    frontPronunciation: говори́шь
+    back: you speak (ты, second conjugation)
+    exerciseIds: [ptc4]
+
+  - id: ptc-govoryat
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: говорят
+    back: they speak (second conjugation)
+    exerciseIds: [ptc5]
+
+  - id: ptc-govorim
+    kind: word
+    topicId: russian:present-tense-conjugation
+    front: говорим
+    back: we speak (second conjugation)
+    exerciseIds: [ptc6]
+
+  - id: ptc-ty-govorish-po-russki
+    kind: sentence
+    topicId: russian:present-tense-conjugation
+    front: Ты говоришь по-русски?
+    frontPronunciation: Ты говори́шь по-ру́сски?
+    back: Do you speak Russian?

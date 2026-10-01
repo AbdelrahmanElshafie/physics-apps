@@ -66,6 +66,17 @@ const RAW_STRESS: Record<string, string> = {
   'prep-na-rabote': "на рабо'те",
   'prep-okne': "окне'",
   'prep-o-knige': "Я ду'маю о кни'ге.",
+  'intro-menya-zovut': "Меня' зову'т А'нна.",
+  'intro-iz-rossii': "из Росси'и",
+  'intro-ya-iz-ameriki': "Я из Аме'рики.",
+  'intro-byla': "была'",
+  'ptc-chitayu': "чита'ю",
+  'ptc-govorish': "говори'шь",
+  'ptc-ty-govorish-po-russki': "Ты говори'шь по-ру'сски?",
+  'va-ya-chital': "Я чита'л кни'гу всё у'тро.",
+  'va-prochitayu': "прочита'ю",
+  'va-prochital': "прочита'л",
+  'va-ya-budu-chitat': "Я бу'ду чита'ть кни'гу.",
 }
 
 describe('review card content', () => {
