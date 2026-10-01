@@ -96,7 +96,32 @@ export function ExerciseCard({
         <p className="hanzi-display mb-3 text-3xl font-medium text-fg">{exercise.given}</p>
       )}
 
-      {exercise.kind === 'multichoice' && exercise.choices ? (
+      {exercise.kind === 'truefalse' ? (
+        <fieldset disabled={pending} className="flex gap-2">
+          <legend className="sr-only">Answer for {exercise.label ?? exercise.id}</legend>
+          {(['true', 'false'] as const).map((value) => (
+            <label
+              key={value}
+              className={cn(
+                'flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-colors',
+                answer === value
+                  ? 'border-accent bg-accent-muted/30 text-fg'
+                  : 'border-border bg-surface-sunken text-fg-muted hover:border-border-strong',
+              )}
+            >
+              <input
+                type="radio"
+                name={`choice-${exercise.id}`}
+                value={value}
+                checked={answer === value}
+                onChange={() => setAnswer(value)}
+                className="size-3.5 accent-[var(--color-accent)]"
+              />
+              {value === 'true' ? 'True' : 'False'}
+            </label>
+          ))}
+        </fieldset>
+      ) : exercise.kind === 'multichoice' && exercise.choices ? (
         <fieldset disabled={pending} className="space-y-1.5">
           <legend className="sr-only">Answer for {exercise.label ?? exercise.id}</legend>
           {exercise.choices.map((choice) => (
