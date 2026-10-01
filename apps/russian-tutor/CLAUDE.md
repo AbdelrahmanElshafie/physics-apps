@@ -115,10 +115,10 @@ The `russian` syllabus (`content/syllabi/russian/syllabus.yaml`) is a full five-
 21 topics, ending with word order and real sentences. Written so far: Phase 1's foundation topics
 (`cyrillic-alphabet`, `stress-and-vowel-reduction`, `gender-of-nouns`), Phase 2's `greetings` and
 `introducing-yourself`, all six Phase 3 case-system topics (`introduction-to-cases` through
-`prepositional-case`), and Phase 4's `present-tense-conjugation` and `verb-aspect-intro`. The rest
-is real (ordered, with real prerequisites and summaries) but shows "this lesson hasn't been
-written yet" until its `.mdx` file exists — `past-tense` and `future-tense` (the rest of Phase 4)
-are next, see below.
+`prepositional-case`), and all of Phase 4 (`present-tense-conjugation`, `verb-aspect-intro`,
+`past-tense`, `future-tense`). The rest is real (ordered, with real prerequisites and summaries)
+but shows "this lesson hasn't been written yet" until its `.mdx` file exists — Phase 5
+(`word-order` through `questions-recap`) is next, see below.
 
 ### Content rules
 
@@ -136,14 +136,14 @@ form registered in that test file, the same discipline `tests/stress.test.ts` ap
 prose. A card's `exerciseIds` only needs to name real exercise ids in that topic's exercises YAML
 — `pnpm validate:content` checks this, along with topicId validity and duplicate card ids.
 
-**The case system (Phase 3) is fully written**, as is the start of Phase 4 — subject pronouns and
-both present-tense conjugation patterns (`present-tense-conjugation`), and the perfective/
-imperfective distinction (`verb-aspect-intro`), including the structural fact that perfective
-verbs have no present tense at all. **`past-tense` and `future-tense` are now the real content
-debt**, not polish — past tense's gender-agreement rule (a different agreement pattern than every
-present-tense verb taught so far) and the two parallel future tenses (one per aspect) are
-structural features, not vocabulary. When picking what to write next, these should outrank filling
-in easier vocabulary-only topics (numbers, dates) if forced to choose.
+**Phases 3 and 4 are both fully written** — the whole case system, subject pronouns, both
+present-tense conjugation patterns, perfective/imperfective aspect (including why perfective verbs
+have no present tense), gender-agreeing past tense, and both future tenses. **Phase 5
+(`word-order` through `questions-recap`) is now the real content debt**, not polish —
+`word-order` is flagged `critical: true` in the syllabus for good reason: it's where case endings
+(Phase 3) actually pay off as freer word order, and `negation`'s double-negative rule is a genuine
+structural difference from English, not vocabulary. When picking what to write next, these should
+outrank filling in easier vocabulary-only topics (`how-are-you`, numbers, dates) if forced to choose.
 
 ## Architecture
 

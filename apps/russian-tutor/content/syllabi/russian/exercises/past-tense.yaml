@@ -1,0 +1,100 @@
+# Exercises: the past tense.
+
+schemaVersion: 1
+topic: past-tense
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: pt1
+    set: A
+    label: Q1
+    kind: text
+    prompt: Conjugate читать (to read) in the past tense for a masculine singular subject.
+    check: { type: exact, value: читал }
+    solution: читал — masculine singular takes -л.
+
+  - id: pt2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Conjugate читать in the past tense for a feminine singular subject.
+    check: { type: exact, value: читала }
+    solution: читала — feminine singular takes -ла.
+
+  - id: pt3
+    set: A
+    label: Q3
+    kind: text
+    prompt: Conjugate говорить (to speak) in the past tense for any plural subject (мы/вы/они).
+    check: { type: exact, value: говорили }
+    solution: говорили — every plural subject, regardless of gender, takes -ли.
+
+  - id: pt4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: 'Я читал vs. Я читала — both are first person. What actually decides which is correct?'
+    choices:
+      - { id: a, label: 'Either works for anyone, no real difference' }
+      - { id: b, label: "The speaker's own gender" }
+      - { id: c, label: 'Whether the reading is finished' }
+      - { id: d, label: 'The time of day' }
+    check: { type: exact, value: b }
+    solution: The past tense agrees with the actual gender of the subject — я itself carries no gender, so a man says читал and a woman says читала.
+
+  - id: pt5
+    set: B
+    label: Q5
+    kind: truefalse
+    prompt: 'True or false — the past tense distinguishes я, ты, and он with three different endings, the same way the present tense does.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Does the past tense have a column for each person, or for each gender?' }
+    solution: >-
+      False. The past tense has no person distinction at all — он читал and я читал (for a male
+      speaker) use the identical form, because both are masculine singular. Gender, not person, is
+      what the past tense agrees with.
+
+  - id: pt6
+    set: C
+    label: Q6
+    kind: text
+    prompt: Conjugate быть (to be) in the past tense for a masculine singular subject.
+    check: { type: exact, value: был }
+    solution: был — быть follows the same four-way gender/plural pattern as any other verb in the past tense.
+
+  - id: pt7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: Он был врач means...
+    choices:
+      - { id: a, label: 'He is a doctor' }
+      - { id: b, label: 'He was a doctor' }
+      - { id: c, label: 'He will be a doctor' }
+      - { id: d, label: 'He wants to be a doctor' }
+    check: { type: exact, value: b }
+    solution: был is the masculine past tense of быть — "he was a doctor," unlike the present tense Он врач, which has no verb at all.
+
+  - id: pt8
+    set: C
+    label: Q8
+    kind: text
+    prompt: 'Complete: Это ___ (быть, past tense) хорошо. (это counts as neuter.)'
+    check: { type: exact, value: было }
+    hint: It is grammatically neuter.
+    solution: было — это is treated as neuter, so it takes the neuter past-tense ending.
+
+  - id: pt9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why is it misleading to think of the Russian past tense as "the present
+      tense endings, but for the past"?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What does the present tense agree with, and what does the past tense agree with instead?' }
+    solution: >-
+      They're built on completely different agreement systems, not variations of one system. The
+      present tense tracks person (я/ты/он/мы/вы/они, six distinct forms); the past tense tracks
+      gender and number instead (masculine/feminine/neuter singular, plus one shared plural — four
+      forms, with no person distinction inside them at all).

@@ -1,0 +1,57 @@
+# Review cards: the past tense — gender/number agreement, and быть at last.
+
+schemaVersion: 1
+topic: past-tense
+cards:
+  - id: pt-chital
+    kind: word
+    topicId: russian:past-tense
+    front: читал
+    frontPronunciation: чита́л
+    back: read — masculine singular past
+    exerciseIds: [pt1]
+
+  - id: pt-chitala
+    kind: word
+    topicId: russian:past-tense
+    front: читала
+    frontPronunciation: чита́ла
+    back: read — feminine singular past
+    exerciseIds: [pt2]
+
+  - id: pt-govorili
+    kind: word
+    topicId: russian:past-tense
+    front: говорили
+    frontPronunciation: говори́ли
+    back: spoke — any plural past, regardless of gender
+    exerciseIds: [pt3]
+
+  - id: pt-byl
+    kind: word
+    topicId: russian:past-tense
+    front: был
+    back: was — masculine singular past of быть
+    exerciseIds: [pt6]
+
+  - id: pt-bylo
+    kind: word
+    topicId: russian:past-tense
+    front: было
+    frontPronunciation: бы́ло
+    back: was — neuter singular past of быть (stress shifts to the first syllable, unlike была́)
+    exerciseIds: [pt8]
+
+  - id: pt-on-byl-vrach
+    kind: sentence
+    topicId: russian:past-tense
+    front: Он был врач.
+    back: He was a doctor.
+    exerciseIds: [pt7]
+
+  - id: pt-eto-bylo-horosho
+    kind: sentence
+    topicId: russian:past-tense
+    front: Это было хорошо.
+    frontPronunciation: Э́то бы́ло хорошо́.
+    back: That was good.

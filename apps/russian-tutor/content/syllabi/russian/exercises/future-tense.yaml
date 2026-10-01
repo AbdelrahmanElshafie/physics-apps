@@ -1,0 +1,108 @@
+# Exercises: the future tense.
+
+schemaVersion: 1
+topic: future-tense
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ft1
+    set: A
+    label: Q1
+    kind: text
+    prompt: Conjugate буду (the future of быть) for ты.
+    check: { type: exact, value: будешь }
+    solution: будешь — буду conjugates like a regular first-conjugation verb on its irregular stem буд-.
+
+  - id: ft2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: In Я буду читать, what is actually being conjugated for the subject?
+    choices:
+      - { id: a, label: 'читать — the infinitive changes form' }
+      - { id: b, label: 'буду — the infinitive читать never changes' }
+      - { id: c, label: 'Both words change equally' }
+      - { id: d, label: 'Neither word changes' }
+    check: { type: exact, value: b }
+    solution: буду is what conjugates (буду, будешь, будет...); the infinitive читать stays exactly as it is.
+
+  - id: ft3
+    set: B
+    label: Q3
+    kind: text
+    prompt: Conjugate прочитать (perfective) for я, as a future action.
+    check: { type: exact, value: прочитаю }
+    solution: прочитаю — perfective verbs conjugate directly, using the same endings as an imperfective present tense.
+
+  - id: ft4
+    set: B
+    label: Q4
+    kind: truefalse
+    prompt: 'True or false — читаю (imperfective present) and прочитаю (perfective future) use different sets of conjugation endings.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: Compare the endings on читаю and прочитаю letter by letter — are they the same pattern? }
+    solution: >-
+      False. They use identical endings — the only difference is the verb itself (imperfective
+      читать vs. perfective прочитать), which is what actually carries the different meaning.
+
+  - id: ft5
+    set: C
+    label: Q5
+    kind: multichoice
+    prompt: Which future form do you use for an ongoing or repeated future action?
+    choices:
+      - { id: a, label: 'буду + imperfective infinitive' }
+      - { id: b, label: 'Conjugate the perfective verb directly' }
+      - { id: c, label: 'Either works identically' }
+      - { id: d, label: 'Neither — use the present tense' }
+    check: { type: exact, value: a }
+    solution: буду + the imperfective infinitive is for ongoing or repeated future action, like Я буду читать.
+
+  - id: ft6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: Which future form do you use for one specific, completed action?
+    choices:
+      - { id: a, label: 'буду + perfective infinitive' }
+      - { id: b, label: 'The perfective verb, conjugated directly, no буду' }
+      - { id: c, label: 'The past tense instead' }
+      - { id: d, label: 'Either future form, no difference' }
+    check: { type: exact, value: b }
+    solution: A perfective verb conjugates directly for the future — no буду involved — exactly like прочитаю.
+
+  - id: ft7
+    set: C
+    label: Q7
+    kind: text
+    prompt: 'Complete: Они ___ говорить. (future, ongoing — буду form for они)'
+    check: { type: exact, value: будут }
+    solution: будут — они takes the буду-form будут, then the unchanged infinitive говорить.
+
+  - id: ft8
+    set: D
+    label: Q8
+    kind: multichoice
+    prompt: 'You want to say "I will read this book tonight" and finish it. Which is correct?'
+    choices:
+      - { id: a, label: 'Я буду читать эту книгу' }
+      - { id: b, label: 'Я прочитаю эту книгу' }
+      - { id: c, label: 'Either sentence means exactly the same thing' }
+      - { id: d, label: 'Neither — Russian has no way to say this' }
+    check: { type: exact, value: b }
+    solution: Я прочитаю — finishing the book is one completed result, which is exactly what the perfective future expresses.
+
+  - id: ft9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why can the exact same conjugation endings (as on читаю/прочитаю) mean
+      two different tenses depending on the verb?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Is the tense difference coming from the ending, or from something about the verb itself?' }
+    solution: >-
+      The ending pattern itself is aspect-neutral — it's just "the six-way present/future
+      conjugation shape." Whether that shape means "ongoing, happening now" (imperfective present)
+      or "a single action that will be completed" (perfective future) depends entirely on whether
+      the verb being conjugated is imperfective or perfective, not on anything in the ending itself.

@@ -1,0 +1,58 @@
+# Review cards: the two future tenses — буду + infinitive, and the perfective future.
+
+schemaVersion: 1
+topic: future-tense
+cards:
+  - id: ft-budu
+    kind: word
+    topicId: russian:future-tense
+    front: буду
+    frontPronunciation: бу́ду
+    back: I will (auxiliary, future of быть)
+
+  - id: ft-budesh
+    kind: word
+    topicId: russian:future-tense
+    front: будешь
+    frontPronunciation: бу́дешь
+    back: you will (ты, auxiliary future of быть)
+    exerciseIds: [ft1]
+
+  - id: ft-budut
+    kind: word
+    topicId: russian:future-tense
+    front: будут
+    frontPronunciation: бу́дут
+    back: they will (они, auxiliary future of быть)
+    exerciseIds: [ft7]
+
+  - id: ft-ya-budu-chitat
+    kind: sentence
+    topicId: russian:future-tense
+    front: Я буду читать.
+    frontPronunciation: Я бу́ду чита́ть.
+    back: I will read / will be reading. (imperfective future)
+    exerciseIds: [ft2, ft5]
+
+  - id: ft-prochitayu
+    kind: word
+    topicId: russian:future-tense
+    front: прочитаю
+    frontPronunciation: прочита́ю
+    back: I will read [completely] — perfective future, conjugated directly, no буду
+    exerciseIds: [ft3, ft4, ft6]
+
+  - id: ft-oni-budut-govorit
+    kind: sentence
+    topicId: russian:future-tense
+    front: Они будут говорить.
+    frontPronunciation: Они́ бу́дут говори́ть.
+    back: They will speak / will be speaking.
+
+  - id: ft-ya-prochitayu-etu-knigu
+    kind: sentence
+    topicId: russian:future-tense
+    front: Я прочитаю эту книгу.
+    frontPronunciation: Я прочита́ю э́ту кни́гу.
+    back: I will read this book (and finish it).
+    exerciseIds: [ft8]
