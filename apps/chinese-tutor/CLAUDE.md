@@ -100,22 +100,28 @@ content/syllabi/<id>/
 ```
 
 The `mandarin` syllabus (`content/syllabi/mandarin/syllabus.yaml`) is a full roadmap — five
-phases, HSK1-ish in scope, 21 topics. Nine are written: `pinyin-and-tones`, `tone-pairs`,
-`strokes-and-radicals`, `greetings`, `introducing-yourself`, `how-are-you`, `numbers-0-99`,
-`pronouns-and-measure-words` and `this-that-de`. Every other topic is real (ordered, with real
-prerequisites and summaries) but shows "this lesson hasn't been written yet" until its `.mdx`
-file exists — adding a lesson is adding that one file plus its matching exercises YAML and review
-deck.
+phases, HSK1-ish in scope, 21 topics. Thirteen are written, and **the grammatical spine of the
+course is complete**: sounds (`pinyin-and-tones`, `tone-pairs`), the writing system
+(`strokes-and-radicals`), the 是/很 split (`introducing-yourself`, `how-are-you`), numbers and
+measure words (`numbers-0-99`, `pronouns-and-measure-words`, `this-that-de`), the first real
+verbs (`have-and-want`), and all of Module 5.1 (`word-order`, `questions-ma-ne`, `negation`).
+Every other topic is real (ordered, with real prerequisites and summaries) but shows "this lesson
+hasn't been written yet" until its `.mdx` file exists — adding a lesson is adding that one file
+plus its matching exercises YAML and review deck.
 
-**What to write next, and why in this order:** `have-and-want` is the only thing still standing
-between the written content and `word-order` (flagged `critical`), which in turn gates
-`questions-ma-ne` and `negation` — so that chain of four finishes the structural spine of the
-course. The lessons so far cross-reference deliberately: measure words are introduced for
-numbers, then reused unchanged for 这/那/哪; 是-for-nouns-only is planted in `introducing-yourself`
-and paid off in `how-are-you`; the 不 → bú sandhi from `tone-pairs` recurs in 不太好. Keep those
-threads intact when editing. Everything after Phase 5 (`simplified-vs-traditional`,
-`family-members`, dates, time, food, places, directions) is vocabulary breadth on top of a
-finished grammar spine, and can be written in any order.
+The written lessons cross-reference deliberately, along one thread: measure words are introduced
+for numbers and reused unchanged for 这/那/哪; 是-for-nouns-only is planted in
+`introducing-yourself` and paid off in `how-are-you`; 没有 is taught as a fixed unit in
+`have-and-want` so the 不/没 rule in `negation` lands on something already automatic; the 不 → bú
+sandhi from `tone-pairs` recurs in 不太好, 不是 and 不要, and the 一 sandhi that `tone-pairs`
+deferred is finally delivered in `have-and-want`. **Keep that thread intact when editing** — a
+change to how one lesson frames measure words or 是 has knock-on claims in three or four others.
+
+**What's left** (`simplified-vs-traditional`, `family-members`, `dates-and-days`, `telling-time`,
+`ordering-food`, `likes-and-dislikes`, `places-in-town`, `asking-directions`) is vocabulary breadth
+on top of a finished grammar spine, and can be written in any order. The one with real grammar in
+it is `likes-and-dislikes`: 喜欢 takes a verb as its object as readily as a noun, which is the
+first verb-as-object construction in the course — treat that as its content, not the vocabulary.
 
 ### Content rules
 

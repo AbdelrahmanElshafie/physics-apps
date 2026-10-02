@@ -1,0 +1,79 @@
+# Review cards: subject – time – place – verb – object.
+
+schemaVersion: 1
+topic: word-order
+cards:
+  - id: wd-jintian
+    kind: word
+    topicId: mandarin:word-order
+    front: 今天
+    frontPronunciation: jīn tiān
+    back: today — goes before the verb, never after it
+    exerciseIds: [wd2, wd6]
+
+  - id: wd-zai
+    kind: word
+    topicId: mandarin:word-order
+    front: 在
+    frontPronunciation: zài
+    back: at / in — introduces a place, and the whole place phrase goes before the verb
+    exerciseIds: [wd4, wd5]
+
+  - id: wd-jia
+    kind: word
+    topicId: mandarin:word-order
+    front: 家
+    frontPronunciation: jiā
+    back: home
+
+  - id: wd-fan
+    kind: word
+    topicId: mandarin:word-order
+    front: 饭
+    frontPronunciation: fàn
+    back: food; a meal
+
+  - id: wd-chifan
+    kind: word
+    topicId: mandarin:word-order
+    front: 吃饭
+    frontPronunciation: chī fàn
+    back: to eat (a meal) — the everyday way to say "eat" with no particular food in mind
+
+  - id: wd-kan
+    kind: word
+    topicId: mandarin:word-order
+    front: 看
+    frontPronunciation: kàn
+    back: to look at, read, watch
+
+  - id: wd-ta-kan-shu
+    kind: sentence
+    topicId: mandarin:word-order
+    front: 他看书。
+    frontPronunciation: Tā kàn shū
+    back: He reads / is reading a book — subject, verb, object
+    exerciseIds: [wd1]
+
+  - id: wd-wo-zai-jia-chifan
+    kind: sentence
+    topicId: mandarin:word-order
+    front: 我在家吃饭。
+    frontPronunciation: Wǒ zài jiā chī fàn
+    back: I eat at home — the place phrase sits before the verb
+
+  - id: wd-wo-jintian-zai-jia-chifan
+    kind: sentence
+    topicId: mandarin:word-order
+    front: 我今天在家吃饭。
+    frontPronunciation: Wǒ jīn tiān zài jiā chī fàn
+    back: I'm eating at home today — subject, time, place, verb, object
+    exerciseIds: [wd3, wd7]
+
+  - id: wd-jintian-wo-zai-jia-chifan
+    kind: sentence
+    topicId: mandarin:word-order
+    front: 今天我在家吃饭。
+    frontPronunciation: Jīn tiān wǒ zài jiā chī fàn
+    back: Today I'm eating at home — the time word can also open the sentence
+    exerciseIds: [wd8]

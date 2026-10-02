@@ -1,0 +1,114 @@
+# Exercises: 有 and 要.
+
+schemaVersion: 1
+topic: have-and-want
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: hw1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: 我有两本书 means...
+    choices:
+      - { id: a, label: 'I want two books' }
+      - { id: b, label: 'I have two books' }
+      - { id: c, label: 'I am two books' }
+      - { id: d, label: 'There are two of my books' }
+    check: { type: exact, value: b }
+    solution: 有 is "to have"; the object follows the number + measure word + noun pattern.
+
+  - id: hw2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the numbered pinyin for 有 (to have).
+    check: { type: exact, value: you3 }
+    solution: "you3 — third tone."
+
+  - id: hw3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: How do you say "I don't have"?
+    choices:
+      - { id: a, label: 我不有 }
+      - { id: b, label: 我没有 }
+      - { id: c, label: 我有不 }
+      - { id: d, label: 我无有 }
+    check: { type: exact, value: b }
+    solution: 没有 — 有 is the one verb that is never negated with 不.
+
+  - id: hw4
+    set: B
+    label: Q4
+    kind: truefalse
+    prompt: 'True or false — 不有 is an acceptable way to say "not have".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Which word does 有 take for its negation, and does it ever take the other one?' }
+    solution: >-
+      False. 不有 does not exist. 有 is always negated with 没 — 没有 — and this is the single
+      exception to the rule that verbs take 不.
+
+  - id: hw5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 要 (to want).
+    check: { type: exact, value: yao4 }
+    solution: "yao4 — fourth tone."
+
+  - id: hw6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: 我要吃 means...
+    choices:
+      - { id: a, label: 'I have eaten' }
+      - { id: b, label: "I want to eat / I'm going to eat" }
+      - { id: c, label: 'I want food' }
+      - { id: d, label: 'I must not eat' }
+    check: { type: exact, value: b }
+    solution: 要 followed by a verb shades between "want to" and "going to" — context decides, and here 吃 is the verb.
+
+  - id: hw7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: 不要 is pronounced bú yào rather than bù yào. Why?
+    choices:
+      - { id: a, label: '不 is always bú before a verb' }
+      - { id: b, label: '要 is fourth tone, so 不 shifts to bú — the same sandhi as 不是' }
+      - { id: c, label: 'It is an irregular exception' }
+      - { id: d, label: 'Because 要 means "want"' }
+    check: { type: exact, value: b }
+    solution: 不 becomes bú before a fourth-tone syllable. 要 (yào) is fourth tone, so the rule applies.
+
+  - id: hw8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: In 一个人 ("one person"), how is 一 pronounced?
+    choices:
+      - { id: a, label: 'yī — first tone, as when counting' }
+      - { id: b, label: 'yí — second tone, because 个 is fourth tone' }
+      - { id: c, label: 'yì — fourth tone' }
+      - { id: d, label: 'yi — neutral tone' }
+    check: { type: exact, value: b }
+    solution: Before a fourth-tone syllable like 个, 一 becomes yí. Before first, second or third tones it becomes yì (一本 yì běn, 一杯 yì bēi).
+
+  - id: hw9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why is it worth learning 没有 as a fixed unit now, rather than treating it
+      as "the negation lesson's problem"?
+    check: { type: tutor }
+    explain: { required: true, hint: 'How often does "I don''t have" or "there isn''t" come up, and what happens if you reach for 不 by habit?' }
+    solution: >-
+      Because 有 breaks the general rule — it is the one verb that refuses 不 — and it is also one
+      of the most frequent verbs in the language. If 没有 is not already automatic, the habit of
+      putting 不 in front of verbs will produce 不有 under pressure, which is not Mandarin at all.
+      Learning it as a single word now means the exception is in place before the rule it breaks
+      is even taught.

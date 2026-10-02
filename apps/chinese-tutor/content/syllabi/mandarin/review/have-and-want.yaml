@@ -1,0 +1,107 @@
+# Review cards: 有 / 没有, 要 / 不要, and the 一 sandhi.
+
+schemaVersion: 1
+topic: have-and-want
+cards:
+  - id: hw-you
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 有
+    frontPronunciation: yǒu
+    back: to have
+    exerciseIds: [hw1, hw2]
+
+  - id: hw-meiyou
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 没有
+    frontPronunciation: méi yǒu
+    back: to not have — the only negation 有 takes; 不有 does not exist
+    exerciseIds: [hw3, hw4]
+
+  - id: hw-yao
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 要
+    frontPronunciation: yào
+    back: to want; before a verb, want to / going to
+    exerciseIds: [hw5, hw6]
+
+  - id: hw-buyao
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 不要
+    frontPronunciation: bú yào
+    back: to not want — bú, because 要 is fourth tone
+    exerciseIds: [hw7]
+
+  - id: hw-cha
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 茶
+    frontPronunciation: chá
+    back: tea
+
+  - id: hw-qian
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 钱
+    frontPronunciation: qián
+    back: money
+
+  - id: hw-chi
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 吃
+    frontPronunciation: chī
+    back: to eat
+
+  - id: hw-yi-ben-shu
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 一本书
+    frontPronunciation: yì běn shū
+    back: one book — 一 is yì before a third-tone syllable
+
+  - id: hw-yi-ge-ren
+    kind: word
+    topicId: mandarin:have-and-want
+    front: 一个人
+    frontPronunciation: yí gè rén
+    back: one person — 一 is yí before a fourth-tone syllable
+    exerciseIds: [hw8]
+
+  - id: hw-wo-you-liang-ben-shu
+    kind: sentence
+    topicId: mandarin:have-and-want
+    front: 我有两本书。
+    frontPronunciation: Wǒ yǒu liǎng běn shū
+    back: I have two books.
+
+  - id: hw-wo-meiyou-qian
+    kind: sentence
+    topicId: mandarin:have-and-want
+    front: 我没有钱。
+    frontPronunciation: Wǒ méi yǒu qián
+    back: I don't have money.
+
+  - id: hw-wo-yao-yi-bei-cha
+    kind: sentence
+    topicId: mandarin:have-and-want
+    front: 我要一杯茶。
+    frontPronunciation: Wǒ yào yì bēi chá
+    back: I want a cup of tea.
+
+  - id: hw-wo-yao-chi
+    kind: sentence
+    topicId: mandarin:have-and-want
+    front: 我要吃。
+    frontPronunciation: Wǒ yào chī
+    back: I want to eat / I'm going to eat.
+
+  - id: hw-ni-you-shu-ma
+    kind: sentence
+    topicId: mandarin:have-and-want
+    front: 你有书吗?
+    frontPronunciation: Nǐ yǒu shū ma
+    back: Do you have a book?

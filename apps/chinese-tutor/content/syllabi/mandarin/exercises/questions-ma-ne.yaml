@@ -1,0 +1,117 @@
+# Exercises: questions with 吗 and 呢.
+
+schemaVersion: 1
+topic: questions-ma-ne
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: qm1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: How do you turn 你是学生 ("you are a student") into "are you a student?"
+    choices:
+      - { id: a, label: 'Swap the first two words: 是你学生' }
+      - { id: b, label: 'Add 吗 at the end: 你是学生吗' }
+      - { id: c, label: 'Add 吗 at the start: 吗你是学生' }
+      - { id: d, label: 'Add 什么 before 学生' }
+    check: { type: exact, value: b }
+    solution: 吗 goes at the end and nothing else moves — the statement and the question have identical word order.
+
+  - id: qm2
+    set: A
+    label: Q2
+    kind: truefalse
+    prompt: 'True or false — adding 吗 to a statement changes the order of the other words.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Compare 你是学生 and 你是学生吗 word by word.' }
+    solution: >-
+      False. 吗 is simply appended. No inversion, no auxiliary — the rest of the sentence is
+      untouched.
+
+  - id: qm3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: 他很忙 means "he is busy". What is the natural way to ask "is he busy?"
+    choices:
+      - { id: a, label: 他很忙吗 }
+      - { id: b, label: 他忙吗 }
+      - { id: c, label: 很他忙吗 }
+      - { id: d, label: 他是忙吗 }
+    check: { type: exact, value: b }
+    solution: 他忙吗 — the placeholder 很 drops out in a question. Keeping it would mean "is he very busy?"
+
+  - id: qm4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Someone asks 你是学生吗. What is the natural "yes"?
+    choices:
+      - { id: a, label: 是 }
+      - { id: b, label: 对 }
+      - { id: c, label: 好 }
+      - { id: d, label: 吗 }
+    check: { type: exact, value: a }
+    solution: Repeat the verb — 是. "No" is 不是. Mandarin answers a 吗 question by echoing its key word rather than with a separate yes/no.
+
+  - id: qm5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 谁 (who).
+    check: { type: exact, value: shei2 }
+    solution: "shei2 — second tone."
+
+  - id: qm6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: 我的书呢? means...
+    choices:
+      - { id: a, label: 'Is this my book?' }
+      - { id: b, label: "Where's my book? / What about my book?" }
+      - { id: c, label: 'My book is here' }
+      - { id: d, label: 'Do you have my book?' }
+    check: { type: exact, value: b }
+    solution: 呢 after a noun asks after it — where it is, or what about it.
+
+  - id: qm7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: In 你叫什么名字, where does the question word 什么 sit?
+    choices:
+      - { id: a, label: 'At the front, like English "what"' }
+      - { id: b, label: 'Where the answer will go — in place of the name' }
+      - { id: c, label: 'At the very end' }
+      - { id: d, label: 'It can go anywhere' }
+    check: { type: exact, value: b }
+    solution: 你叫什么名字 → 我叫王明. 什么 occupies exactly the slot the answer fills; Mandarin never fronts a question word.
+
+  - id: qm8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — 你叫什么名字吗 is a correct question.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What does 吗 ask for, and what does 什么 ask for?' }
+    solution: >-
+      False. 吗 asks for yes or no; 什么 asks for a name. A sentence cannot want both, so a question
+      containing a question word never takes 吗.
+
+  - id: qm9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why can Mandarin form a question by adding one syllable, when English has
+      to rearrange the sentence or add "do"?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What is English word order busy doing that Mandarin word order is not?' }
+    solution: >-
+      English uses word order to mark that something is a question — inverting the subject and
+      verb, or inserting "do" — so the order has to change. Mandarin keeps the statement's order
+      and marks the question with a particle instead, so 吗 can be appended with nothing else
+      moving. The same is true of question words: they sit where the answer goes, rather than
+      being pulled to the front.

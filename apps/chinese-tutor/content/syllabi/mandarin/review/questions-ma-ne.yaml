@@ -1,0 +1,65 @@
+# Review cards: 吗, 呢, and question words that stay in place.
+
+schemaVersion: 1
+topic: questions-ma-ne
+cards:
+  - id: qm-ne
+    kind: word
+    topicId: mandarin:questions-ma-ne
+    front: 呢
+    frontPronunciation: ne
+    back: …and what about…? — bounces a question back, or asks where something is
+    exerciseIds: [qm6]
+
+  - id: qm-shei
+    kind: word
+    topicId: mandarin:questions-ma-ne
+    front: 谁
+    frontPronunciation: shéi
+    back: who
+    exerciseIds: [qm5]
+
+  - id: qm-nali
+    kind: word
+    topicId: mandarin:questions-ma-ne
+    front: 哪里
+    frontPronunciation: nǎ lǐ
+    back: where — 哪 (which) + 里 (inside)
+
+  - id: qm-ni-shi-xuesheng-ma
+    kind: sentence
+    topicId: mandarin:questions-ma-ne
+    front: 你是学生吗?
+    frontPronunciation: Nǐ shì xué shēng ma
+    back: Are you a student? — statement + 吗, nothing moves
+    exerciseIds: [qm1, qm2, qm4]
+
+  - id: qm-ta-mang-ma
+    kind: sentence
+    topicId: mandarin:questions-ma-ne
+    front: 他忙吗?
+    frontPronunciation: Tā máng ma
+    back: Is he busy? — the placeholder 很 drops out in a question
+    exerciseIds: [qm3]
+
+  - id: qm-wo-de-shu-ne
+    kind: sentence
+    topicId: mandarin:questions-ma-ne
+    front: 我的书呢?
+    frontPronunciation: Wǒ de shū ne
+    back: Where's my book? / What about my book?
+
+  - id: qm-ta-shi-shei
+    kind: sentence
+    topicId: mandarin:questions-ma-ne
+    front: 他是谁?
+    frontPronunciation: Tā shì shéi
+    back: Who is he? — the question word sits where the answer will go
+    exerciseIds: [qm7, qm8]
+
+  - id: qm-ni-zai-nali
+    kind: sentence
+    topicId: mandarin:questions-ma-ne
+    front: 你在哪里?
+    frontPronunciation: Nǐ zài nǎ lǐ
+    back: Where are you?

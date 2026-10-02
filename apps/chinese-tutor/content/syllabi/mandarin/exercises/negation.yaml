@@ -1,0 +1,111 @@
+# Exercises: negation with 不 and 没.
+
+schemaVersion: 1
+topic: negation
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ng1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: How do you say "I am not a student"?
+    choices:
+      - { id: a, label: 我没是学生 }
+      - { id: b, label: 我不是学生 }
+      - { id: c, label: 我是不学生 }
+      - { id: d, label: 不我是学生 }
+    check: { type: exact, value: b }
+    solution: 不是 — being a student is a state, and states take 不. 不 goes directly in front of the verb.
+
+  - id: ng2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: How do you say "I don't have money"?
+    choices:
+      - { id: a, label: 我不有钱 }
+      - { id: b, label: 我没有钱 }
+      - { id: c, label: 我有没钱 }
+      - { id: d, label: 我没钱有 }
+    check: { type: exact, value: b }
+    solution: 没有 — 有 is only ever negated with 没.
+
+  - id: ng3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: What is the difference between 我不吃饭 and 我没吃饭?
+    choices:
+      - { id: a, label: 'No difference' }
+      - { id: b, label: "不吃饭 is a habit or decision (I don't / won't eat); 没吃饭 is an event that didn't happen (I didn't eat)" }
+      - { id: c, label: '不吃饭 is past, 没吃饭 is future' }
+      - { id: d, label: '没吃饭 is more polite' }
+    check: { type: exact, value: b }
+    solution: 不 denies a state or intention; 没 denies that an action took place. Skipping lunch is 我没吃饭.
+
+  - id: ng4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Type the numbered pinyin for 不 on its own.
+    check: { type: exact, value: bu4 }
+    solution: "bu4 — fourth tone on its own; it shifts to bu2 only before another fourth tone."
+
+  - id: ng5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 没.
+    check: { type: exact, value: mei2 }
+    solution: "mei2 — second tone, always."
+
+  - id: ng6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: In 不是, how is 不 pronounced?
+    choices:
+      - { id: a, label: 'bù — it never changes' }
+      - { id: b, label: 'bú — because 是 is fourth tone' }
+      - { id: c, label: 'bu — neutral tone' }
+      - { id: d, label: 'bǔ — third tone' }
+    check: { type: exact, value: b }
+    solution: 不 becomes bú before a fourth-tone syllable. 是 is fourth tone, so 不是 is bú shì.
+
+  - id: ng7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — like 不, 没 also changes its tone before a fourth-tone syllable.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Is there a 没 equivalent of the bù → bú shift?' }
+    solution: >-
+      False. 没 is always méi. The sandhi shift belongs to 不 (and to 一); 没 has no such rule.
+
+  - id: ng8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: 他不忙 means...
+    choices:
+      - { id: a, label: "He isn't busy" }
+      - { id: b, label: "He wasn't busy" }
+      - { id: c, label: 'He is not very busy' }
+      - { id: d, label: 'He has no work' }
+    check: { type: exact, value: a }
+    solution: 不 before an adjective denies the state — and takes the place of 很. 他不很忙 would be the different claim "not very busy".
+
+  - id: ng9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: what single question do you ask yourself to choose between 不 and 没?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Is the sentence denying how things are, or denying that something took place?' }
+    solution: >-
+      "Am I denying a state or an event?" 不 denies a description — this is not how things are,
+      now or in general or going forward. 没 denies an occurrence — this did not take place, or
+      hasn't yet. 有 goes with 没 because having is treated as something that has or hasn't come
+      about. Ask that one question and the choice follows.

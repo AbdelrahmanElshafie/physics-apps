@@ -1,0 +1,52 @@
+# Review cards: 不 vs 没.
+
+schemaVersion: 1
+topic: negation
+cards:
+  - id: ng-bu
+    kind: word
+    topicId: mandarin:negation
+    front: 不
+    frontPronunciation: bù
+    back: not — for states, habits, intentions and adjectives; bú before a fourth tone
+    exerciseIds: [ng4, ng6]
+
+  - id: ng-mei
+    kind: word
+    topicId: mandarin:negation
+    front: 没
+    frontPronunciation: méi
+    back: not — for 有, and for actions that didn't happen or haven't yet; always méi
+    exerciseIds: [ng5, ng7]
+
+  - id: ng-wo-bu-shi-xuesheng
+    kind: sentence
+    topicId: mandarin:negation
+    front: 我不是学生。
+    frontPronunciation: Wǒ bú shì xué shēng
+    back: I'm not a student — a state, so 不
+    exerciseIds: [ng1]
+
+  - id: ng-ta-bu-mang
+    kind: sentence
+    topicId: mandarin:negation
+    front: 他不忙。
+    frontPronunciation: Tā bù máng
+    back: He isn't busy — 不 with an adjective, and it replaces 很
+    exerciseIds: [ng8]
+
+  - id: ng-wo-bu-chifan
+    kind: sentence
+    topicId: mandarin:negation
+    front: 我不吃饭。
+    frontPronunciation: Wǒ bù chī fàn
+    back: I don't eat / I'm not going to eat — a habit or decision
+    exerciseIds: [ng3]
+
+  - id: ng-wo-mei-chifan
+    kind: sentence
+    topicId: mandarin:negation
+    front: 我没吃饭。
+    frontPronunciation: Wǒ méi chī fàn
+    back: I didn't eat / I haven't eaten — an event that didn't happen
+    exerciseIds: [ng2, ng3]

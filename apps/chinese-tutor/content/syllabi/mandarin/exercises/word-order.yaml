@@ -1,0 +1,113 @@
+# Exercises: Mandarin word order.
+
+schemaVersion: 1
+topic: word-order
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: wd1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: What is the basic order of a plain Mandarin sentence like 他看书?
+    choices:
+      - { id: a, label: 'Subject – verb – object, the same as English' }
+      - { id: b, label: 'Subject – object – verb' }
+      - { id: c, label: 'Verb – subject – object' }
+      - { id: d, label: 'Object – subject – verb' }
+    check: { type: exact, value: a }
+    solution: 他 (subject) 看 (verb) 书 (object). Most Mandarin sentences follow the same order English does.
+
+  - id: wd2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Where can 今天 (today) go in a sentence?
+    choices:
+      - { id: a, label: 'Only at the very end' }
+      - { id: b, label: 'Before the verb — right after the subject, or at the start of the sentence' }
+      - { id: c, label: 'Anywhere at all' }
+      - { id: d, label: 'Only between the verb and its object' }
+    check: { type: exact, value: b }
+    solution: 我今天吃饭 and 今天我吃饭 are both correct. 我吃饭今天 is not — a time word never follows the verb.
+
+  - id: wd3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — 我吃饭今天 is an acceptable way to say "I eat today".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Where does a time word have to sit relative to the verb?' }
+    solution: >-
+      False. Time words go before the verb in Mandarin. 我吃饭今天 is English word order with
+      Mandarin words — the correct versions are 我今天吃饭 or 今天我吃饭.
+
+  - id: wd4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Where does a place phrase like 在家 (at home) go?
+    choices:
+      - { id: a, label: 'After the object, as in English' }
+      - { id: b, label: 'Before the verb' }
+      - { id: c, label: 'Before the subject, always' }
+      - { id: d, label: 'It replaces the object' }
+    check: { type: exact, value: b }
+    solution: 我在家吃饭 — the place comes before the verb, exactly like a time word does.
+
+  - id: wd5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 在 (at / in).
+    check: { type: exact, value: zai4 }
+    solution: "zai4 — fourth tone."
+
+  - id: wd6
+    set: B
+    label: Q6
+    kind: text
+    prompt: Type the numbered pinyin for 今天 (today).
+    check: { type: exact, value: jin1tian1 }
+    hint: Both syllables, with their tone numbers.
+    solution: "jin1 tian1 — both first tone."
+
+  - id: wd7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: Which is correct for "I eat at home today"?
+    choices:
+      - { id: a, label: 我吃饭在家今天 }
+      - { id: b, label: 我今天在家吃饭 }
+      - { id: c, label: 我在家吃饭今天 }
+      - { id: d, label: 今天在家我吃饭 }
+    check: { type: exact, value: b }
+    solution: 'Subject, time, place, verb, object: 我今天在家吃饭. Both 今天 and 在家 sit in front of 吃饭.'
+
+  - id: wd8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — turning a statement into a question changes the word order.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'How does 你是学生 become "are you a student?"' }
+    solution: >-
+      False. 你是学生 becomes 你是学生吗 by adding 吗 at the end; nothing moves. Question words sit
+      where the answer would go, and negation goes straight in front of the verb — none of it
+      disturbs the order.
+
+  - id: wd9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: what is the one principle behind both of the places where Mandarin word
+      order differs from English?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What do a time word and a place phrase have in common, and where do they both go?' }
+    solution: >-
+      Scene before action. Time and place set the scene for what happens, so Mandarin puts them
+      before the verb; the verb and its object are the action, so they come last. English puts
+      scene-setting at the end instead, which is why time and place are exactly the two spots where
+      a word-for-word translation comes out wrong while everything else lines up.
