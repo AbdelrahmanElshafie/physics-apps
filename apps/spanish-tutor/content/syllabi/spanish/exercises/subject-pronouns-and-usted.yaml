@@ -1,0 +1,102 @@
+# Exercises: the subject pronouns, dropping them, and tú vs. usted.
+
+schemaVersion: 1
+topic: subject-pronouns-and-usted
+intro: Nine questions. Accents count on the typed ones. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: sp1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: Three women want to say "we". Which pronoun?
+    choices:
+      - { id: a, label: nosotros }
+      - { id: b, label: nosotras }
+      - { id: c, label: ellas }
+      - { id: d, label: vosotras }
+    check: { type: exact, value: b }
+    solution: nosotras — the all-female "we". One man in the group and it would be nosotros.
+
+  - id: sp2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the pronoun for "you" (one person, informal) — with its accent.
+    check: { type: exact, value: tú }
+    solution: tú — without the accent, tu means "your".
+
+  - id: sp3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: Why is "Soy estudiante" more natural than "Yo soy estudiante"?
+    choices:
+      - { id: a, label: 'yo is only used in writing' }
+      - { id: b, label: 'soy already means "I am", so yo adds emphasis rather than information' }
+      - { id: c, label: 'yo cannot be used with ser' }
+      - { id: d, label: 'Both are equally neutral' }
+    check: { type: exact, value: b }
+    solution: The verb ending carries the subject; the pronoun is kept for contrast, clarity, or ¿y tú?
+
+  - id: sp4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Which verb form goes with usted?
+    choices:
+      - { id: a, label: 'The tú form — eres, estás' }
+      - { id: b, label: 'The él / ella form — es, está' }
+      - { id: c, label: 'The yo form — soy, estoy' }
+      - { id: d, label: 'Its own special form' }
+    check: { type: exact, value: b }
+    solution: usted takes the third-person form, a leftover of vuestra merced ("your grace"). ¿Cómo está usted? and ¿Cómo está ella? share the same está.
+
+  - id: sp5
+    set: B
+    label: Q5
+    kind: truefalse
+    prompt: 'True or false — in Latin America, ustedes is used for any group of people you are addressing, friends included.'
+    check: { type: exact, value: true }
+    solution: True. vosotros is Spain only; everywhere else ustedes covers both formal and informal plural "you".
+
+  - id: sp6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: '___ eres de Madrid, ¿no?'
+    choices:
+      - { id: a, label: Tu }
+      - { id: b, label: Tú }
+    check: { type: exact, value: b }
+    solution: Tú — the pronoun carries the accent; tu without it is "your" (tu casa).
+
+  - id: sp7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: A group of three men and one woman — which pronoun means "they"?
+    choices:
+      - { id: a, label: ellas }
+      - { id: b, label: ellos }
+      - { id: c, label: ustedes }
+      - { id: d, label: nosotros }
+    check: { type: exact, value: b }
+    solution: ellos — a mixed group takes the masculine, as mixed groups of nouns do.
+
+  - id: sp8
+    set: C
+    label: Q8
+    kind: text
+    prompt: Type the formal "you" for one person.
+    check: { type: exact, value: usted }
+    solution: usted — written in full here; in print you will also see Ud. and Vd.
+
+  - id: sp9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "I am from London, but she is from Madrid. And you, sir?" — your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'There is a contrast in the first sentence — do the pronouns stay in or drop out? And "sir" tells you which "you" the question wants.' }
+    solution: "Yo soy de Londres, pero ella es de Madrid. ¿Y usted, señor? — the pronouns stay because of the contrast, and señor points to usted rather than tú."

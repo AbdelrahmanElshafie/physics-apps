@@ -1,0 +1,100 @@
+# Exercises: the present tense of regular -ar verbs.
+
+schemaVersion: 1
+topic: present-tense-ar
+intro: Nine questions. Accents count on the typed ones. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: ar1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: What is the stem of hablar?
+    choices:
+      - { id: a, label: hab- }
+      - { id: b, label: habl- }
+      - { id: c, label: habla- }
+      - { id: d, label: hablar- }
+    check: { type: exact, value: b }
+    solution: habl- — the infinitive minus its -ar ending. Every present-tense form is habl- plus an ending.
+
+  - id: ar2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the form of hablar that means "I speak".
+    check: { type: exact, value: hablo }
+    solution: hablo — stem plus -o. (No accent — habló with one is the past tense.)
+
+  - id: ar3
+    set: A
+    label: Q3
+    kind: text
+    prompt: 'trabajar — to work. Type "we work".'
+    check: { type: exact, value: trabajamos }
+    solution: trabajamos — trabaj- plus -amos.
+
+  - id: ar4
+    set: B
+    label: Q4
+    kind: text
+    prompt: 'estudiar — to study. Type "you study" (tú).'
+    check: { type: exact, value: estudias }
+    solution: estudias — estudi- plus -as.
+
+  - id: ar5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: hablan means...
+    choices:
+      - { id: a, label: 'we speak' }
+      - { id: b, label: 'they speak, or you (plural) speak' }
+      - { id: c, label: 'he speaks' }
+      - { id: d, label: 'you (tú) speak' }
+    check: { type: exact, value: b }
+    solution: -an is the ellos / ellas / ustedes ending, so hablan is "they speak" or "you (all) speak".
+
+  - id: ar6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: Which is the only form in the present tense of hablar that carries a written accent?
+    choices:
+      - { id: a, label: hablamos }
+      - { id: b, label: habláis }
+      - { id: c, label: hablan }
+      - { id: d, label: habla }
+    check: { type: exact, value: b }
+    solution: habláis — stressed on the final syllable though it ends in s, so rule one is broken and the accent marks it.
+
+  - id: ar7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — hablo español can mean both "I speak Spanish" and "I am speaking Spanish".'
+    check: { type: exact, value: true }
+    solution: True. The Spanish simple present covers the English simple present, the -ing form, and the "do" form.
+
+  - id: ar8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: How do you say "they don't speak English"?
+    choices:
+      - { id: a, label: No hablan inglés. }
+      - { id: b, label: Hablan no inglés. }
+      - { id: c, label: No hablamos inglés. }
+      - { id: d, label: Hablan inglés no. }
+    check: { type: exact, value: a }
+    explain: { required: true, hint: 'Where does no go, and which ending is "they"?' }
+    solution: No hablan inglés — no goes straight before the verb, and -an is the "they" ending. No hablamos would be "we don't speak".
+
+  - id: ar9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "I study Spanish in Madrid. I work in a school. I don''t speak French." (French = francés) — your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'Three -ar verbs in the yo form, and one no.' }
+    solution: "Estudio español en Madrid. Trabajo en una escuela. No hablo francés. — any natural phrasing is fine; the three yo forms end in -o and no sits right before hablo."

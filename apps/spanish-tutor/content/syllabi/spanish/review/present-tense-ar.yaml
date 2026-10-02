@@ -1,0 +1,133 @@
+# Review cards: the hablar table minus hablo (already fronted as "hablo (present)" in the stress
+# deck), the first batch of -ar infinitives, and the question/negative sentence shapes.
+
+schemaVersion: 1
+topic: present-tense-ar
+cards:
+  - id: ar-hablar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: hablar
+    back: to speak, to talk — the model -ar verb
+    exerciseIds: [ar1]
+
+  - id: ar-hablas
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: hablas
+    back: you (tú) speak — stem + -as
+
+  - id: ar-habla
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: habla
+    back: he / she speaks; you (formal) speak — stem + -a
+
+  - id: ar-hablamos
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: hablamos
+    back: we speak — stem + -amos
+
+  - id: ar-hablais
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: habláis
+    back: you (plural, Spain) speak — the only accented form in the table
+    exerciseIds: [ar6]
+
+  - id: ar-hablan
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: hablan
+    back: they speak; you (plural) speak — stem + -an
+    exerciseIds: [ar5]
+
+  - id: ar-trabajar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: trabajar
+    back: to work
+
+  - id: ar-trabajamos
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: trabajamos
+    back: we work
+    exerciseIds: [ar3]
+
+  - id: ar-estudiar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: estudiar
+    back: to study
+
+  - id: ar-estudias
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: estudias
+    back: you (tú) study
+    exerciseIds: [ar4]
+
+  - id: ar-comprar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: comprar
+    back: to buy
+
+  - id: ar-escuchar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: escuchar
+    back: to listen (to) — no "to" needed, escucho música
+
+  - id: ar-necesitar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: necesitar
+    back: to need
+
+  - id: ar-tomar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: tomar
+    back: to take; to have (a drink or food)
+
+  - id: ar-llamar
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: llamar
+    back: to call — me llamo is its yo form with a reflexive me
+
+  - id: ar-un-poco-de
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: un poco de
+    back: a little (of)
+
+  - id: ar-escuela
+    kind: word
+    topicId: spanish:present-tense-ar
+    front: la escuela
+    back: the school
+
+  - id: ar-hablas-espanol
+    kind: sentence
+    topicId: spanish:present-tense-ar
+    front: ¿Hablas español?
+    back: Do you speak Spanish? — statement order, question marks, rising voice
+    exerciseIds: [ar7]
+
+  - id: ar-no-hablan-ingles
+    kind: sentence
+    topicId: spanish:present-tense-ar
+    front: No hablan inglés.
+    back: They don't speak English — no goes straight before the verb
+    exerciseIds: [ar8]
+
+  - id: ar-estudio-espanol
+    kind: sentence
+    topicId: spanish:present-tense-ar
+    front: Estudio español en Madrid.
+    back: I study / am studying Spanish in Madrid
+    exerciseIds: [ar2, ar9]

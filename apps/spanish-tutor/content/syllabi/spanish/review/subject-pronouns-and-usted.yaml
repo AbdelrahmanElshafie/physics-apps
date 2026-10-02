@@ -1,0 +1,98 @@
+# Review cards: the six subject pronouns and their gendered plurals, señor/señora, and the contrast
+# sentence that keeps its pronouns. "él (not el)" already lives in the stress deck, so él is not
+# repeated here; tú follows the same "(not tu)" convention.
+
+schemaVersion: 1
+topic: subject-pronouns-and-usted
+cards:
+  - id: sp-yo
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: yo
+    back: I — lowercase; usually dropped
+    exerciseIds: [sp3]
+
+  - id: sp-tu
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: tú (not tu)
+    back: you (one person, informal) — tu without the accent is "your"
+    exerciseIds: [sp2, sp6]
+
+  - id: sp-ella
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: ella
+    back: she
+
+  - id: sp-usted
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: usted
+    back: you (one person, formal) — takes the él / ella verb form
+    exerciseIds: [sp4, sp8]
+
+  - id: sp-nosotros
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: nosotros
+    back: we (mixed or all-male group)
+
+  - id: sp-nosotras
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: nosotras
+    back: we (all-female group)
+    exerciseIds: [sp1]
+
+  - id: sp-vosotros
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: vosotros
+    back: you (several people, informal — Spain only)
+
+  - id: sp-ellos
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: ellos
+    back: they (mixed or all-male group)
+    exerciseIds: [sp7]
+
+  - id: sp-ellas
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: ellas
+    back: they (all-female group)
+
+  - id: sp-ustedes
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: ustedes
+    back: you (several people) — formal in Spain, the only plural "you" in Latin America
+    exerciseIds: [sp5]
+
+  - id: sp-senor
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: señor
+    back: sir; Mr
+
+  - id: sp-senora
+    kind: word
+    topicId: spanish:subject-pronouns-and-usted
+    front: señora
+    back: madam; Mrs
+
+  - id: sp-contrast
+    kind: sentence
+    topicId: spanish:subject-pronouns-and-usted
+    front: Yo soy de Londres, pero ella es de Madrid.
+    back: I am from London, but she is from Madrid — pronouns kept for contrast
+    exerciseIds: [sp9]
+
+  - id: sp-y-usted-senor
+    kind: sentence
+    topicId: spanish:subject-pronouns-and-usted
+    front: ¿Y usted, señor?
+    back: And you, sir? — the formal bounce-back
+    exerciseIds: [sp9]

@@ -41,6 +41,15 @@ describe('conjugatePresent', () => {
     ])
   })
 
+  it('produces the trabajar and estudiar tables exactly as the present-tense-ar lesson prints them', () => {
+    expect(presentTable('trabajar')).toEqual([
+      'trabajo', 'trabajas', 'trabaja', 'trabajamos', 'trabajáis', 'trabajan',
+    ])
+    expect(presentTable('estudiar')).toEqual([
+      'estudio', 'estudias', 'estudia', 'estudiamos', 'estudiáis', 'estudian',
+    ])
+  })
+
   it('produces the comer table exactly as the present-tense-er-ir lesson prints it', () => {
     expect(PERSONS.map((p) => conjugatePresent('comer', p))).toEqual([
       'como', 'comes', 'come', 'comemos', 'coméis', 'comen',
