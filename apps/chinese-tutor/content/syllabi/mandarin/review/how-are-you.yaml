@@ -1,0 +1,81 @@
+# Review cards: 你好吗, the 很 + adjective pattern, and 呢.
+
+schemaVersion: 1
+topic: how-are-you
+cards:
+  - id: hay-ni-hao-ma
+    kind: sentence
+    topicId: mandarin:how-are-you
+    front: 你好吗?
+    frontPronunciation: Nǐ hǎo ma
+    back: How are you? — 吗 turns the statement 你好 into a yes/no question
+    exerciseIds: [hay1]
+
+  - id: hay-hen
+    kind: word
+    topicId: mandarin:how-are-you
+    front: 很
+    frontPronunciation: hěn
+    back: very — but in Subject + 很 + adjective it is mostly a placeholder, not an intensifier
+    exerciseIds: [hay3, hay5]
+
+  - id: hay-lei
+    kind: word
+    topicId: mandarin:how-are-you
+    front: 累
+    frontPronunciation: lèi
+    back: tired
+    exerciseIds: [hay6]
+
+  - id: hay-mang
+    kind: word
+    topicId: mandarin:how-are-you
+    front: 忙
+    frontPronunciation: máng
+    back: busy
+
+  - id: hay-wo-hen-hao
+    kind: sentence
+    topicId: mandarin:how-are-you
+    front: 我很好。
+    frontPronunciation: Wǒ hěn hǎo
+    back: I'm fine — adjective predicate, no 是
+    exerciseIds: [hay4]
+
+  - id: hay-wo-hen-lei
+    kind: sentence
+    topicId: mandarin:how-are-you
+    front: 我很累。
+    frontPronunciation: Wǒ hěn lèi
+    back: I'm tired — 累 is an adjective, so no 是
+    exerciseIds: [hay2]
+
+  - id: hay-ta-hen-mang
+    kind: sentence
+    topicId: mandarin:how-are-you
+    front: 他很忙。
+    frontPronunciation: Tā hěn máng
+    back: He is busy.
+
+  - id: hay-hai-xing
+    kind: word
+    topicId: mandarin:how-are-you
+    front: 还行
+    frontPronunciation: hái xíng
+    back: okay / so-so — literally "still passable"
+
+  - id: hay-bu-tai-hao
+    kind: word
+    topicId: mandarin:how-are-you
+    front: 不太好
+    frontPronunciation: bú tài hǎo
+    back: not so good — 不 shifts to bú before fourth-tone 太
+    exerciseIds: [hay7]
+
+  - id: hay-ni-ne
+    kind: sentence
+    topicId: mandarin:how-are-you
+    front: 你呢?
+    frontPronunciation: Nǐ ne
+    back: And you? — 呢 bounces the question back
+    exerciseIds: [hay8]

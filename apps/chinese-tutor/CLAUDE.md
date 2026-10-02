@@ -100,19 +100,22 @@ content/syllabi/<id>/
 ```
 
 The `mandarin` syllabus (`content/syllabi/mandarin/syllabus.yaml`) is a full roadmap — five
-phases, HSK1-ish in scope, 21 topics. Six are written: `pinyin-and-tones`, `tone-pairs`,
-`strokes-and-radicals`, `greetings`, `introducing-yourself` and `numbers-0-99`. Every other topic
-is real (ordered, with real prerequisites and summaries) but shows "this lesson hasn't been
-written yet" until its `.mdx` file exists — adding a lesson is adding that one file plus its
-matching exercises YAML and review deck.
+phases, HSK1-ish in scope, 21 topics. Nine are written: `pinyin-and-tones`, `tone-pairs`,
+`strokes-and-radicals`, `greetings`, `introducing-yourself`, `how-are-you`, `numbers-0-99`,
+`pronouns-and-measure-words` and `this-that-de`. Every other topic is real (ordered, with real
+prerequisites and summaries) but shows "this lesson hasn't been written yet" until its `.mdx`
+file exists — adding a lesson is adding that one file plus its matching exercises YAML and review
+deck.
 
-**What to write next, and why in this order:** `pronouns-and-measure-words` is the big one — you
-cannot say "three books" in Mandarin without a measure word, so it gates a lot of ordinary speech,
-and it already has its prerequisite (`numbers-0-99`) in place. After it, the chain
-`this-that-de` → `have-and-want` → `word-order` (flagged `critical`) → `questions-ma-ne` /
-`negation` unlocks the whole of Phase 5. `how-are-you` is worth doing early despite being small,
-because `introducing-yourself` deliberately sets up its adjective-as-predicate payoff by warning
-that 是 must never be used with an adjective.
+**What to write next, and why in this order:** `have-and-want` is the only thing still standing
+between the written content and `word-order` (flagged `critical`), which in turn gates
+`questions-ma-ne` and `negation` — so that chain of four finishes the structural spine of the
+course. The lessons so far cross-reference deliberately: measure words are introduced for
+numbers, then reused unchanged for 这/那/哪; 是-for-nouns-only is planted in `introducing-yourself`
+and paid off in `how-are-you`; the 不 → bú sandhi from `tone-pairs` recurs in 不太好. Keep those
+threads intact when editing. Everything after Phase 5 (`simplified-vs-traditional`,
+`family-members`, dates, time, food, places, directions) is vocabulary breadth on top of a
+finished grammar spine, and can be written in any order.
 
 ### Content rules
 

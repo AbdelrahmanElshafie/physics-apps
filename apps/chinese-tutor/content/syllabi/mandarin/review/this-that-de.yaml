@@ -1,0 +1,94 @@
+# Review cards: 这 / 那 / 哪 with measure words, and 的.
+
+schemaVersion: 1
+topic: this-that-de
+cards:
+  - id: td-zhe
+    kind: word
+    topicId: mandarin:this-that-de
+    front: 这
+    frontPronunciation: zhè
+    back: this
+    exerciseIds: [td3]
+
+  - id: td-na
+    kind: word
+    topicId: mandarin:this-that-de
+    front: 那
+    frontPronunciation: nà
+    back: that
+    exerciseIds: [td4]
+
+  - id: td-na-which
+    kind: word
+    topicId: mandarin:this-that-de
+    front: 哪
+    frontPronunciation: nǎ
+    back: which — 那 with a 口 added, third tone instead of fourth
+    exerciseIds: [td5]
+
+  - id: td-de
+    kind: word
+    topicId: mandarin:this-that-de
+    front: 的
+    frontPronunciation: de
+    back: the possessive / linking particle — does the work of both apostrophe-s and "of"
+    exerciseIds: [td6]
+
+  - id: td-wo-de
+    kind: word
+    topicId: mandarin:this-that-de
+    front: 我的
+    frontPronunciation: wǒ de
+    back: my / mine
+
+  - id: td-pengyou
+    kind: word
+    topicId: mandarin:this-that-de
+    front: 朋友
+    frontPronunciation: péng yǒu
+    back: friend
+
+  - id: td-zhe-ben-shu
+    kind: sentence
+    topicId: mandarin:this-that-de
+    front: 这本书
+    frontPronunciation: zhè běn shū
+    back: this book — 这 needs a measure word, just as a number does
+    exerciseIds: [td1, td2]
+
+  - id: td-na-ge-ren
+    kind: sentence
+    topicId: mandarin:this-that-de
+    front: 那个人
+    frontPronunciation: nà gè rén
+    back: that person
+
+  - id: td-zhe-shi-shenme
+    kind: sentence
+    topicId: mandarin:this-that-de
+    front: 这是什么?
+    frontPronunciation: Zhè shì shén me
+    back: What is this?
+
+  - id: td-na-shi-wo-de-shu
+    kind: sentence
+    topicId: mandarin:this-that-de
+    front: 那是我的书。
+    frontPronunciation: Nà shì wǒ de shū
+    back: That is my book.
+
+  - id: td-laoshi-de-mingzi
+    kind: sentence
+    topicId: mandarin:this-that-de
+    front: 老师的名字
+    frontPronunciation: lǎo shī de míng zi
+    back: the teacher's name / the name of the teacher
+
+  - id: td-zhe-shi-wo-de
+    kind: sentence
+    topicId: mandarin:this-that-de
+    front: 这是我的。
+    frontPronunciation: Zhè shì wǒ de
+    back: This is mine — the noun after 的 is dropped when it is obvious
+    exerciseIds: [td7, td8]

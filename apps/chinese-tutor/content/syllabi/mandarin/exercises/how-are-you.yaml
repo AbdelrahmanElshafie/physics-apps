@@ -1,0 +1,114 @@
+# Exercises: asking how someone is.
+
+schemaVersion: 1
+topic: how-are-you
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: hay1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: 你好吗? means...
+    choices:
+      - { id: a, label: 'Hello?' }
+      - { id: b, label: 'How are you? / Are you well?' }
+      - { id: c, label: 'Who are you?' }
+      - { id: d, label: 'Goodbye' }
+    check: { type: exact, value: b }
+    solution: 'Literally "you good [question]?" — 吗 at the end turns the statement 你好 into a yes/no question.'
+
+  - id: hay2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Which is correct for "I am tired"?
+    choices:
+      - { id: a, label: 我是累 }
+      - { id: b, label: 我很累 }
+      - { id: c, label: 我累是 }
+      - { id: d, label: 我是很累 }
+    check: { type: exact, value: b }
+    solution: 我很累 — 累 is an adjective, so 是 is wrong. The adjective is the predicate by itself, with 很 filling the slot in front of it.
+
+  - id: hay3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — in 我很好, 很 carries its full dictionary meaning of "very", so the sentence means "I am very well".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What does a bare 我好 sound like, and what is 很 doing about that?' }
+    solution: >-
+      False. In this pattern 很 is mostly a grammatical placeholder — 我很好 just means "I'm fine".
+      It is there because a bare adjective after a subject sounds unfinished, as if a "but…" is
+      coming.
+
+  - id: hay4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Why is there no 是 in 我很累?
+    choices:
+      - { id: a, label: '是 is only used in questions' }
+      - { id: b, label: '累 is an adjective, and 是 links nouns only' }
+      - { id: c, label: '很 is a form of 是' }
+      - { id: d, label: 'There should be — 我很累 is a mistake' }
+    check: { type: exact, value: b }
+    solution: 是 equates two nouns (我是学生). An adjective is its own predicate and never takes 是.
+
+  - id: hay5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 很.
+    check: { type: exact, value: hen3 }
+    solution: "hen3 — third tone."
+
+  - id: hay6
+    set: B
+    label: Q6
+    kind: text
+    prompt: Type the numbered pinyin for 累 (tired).
+    check: { type: exact, value: lei4 }
+    solution: "lei4 — fourth tone."
+
+  - id: hay7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: 不太好 ("not so good") is pronounced bú tài hǎo, not bù tài hǎo. Why?
+    choices:
+      - { id: a, label: '不 is always second tone' }
+      - { id: b, label: '太 is fourth tone, so 不 shifts to bú — the sandhi rule from the tone-pairs lesson' }
+      - { id: c, label: 'It is an irregular exception with no rule' }
+      - { id: d, label: 'Because 好 is third tone' }
+    check: { type: exact, value: b }
+    solution: 不 becomes bú before a fourth-tone syllable. 太 (tài) is fourth tone, so the rule applies — the same one behind 不是 bú shì.
+
+  - id: hay8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: 你呢? means...
+    choices:
+      - { id: a, label: 'Are you?' }
+      - { id: b, label: 'And you? / What about you?' }
+      - { id: c, label: 'Who are you?' }
+      - { id: d, label: 'You are here' }
+    check: { type: exact, value: b }
+    solution: 呢 bounces the previous question back at the other person without repeating it.
+
+  - id: hay9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: an English speaker has one verb, "to be", for both "I am a student" and
+      "I am tired". What does Mandarin do instead, and what decides which pattern you need?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Look at the word after the subject — is it a noun or an adjective?' }
+    solution: >-
+      Mandarin splits the two. A noun predicate takes 是 (我是学生); an adjective predicate takes
+      no verb at all, just 很 as a filler in front of it (我很累). The only thing that decides
+      which pattern applies is the part of speech of the word after the subject — noun means 是,
+      adjective means 很 and no 是.

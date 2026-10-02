@@ -1,0 +1,115 @@
+# Review cards: pronouns, 们, and the first measure words.
+
+schemaVersion: 1
+topic: pronouns-and-measure-words
+cards:
+  - id: pm-ni
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 你
+    frontPronunciation: nǐ
+    back: you (singular)
+
+  - id: pm-ta-he
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 他
+    frontPronunciation: tā
+    back: he / him — 亻 person radical
+    exerciseIds: [pm2]
+
+  - id: pm-ta-she
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 她
+    frontPronunciation: tā
+    back: she / her — 女 woman radical, same sound as 他
+
+  - id: pm-ta-it
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 它
+    frontPronunciation: tā
+    back: it — animals and things, same sound as 他 and 她
+
+  - id: pm-women
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 我们
+    frontPronunciation: wǒ men
+    back: we / us — 们 makes a pronoun plural
+    exerciseIds: [pm1, pm3]
+
+  - id: pm-tamen
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 他们
+    frontPronunciation: tā men
+    back: they / them
+
+  - id: pm-ge
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 个
+    frontPronunciation: gè
+    back: the general-purpose measure word — people and many objects; the fallback when unsure
+    exerciseIds: [pm5, pm8]
+
+  - id: pm-ben
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 本
+    frontPronunciation: běn
+    back: measure word for books and bound volumes
+    exerciseIds: [pm6]
+
+  - id: pm-zhi
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 只
+    frontPronunciation: zhī
+    back: measure word for many animals
+
+  - id: pm-zhang
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 张
+    frontPronunciation: zhāng
+    back: measure word for flat things — tables, sheets of paper
+
+  - id: pm-bei
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 杯
+    frontPronunciation: bēi
+    back: measure word for cups of something
+
+  - id: pm-shu
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 书
+    frontPronunciation: shū
+    back: book
+
+  - id: pm-mao
+    kind: word
+    topicId: mandarin:pronouns-and-measure-words
+    front: 猫
+    frontPronunciation: māo
+    back: cat
+
+  - id: pm-san-ben-shu
+    kind: sentence
+    topicId: mandarin:pronouns-and-measure-words
+    front: 三本书
+    frontPronunciation: sān běn shū
+    back: three books — number + measure word + noun, never number + noun
+    exerciseIds: [pm4]
+
+  - id: pm-liang-zhi-mao
+    kind: sentence
+    topicId: mandarin:pronouns-and-measure-words
+    front: 两只猫
+    frontPronunciation: liǎng zhī māo
+    back: two cats — 两 (not 二) because actual things are being counted
+    exerciseIds: [pm7]

@@ -1,0 +1,113 @@
+# Exercises: pronouns and measure words.
+
+schemaVersion: 1
+topic: pronouns-and-measure-words
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: pm1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: How do you make 我 (I) plural?
+    choices:
+      - { id: a, label: '我们 — add 们' }
+      - { id: b, label: '我我 — repeat it' }
+      - { id: c, label: '多我 — put 多 (many) in front' }
+      - { id: d, label: 'It has no plural' }
+    check: { type: exact, value: a }
+    solution: 我们 — 们 pluralises pronouns, with no exceptions. 你们, 他们 work the same way.
+
+  - id: pm2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: How do 他 (he), 她 (she) and 它 (it) differ when spoken aloud?
+    choices:
+      - { id: a, label: 'Different tones' }
+      - { id: b, label: 'Different vowels' }
+      - { id: c, label: 'They do not differ at all — all three are tā' }
+      - { id: d, label: '他 is tā, the others are tá' }
+    check: { type: exact, value: c }
+    solution: All three are pronounced tā. The distinction exists only in writing, where the radical (亻 person, 女 woman, 宀 roof) carries the meaning.
+
+  - id: pm3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — 我 changes to a different word when it is the object of a sentence, the way English I becomes me.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Compare 我看他 (I see him) and 他看我 (he sees me) — does 我 change?' }
+    solution: >-
+      False. Mandarin pronouns have one form for every job — 我 is both "I" and "me". Only word
+      order tells you who is doing what to whom.
+
+  - id: pm4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Why is 三书 not an acceptable way to say "three books"?
+    choices:
+      - { id: a, label: 'The number should come after the noun' }
+      - { id: b, label: 'A measure word is missing between the number and the noun' }
+      - { id: c, label: '书 needs to be made plural first' }
+      - { id: d, label: 'It is fine — this is correct Mandarin' }
+    check: { type: exact, value: b }
+    solution: A number can never sit directly in front of a noun. It needs a measure word in between — 三本书.
+
+  - id: pm5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 个, the general-purpose measure word.
+    check: { type: exact, value: ge4 }
+    solution: "ge4 — fourth tone."
+
+  - id: pm6
+    set: B
+    label: Q6
+    kind: text
+    prompt: Type the numbered pinyin for 本, the measure word for books.
+    check: { type: exact, value: ben3 }
+    solution: "ben3 — third tone."
+
+  - id: pm7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: Given that 只 is the measure word for many animals, how do you say "two cats"?
+    choices:
+      - { id: a, label: 二只猫 }
+      - { id: b, label: 两只猫 }
+      - { id: c, label: 两猫 }
+      - { id: d, label: 只两猫 }
+    check: { type: exact, value: b }
+    solution: 两只猫 — 两 because actual things are being counted, 只 because they are animals, noun last.
+
+  - id: pm8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: You cannot remember the specific measure word for a noun. What is the best fallback?
+    choices:
+      - { id: a, label: 'Leave the measure word out entirely' }
+      - { id: b, label: 'Use 个 — it will sound slightly off but be understood' }
+      - { id: c, label: 'Use 本 for everything' }
+      - { id: d, label: 'Say the number twice' }
+    check: { type: exact, value: b }
+    solution: 个 is the safety net. Using it where a more specific word belongs is a small error; omitting the measure word altogether is not Mandarin.
+
+  - id: pm9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: how does English's "two cups of tea" or "three sheets of paper" help
+      explain what a Mandarin measure word is doing?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What is "cups" doing in that phrase, and which nouns does English require that kind of word for?' }
+    solution: >-
+      English already uses counting words — cups, sheets, loaves, head — but only for nouns it
+      treats as uncountable, and it lets countable nouns take a number directly. Mandarin uses the
+      same mechanism and simply applies it to every noun. So a measure word is not a foreign idea;
+      it is the thing "cups" is doing in "two cups of tea", made universal.

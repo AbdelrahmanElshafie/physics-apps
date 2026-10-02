@@ -1,0 +1,114 @@
+# Exercises: this, that, and 的.
+
+schemaVersion: 1
+topic: this-that-de
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: td1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: How do you say "this book"?
+    choices:
+      - { id: a, label: 这书 }
+      - { id: b, label: 这本书 }
+      - { id: c, label: 书这 }
+      - { id: d, label: 这个本书 }
+    check: { type: exact, value: b }
+    solution: 这本书 — 这 needs a measure word before the noun, exactly as a number does.
+
+  - id: td2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Why is 这书 wrong?
+    choices:
+      - { id: a, label: '这 should come after the noun' }
+      - { id: b, label: 'A measure word is missing — the same rule that makes 三书 wrong' }
+      - { id: c, label: '书 needs 们 to be made plural' }
+      - { id: d, label: 'It is not wrong' }
+    check: { type: exact, value: b }
+    solution: Anything that specifies a noun — a number, or 这/那/哪 — goes through a measure word. 这本书, 那个人.
+
+  - id: td3
+    set: A
+    label: Q3
+    kind: text
+    prompt: Type the numbered pinyin for 这 (this).
+    check: { type: exact, value: zhe4 }
+    solution: "zhe4 — fourth tone."
+
+  - id: td4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Type the numbered pinyin for 那 (that).
+    check: { type: exact, value: na4 }
+    solution: "na4 — fourth tone."
+
+  - id: td5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: What is the difference between 那 and 哪?
+    choices:
+      - { id: a, label: 'They are the same word written two ways' }
+      - { id: b, label: '那 nà is "that"; 哪 nǎ is "which" — a 口 radical and a different tone' }
+      - { id: c, label: '哪 is the plural of 那' }
+      - { id: d, label: '哪 is traditional, 那 is simplified' }
+    check: { type: exact, value: b }
+    solution: 哪 (nǎ, third tone, with a 口 on the left) means "which"; 那 (nà, fourth tone) means "that". Both take a measure word before a noun.
+
+  - id: td6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: 老师的名字 means...
+    choices:
+      - { id: a, label: 'The teacher is a name' }
+      - { id: b, label: "The teacher's name / the name of the teacher" }
+      - { id: c, label: 'A teacher named Dе' }
+      - { id: d, label: 'The teacher and the name' }
+    check: { type: exact, value: b }
+    solution: 的 links the owner (老师) to the thing (名字) — covering both of English's constructions in one.
+
+  - id: td7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — 的 is always required between 我 and a family word like 妈妈.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Is 我妈妈 acceptable Mandarin?' }
+    solution: >-
+      False. For close, personal relationships the 的 is routinely dropped — 我妈妈, 我朋友 are at
+      least as common as the versions with 的. Including it is never wrong; omitting it is simply
+      very usual.
+
+  - id: td8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: 这是我的 means...
+    choices:
+      - { id: a, label: 'This is me' }
+      - { id: b, label: 'This is mine' }
+      - { id: c, label: 'This is my' }
+      - { id: d, label: 'I am this' }
+    check: { type: exact, value: b }
+    solution: With the noun left off, 的 at the end carries "mine" by itself. 这是我 (no 的) would be "this is me".
+
+  - id: td9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: English says "the teacher's name" and "the name of the teacher" using two
+      different constructions. How does Mandarin handle both, and what does that tell you about 的?
+    check: { type: tutor }
+    explain: { required: true, hint: 'How many ways does Mandarin have to say it, and what goes on each side of 的?' }
+    solution: >-
+      Mandarin has one construction, owner + 的 + thing: 老师的名字. The apostrophe-s version and
+      the "of" version both collapse into it. That shows 的 is not a translation of either English
+      word specifically — it is a general linker that attaches whatever comes before it, as a
+      possessor or description, to the noun that comes after.
