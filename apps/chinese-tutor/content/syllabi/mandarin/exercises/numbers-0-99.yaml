@@ -1,0 +1,109 @@
+# Exercises: numbers 0 to 99.
+
+schemaVersion: 1
+topic: numbers-0-99
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: nm1
+    set: A
+    label: Q1
+    kind: text
+    prompt: Type the numbered pinyin for 五 (5).
+    check: { type: exact, value: wu3 }
+    solution: "wu3 — third tone."
+
+  - id: nm2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the numbered pinyin for 八 (8).
+    check: { type: exact, value: ba1 }
+    solution: "ba1 — first tone."
+
+  - id: nm3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: What number is 十七?
+    choices:
+      - { id: a, label: "7" }
+      - { id: b, label: "17" }
+      - { id: c, label: "70" }
+      - { id: d, label: "77" }
+    check: { type: exact, value: b }
+    solution: 17 — ten, then seven. 11–19 are all 十 followed by the remainder.
+
+  - id: nm4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: How do you write 68?
+    choices:
+      - { id: a, label: 六八 }
+      - { id: b, label: 八十六 }
+      - { id: c, label: 六十八 }
+      - { id: d, label: 十六八 }
+    check: { type: exact, value: c }
+    solution: 六十八 — six tens, then eight. 八十六 would be 86, reversing the multiplier and the remainder.
+
+  - id: nm5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: What number is 九十九?
+    choices:
+      - { id: a, label: "909" }
+      - { id: b, label: "99" }
+      - { id: c, label: "90" }
+      - { id: d, label: "919" }
+    check: { type: exact, value: b }
+    solution: 99 — nine tens, nine.
+
+  - id: nm6
+    set: B
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — Mandarin has special one-off words for 11, 12 and 20, the way English has "eleven", "twelve" and "twenty".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What is 11 built from, and what is 20 built from?' }
+    solution: >-
+      False. 十一 is literally ten-one and 二十 is two-ten. Every number from 11 to 99 is built by
+      combination, with no irregular forms anywhere in the range.
+
+  - id: nm7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: When do you use 两 (liǎng) rather than 二 (èr) for "two"?
+    choices:
+      - { id: a, label: 'When counting aloud, and inside larger numbers' }
+      - { id: b, label: 'When counting actual objects' }
+      - { id: c, label: 'They are completely interchangeable' }
+      - { id: d, label: 'Only in writing, never in speech' }
+    check: { type: exact, value: b }
+    solution: 两 is for two actual things (两个人, "two people"); 二 is for counting aloud and inside bigger numbers like 二十二.
+
+  - id: nm8
+    set: C
+    label: Q8
+    kind: text
+    prompt: Type the numbered pinyin for 十 (10).
+    check: { type: exact, value: shi2 }
+    solution: "shi2 — second tone."
+
+  - id: nm9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: what does a learner actually have to memorise to count to 99 in Mandarin,
+      compared with English?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Count up the number of distinct words each language needs before you can say any number under 100.' }
+    solution: >-
+      In Mandarin, ten number words plus two combination rules (十 + remainder for the teens,
+      multiplier + 十 + remainder above that) — everything else follows. English needs those ten
+      plus "eleven", "twelve", the whole -teen series, and a separate set of tens words
+      (twenty, thirty, fifty…), none of which are derivable from the units. The Mandarin system
+      states its own place value out loud, which is why it needs so much less memorising.

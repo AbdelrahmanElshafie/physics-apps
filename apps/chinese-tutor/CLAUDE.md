@@ -100,10 +100,19 @@ content/syllabi/<id>/
 ```
 
 The `mandarin` syllabus (`content/syllabi/mandarin/syllabus.yaml`) is a full roadmap — five
-phases, HSK1-ish in scope — but only `pinyin-and-tones` and `greetings` have lessons written so
-far. Every other topic is real (ordered, with real prerequisites and summaries) but shows "this
-lesson hasn't been written yet" until its `.mdx` file exists — adding a lesson is adding that one
-file plus its matching exercises YAML, same as either physics app.
+phases, HSK1-ish in scope, 21 topics. Six are written: `pinyin-and-tones`, `tone-pairs`,
+`strokes-and-radicals`, `greetings`, `introducing-yourself` and `numbers-0-99`. Every other topic
+is real (ordered, with real prerequisites and summaries) but shows "this lesson hasn't been
+written yet" until its `.mdx` file exists — adding a lesson is adding that one file plus its
+matching exercises YAML and review deck.
+
+**What to write next, and why in this order:** `pronouns-and-measure-words` is the big one — you
+cannot say "three books" in Mandarin without a measure word, so it gates a lot of ordinary speech,
+and it already has its prerequisite (`numbers-0-99`) in place. After it, the chain
+`this-that-de` → `have-and-want` → `word-order` (flagged `critical`) → `questions-ma-ne` /
+`negation` unlocks the whole of Phase 5. `how-are-you` is worth doing early despite being small,
+because `introducing-yourself` deliberately sets up its adjective-as-predicate payoff by warning
+that 是 must never be used with an adjective.
 
 ### Content rules
 
@@ -117,6 +126,12 @@ tone.
 
 **Simplified characters only**, matching `simplified-vs-traditional`'s own content — don't mix in
 traditional forms elsewhere in the syllabus without a reason tied to that lesson.
+
+**A review card's `frontPronunciation` carries no punctuation**, even when the `front` does:
+`front: 你叫什么名字?` pairs with `frontPronunciation: Nǐ jiào shén me míng zi`. This isn't
+cosmetic — `toneMarkPinyin`'s syllable regex anchors the tone digit at the end of the token, so a
+raw `zi5?` doesn't match and passes through with the digit still in it. (Russian's `markStress`
+slices around the apostrophe and so does tolerate trailing punctuation; the two apps differ here.)
 
 **Review cards are hand-authored, not scraped from the lesson MDX.** `review/<topicId>.yaml` is a
 plain list of `{ id, kind: letter|word|sentence, topicId, front, frontPronunciation?, back,

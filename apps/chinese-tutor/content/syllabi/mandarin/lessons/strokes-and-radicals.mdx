@@ -1,0 +1,142 @@
+---
+title: Strokes, stroke order, and radicals
+summary: Characters are built from a small set of strokes and reusable pieces, not drawn freehand.
+readingMinutes: 25
+---
+
+The single most discouraging belief about Chinese is that characters are thousands of unrelated
+pictures to be memorized one at a time. They aren't. Characters are assembled — from a small
+inventory of strokes, written in a fixed order, grouped into reusable components that repeat
+across hundreds of characters. This lesson is about that structure, because seeing it is the
+difference between memorizing and reading.
+
+## 1. The basic strokes
+
+Nearly every character is built from these:
+
+<Compare
+  columns={['Stroke', 'Name', 'Direction']}
+  rows={[
+    ['一', 'héng', 'horizontal, left to right'],
+    ['丨', 'shù', 'vertical, top to bottom'],
+    ['丿', 'piě', 'falling to the left'],
+    ['㇏', 'nà', 'falling to the right'],
+    ['丶', 'diǎn', 'a dot, pressed down and away'],
+  ]}
+  caption="Plus hooks and turns, which are these same strokes with a change of direction partway through."
+/>
+
+## 2. Stroke order is a rule, not a preference
+
+Every character has one correct order. The main rules, in priority order:
+
+<Compare
+  columns={['Rule', 'Example']}
+  rows={[
+    ['Top to bottom', '三 — the three lines go top, middle, bottom'],
+    ['Left to right', '们 — the person component on the left comes first'],
+    ['Horizontal before vertical', '十 — the horizontal stroke, then the vertical through it'],
+    ['Outside before inside', '月 — the frame before the two lines inside'],
+    ['Close the box last', '国 — three sides, then the contents, then the bottom seals it'],
+    ['Centre before the two sides', '小 — the central stroke, then left, then right'],
+  ]}
+/>
+
+<Callout kind="why" title="Why this isn't pedantry">
+It's tempting to think that if the finished character looks right, the order didn't matter. Three
+reasons it does: characters written at speed only come out legible if the strokes flow in the
+expected order; dictionaries and handwriting input are indexed by stroke count and order, so a
+character written in an invented order can be genuinely hard to look up; and the order is
+consistent enough across characters that learning it once means you can usually write a *new*
+character correctly on first sight.
+</Callout>
+
+<Predict
+  question="You're writing 十 (shí, 'ten'), which is one horizontal and one vertical stroke crossing. Which goes first?"
+  options={['The vertical', 'The horizontal', "Either — it's a two-stroke character so it can't matter", 'Both at once']}
+  answer={1}
+>
+  The horizontal. "Horizontal before vertical" is one of the core ordering rules, and it applies
+  here even though the character is as simple as two strokes.
+</Predict>
+
+## 3. Components repeat — and often hint at meaning
+
+Characters are built from components, many of which carry a meaning category. The clearest
+demonstration in the whole language:
+
+<Compare
+  columns={['Character', 'Pinyin', 'Meaning', 'Built from']}
+  rows={[
+    ['木', 'mù', 'tree, wood', 'the component itself'],
+    ['林', 'lín', 'woods, grove', 'two 木'],
+    ['森', 'sēn', 'dense forest', 'three 木'],
+  ]}
+  caption="One tree, two trees, three trees. Not every character is this transparent — but the principle of building from repeated pieces holds throughout."
+/>
+
+The **radical** is the component a dictionary files the character under, and it usually points at
+a meaning category:
+
+<Compare
+  columns={['Radical', 'Category', 'Characters using it']}
+  rows={[
+    ['氵 (from 水, water)', 'liquids', '河 hé river · 海 hǎi sea · 洗 xǐ to wash'],
+    ['亻 (from 人, person)', 'people', '你 nǐ you · 他 tā he'],
+    ['口 (mouth)', 'speech, eating', '吃 chī to eat · 叫 jiào to call'],
+  ]}
+  caption="Meeting an unknown character with 氵 on the left is already a hint it has something to do with water."
+/>
+
+<VocabCard hanzi="木" pinyin="mù" meaning="tree, wood" />
+<VocabCard hanzi="海" pinyin="hǎi" meaning="sea — note the 氵 water radical on the left" />
+
+## 4. The other half: a component that hints at the *sound*
+
+This is the fact that makes Chinese characters a system rather than a pile. The large majority of
+characters are **semantic-phonetic compounds**: one component suggests the meaning, another
+suggests the pronunciation.
+
+<GrammarPoint pattern="女 (woman) + 马 mǎ (sound) = 妈 mā (mother)" title="Meaning on one side, sound on the other">
+
+妈 isn't a picture of a mother. It's the woman component (meaning: this word is about a female
+person) next to 马 mǎ, a character that means "horse" but is here contributing only its *sound*.
+Nothing about horses is involved — 马 is being used as a pronunciation hint.
+
+</GrammarPoint>
+
+Once you notice this, whole families of characters line up:
+
+<Compare
+  columns={['Character', 'Pinyin', 'Meaning', 'Meaning part + sound part']}
+  rows={[
+    ['青', 'qīng', 'blue-green', 'the sound component itself'],
+    ['清', 'qīng', 'clear (water)', '氵 water + 青 qīng'],
+    ['请', 'qǐng', 'please, to request', '讠 speech + 青 qīng'],
+    ['情', 'qíng', 'feeling, emotion', '忄 heart + 青 qīng'],
+  ]}
+  caption="Same sound component, same rough pronunciation, four different meanings supplied by the other half."
+/>
+
+<Predict
+  question="You meet an unfamiliar character made of 氵 on the left and a component you know is pronounced 'yáng'. What two guesses can you make?"
+  options={['Nothing — you have to look it up', 'That it probably involves water, and probably sounds something like yáng', 'That it definitely means "water yang"', 'That it is pronounced shuǐ']}
+  answer={1}
+>
+  Exactly those two guesses, and they're often right: the radical narrows the meaning category and
+  the phonetic component narrows the sound. (The character is 洋 yáng, "ocean".) Neither guess is
+  guaranteed — sound components have drifted over centuries — but together they turn an unknown
+  character from a blank into something you can often read.
+</Predict>
+
+<Callout kind="warning" title="The sound hint is a hint, not a rule">
+Pronunciations have drifted over the ~2,000 years these characters have been in use, so a phonetic
+component often gives the right syllable with a different tone (清 qīng vs. 请 qǐng), sometimes a
+related-but-different sound, and occasionally nothing useful at all. Treat it as a strong clue
+worth checking, never as a guarantee.
+</Callout>
+
+<Callout kind="forward">
+Next: simplified vs. traditional characters — why 国 and 國 are the same word, what was actually
+changed, and which set this course uses.
+</Callout>

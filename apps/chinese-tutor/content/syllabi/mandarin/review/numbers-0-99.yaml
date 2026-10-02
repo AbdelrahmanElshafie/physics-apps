@@ -1,0 +1,109 @@
+# Review cards: one to ten, the two combination patterns, and 两.
+
+schemaVersion: 1
+topic: numbers-0-99
+cards:
+  - id: nm-1
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 一
+    frontPronunciation: yī
+    back: "1"
+
+  - id: nm-2
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 二
+    frontPronunciation: èr
+    back: 2 — for counting aloud and inside larger numbers
+
+  - id: nm-3
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 三
+    frontPronunciation: sān
+    back: "3"
+
+  - id: nm-4
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 四
+    frontPronunciation: sì
+    back: "4"
+
+  - id: nm-5
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 五
+    frontPronunciation: wǔ
+    back: "5"
+    exerciseIds: [nm1]
+
+  - id: nm-6
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 六
+    frontPronunciation: liù
+    back: "6"
+
+  - id: nm-7
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 七
+    frontPronunciation: qī
+    back: "7"
+
+  - id: nm-8
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 八
+    frontPronunciation: bā
+    back: "8"
+    exerciseIds: [nm2]
+
+  - id: nm-9
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 九
+    frontPronunciation: jiǔ
+    back: "9"
+
+  - id: nm-10
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 十
+    frontPronunciation: shí
+    back: "10"
+    exerciseIds: [nm8]
+
+  - id: nm-17
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 十七
+    frontPronunciation: shí qī
+    back: 17 — ten, then the remainder
+    exerciseIds: [nm3]
+
+  - id: nm-68
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 六十八
+    frontPronunciation: liù shí bā
+    back: 68 — six tens, then eight (八十六 would be 86)
+    exerciseIds: [nm4]
+
+  - id: nm-99
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 九十九
+    frontPronunciation: jiǔ shí jiǔ
+    back: 99 — nine tens, nine
+    exerciseIds: [nm5]
+
+  - id: nm-liang
+    kind: word
+    topicId: mandarin:numbers-0-99
+    front: 两
+    frontPronunciation: liǎng
+    back: two, when counting actual things (两个人) — 二 is the one used for reciting numbers
+    exerciseIds: [nm7]

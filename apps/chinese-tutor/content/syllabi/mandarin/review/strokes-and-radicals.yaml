@@ -1,0 +1,99 @@
+# Review cards: components, radicals, and the semantic-phonetic pairing.
+
+schemaVersion: 1
+topic: strokes-and-radicals
+cards:
+  - id: sr-shi-ten
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 十 (stroke order)
+    frontPronunciation: shí
+    back: horizontal stroke first, then the vertical through it
+    exerciseIds: [sr1, sr3]
+
+  - id: sr-guo
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 国
+    frontPronunciation: guó
+    back: country — three sides of the box, then the contents, then the bottom seals it last
+    exerciseIds: [sr2]
+
+  - id: sr-mu
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 木
+    frontPronunciation: mù
+    back: tree, wood
+
+  - id: sr-lin
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 林
+    frontPronunciation: lín
+    back: woods, grove — two 木 side by side
+    exerciseIds: [sr4]
+
+  - id: sr-sen
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 森
+    frontPronunciation: sēn
+    back: dense forest — three 木
+    exerciseIds: [sr5]
+
+  - id: sr-shui-radical
+    kind: letter
+    topicId: mandarin:strokes-and-radicals
+    front: 氵
+    back: the water radical, from 水 shuǐ — marks liquids (河 river, 海 sea, 洗 to wash)
+    exerciseIds: [sr6]
+
+  - id: sr-he
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 河
+    frontPronunciation: hé
+    back: river — 氵 water radical on the left
+
+  - id: sr-hai
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 海
+    frontPronunciation: hǎi
+    back: sea — 氵 water radical on the left
+
+  - id: sr-ren-radical
+    kind: letter
+    topicId: mandarin:strokes-and-radicals
+    front: 亻
+    back: the person radical, from 人 rén — 你 you, 他 he
+
+  - id: sr-kou
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 口
+    frontPronunciation: kǒu
+    back: mouth — as a radical it marks speech and eating (吃 to eat, 叫 to call)
+
+  - id: sr-ma-mother
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 女 + 马
+    back: 妈 mā, mother — 女 supplies the meaning category, 马 mǎ supplies only the sound
+    exerciseIds: [sr7]
+
+  - id: sr-qing-blue
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 青
+    frontPronunciation: qīng
+    back: blue-green — the shared sound component inside 清, 请 and 情
+
+  - id: sr-qing-please
+    kind: word
+    topicId: mandarin:strokes-and-radicals
+    front: 请
+    frontPronunciation: qǐng
+    back: please, to request — 讠 speech + 青 qīng for the sound (note the tone differs)
+    exerciseIds: [sr8]

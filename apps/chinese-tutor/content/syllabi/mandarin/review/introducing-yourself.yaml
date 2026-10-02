@@ -1,0 +1,108 @@
+# Review cards: names, 是, and country + 人.
+
+schemaVersion: 1
+topic: introducing-yourself
+cards:
+  - id: iy-wo
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 我
+    frontPronunciation: wǒ
+    back: I, me
+    exerciseIds: [iy3]
+
+  - id: iy-jiao
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 叫
+    frontPronunciation: jiào
+    back: to be called
+    exerciseIds: [iy1, iy2]
+
+  - id: iy-shenme
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 什么
+    frontPronunciation: shén me
+    back: what
+
+  - id: iy-mingzi
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 名字
+    frontPronunciation: míng zi
+    back: name
+
+  - id: iy-ni-jiao-shenme
+    kind: sentence
+    topicId: mandarin:introducing-yourself
+    front: 你叫什么名字?
+    frontPronunciation: Nǐ jiào shén me míng zi
+    back: What's your name?
+
+  - id: iy-wo-jiao
+    kind: sentence
+    topicId: mandarin:introducing-yourself
+    front: 我叫王明。
+    frontPronunciation: Wǒ jiào Wáng Míng
+    back: I'm called Wáng Míng.
+
+  - id: iy-shi
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 是
+    frontPronunciation: shì
+    back: to be — links two nouns only, never a noun to an adjective, and never changes form
+    exerciseIds: [iy4, iy6]
+
+  - id: iy-xuesheng
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 学生
+    frontPronunciation: xué shēng
+    back: student
+
+  - id: iy-laoshi
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 老师
+    frontPronunciation: lǎo shī
+    back: teacher
+
+  - id: iy-wo-shi-xuesheng
+    kind: sentence
+    topicId: mandarin:introducing-yourself
+    front: 我是学生。
+    frontPronunciation: Wǒ shì xué shēng
+    back: I am a student. (noun after 是 — this is what 是 is for)
+    exerciseIds: [iy5]
+
+  - id: iy-zhongguo
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 中国
+    frontPronunciation: Zhōng guó
+    back: China — literally "middle country", the Middle Kingdom
+    exerciseIds: [iy8]
+
+  - id: iy-zhongguoren
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 中国人
+    frontPronunciation: Zhōng guó rén
+    back: a Chinese person — country + 人, completely regular
+
+  - id: iy-meiguoren
+    kind: word
+    topicId: mandarin:introducing-yourself
+    front: 美国人
+    frontPronunciation: Měi guó rén
+    back: an American — country + 人
+    exerciseIds: [iy7]
+
+  - id: iy-wo-shi-meiguoren
+    kind: sentence
+    topicId: mandarin:introducing-yourself
+    front: 我是美国人。
+    frontPronunciation: Wǒ shì Měi guó rén
+    back: I am American.

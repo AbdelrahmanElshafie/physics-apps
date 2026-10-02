@@ -1,0 +1,120 @@
+# Exercises: strokes, stroke order, and radicals.
+
+schemaVersion: 1
+topic: strokes-and-radicals
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: sr1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: 十 (shí) is a horizontal and a vertical stroke crossing. Which stroke is written first?
+    choices:
+      - { id: a, label: The vertical }
+      - { id: b, label: The horizontal }
+      - { id: c, label: 'Either — it cannot matter in a two-stroke character' }
+      - { id: d, label: They are written as one continuous stroke }
+    check: { type: exact, value: b }
+    solution: 'Horizontal before vertical is one of the core ordering rules, and it applies even to a character this simple.'
+
+  - id: sr2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: In 国, when is the bottom of the enclosing box written?
+    choices:
+      - { id: a, label: 'First, before anything else' }
+      - { id: b, label: 'Last, sealing the contents in' }
+      - { id: c, label: 'Immediately after the left side' }
+      - { id: d, label: 'It has no enclosing box' }
+    check: { type: exact, value: b }
+    solution: 'Three sides of the box, then the contents, then the bottom stroke closes it — "close the box last".'
+
+  - id: sr3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — as long as the finished character looks correct, the order the strokes were written in does not matter.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Think about writing at speed, and about how a dictionary or handwriting input finds a character.' }
+    solution: >-
+      False. Stroke order affects how legible a character is when written quickly, it is what
+      dictionary and handwriting-recognition lookup rely on, and it is consistent enough across
+      characters that knowing it lets you write unfamiliar characters correctly on sight.
+
+  - id: sr4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: 林 (lín, "woods") is built from which repeated component?
+    choices:
+      - { id: a, label: '水 water' }
+      - { id: b, label: '木 tree' }
+      - { id: c, label: '人 person' }
+      - { id: d, label: '口 mouth' }
+    check: { type: exact, value: b }
+    solution: 林 is two 木 (tree) side by side — and 森 sēn, "dense forest", is three of them.
+
+  - id: sr5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the numbered pinyin for 森 (dense forest).
+    check: { type: exact, value: sen1 }
+    solution: "sen1 — first tone."
+
+  - id: sr6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: You meet an unknown character with the 氵 radical on its left. What does that suggest?
+    choices:
+      - { id: a, label: 'It is pronounced shuǐ' }
+      - { id: b, label: 'Its meaning probably has something to do with water or liquid' }
+      - { id: c, label: 'It is a traditional-only character' }
+      - { id: d, label: 'Nothing at all' }
+    check: { type: exact, value: b }
+    solution: '氵 comes from 水 (water) and marks a meaning category — 河 river, 海 sea, 洗 to wash. It says nothing about pronunciation.'
+
+  - id: sr7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: 妈 (mā, mother) is 女 (woman) plus 马 (mǎ, horse). What is 马 doing there?
+    choices:
+      - { id: a, label: 'Contributing meaning — mothers were associated with horses' }
+      - { id: b, label: 'Contributing only its sound, as a pronunciation hint' }
+      - { id: c, label: 'Nothing — it is decorative' }
+      - { id: d, label: 'Marking the character as traditional' }
+    check: { type: exact, value: b }
+    solution: 马 is the phonetic component — it supplies the sound mā, with nothing about horses involved. 女 supplies the meaning category.
+
+  - id: sr8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — a phonetic component always tells you the exact pronunciation, including the tone.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Compare 清 qīng and 请 qǐng — same sound component, same tone?' }
+    solution: >-
+      False. Pronunciations have drifted over roughly two thousand years, so the component often
+      gives the right syllable with a different tone (清 qīng vs. 请 qǐng), sometimes only a
+      related sound, and occasionally nothing useful. It is a strong clue, not a guarantee.
+
+  - id: sr9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does knowing about radicals and phonetic components change how much
+      work learning characters actually is?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What is the difference between memorising three thousand unrelated pictures and recognising recombinations of a few hundred parts?' }
+    solution: >-
+      Without the structure, every character looks like an arbitrary picture that has to be
+      memorised whole, and the workload grows linearly with the number of characters. With it,
+      characters are recombinations of a few hundred reusable components, most of them pairing one
+      part that narrows the meaning with one that hints at the sound — so each new component you
+      learn pays off across many characters, and an unfamiliar character is often partly readable
+      rather than completely opaque.

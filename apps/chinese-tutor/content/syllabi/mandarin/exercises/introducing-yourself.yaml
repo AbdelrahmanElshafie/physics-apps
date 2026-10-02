@@ -1,0 +1,109 @@
+# Exercises: saying who you are.
+
+schemaVersion: 1
+topic: introducing-yourself
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: iy1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: Which is the everyday way to give your name?
+    choices:
+      - { id: a, label: 我是王明。 }
+      - { id: b, label: 我叫王明。 }
+      - { id: c, label: 我名字王明。 }
+      - { id: d, label: 王明我。 }
+    check: { type: exact, value: b }
+    solution: 我叫王明 — 叫 means "to be called", and this is the standard phrasing for giving a name.
+
+  - id: iy2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the numbered pinyin for 叫 (to be called).
+    check: { type: exact, value: jiao4 }
+    solution: "jiao4 — fourth tone."
+
+  - id: iy3
+    set: A
+    label: Q3
+    kind: text
+    prompt: Type the numbered pinyin for 我 (I, me).
+    check: { type: exact, value: wo3 }
+    solution: "wo3 — third tone."
+
+  - id: iy4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: 是 (shì) is used to link...
+    choices:
+      - { id: a, label: 'A noun to another noun' }
+      - { id: b, label: 'A noun to an adjective' }
+      - { id: c, label: 'Any two words at all' }
+      - { id: d, label: 'Only questions to answers' }
+    check: { type: exact, value: a }
+    solution: 是 equates two noun phrases — 我是学生. It is not used before an adjective.
+
+  - id: iy5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: Which sentence needs 是?
+    choices:
+      - { id: a, label: '"I am tired" — 累 is an adjective' }
+      - { id: b, label: '"I am a teacher" — 老师 is a noun' }
+      - { id: c, label: Both of them }
+      - { id: d, label: Neither of them }
+    check: { type: exact, value: b }
+    solution: Only the noun case. 我是老师 is correct; "I am tired" uses an adjective and takes a different pattern entirely.
+
+  - id: iy6
+    set: B
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — 是 changes form depending on whether the subject is 我, 你 or 他.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Compare 我是, 你是 and 他是 — is the verb different in any of them?' }
+    solution: >-
+      False. 是 is 是 in every case. Mandarin verbs never conjugate for person, number or tense —
+      unlike English am/is/are, which is three forms of one verb.
+
+  - id: iy7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: 'If France is 法国 (Fǎguó), how do you say "a French person"?'
+    choices:
+      - { id: a, label: 法国人 }
+      - { id: b, label: 人法国 }
+      - { id: c, label: 法国是人 }
+      - { id: d, label: 'It has to be memorised separately — there is no pattern' }
+    check: { type: exact, value: a }
+    solution: 法国人 — country + 人 is completely regular, so every nationality comes free once you know the country name.
+
+  - id: iy8
+    set: C
+    label: Q8
+    kind: text
+    prompt: Type the numbered pinyin for 中国 (China).
+    check: { type: exact, value: zhong1guo2 }
+    hint: Both syllables, with their tone numbers.
+    solution: "zhong1 guo2 — 中 'middle' plus 国 'country', literally the Middle Kingdom."
+
+  - id: iy9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does an English speaker have to be more careful with 是 than the
+      translation "to be" suggests?
+    check: { type: tutor }
+    explain: { required: true, hint: 'English uses "is" for both "she is a teacher" and "she is tired" — does Mandarin?' }
+    solution: >-
+      English collapses two different things into one verb: equating two nouns ("she is a
+      teacher") and attaching a description ("she is tired"). Mandarin only uses 是 for the first.
+      Translating "to be" straight across therefore produces wrong sentences roughly half the
+      time — the adjective case needs a completely different pattern, with no 是 in it at all.
