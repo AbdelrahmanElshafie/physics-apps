@@ -1,0 +1,100 @@
+# Exercises: asking how someone is, and answering.
+
+schemaVersion: 1
+topic: how-are-you
+intro: Nine questions. Accents count on the typed ones. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: ha1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: ¿Cómo estás? means...
+    choices:
+      - { id: a, label: "What's your name?" }
+      - { id: b, label: 'How are you?' }
+      - { id: c, label: 'Where are you?' }
+      - { id: d, label: 'Who are you?' }
+    check: { type: exact, value: b }
+    solution: How are you? — literally "how are you (being)?", with estar.
+
+  - id: ha2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the two-word answer that means "very well".
+    check: { type: exact, value: muy bien }
+    solution: muy bien.
+
+  - id: ha3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: You are speaking to an elderly stranger. How do you ask how they are?
+    choices:
+      - { id: a, label: ¿Cómo estás? }
+      - { id: b, label: ¿Cómo está usted? }
+      - { id: c, label: ¿Qué tal? }
+      - { id: d, label: ¿Cómo eres? }
+    check: { type: exact, value: b }
+    solution: ¿Cómo está usted? — the usted form. ¿Cómo estás? is for a friend; ¿Qué tal? is casual; ¿Cómo eres? asks what you are like as a person.
+
+  - id: ha4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Type the form of estar that means "I am".
+    check: { type: exact, value: estoy }
+    solution: estoy — one of the two forms of estar with no accent.
+
+  - id: ha5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: A woman says she is tired. Which is right?
+    choices:
+      - { id: a, label: Estoy cansado. }
+      - { id: b, label: Estoy cansada. }
+      - { id: c, label: Soy cansada. }
+      - { id: d, label: Estoy bien cansado. }
+    check: { type: exact, value: b }
+    solution: Estoy cansada — estar for a state, and the adjective agrees with the speaker.
+
+  - id: ha6
+    set: B
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — ¿Qué tal? is a complete question with no verb in it.'
+    check: { type: exact, value: true }
+    solution: True. qué tal is a fixed casual expression; you can add a noun after it (¿Qué tal el trabajo?) but it never takes a verb.
+
+  - id: ha7
+    set: C
+    label: Q7
+    kind: text
+    prompt: Type the form of estar that means "you are" (tú) — with its accent.
+    check: { type: exact, value: estás }
+    explain: { required: true, hint: 'Where does the stress fall, and does rule one from the accents lesson predict that?' }
+    solution: estás — stressed on the last syllable though it ends in s, so rule one is broken and the accent marks it.
+
+  - id: ha8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: Why is it Estoy cansado and not Soy cansado?
+    choices:
+      - { id: a, label: 'soy is only used with nouns, never adjectives' }
+      - { id: b, label: 'Tiredness is a state you are in, so it takes estar; ser is for what you are' }
+      - { id: c, label: 'It is a fixed phrase with no rule behind it' }
+      - { id: d, label: 'cansado is an adverb' }
+    check: { type: exact, value: b }
+    solution: estar for how you are; ser for who or what you are. (soy does take adjectives — soy inglesa — but for characteristics, not passing states.)
+
+  - id: ha9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "Hello! How are you? I am fine, thanks. And you?" (to a friend) — your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'Which form of estar goes with tú, and what does it carry on its last syllable?' }
+    solution: "¡Hola! ¿Cómo estás? Estoy bien, gracias. ¿Y tú? — any natural phrasing is fine; the things to get right are the ¿ ¡ marks and the accent on estás."

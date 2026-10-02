@@ -1,0 +1,110 @@
+# Review cards: the how-are-you question in both registers, the stock answers, and estoy + adjective.
+# Plain "está" is not fronted here — the stress deck already has "está (not esta)".
+
+schemaVersion: 1
+topic: how-are-you
+cards:
+  - id: ha-como-estas
+    kind: sentence
+    topicId: spanish:how-are-you
+    front: ¿Cómo estás?
+    back: How are you? (to a friend) — estar, tú form
+    exerciseIds: [ha1]
+
+  - id: ha-como-esta-usted
+    kind: sentence
+    topicId: spanish:how-are-you
+    front: ¿Cómo está usted?
+    back: How are you? (formal) — estar, usted form
+    exerciseIds: [ha3]
+
+  - id: ha-que-tal
+    kind: sentence
+    topicId: spanish:how-are-you
+    front: ¿Qué tal?
+    back: How's it going? — casual, no verb
+    exerciseIds: [ha6]
+
+  - id: ha-estoy
+    kind: word
+    topicId: spanish:how-are-you
+    front: estoy
+    back: I am — from estar; no accent
+    exerciseIds: [ha4]
+
+  - id: ha-estas
+    kind: word
+    topicId: spanish:how-are-you
+    front: estás
+    back: you are (tú) — from estar; the accent is required
+    exerciseIds: [ha7]
+
+  - id: ha-bien
+    kind: word
+    topicId: spanish:how-are-you
+    front: bien
+    back: well / fine — an adverb, never changes
+
+  - id: ha-muy-bien
+    kind: word
+    topicId: spanish:how-are-you
+    front: muy bien
+    back: very well
+    exerciseIds: [ha2]
+
+  - id: ha-mal
+    kind: word
+    topicId: spanish:how-are-you
+    front: mal
+    back: badly / bad — as an answer, rarer than in English
+
+  - id: ha-mas-o-menos
+    kind: word
+    topicId: spanish:how-are-you
+    front: más o menos
+    back: so-so — literally "more or less"
+
+  - id: ha-y-tu
+    kind: sentence
+    topicId: spanish:how-are-you
+    front: ¿Y tú?
+    back: And you? — formal version ¿Y usted?
+
+  - id: ha-cansado
+    kind: word
+    topicId: spanish:how-are-you
+    front: cansado
+    back: tired (masculine) — with estar
+    exerciseIds: [ha5, ha8]
+
+  - id: ha-cansada
+    kind: word
+    topicId: spanish:how-are-you
+    front: cansada
+    back: tired (feminine) — with estar
+    exerciseIds: [ha5]
+
+  - id: ha-enfermo
+    kind: word
+    topicId: spanish:how-are-you
+    front: enfermo
+    back: ill (masculine; enferma) — with estar
+
+  - id: ha-contento
+    kind: word
+    topicId: spanish:how-are-you
+    front: contento
+    back: happy, pleased (masculine; contenta) — with estar
+
+  - id: ha-ocupado
+    kind: word
+    topicId: spanish:how-are-you
+    front: ocupado
+    back: busy (masculine; ocupada) — with estar
+
+  - id: ha-estoy-bien-gracias
+    kind: sentence
+    topicId: spanish:how-are-you
+    front: Estoy bien, gracias.
+    back: I'm fine, thanks.
+    exerciseIds: [ha9]

@@ -1,0 +1,154 @@
+# Review cards: the remaining forms of ser and estar, the classify-vs-describe contrasts, and the
+# meaning-flipping adjectives. soy/eres/es live in the introducing-yourself deck, estoy/estás in
+# how-are-you, and plain "está" in the stress deck — none is repeated here.
+
+schemaVersion: 1
+topic: ser-vs-estar
+cards:
+  - id: se-somos
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: somos
+    back: we are — from ser
+    exerciseIds: [se3]
+
+  - id: se-sois
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: sois
+    back: you (plural, Spain) are — from ser
+
+  - id: se-son
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: son
+    back: they are; you (plural) are — from ser
+
+  - id: se-estamos
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: estamos
+    back: we are — from estar; no accent
+
+  - id: se-estais
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: estáis
+    back: you (plural, Spain) are — from estar
+
+  - id: se-estan
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: están
+    back: they are; you (plural) are — from estar; the accent is required
+    exerciseIds: [se4]
+
+  - id: se-hoy
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: hoy
+    back: today
+
+  - id: se-en-casa
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: en casa
+    back: at home — no article
+
+  - id: se-simpatico
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: simpático
+    back: nice, friendly (of a person) — a characteristic, so with ser
+
+  - id: se-madrid-esta-en-espana
+    kind: sentence
+    topicId: spanish:ser-vs-estar
+    front: Madrid está en España.
+    back: Madrid is in Spain — location is estar, permanent or not
+    exerciseIds: [se1]
+
+  - id: se-ana-es-profesora
+    kind: sentence
+    topicId: spanish:ser-vs-estar
+    front: Ana es profesora.
+    back: Ana is a teacher — profession classifies, so ser
+    exerciseIds: [se2]
+
+  - id: se-donde-esta
+    kind: sentence
+    topicId: spanish:ser-vs-estar
+    front: ¿Dónde está el libro?
+    back: Where is the book? — the location question takes estar
+
+  - id: se-esta-muerto
+    kind: sentence
+    topicId: spanish:ser-vs-estar
+    front: Está muerto.
+    back: He is dead — a state, so estar, however permanent
+    exerciseIds: [se7]
+
+  - id: se-la-fiesta-es-en-mi-casa
+    kind: sentence
+    topicId: spanish:ser-vs-estar
+    front: La fiesta es en mi casa.
+    back: The party is at my house — an event is located with ser
+    exerciseIds: [se8]
+
+  - id: se-aburrido-ser
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: aburrido (with ser)
+    back: boring — the characteristic
+    exerciseIds: [se5]
+
+  - id: se-aburrido-estar
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: aburrido (with estar)
+    back: bored — the state
+    exerciseIds: [se5]
+
+  - id: se-listo-ser
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: listo (with ser)
+    back: clever
+
+  - id: se-listo-estar
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: listo (with estar)
+    back: ready
+
+  - id: se-rico-ser
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: rico (with ser)
+    back: rich, wealthy
+
+  - id: se-rico-estar
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: rico (with estar)
+    back: delicious (of food) — ¡Está muy rico!
+    exerciseIds: [se6]
+
+  - id: se-malo-estar
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: malo (with estar)
+    back: ill — with ser, malo is "bad" as a person
+
+  - id: se-verde-estar
+    kind: word
+    topicId: spanish:ser-vs-estar
+    front: verde (with estar)
+    back: unripe — with ser, verde is just "green"
+
+  - id: se-sentence-ana
+    kind: sentence
+    topicId: spanish:ser-vs-estar
+    front: Hoy está cansada y está en casa.
+    back: Today she is tired and she is at home — both estar, a state and a location
+    exerciseIds: [se9]

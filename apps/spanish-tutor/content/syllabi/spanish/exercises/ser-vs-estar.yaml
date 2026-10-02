@@ -1,0 +1,103 @@
+# Exercises: choosing between ser and estar.
+
+schemaVersion: 1
+topic: ser-vs-estar
+intro: Nine questions. Accents count on the typed ones. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: se1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: 'Madrid ___ en España.'
+    choices:
+      - { id: a, label: es }
+      - { id: b, label: está }
+    check: { type: exact, value: b }
+    solution: está — the location of a thing or a place is always estar, permanent or not.
+
+  - id: se2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: 'Ana ___ profesora.'
+    choices:
+      - { id: a, label: es }
+      - { id: b, label: está }
+    check: { type: exact, value: a }
+    solution: es — a profession classifies someone, so ser. (And no article before profesora.)
+
+  - id: se3
+    set: A
+    label: Q3
+    kind: text
+    prompt: Type the form of ser that means "we are".
+    check: { type: exact, value: somos }
+    solution: somos.
+
+  - id: se4
+    set: B
+    label: Q4
+    kind: text
+    prompt: Type the form of estar that means "they are" — with its accent.
+    check: { type: exact, value: están }
+    solution: están — stressed on the last syllable though it ends in n, so the accent is required.
+
+  - id: se5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: 'Estoy aburrido means...'
+    choices:
+      - { id: a, label: 'I am boring' }
+      - { id: b, label: 'I am bored' }
+      - { id: c, label: 'I am tired' }
+      - { id: d, label: 'I am busy' }
+    check: { type: exact, value: b }
+    solution: I am bored — aburrido with estar is the state. Soy aburrido would be "I am boring", the characteristic.
+
+  - id: se6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: 'La sopa está muy rica. What does the speaker mean?'
+    choices:
+      - { id: a, label: 'The soup is expensive' }
+      - { id: b, label: 'The soup is delicious' }
+      - { id: c, label: 'The soup is rich in calories' }
+      - { id: d, label: 'The soup is ready' }
+    check: { type: exact, value: b }
+    solution: Delicious — rico with estar, said of food. With ser, rico means rich (wealthy).
+
+  - id: se7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — because being dead is permanent, "he is dead" uses ser: es muerto.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Is the rule really about permanence, or about classifying vs. describing a state?' }
+    solution: >-
+      False. It is está muerto — death is a state, however permanent. The permanent/temporary
+      shortcut is what fails here; the real split is classify (ser) vs. describe a state or
+      location (estar).
+
+  - id: se8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: 'La fiesta ___ en mi casa.'
+    choices:
+      - { id: a, label: es }
+      - { id: b, label: está }
+    check: { type: exact, value: a }
+    explain: { required: true, hint: 'Is a party a thing sitting somewhere, or something that takes place?' }
+    solution: es — an event is located with ser. Ana está en mi casa, but la fiesta es en mi casa.
+
+  - id: se9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "Ana is a teacher. She is from Madrid. Today she is tired and she is at home." — your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'Four facts about Ana — which two classify her, and which two describe her state and place today?' }
+    solution: "Ana es profesora. Es de Madrid. Hoy está cansada y está en casa. — any natural phrasing is fine; what matters is es/es for profession and origin, está/está for the state and the location, and cansada agreeing with Ana."
