@@ -2,22 +2,24 @@ import Link from 'next/link'
 import { NotebookPen, RotateCcw } from 'lucide-react'
 
 /**
- * The Russian chrome: a black bar with the app name in condensed capitals, a red slanted block
- * as the mark, and the two destinations labelled in Russian first — poster lettering, not a
- * toolbar.
+ * The Russian chrome: a skewed red block as the mark, the app name in the condensed display face,
+ * the two destinations labelled in Russian first, and a red hairline along the bottom edge.
+ *
+ * This was a solid black bar with everything in capitals. The red is the identity; the black bar
+ * only made the page shout.
  */
 export function Header() {
   return (
-    <header className="shrink-0 border-b-4 border-accent bg-ink text-ink-fg">
-      <div className="flex items-stretch gap-4 px-5">
-        <Link href="/" className="flex items-center gap-3 py-2.5">
-          <span className="block h-7 w-5 skew-x-[-16deg] bg-accent" aria-hidden />
-          <span className="poster text-xl">
-            Русский <span className="font-medium text-ink-fg/55">· Russian</span>
+    <header className="shrink-0 border-b-2 border-accent bg-surface">
+      <div className="flex items-center gap-4 px-5 py-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="block h-7 w-5 shrink-0 skew-x-[-16deg] rounded-xs bg-accent" aria-hidden />
+          <span className="poster text-xl text-fg">
+            Русский <span className="font-normal text-fg-subtle">· Russian</span>
           </span>
         </Link>
 
-        <nav className="ml-auto flex items-stretch" aria-label="Sections">
+        <nav className="ml-auto flex items-center gap-1" aria-label="Sections">
           <HeaderLink href="/review" ru="Повторение" en="Review" icon={RotateCcw} />
           <HeaderLink href="/practice" ru="Практика" en="Practice" icon={NotebookPen} />
         </nav>
@@ -40,11 +42,11 @@ function HeaderLink({
   return (
     <Link
       href={href}
-      className="poster flex items-center gap-2 border-b-4 border-transparent px-4 text-sm font-medium tracking-wider text-ink-fg/85 transition-colors hover:bg-accent hover:text-accent-fg"
+      className="flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm text-fg-muted transition-colors hover:bg-accent-muted hover:text-accent-strong"
     >
       <Icon className="size-4" aria-hidden />
-      {ru}
-      <span className="font-medium normal-case tracking-normal text-ink-fg/50">{en}</span>
+      <span className="poster text-sm">{ru}</span>
+      <span className="text-fg-subtle">{en}</span>
     </Link>
   )
 }

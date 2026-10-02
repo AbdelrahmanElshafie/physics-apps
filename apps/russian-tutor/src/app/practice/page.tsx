@@ -24,7 +24,7 @@ export default async function PracticeListPage() {
 
       <div className="mt-4 flex items-start justify-between gap-4">
         <div>
-          <h1 className="poster text-4xl text-fg">Практика <span className="text-fg-subtle">· Practice</span></h1>
+          <h1 className="poster text-4xl text-fg">Практика <span className="text-lg font-normal text-fg-subtle">· Practice</span></h1>
           <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">
             Write a sentence, a short dialogue, or anything you want feedback on — then send it to
             your tutor to review.
@@ -39,7 +39,7 @@ export default async function PracticeListPage() {
         >
           <button
             type="submit"
-            className="flex shrink-0 items-center gap-1.5 poster border-2 border-ink bg-accent px-4 py-2 text-sm text-accent-fg shadow-panel transition-opacity hover:opacity-90"
+            className="flex shrink-0 items-center gap-1.5 poster rounded-lg bg-accent px-4 py-2 text-sm text-accent-fg shadow-panel transition-opacity hover:opacity-90"
           >
             <Plus className="size-4" aria-hidden />
             New

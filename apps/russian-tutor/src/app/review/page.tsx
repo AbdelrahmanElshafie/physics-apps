@@ -63,8 +63,8 @@ export default async function ReviewPage() {
   const mistakesTotal = mistakeCards.length + exerciseMistakes.length
 
   const stat = (label: string, value: number, Icon: typeof Layers) => (
-    <div className="flex flex-col gap-1 border-2 border-ink bg-surface px-4 py-3 shadow-panel">
-      <p className="poster flex items-center gap-1.5 text-[0.65rem] tracking-[0.15em] text-fg-subtle">
+    <div className="flex flex-col gap-1 rounded-panel border border-border bg-surface px-4 py-3 shadow-panel">
+      <p className="poster-caps flex items-center gap-1.5 text-[0.65rem] text-fg-subtle">
         <Icon className="size-3.5 text-accent" aria-hidden />
         {label}
       </p>
@@ -82,7 +82,7 @@ export default async function ReviewPage() {
         Back to lessons
       </Link>
 
-      <h1 className="poster mt-4 text-4xl text-fg">Повторение <span className="text-fg-subtle">· Review</span></h1>
+      <h1 className="poster mt-4 text-4xl text-fg">Повторение <span className="text-lg font-normal text-fg-subtle">· Review</span></h1>
       <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">
         Every letter, word, and sentence you&apos;ve studied, scheduled with spaced repetition —
         cards you keep getting wrong come back sooner, cards you know well come back less often.

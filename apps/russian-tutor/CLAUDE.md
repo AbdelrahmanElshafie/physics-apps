@@ -30,32 +30,40 @@ of this app — read that first if something here is unclear, most of the reason
   `containsHanzi` became `containsCyrillic` (Unicode range `Ѐ`–`ӿ`), used the same way:
   gating which exercise choices and table cells get a speak button.
 
-## Visual identity — the constructivist poster
+## Visual identity — red, ink and paper
 
 Each language app in this workspace looks like a different product on purpose; they were clones,
-and three identical sites with the labels swapped is not a course, it is a template. This one is a
-**Soviet-era poster**.
+and three identical sites with the labels swapped is not a course, it is a template. This one is
+**one strong red over warm paper**.
 
-- **Palette** (`src/app/globals.css` `@theme`): chalk-white ground, black (`ink`) bars and blocks,
-  one red accent, nothing else. Corners are square everywhere — `--radius-*` is overridden
-  app-wide to 0, so every `rounded-*` utility in every component, including the exercise cards and
-  MDX blocks, draws a square corner without those files knowing. `--shadow-panel` is a hard
-  4px offset black, not a soft blur, so panels read as pasted paper.
-- **Type**: **Oswald**, a condensed grotesque, as `--font-display` for every heading, the chrome,
-  and `.word-display`; Golos Text (a Russian-designed text face) for English reading text. Both
-  were drawn for Cyrillic, so a Russian word inside an English sentence never swaps font.
-- **Chrome**: `Header` is a black bar with a skewed red block as its mark. The home page is the
-  poster itself — the course name at 8rem in condensed capitals, a shallow red diagonal band along
-  the hero's bottom edge, then the five phases as numbered blocks (01–05) listing their lessons
-  with a square marker: red filled = written, hollow = roadmap only, black with a tick = read.
-  `Sidebar` repeats the black phase bars and square markers.
-- **Helpers**: `.poster` (condensed capitals, the poster voice) and `.band`. The band's skew is
-  deliberately shallow and centred — a steeper angle lifts its left end hundreds of pixels across
-  a wide hero and swallows the text above it; nothing is ever laid on top of it.
-  `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and name and pads the number to
-  the two-digit poster numeral.
+**It was redesigned once, and the reason matters.** The first cut went all-in on a constructivist
+poster: pure black bars, square corners everywhere, a hard offset shadow, condensed capitals on
+every label, dense checkbox lists. It looked good in a screenshot and was tiring to use — all-caps
+is slow to read and the black edges made every panel shout. What survived is what was actually
+good: one strong red, a condensed display face, and big two-digit numerals. The layout is now the
+one spanish-tutor proved out. **Don't put the black bars and the blanket uppercase back.**
 
-Keep new UI reading the semantic tokens (`accent`, `ink`, `fg-muted`, `surface`) rather than
+- **Palette** (`src/app/globals.css` `@theme`): warm off-white canvas, soft grey borders, one red
+  accent. Radii are real — `--radius-*` is overridden app-wide to 0.25-1.4rem — and
+  `--shadow-panel` is a soft warm shadow, not a hard offset black.
+- **Type**: **Oswald**, a condensed grotesque, as `--font-display` for headings, the chrome and
+  `.word-display`; Golos Text (a Russian-designed text face) for English reading text. Both were
+  drawn for Cyrillic, so a Russian word inside an English sentence never swaps font.
+- **Two display classes, and the distinction is the whole lesson from the redesign**: `.poster` is
+  the condensed voice in sentence case, for headings and labels; `.poster-caps` adds uppercase and
+  wide tracking and is for a short eyebrow of two or three words only. Reaching for `.poster-caps`
+  on body-adjacent text is what made the first version tiring.
+- **Chrome**: `Header` is a light bar with a skewed red block as its mark and a red hairline
+  underneath. The home page is a hero with the next lesson as a red card and a shallow red band
+  along the hero's bottom edge, then the five phases as numbered red nodes down a vertical rule,
+  each lesson a pill — solid where written, dashed where only on the roadmap, green with a tick
+  where read. `Sidebar` repeats the pill shape and the numerals.
+- **Helpers**: `.band` — its skew is deliberately shallow and centred, because a steeper angle
+  lifts the left end hundreds of pixels across a wide hero and swallows the text above it; nothing
+  is ever laid on top of it. `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and
+  name and pads the number to two digits.
+
+Keep new UI reading the semantic tokens (`accent`, `fg-muted`, `surface`, `success`) rather than
 naming colours, and the identity stays in one file.
 
 ## Watching a student write, not just grading multiple choice

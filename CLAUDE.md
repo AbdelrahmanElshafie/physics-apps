@@ -71,13 +71,20 @@ an explicit `speakColumns` prop for Spanish, since it shares an alphabet with th
 Clone whichever sibling is most recent — it has every later fix in it — and note that
 `tar --exclude=content` also matches `src/adapters/content/`; copy that directory back.
 
-**Then give the new app its own look.** Cloning is how the plumbing gets there, not how the app
-should end up: three language sites that differ only in their labels read as one template, not as
-three courses. Each app now carries a distinct visual identity — chinese-tutor is a printed book
-(ink, rice paper, a vermilion seal, a 目录 table of contents), russian-tutor is a constructivist
-poster (black bars, one red, square corners, condensed capitals), spanish-tutor is Mediterranean
-(cream, terracotta, azulejo tiles, a soft serif, the course drawn as a road). See each app's own
-CLAUDE.md for its palette, type and chrome.
+**Then give the new app its own look — but keep the proven shape.** Cloning is how the plumbing
+gets there, not how the app should end up: three language sites that differ only in their labels
+read as one template. Each app carries a distinct palette, typeface and ornament — chinese-tutor
+is warm paper and a vermilion seal, russian-tutor is one red over warm paper with a condensed
+display face, spanish-tutor is Mediterranean cream, terracotta and azulejo tiles.
+
+What they share is the **layout**, and that was learned the hard way. Chinese and Russian were
+first built as full-blown pastiches: a printed book with dotted-leader contents and a vertical
+spine, and a constructivist poster of black bars and blanket uppercase. Both looked striking in a
+screenshot and were rejected on sight in use — dense, low-contrast, tiring. They were rebuilt on
+spanish-tutor's shape, which works: a hero with the next lesson as one accent card, then the
+course as a path of numbered nodes down a vertical rule, every lesson a pill that is solid when
+written, dashed when only on the roadmap, and ticked when read. **Start a new app from that
+shape** and spend the invention on colour, type and one ornament. See each app's own CLAUDE.md.
 
 The identity is deliberately cheap to carry, because it lives in four places and nowhere else:
 `src/app/globals.css` (`@theme` tokens, including an app-wide `--radius-*` scale so every

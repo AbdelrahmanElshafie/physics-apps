@@ -63,7 +63,7 @@ export default async function ReviewPage() {
   const mistakesTotal = mistakeCards.length + exerciseMistakes.length
 
   const stat = (label: string, value: number, Icon: typeof Layers) => (
-    <div className="flex flex-col gap-1 border border-border border-t-2 border-t-accent bg-surface px-4 py-3 shadow-panel">
+    <div className="flex flex-col gap-1 rounded-panel border border-border bg-surface px-4 py-3 shadow-panel">
       <p className="flex items-center gap-1.5 text-xs text-fg-subtle">
         <Icon className="size-3.5 text-accent" aria-hidden />
         {label}

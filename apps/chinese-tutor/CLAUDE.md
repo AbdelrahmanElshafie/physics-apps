@@ -26,28 +26,35 @@ pnpm workspace, sharing what is genuinely subject-agnostic via `packages/`.
   before it. A written sentence has no "previous line" to be consistent with; it just needs a
   human read. So `/practice` is free writing + "ask your tutor", with no local verdict.
 
-## Visual identity — ink and paper
+## Visual identity — warm paper and vermilion
 
 Each language app in this workspace looks like a different product on purpose; they were clones,
-and three identical sites with the labels swapped is not a course, it is a template. This one is a
-**printed Chinese book**.
+and three identical sites with the labels swapped is not a course, it is a template. This one is
+**warm paper and a vermilion seal**.
 
-- **Palette** (`src/app/globals.css` `@theme`): warm rice-paper canvas, near-black ink, a single
-  vermilion accent (the colour of a name seal), jade for "done". Square-ish corners —
-  `--radius-*` is overridden app-wide to 0.1–0.4rem, so every `rounded-*` utility in every
-  component, including the exercise cards and MDX blocks, resolves near-square without those
-  files naming a radius.
+**It was redesigned once, and the reason matters.** The first cut chased the look of a printed
+Chinese book: square corners, a laid-paper line texture, a table of contents with dotted leaders,
+a vertical spine down the left, small grey type. It was faithful to the idea and bad to use —
+dense, low-contrast, and it read as a document rather than something you want to open. The layout
+is now the one spanish-tutor proved out; the Song serif, the seal and the volume numbering are
+what keep it Chinese. **Don't reintroduce the book-imitation layout.**
+
+- **Palette** (`src/app/globals.css` `@theme`): rice-paper canvas, ink text, a single vermilion
+  accent (the colour of a name seal), jade for "done". Generous radii — `--radius-*` is overridden
+  app-wide to 0.3-1.5rem, so every `rounded-*` utility in every component, including the exercise
+  cards and MDX blocks, comes out soft without those files naming a radius.
 - **Type**: Noto Sans SC for interface and running text; **Noto Serif SC** (a Song face) as
   `--font-display` for every heading and for `.word-display`, the hanzi a `VocabCard` puts front
   and centre. The serif is what makes characters read as characters rather than UI labels.
-- **Chrome**: `Header` is a running head with a 中 seal and the double rule a printed page carries
-  under its header. The home page is a 目录 (table of contents): a vertical spine on the left,
-  phases as 卷一/卷二, every lesson a line numbered in hanzi numerals with dotted leaders out to
-  its reading time, marked 已读 / 未写. `Sidebar` repeats those cues in miniature.
-- **Helpers**: `.paper` (faint laid-paper grid), `.seal`, `.book-rule`, `.vertical-rl` (upright
-  hanzi) and `.vertical-rl-latin` (rotated Latin — upright Latin stacks one letter per line and
-  is unreadable). `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and name and
-  converts a number to a hanzi numeral.
+- **Chrome**: `Header` carries a seal mark and a hairline rule over a vermilion thread. The home
+  page is the course as a path: a hero with the next lesson as a vermilion card, then the five
+  volumes as numbered seal nodes down a vertical rule, each lesson a pill — solid where written,
+  dashed where only on the roadmap, jade with a tick where read. `Sidebar` repeats the pill shape
+  and the volume badges.
+- **Helpers**: `.seal`, `.book-rule`, `.paper` (now a plain warm sheet — the line grid it used to
+  carry read as noise behind text), `.vertical-rl` (upright hanzi, ornament only).
+  `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and name and converts a number to
+  a hanzi numeral.
 
 Keep new UI reading the semantic tokens (`accent`, `fg-muted`, `surface`, `jade`) rather than
 naming colours, and the identity stays in one file.

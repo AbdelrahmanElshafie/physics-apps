@@ -1,19 +1,23 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens — the constructivist poster. Chalk-white ground, black bars, one red; square
- * corners everywhere and a hard offset shadow instead of a soft one, so panels sit on the page
- * like pasted paper. Every component reads these semantic names — the identity lives here and in
- * the chrome (Header, Sidebar, home, review).
+ * Design tokens — red, ink and paper.
+ *
+ * The first cut of this app went all-in on a constructivist poster: pure black bars, square
+ * corners, a hard offset shadow, condensed capitals on every label. It was striking and tiring —
+ * all-caps everywhere is slow to read and the black edges made every panel shout. What is left of
+ * the poster is what was actually good about it: one strong red, a condensed display face used
+ * for headings only, and big numerals. Everything else now follows the airy shape proven in
+ * spanish-tutor — soft borders, real radii, a soft shadow, sentence case.
  */
 
 @theme {
-  --color-canvas: oklch(0.97 0.004 80);
+  --color-canvas: oklch(0.973 0.006 70);
   --color-surface: oklch(1 0 0);
   --color-surface-raised: oklch(1 0 0);
-  --color-surface-sunken: oklch(0.935 0.004 80);
-  --color-border: oklch(0.84 0.005 80);
-  --color-border-strong: oklch(0.2 0.01 260);
+  --color-surface-sunken: oklch(0.945 0.008 70);
+  --color-border: oklch(0.885 0.01 60);
+  --color-border-strong: oklch(0.74 0.015 55);
 
   --color-fg: oklch(0.17 0.01 260);
   --color-fg-muted: oklch(0.4 0.01 260);
@@ -43,19 +47,18 @@
   --font-cyrillic: var(--font-golos), 'Segoe UI', sans-serif;
   --font-mono: ui-monospace, 'SF Mono', monospace;
 
-  /* Corner radius, app-wide: none. The poster is cut paper — every rounded-* utility in every
-     component resolves to a square corner, so the identity reaches the exercise cards and MDX
-     blocks, not just the chrome. (rounded-full is untouched and still draws circles.) */
-  --radius-xs: 0;
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
-  --radius-2xl: 0;
-  --radius-3xl: 0;
+  /* Corner radius, app-wide. Every rounded-* utility in every component reads these, so the
+     softened feel reaches the exercise cards and MDX blocks, not just the chrome. */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.4rem;
+  --radius-md: 0.55rem;
+  --radius-lg: 0.7rem;
+  --radius-xl: 0.9rem;
+  --radius-2xl: 1.1rem;
+  --radius-3xl: 1.4rem;
 
-  --radius-panel: 0;
-  --shadow-panel: 4px 4px 0 oklch(0.17 0.01 260);
+  --radius-panel: 1.1rem;
+  --shadow-panel: 0 1px 2px oklch(0.3 0.02 30 / 0.05), 0 10px 26px oklch(0.35 0.03 30 / 0.1);
 }
 
 @layer base {
@@ -101,17 +104,26 @@
 
 /* ---- Poster pieces -------------------------------------------------------- */
 
-/* Condensed capitals, the poster voice. */
+/* The condensed display voice. Deliberately NOT uppercase: the poster face carries the character
+   on its own, and all-caps on every label was what made the first version tiring. Reach for
+   `.poster-caps` only for a short eyebrow of two or three words. */
 .poster {
   font-family: var(--font-display);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 0.95;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
 }
 
-/* A red diagonal band. Shallow on purpose: skewed from the centre, a steeper angle lifts the
-   band's left end hundreds of pixels over a wide hero and swallows the text above it. */
+.poster-caps {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* A red diagonal band, kept shallow and confined to the hero's bottom edge: skewed from the
+   centre, a steeper angle lifts its left end hundreds of pixels over a wide hero and swallows the
+   text above it. Nothing is ever laid on top of it. */
 .band {
   background: var(--color-accent);
   transform: skewY(-3deg);
@@ -137,11 +149,10 @@
   padding-bottom: 0.5rem;
   position: relative;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  line-height: 1.15;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
 }
@@ -160,10 +171,9 @@
   margin-top: 2.25rem;
   margin-bottom: 0.7rem;
   font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
 }
@@ -179,7 +189,7 @@
 }
 
 .lesson-prose ul {
-  list-style: square;
+  list-style: disc;
 }
 
 .lesson-prose ol {
@@ -200,6 +210,7 @@
   font-size: 0.9em;
   background-color: var(--color-surface-sunken);
   border: 1px solid var(--color-border);
+  border-radius: 0.4rem;
 }
 
 .lesson-prose a {
@@ -216,7 +227,7 @@
 }
 
 /* A Russian word, front and center — a VocabCard's headline word, not body text. The condensed
-   display face at a large size is the poster lettering; its stress mark still reads clearly. */
+   display face at a large size, with the stress mark still reading clearly. */
 .word-display {
   font-family: var(--font-display);
   font-weight: 500;

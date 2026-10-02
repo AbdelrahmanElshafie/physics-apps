@@ -43,7 +43,13 @@ export interface CourseDefinition {
   readonly label: string
   /** One line about what the course actually teaches. */
   readonly blurb: string
-  /** The course's own accent, so a tile looks like the app it opens. */
+  /**
+   * The course's own accent, so a tile looks like the app it opens.
+   *
+   * Three of the five courses are warm reds in their own apps, and sampled literally the Mandarin
+   * and Russian tiles were indistinguishable side by side. Each is still that course's colour, but
+   * spread along both hue and lightness (deep red → vermilion → clay) so the grid stays scannable.
+   */
   readonly accent: string
   readonly accentSoft: string
   /** Set for a course whose own interface is right-to-left. */
@@ -59,8 +65,8 @@ export const COURSES: readonly CourseDefinition[] = [
     mark: '中',
     label: 'Mandarin',
     blurb: 'Pinyin and tones, characters, measure words, and the grammar spine.',
-    accent: 'oklch(0.6 0.19 32)',
-    accentSoft: 'oklch(0.6 0.19 32 / 0.16)',
+    accent: 'oklch(0.66 0.185 40)',
+    accentSoft: 'oklch(0.66 0.185 40 / 0.16)',
   },
   {
     dir: 'russian-tutor',
@@ -70,8 +76,8 @@ export const COURSES: readonly CourseDefinition[] = [
     mark: 'Я',
     label: 'Russian',
     blurb: 'Cyrillic, stress, the six cases, verb aspect, and real sentences.',
-    accent: 'oklch(0.62 0.22 27)',
-    accentSoft: 'oklch(0.62 0.22 27 / 0.16)',
+    accent: 'oklch(0.57 0.235 21)',
+    accentSoft: 'oklch(0.57 0.235 21 / 0.18)',
   },
   {
     dir: 'spanish-tutor',
@@ -81,8 +87,8 @@ export const COURSES: readonly CourseDefinition[] = [
     mark: 'ñ',
     label: 'Spanish',
     blurb: 'Sounds and accents, gender, ser and estar, and the verb tables.',
-    accent: 'oklch(0.66 0.16 42)',
-    accentSoft: 'oklch(0.66 0.16 42 / 0.16)',
+    accent: 'oklch(0.74 0.135 62)',
+    accentSoft: 'oklch(0.74 0.135 62 / 0.16)',
   },
   {
     dir: 'physics-instructor',

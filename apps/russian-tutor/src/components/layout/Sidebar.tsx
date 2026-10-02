@@ -7,9 +7,8 @@ import { cn } from '@/lib/utils'
 
 /**
  * The course tree: phases > modules > topics, current topic highlighted, viewed topics ticked.
- * Phases are black bars with a two-digit numeral in condensed capitals, the active topic carries
- * a thick red bar down its left edge, and a read topic gets a filled black square — the same
- * markers the home-page poster uses.
+ * Phases carry the same two-digit numeral the home page uses, and the active topic is a filled
+ * red pill — the same shape the home page uses for a lesson, so the two views read as one system.
  *
  * No prerequisite locking yet — every topic is a link, even though the syllabus already carries a
  * `requires` DAG (same schema as the physics apps). Worth adding once there is enough content that
@@ -25,7 +24,7 @@ export function Sidebar({
   activeTopicId: string
 }) {
   return (
-    <nav className="pane-scroll h-full overflow-y-auto border-r-2 border-ink bg-surface p-4">
+    <nav className="pane-scroll h-full overflow-y-auto border-r border-border bg-surface-sunken/60 p-4">
       <div className="mb-5 px-1">
         <h2 className="poster text-lg text-fg">{syllabus.title}</h2>
         {syllabus.subtitle && <p className="mt-1 text-xs leading-snug text-fg-subtle">{syllabus.subtitle}</p>}
@@ -33,21 +32,24 @@ export function Sidebar({
 
       {syllabus.phases.map((phase, index) => {
         const { number, name } = splitTitle(phase.title)
+        const ordinal = posterNumeral(number ? Number(number) : index + 1)
         return (
-          <div key={phase.id} className="mb-5">
-            <p className="poster mb-2 flex items-center gap-2 bg-ink px-2.5 py-1.5 text-xs tracking-[0.12em] text-ink-fg">
-              <span className="text-accent">{posterNumeral(number ? Number(number) : index + 1)}</span>
-              <span className="truncate">{name}</span>
+          <div key={phase.id} className="mb-6">
+            <p className="mb-2 flex items-baseline gap-2 px-1">
+              <span className="poster rounded-md bg-accent-muted px-2 py-0.5 text-[0.7rem] text-accent-strong">
+                {ordinal}
+              </span>
+              <span className="poster text-sm text-fg">{name}</span>
             </p>
             {phase.moduleIds.map((moduleId) => {
               const mod = syllabus.modules.get(moduleId)
               if (!mod) return null
               return (
                 <div key={moduleId} className="mb-3">
-                  <p className="poster px-2 py-1 text-[0.65rem] tracking-[0.15em] text-fg-subtle">
+                  <p className="px-2 py-1 text-[0.7rem] font-semibold text-fg-subtle">
                     {splitTitle(mod.title).name}
                   </p>
-                  <ul>
+                  <ul className="space-y-1">
                     {mod.topicIds.map((topicId) => {
                       const topic = syllabus.topics.get(topicId)
                       if (!topic) return null
@@ -59,20 +61,24 @@ export function Sidebar({
                           <Link
                             href={`/lesson/${syllabusLocal}/${local}`}
                             className={cn(
-                              'flex items-center gap-2.5 border-l-4 py-1.5 pl-2 pr-2 text-sm transition-colors',
+                              'flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm transition-colors',
                               active
-                                ? 'border-accent bg-accent-muted font-bold text-fg'
-                                : 'border-transparent text-fg-muted hover:bg-surface-sunken hover:text-fg',
+                                ? 'bg-accent font-semibold text-accent-fg shadow-panel'
+                                : 'text-fg-muted hover:bg-surface hover:text-fg',
                             )}
                           >
                             <span
                               className={cn(
-                                'flex size-3 shrink-0 items-center justify-center border-2',
-                                viewed ? 'border-ink bg-ink text-ink-fg' : active ? 'border-accent' : 'border-border-strong/60',
+                                'flex size-4 shrink-0 items-center justify-center rounded-full border',
+                                active
+                                  ? 'border-accent-fg/60'
+                                  : viewed
+                                    ? 'border-success bg-success text-accent-fg'
+                                    : 'border-border-strong',
                               )}
                               aria-hidden
                             >
-                              {viewed && <Check className="size-2" strokeWidth={4} />}
+                              {viewed && <Check className="size-3" strokeWidth={3} />}
                             </span>
                             <span className="truncate">{topic.title}</span>
                           </Link>

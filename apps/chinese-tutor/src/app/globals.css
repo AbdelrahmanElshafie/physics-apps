@@ -1,10 +1,14 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens — ink and paper. A warm rice-paper canvas, near-black ink for text, vermilion
- * (the colour of a name seal) as the single accent, jade for "done"; square corners and the
- * faintest of shadows, so panels read as sheets laid on a desk rather than floating cards. Every
- * component reads these semantic names — the identity lives here and in the chrome.
+ * Design tokens — warm paper and vermilion. A rice-paper canvas, ink text, vermilion (the colour
+ * of a name seal) as the single accent and jade for "done".
+ *
+ * The first cut of this app chased the look of a printed book — square corners, a laid-paper
+ * texture, dense dotted-leader contents, small grey type — and it read as a document rather than
+ * something you want to open. It is now built on the same airy shape as spanish-tutor: generous
+ * radii, soft shadows, large headings and scannable pills. The Song serif, the seal and the 卷
+ * numbering are what keep it Chinese; the layout is the one that was proven to work.
  */
 
 @theme {
@@ -44,19 +48,18 @@
   --font-hanzi: var(--font-noto-serif-sc), 'Songti SC', 'SimSun', serif;
   --font-mono: ui-monospace, 'SF Mono', monospace;
 
-  /* Corner radius, app-wide. Near-square: a printed page has no rounded corners, but a hairline
-     softening keeps buttons from looking like 1995. Every rounded-* utility in every component
-     reads these, so the identity reaches the exercise cards and MDX blocks, not just the chrome. */
-  --radius-xs: 0.1rem;
-  --radius-sm: 0.15rem;
-  --radius-md: 0.2rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.3rem;
-  --radius-2xl: 0.35rem;
-  --radius-3xl: 0.4rem;
+  /* Corner radius, app-wide. Generous: every rounded-* utility in every component reads these, so
+     the soft feel reaches the exercise cards and MDX blocks, not just the chrome. */
+  --radius-xs: 0.3rem;
+  --radius-sm: 0.45rem;
+  --radius-md: 0.6rem;
+  --radius-lg: 0.8rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.2rem;
+  --radius-3xl: 1.5rem;
 
-  --radius-panel: 0.3rem;
-  --shadow-panel: 0 1px 0 oklch(0.3 0.02 60 / 0.06), 0 6px 18px oklch(0.3 0.03 60 / 0.07);
+  --radius-panel: 1.25rem;
+  --shadow-panel: 0 1px 2px oklch(0.35 0.03 60 / 0.05), 0 10px 28px oklch(0.4 0.04 60 / 0.1);
 }
 
 @layer base {
@@ -123,23 +126,17 @@
   box-shadow: inset 0 0 0 1.5px oklch(0.99 0.005 88 / 0.55), inset 0 0 0 3px var(--color-accent);
 }
 
-/* The double rule a printed page uses under a running head. */
+/* The rule under a running head — a hairline of ink over a vermilion thread. */
 .book-rule {
-  border-bottom: 1px solid var(--color-fg);
-  box-shadow: 0 2px 0 var(--color-border-strong);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 1.5px 0 var(--color-accent-muted);
 }
 
-/* Vertical text for the home-page spine. Hanzi stand upright, one character per line, the way a
-   book's spine sets them; Latin rotates a quarter turn instead, because upright Latin stacks one
-   letter per line and is unreadable. */
+/* Vertical hanzi, upright one character per line, the way a book's spine sets them. Used once,
+   as an ornament beside the hero — never for anything the reader has to read in sequence. */
 .vertical-rl {
   writing-mode: vertical-rl;
   text-orientation: upright;
-}
-
-.vertical-rl-latin {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
 }
 
 /* ---- Reading column ------------------------------------------------------- */

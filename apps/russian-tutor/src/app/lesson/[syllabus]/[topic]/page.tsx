@@ -56,7 +56,7 @@ export default async function LessonPage({ params }: PageProps) {
             <div className="mx-auto max-w-3xl px-6 py-8">
               {lesson ? (
                 <>
-                  <p className="poster mb-2 text-xs tracking-[0.25em] text-accent">
+                  <p className="poster-caps mb-2 text-xs text-accent">
                     {syllabus.modules.get(syllabus.topics.get(topicId)!.moduleId)?.title}
                   </p>
                   <h1 className="poster mb-3 text-4xl text-fg">{lesson.frontmatter.title}</h1>
@@ -77,7 +77,7 @@ export default async function LessonPage({ params }: PageProps) {
 
                   {exercises.length > 0 && (
                     <section className="mt-12 border-t border-border pt-8">
-                      <h2 className="poster mb-1 text-2xl text-fg">Упражнения <span className="text-fg-subtle">· Exercises</span></h2>
+                      <h2 className="poster mb-1 text-2xl text-fg">Упражнения <span className="text-base font-normal text-fg-subtle">· Exercises</span></h2>
                       <p className="mb-6 text-sm text-fg-subtle">
                         Multiple-choice and typed answers are checked instantly.
                       </p>
