@@ -1,0 +1,107 @@
+# Review cards: the numbers themselves, plus the three numeral-case brackets.
+
+schemaVersion: 1
+topic: numbers-0-20
+cards:
+  - id: num-1
+    kind: word
+    topicId: russian:numbers-0-20
+    front: один
+    frontPronunciation: оди́н
+    back: 1 — takes a nominative singular noun, and agrees in gender (одна / одно)
+
+  - id: num-2
+    kind: word
+    topicId: russian:numbers-0-20
+    front: два
+    back: 2 — два with masculine and neuter, две with feminine; takes a genitive singular noun
+    exerciseIds: [nm8]
+
+  - id: num-4
+    kind: word
+    topicId: russian:numbers-0-20
+    front: четыре
+    frontPronunciation: четы́ре
+    back: "4"
+
+  - id: num-5
+    kind: word
+    topicId: russian:numbers-0-20
+    front: пять
+    back: 5 — from here up, the noun goes into the genitive plural
+    exerciseIds: [nm1]
+
+  - id: num-8
+    kind: word
+    topicId: russian:numbers-0-20
+    front: восемь
+    frontPronunciation: во́семь
+    back: "8"
+    exerciseIds: [nm2]
+
+  - id: num-9
+    kind: word
+    topicId: russian:numbers-0-20
+    front: девять
+    frontPronunciation: де́вять
+    back: "9"
+
+  - id: num-10
+    kind: word
+    topicId: russian:numbers-0-20
+    front: десять
+    frontPronunciation: де́сять
+    back: "10"
+
+  - id: num-14
+    kind: word
+    topicId: russian:numbers-0-20
+    front: четырнадцать
+    frontPronunciation: четы́рнадцать
+    back: 14 — the one teen that keeps its stress back on четы́-, not on -на́дцать
+    exerciseIds: [nm4]
+
+  - id: num-15
+    kind: word
+    topicId: russian:numbers-0-20
+    front: пятнадцать
+    frontPronunciation: пятна́дцать
+    back: "15"
+
+  - id: num-20
+    kind: word
+    topicId: russian:numbers-0-20
+    front: двадцать
+    frontPronunciation: два́дцать
+    back: "20"
+
+  - id: num-odin-stol
+    kind: word
+    topicId: russian:numbers-0-20
+    front: один стол
+    frontPronunciation: оди́н стол
+    back: one table — 1 leaves the noun in the nominative singular
+
+  - id: num-dva-stola
+    kind: word
+    topicId: russian:numbers-0-20
+    front: два стола
+    frontPronunciation: два стола́
+    back: two tables — 2, 3 and 4 put the noun in the genitive singular
+    exerciseIds: [nm5]
+
+  - id: num-pyat-stolov
+    kind: word
+    topicId: russian:numbers-0-20
+    front: пять столов
+    frontPronunciation: пять столо́в
+    back: five tables — 5 through 20 put the noun in the genitive plural
+    exerciseIds: [nm6]
+
+  - id: num-tri-knigi
+    kind: word
+    topicId: russian:numbers-0-20
+    front: три книги
+    frontPronunciation: три кни́ги
+    back: three books — genitive singular after 3, even though English uses a plural here
+    exerciseIds: [nm7]

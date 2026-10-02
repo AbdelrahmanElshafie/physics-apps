@@ -1,0 +1,108 @@
+# Review cards: days, months, and the hour — the bracket rule applied to час.
+
+schemaVersion: 1
+topic: dates-and-time
+cards:
+  - id: dt-ponedelnik
+    kind: word
+    topicId: russian:dates-and-time
+    front: понедельник
+    frontPronunciation: понеде́льник
+    back: Monday — day one of the Russian week
+    exerciseIds: [dt1]
+
+  - id: dt-vtornik
+    kind: word
+    topicId: russian:dates-and-time
+    front: вторник
+    frontPronunciation: вто́рник
+    back: Tuesday — from второ́й, "second"
+    exerciseIds: [dt2]
+
+  - id: dt-sreda
+    kind: word
+    topicId: russian:dates-and-time
+    front: среда
+    frontPronunciation: среда́
+    back: Wednesday — from "middle", the middle of the week
+
+  - id: dt-chetverg
+    kind: word
+    topicId: russian:dates-and-time
+    front: четверг
+    frontPronunciation: четве́рг
+    back: Thursday — from четы́ре, "four"
+
+  - id: dt-pyatnitsa
+    kind: word
+    topicId: russian:dates-and-time
+    front: пятница
+    frontPronunciation: пя́тница
+    back: Friday — from пять, "five"
+
+  - id: dt-subbota
+    kind: word
+    topicId: russian:dates-and-time
+    front: суббота
+    frontPronunciation: суббо́та
+    back: Saturday
+
+  - id: dt-voskresenye
+    kind: word
+    topicId: russian:dates-and-time
+    front: воскресенье
+    frontPronunciation: воскресе́нье
+    back: Sunday — the last day of the Russian week, not the first
+
+  - id: dt-v-ponedelnik
+    kind: word
+    topicId: russian:dates-and-time
+    front: в понедельник
+    frontPronunciation: в понеде́льник
+    back: on Monday — в + accusative (masculine inanimate, so nothing visibly changes)
+    exerciseIds: [dt4]
+
+  - id: dt-yanvar
+    kind: word
+    topicId: russian:dates-and-time
+    front: январь
+    frontPronunciation: янва́рь
+    back: January — lowercase in Russian, unless it starts a sentence
+    exerciseIds: [dt3]
+
+  - id: dt-sentyabr
+    kind: word
+    topicId: russian:dates-and-time
+    front: сентябрь
+    frontPronunciation: сентя́брь
+    back: September
+
+  - id: dt-chas
+    kind: word
+    topicId: russian:dates-and-time
+    front: час
+    back: hour; o'clock
+    exerciseIds: [dt5]
+
+  - id: dt-kotoryy-chas
+    kind: sentence
+    topicId: russian:dates-and-time
+    front: Который час?
+    frontPronunciation: Кото́рый час?
+    back: What time is it? (lit. "which hour?")
+
+  - id: dt-dva-chasa
+    kind: sentence
+    topicId: russian:dates-and-time
+    front: Сейчас два часа.
+    frontPronunciation: Сейча́с два часа́.
+    back: It's two o'clock — the 2–4 bracket, so час takes the genitive singular
+    exerciseIds: [dt6]
+
+  - id: dt-pyat-chasov
+    kind: sentence
+    topicId: russian:dates-and-time
+    front: Сейчас пять часов.
+    frontPronunciation: Сейча́с пять часо́в.
+    back: It's five o'clock — the 5–20 bracket, so час takes the genitive plural
+    exerciseIds: [dt7, dt8]

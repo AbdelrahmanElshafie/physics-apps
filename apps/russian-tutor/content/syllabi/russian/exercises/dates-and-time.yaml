@@ -1,0 +1,111 @@
+# Exercises: dates and telling the time.
+
+schemaVersion: 1
+topic: dates-and-time
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: dt1
+    set: A
+    label: Q1
+    kind: text
+    prompt: Type the Russian for Monday.
+    check: { type: exact, value: понедельник }
+    solution: понедельник.
+
+  - id: dt2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: вторник ("second") is Tuesday and четверг ("four") is Thursday. What does that tell you?
+    choices:
+      - { id: a, label: 'The Russian week starts on Monday, so Monday is day one' }
+      - { id: b, label: 'The Russian week starts on Sunday, like the American one' }
+      - { id: c, label: 'The names are borrowed and the numbers are coincidence' }
+      - { id: d, label: 'Russian counts the days backwards' }
+    check: { type: exact, value: a }
+    solution: The numbering only works counting from Monday as day one — and by Russian convention the week does start on Monday, making Sunday the last day.
+
+  - id: dt3
+    set: A
+    label: Q3
+    kind: truefalse
+    prompt: 'True or false — days of the week and months are capitalised in Russian, the same way they are in English.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What happened to ру́сский, the nationality adjective, back in the introducing-yourself lesson?' }
+    solution: >-
+      False. понедельник and январь stay lowercase unless they start a sentence. Russian
+      capitalises much less than English — days, months and nationality adjectives are all
+      lowercase.
+
+  - id: dt4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: How do you say "on Monday"?
+    choices:
+      - { id: a, label: 'на понедельник' }
+      - { id: b, label: 'в понедельник' }
+      - { id: c, label: 'о понедельнике' }
+      - { id: d, label: 'понедельника' }
+    check: { type: exact, value: b }
+    solution: в + accusative. понедельник is masculine inanimate, so its accusative is identical to the nominative and nothing visibly changes.
+
+  - id: dt5
+    set: B
+    label: Q5
+    kind: text
+    prompt: Type the Russian word for "hour" / "o'clock".
+    check: { type: exact, value: час }
+    solution: час.
+
+  - id: dt6
+    set: C
+    label: Q6
+    kind: multichoice
+    prompt: How do you say "It's three o'clock"?
+    choices:
+      - { id: a, label: 'Сейчас три час' }
+      - { id: b, label: 'Сейчас три часа' }
+      - { id: c, label: 'Сейчас три часов' }
+      - { id: d, label: 'Сейчас три часы' }
+    check: { type: exact, value: b }
+    solution: Сейчас три часа — 3 falls in the 2–4 bracket, so час takes the genitive singular, exactly as стол became стола after два.
+
+  - id: dt7
+    set: C
+    label: Q7
+    kind: text
+    prompt: 'Complete: Сейчас пять ___ (час). Which form does час take after 5?'
+    check: { type: exact, value: часов }
+    hint: 'Which bracket does 5 fall into?'
+    solution: часов — genitive plural, because 5 starts the 5–20 bracket.
+
+  - id: dt8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: Why does час appear as час, часа and часов depending on the time?
+    choices:
+      - { id: a, label: 'They are three unrelated words that have to be memorised separately' }
+      - { id: b, label: 'It is one noun obeying the same numeral-bracket rule as any other noun after a number' }
+      - { id: c, label: 'The form changes with the time of day' }
+      - { id: d, label: 'Older speakers use one form, younger speakers another' }
+    check: { type: exact, value: b }
+    solution: It is a single noun following the 1 / 2–4 / 5-and-up brackets from the numbers lesson — nothing about time-telling specifically.
+
+  - id: dt9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: what does telling the time in Russian actually require you to know, beyond
+      the numbers and the word час?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Is there a rule specific to clocks here, or one borrowed from somewhere you already learned?' }
+    solution: >-
+      Essentially nothing new. Time-telling has no rule of its own — it reuses the numeral-case
+      brackets from the numbers lesson, with час as the noun being counted: 1 takes the bare
+      nominative (and the number is dropped entirely), 2–4 take the genitive singular часа, and
+      5 and up take the genitive plural часов. Recognising that means the whole topic collapses
+      into vocabulary plus one rule already learned.

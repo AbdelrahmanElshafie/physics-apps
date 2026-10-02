@@ -1,0 +1,64 @@
+# Review cards: Как дела? and the standard answers.
+
+schemaVersion: 1
+topic: how-are-you
+cards:
+  - id: hay-kak-dela
+    kind: sentence
+    topicId: russian:how-are-you
+    front: Как дела?
+    frontPronunciation: Как дела́?
+    back: How are things? / How are you? — literally "how [are] things", with no verb
+    exerciseIds: [hay1, hay2]
+
+  - id: hay-otlichno
+    kind: word
+    topicId: russian:how-are-you
+    front: Отлично!
+    frontPronunciation: Отли́чно!
+    back: Excellent!
+
+  - id: hay-horosho
+    kind: word
+    topicId: russian:how-are-you
+    front: Хорошо.
+    frontPronunciation: Хорошо́.
+    back: Good / well.
+    exerciseIds: [hay3]
+
+  - id: hay-normalno
+    kind: word
+    topicId: russian:how-are-you
+    front: Нормально.
+    frontPronunciation: Норма́льно.
+    back: Fine / OK — an ordinary positive answer, not lukewarm
+    exerciseIds: [hay4]
+
+  - id: hay-neplokho
+    kind: word
+    topicId: russian:how-are-you
+    front: Неплохо.
+    frontPronunciation: Непло́хо.
+    back: Not bad. (не + плохо — the negation particle again)
+    exerciseIds: [hay5]
+
+  - id: hay-plokho
+    kind: word
+    topicId: russian:how-are-you
+    front: Плохо.
+    frontPronunciation: Пло́хо.
+    back: Bad.
+
+  - id: hay-a-ty
+    kind: word
+    topicId: russian:how-are-you
+    front: А ты?
+    back: And you? (informal — А вы? is the formal version)
+    exerciseIds: [hay6]
+
+  - id: hay-horosho-spasibo-a-ty
+    kind: sentence
+    topicId: russian:how-are-you
+    front: Хорошо, спасибо. А ты?
+    frontPronunciation: Хорошо́, спаси́бо. А ты?
+    back: Good, thanks. And you?

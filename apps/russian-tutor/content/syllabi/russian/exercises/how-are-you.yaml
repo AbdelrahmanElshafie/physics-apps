@@ -1,0 +1,101 @@
+# Exercises: asking how someone is.
+
+schemaVersion: 1
+topic: how-are-you
+intro: Eight questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: hay1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: Как дела? literally means...
+    choices:
+      - { id: a, label: 'How do you do?' }
+      - { id: b, label: 'How [are] things/affairs?' }
+      - { id: c, label: 'What are you doing?' }
+      - { id: d, label: 'Where are you?' }
+    check: { type: exact, value: b }
+    solution: дела is the plural of дело ("matter, affair") — the phrase is literally "how [are] things", with no verb at all.
+
+  - id: hay2
+    set: A
+    label: Q2
+    kind: truefalse
+    prompt: 'True or false — Как дела? contains a verb meaning "are".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Which tense drops "to be" entirely in Russian?' }
+    solution: >-
+      False. There is no verb in the phrase at all — the present tense has no form of быть, so
+      Как and дела simply sit next to each other.
+
+  - id: hay3
+    set: A
+    label: Q3
+    kind: text
+    prompt: Type the Russian for "good / well" as an answer to Как дела?
+    check: { type: exact, value: хорошо }
+    solution: Хорошо — the same adverb that appeared in the stress lesson as an example of akanye.
+
+  - id: hay4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: What does Нормально mean as an answer to Как дела?
+    choices:
+      - { id: a, label: 'Something lukewarm and slightly negative' }
+      - { id: b, label: 'Fine / OK — a perfectly ordinary positive answer' }
+      - { id: c, label: 'Terrible' }
+      - { id: d, label: 'It is not a valid answer' }
+    check: { type: exact, value: b }
+    solution: Нормально is a genuinely common and positive answer, despite "normal" sounding lukewarm when translated literally.
+
+  - id: hay5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: Неплохо ("not bad") is built from which two pieces?
+    choices:
+      - { id: a, label: 'не (the negation particle) + плохо (bad)' }
+      - { id: b, label: 'нет (no) + плохо' }
+      - { id: c, label: 'It is a single word with no internal structure' }
+      - { id: d, label: 'ни + плохо' }
+    check: { type: exact, value: a }
+    solution: 'It is не + плохо — the same negation particle from the negation lesson, here fused onto an adverb.'
+
+  - id: hay6
+    set: C
+    label: Q6
+    kind: text
+    prompt: 'How do you return the question informally? Type the two Russian words. ("And you?")'
+    check: { type: exact, value: а ты }
+    solution: А ты? — А means "and" here, pivoting the question back. The formal version is А вы?
+
+  - id: hay7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: A close friend asks Как дела? and things genuinely are not going well. What is culturally normal?
+    choices:
+      - { id: a, label: 'Always answer Хорошо — anything else is rude' }
+      - { id: b, label: 'Answer honestly, including Плохо and a reason' }
+      - { id: c, label: 'Say nothing' }
+      - { id: d, label: 'Switch to the formal вы' }
+    check: { type: exact, value: b }
+    solution: Among friends the question is meant literally and answered honestly — a reflexive "fine" where things clearly aren't can read as deflecting.
+
+  - id: hay8
+    set: D
+    label: Q8
+    kind: text
+    prompt: >-
+      In your own words: how does Как дела? differ in function from the English "How are you?",
+      and why does that matter for how you answer it?
+    check: { type: tutor }
+    explain: { required: true, hint: 'In English, is "How are you?" always a real question expecting real information?' }
+    solution: >-
+      English "How are you?" has largely become a greeting formula — a slot where "Fine, thanks"
+      is expected regardless of the truth. Как дела? stayed closer to a literal question: among
+      friends it invites a real answer, including a negative one with an explanation. Answering it
+      with a reflexive positive when things are visibly wrong reads as evasive rather than polite,
+      which is the opposite of how the same move lands in English.

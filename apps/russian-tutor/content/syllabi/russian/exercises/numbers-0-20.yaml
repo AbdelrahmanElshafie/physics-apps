@@ -1,0 +1,112 @@
+# Exercises: numbers 0 to 20.
+
+schemaVersion: 1
+topic: numbers-0-20
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: nm1
+    set: A
+    label: Q1
+    kind: text
+    prompt: Type the Russian for 5.
+    check: { type: exact, value: пять }
+    solution: пять.
+
+  - id: nm2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the Russian for 8.
+    check: { type: exact, value: восемь }
+    solution: восемь.
+
+  - id: nm3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: What does the ending -надцать in the teens come from?
+    choices:
+      - { id: a, label: 'A worn-down old phrase meaning "on ten"' }
+      - { id: b, label: 'The word for "hundred"' }
+      - { id: c, label: 'A borrowing from German' }
+      - { id: d, label: 'Nothing — it is meaningless' }
+    check: { type: exact, value: a }
+    solution: '-надцать is a worn-down form of an old phrase meaning "on ten", which is why 11–19 are transparently unit + надцать.'
+
+  - id: nm4
+    set: A
+    label: Q4
+    kind: multichoice
+    prompt: Which teen keeps its stress further back than all the others?
+    choices:
+      - { id: a, label: пятнадцать }
+      - { id: b, label: четырнадцать }
+      - { id: c, label: семнадцать }
+      - { id: d, label: девятнадцать }
+    check: { type: exact, value: b }
+    solution: четы́рнадцать keeps the stress on четы́-, where четы́ре had it, while the others stress -на́дцать.
+
+  - id: nm5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: 'After the numbers 2, 3 and 4, what case does the following noun take?'
+    choices:
+      - { id: a, label: 'Nominative singular' }
+      - { id: b, label: 'Genitive singular' }
+      - { id: c, label: 'Genitive plural' }
+      - { id: d, label: 'Accusative plural' }
+    check: { type: exact, value: b }
+    solution: '2, 3 and 4 take the genitive singular — два стола, три книги, четыре окна.'
+
+  - id: nm6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: 'After the numbers 5 through 20, what case does the following noun take?'
+    choices:
+      - { id: a, label: 'Nominative singular' }
+      - { id: b, label: 'Genitive singular' }
+      - { id: c, label: 'Genitive plural' }
+      - { id: d, label: 'Nominative plural' }
+    check: { type: exact, value: c }
+    solution: '5–20 take the genitive plural — пять столов, десять книг, двадцать окон.'
+
+  - id: nm7
+    set: B
+    label: Q7
+    kind: text
+    prompt: 'Complete: три ___ (книга). Which form does книга take after 3?'
+    check: { type: exact, value: книги }
+    hint: 'Three falls in the 2–4 bracket.'
+    solution: книги — genitive singular, because 3 is in the 2–4 bracket. That English says "three books" in the plural is irrelevant here.
+
+  - id: nm8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: What is the difference between два and две?
+    choices:
+      - { id: a, label: 'две is formal, два is informal' }
+      - { id: b, label: 'две goes with feminine nouns; два with masculine and neuter' }
+      - { id: c, label: 'две means 2, два means 12' }
+      - { id: d, label: 'They are interchangeable' }
+    check: { type: exact, value: b }
+    solution: 'два and один are the only numbers in this range that agree in gender: две книги but два стола and два окна.'
+
+  - id: nm9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why is "three books is plural in English, so the Russian noun should be
+      plural too" the wrong way to think about три книги?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Is the Russian noun form being chosen by how many things there are, or by which bracket the number falls into?' }
+    solution: >-
+      Russian is not asking "how many things are there?" and then marking plural — it is asking
+      "which bracket is the number in?" and assigning a case accordingly. 2–4 take the genitive
+      singular regardless of the fact that more than one object is involved, and 5 and up switch to
+      the genitive plural. The grammar is tracking the numeral, not the real-world count, which is
+      why importing English's singular/plural intuition gives the wrong answer.

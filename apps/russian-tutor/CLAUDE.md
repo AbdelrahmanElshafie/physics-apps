@@ -111,14 +111,17 @@ content/syllabi/<id>/
   review/<topicId>.yaml    optional — flashcard/quiz cards for that topic (see below)
 ```
 
-The `russian` syllabus (`content/syllabi/russian/syllabus.yaml`) is a full five-phase roadmap —
-21 topics, ending with word order and real sentences. **Every structural topic is now written**:
-Phase 1's foundations (`cyrillic-alphabet`, `stress-and-vowel-reduction`, `gender-of-nouns`),
-Phase 2's `greetings` and `introducing-yourself`, all six Phase 3 case-system topics, all of
-Phase 4's verb system, and all of Phase 5 (`word-order`, `negation`, `questions-recap`). Only
-three vocabulary-breadth topics are left unwritten — `how-are-you`, `numbers-0-20`, and
-`dates-and-time` — each of which shows "this lesson hasn't been written yet" until its `.mdx`
-file exists.
+The `russian` syllabus (`content/syllabi/russian/syllabus.yaml`) is a full five-phase roadmap of
+21 topics — and **all 21 now have a lesson, exercises, and a review deck**. `pnpm validate:content`
+reports "0 topic(s) have no lesson written yet"; treat that line as the regression check when
+touching content.
+
+Because the roadmap is complete, adding content now means either deepening an existing topic or
+extending the syllabus itself — and extending it means editing `syllabus.yaml` first (a topic
+needs an id, a module, prerequisites and a summary before its `.mdx` is reachable), not dropping
+a lesson file in and hoping. Obvious candidates if the course is extended: adjectives in full
+(only touched in passing by `word-order` and `introducing-yourself`), numbers past 20, plurals
+beyond the nominative, and verbs of motion.
 
 ### Content rules
 
@@ -143,11 +146,11 @@ along one spine: cases free up word order, which is why questions need no invers
 negation can simply agree across the sentence. **Keep that spine intact when editing** — a change
 to how one of those lessons frames the case system has knock-on claims in four other files.
 
-What's left (`how-are-you`, `numbers-0-20`, `dates-and-time`) is vocabulary breadth, not new
-structure, and can be written in any order. The one structural thing those topics do touch is
-number–case agreement (оди́н/два/пять each govern a noun differently), which `numbers-0-20`'s own
-syllabus summary already flags — treat that as the real content of that lesson rather than a
-counting drill.
+The same spine runs through the nominally vocabulary-only topics, which is what keeps them from
+being word lists: `numbers-0-20` is really about the numeral-case brackets (1 → nominative
+singular, 2–4 → genitive singular, 5–20 → genitive plural), and `dates-and-time` is mostly that
+same rule applied to час (час / часа́ / часо́в). If either is ever rewritten, that rule is the
+content — the counting is the excuse for teaching it.
 
 ## Architecture
 
