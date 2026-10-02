@@ -5,6 +5,10 @@ is genuinely subject-agnostic and diverge everywhere else.
 
 ```
 apps/
+  hub/                   The launcher: one screen listing every course, with live progress, a
+                         deep "continue where you left off" link per course, and the command to
+                         start any server that is down. Reads the others off disk; imports no
+                         app's code. See apps/hub/CLAUDE.md.
   physics-instructor/   Research-level nuclear/atomic physics, English + Arabic, Claude Code
                          tutor bridge. See apps/physics-instructor/CLAUDE.md.
   physics-eg/            Egyptian 3rd-secondary physics, Arabic only, drag-and-build circuit
@@ -89,10 +93,18 @@ names a colour or a radius directly is what makes the next app expensive.
 
 ```bash
 pnpm install               # once, from the root — installs every workspace project
-pnpm --filter <name> dev   # e.g. physics-instructor, physics-eg, chinese-tutor, russian-tutor
+pnpm dev                   # the hub alone, on :3000 — the front door
+pnpm dev:all               # the hub and all five courses, in parallel
+pnpm --filter <name> dev   # one app: hub, physics-instructor, physics-eg, chinese-tutor, …
 pnpm -r test                # every project's tests
 pnpm -r lint && pnpm -r typecheck
 ```
 
-Ports: physics-instructor on 3100, physics-eg on 3200, chinese-tutor on 3300, russian-tutor on
-3400, spanish-tutor on 3500 — chosen so all five can run at once.
+Ports: hub on 3000, physics-instructor on 3100, physics-eg on 3200, chinese-tutor on 3300,
+russian-tutor on 3400, spanish-tutor on 3500 — chosen so all six can run at once.
+
+**A new app must register itself with the hub**, or it exists but nothing links to it: add one
+entry to `COURSES` in `apps/hub/src/lib/courses.ts` (directory, port, syllabus id, native and
+English names, blurb, mark, accent pair). The hub reads everything else — title, topic count,
+which lessons are written, what has been read — off that app's own `syllabus.yaml`,
+`lessons/*.mdx` and `data/events.jsonl`, so nothing else is needed and nothing else can drift.
