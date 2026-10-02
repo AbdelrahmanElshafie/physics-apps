@@ -204,7 +204,7 @@ export function PracticeEditor({
             onClick={() => void askForReview()}
             disabled={reviewing}
             aria-label="Send for review"
-            className="rounded-lg bg-accent p-2.5 text-canvas transition-opacity hover:opacity-90 disabled:opacity-50"
+            className="rounded-lg bg-accent p-2.5 text-accent-fg transition-opacity hover:opacity-90 disabled:opacity-50"
           >
             <Send className="size-4" aria-hidden />
           </button>

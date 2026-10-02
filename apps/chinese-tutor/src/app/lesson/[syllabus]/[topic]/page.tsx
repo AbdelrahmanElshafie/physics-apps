@@ -56,10 +56,10 @@ export default async function LessonPage({ params }: PageProps) {
             <div className="mx-auto max-w-3xl px-6 py-8">
               {lesson ? (
                 <>
-                  <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-accent">
+                  <p className="mb-2 text-xs font-medium tracking-[0.2em] text-accent">
                     {syllabus.modules.get(syllabus.topics.get(topicId)!.moduleId)?.title}
                   </p>
-                  <h1 className="mb-2 text-2xl font-bold text-fg">{lesson.frontmatter.title}</h1>
+                  <h1 className="mb-2 font-display text-3xl font-black leading-tight text-fg">{lesson.frontmatter.title}</h1>
                   {lesson.frontmatter.summary && (
                     <p className="mb-6 text-sm leading-relaxed text-fg-muted">{lesson.frontmatter.summary}</p>
                   )}
@@ -77,7 +77,7 @@ export default async function LessonPage({ params }: PageProps) {
 
                   {exercises.length > 0 && (
                     <section className="mt-12 border-t border-border pt-8">
-                      <h2 className="mb-1 text-lg font-semibold text-fg">Exercises</h2>
+                      <h2 className="mb-1 font-display text-2xl font-bold text-fg">练习题 <span className="text-base font-normal text-fg-subtle">Exercises</span></h2>
                       <p className="mb-6 text-sm text-fg-subtle">
                         Multiple-choice and typed answers are checked instantly.
                       </p>

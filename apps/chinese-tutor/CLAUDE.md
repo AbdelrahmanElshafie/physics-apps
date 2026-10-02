@@ -26,6 +26,32 @@ pnpm workspace, sharing what is genuinely subject-agnostic via `packages/`.
   before it. A written sentence has no "previous line" to be consistent with; it just needs a
   human read. So `/practice` is free writing + "ask your tutor", with no local verdict.
 
+## Visual identity — ink and paper
+
+Each language app in this workspace looks like a different product on purpose; they were clones,
+and three identical sites with the labels swapped is not a course, it is a template. This one is a
+**printed Chinese book**.
+
+- **Palette** (`src/app/globals.css` `@theme`): warm rice-paper canvas, near-black ink, a single
+  vermilion accent (the colour of a name seal), jade for "done". Square-ish corners —
+  `--radius-*` is overridden app-wide to 0.1–0.4rem, so every `rounded-*` utility in every
+  component, including the exercise cards and MDX blocks, resolves near-square without those
+  files naming a radius.
+- **Type**: Noto Sans SC for interface and running text; **Noto Serif SC** (a Song face) as
+  `--font-display` for every heading and for `.word-display`, the hanzi a `VocabCard` puts front
+  and centre. The serif is what makes characters read as characters rather than UI labels.
+- **Chrome**: `Header` is a running head with a 中 seal and the double rule a printed page carries
+  under its header. The home page is a 目录 (table of contents): a vertical spine on the left,
+  phases as 卷一/卷二, every lesson a line numbered in hanzi numerals with dotted leaders out to
+  its reading time, marked 已读 / 未写. `Sidebar` repeats those cues in miniature.
+- **Helpers**: `.paper` (faint laid-paper grid), `.seal`, `.book-rule`, `.vertical-rl` (upright
+  hanzi) and `.vertical-rl-latin` (rotated Latin — upright Latin stacks one letter per line and
+  is unreadable). `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and name and
+  converts a number to a hanzi numeral.
+
+Keep new UI reading the semantic tokens (`accent`, `fg-muted`, `surface`, `jade`) rather than
+naming colours, and the identity stays in one file.
+
 ## Watching a student write, not just grading multiple choice
 
 Same two mechanisms as the physics apps, via `@physics/tutor-bridge` (the npm scope is a

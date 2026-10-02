@@ -180,7 +180,7 @@ export function ExerciseCard({
           type="button"
           onClick={submit}
           disabled={!canSubmit}
-          className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-canvas transition disabled:opacity-40"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-fg transition disabled:opacity-40"
         >
           {pending ? 'Checking...' : 'Check'}
         </button>

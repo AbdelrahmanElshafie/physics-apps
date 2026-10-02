@@ -44,7 +44,7 @@ export function TutorSidePanel() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open chat with your tutor"
-        className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-canvas shadow-panel transition hover:opacity-90"
+        className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-accent-fg shadow-panel transition hover:opacity-90"
       >
         <MessageCircle className="size-4" aria-hidden />
         Ask your tutor
@@ -124,7 +124,7 @@ export function TutorSidePanel() {
           onClick={send}
           disabled={pending || draft.trim().length === 0}
           aria-label="Send"
-          className="flex shrink-0 items-center justify-center rounded-lg bg-accent p-2.5 text-canvas transition-opacity hover:opacity-90 disabled:opacity-50"
+          className="flex shrink-0 items-center justify-center rounded-lg bg-accent p-2.5 text-accent-fg transition-opacity hover:opacity-90 disabled:opacity-50"
         >
           <Send className="size-4" aria-hidden />
         </button>

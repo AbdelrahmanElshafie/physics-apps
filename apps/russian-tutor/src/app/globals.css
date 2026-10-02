@@ -1,43 +1,61 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens — the same warm, light palette as the other apps in this workspace: a bright,
- * approachable study surface rather than a developer-tool dark theme, with warm-tinted neutrals
- * and a livelier accent than a dashboard blue.
+ * Design tokens — the constructivist poster. Chalk-white ground, black bars, one red; square
+ * corners everywhere and a hard offset shadow instead of a soft one, so panels sit on the page
+ * like pasted paper. Every component reads these semantic names — the identity lives here and in
+ * the chrome (Header, Sidebar, home, review).
  */
 
 @theme {
-  --color-canvas: oklch(0.975 0.008 80);
+  --color-canvas: oklch(0.97 0.004 80);
   --color-surface: oklch(1 0 0);
-  --color-surface-raised: oklch(0.99 0.005 80);
-  --color-surface-sunken: oklch(0.955 0.009 80);
-  --color-border: oklch(0.9 0.011 75);
-  --color-border-strong: oklch(0.78 0.016 75);
+  --color-surface-raised: oklch(1 0 0);
+  --color-surface-sunken: oklch(0.935 0.004 80);
+  --color-border: oklch(0.84 0.005 80);
+  --color-border-strong: oklch(0.2 0.01 260);
 
-  --color-fg: oklch(0.27 0.025 265);
-  --color-fg-muted: oklch(0.46 0.022 265);
-  --color-fg-subtle: oklch(0.58 0.018 265);
+  --color-fg: oklch(0.17 0.01 260);
+  --color-fg-muted: oklch(0.4 0.01 260);
+  --color-fg-subtle: oklch(0.55 0.01 260);
 
-  --color-accent: oklch(0.56 0.19 262);
-  --color-accent-strong: oklch(0.47 0.2 262);
-  --color-accent-muted: oklch(0.93 0.045 262);
+  /* the red */
+  --color-accent: oklch(0.55 0.22 27);
+  --color-accent-strong: oklch(0.46 0.21 27);
+  --color-accent-muted: oklch(0.93 0.05 27);
   --color-accent-fg: oklch(1 0 0);
 
-  --color-success: oklch(0.56 0.15 155);
-  --color-success-muted: oklch(0.94 0.055 155);
-  --color-warning: oklch(0.65 0.16 65);
-  --color-warning-muted: oklch(0.95 0.06 70);
-  --color-danger: oklch(0.57 0.21 25);
-  --color-danger-muted: oklch(0.95 0.05 25);
-  --color-pending: oklch(0.53 0.16 300);
-  --color-pending-muted: oklch(0.95 0.05 300);
+  /* black as a colour, for bars and blocks */
+  --color-ink: oklch(0.17 0.01 260);
+  --color-ink-fg: oklch(0.97 0.004 80);
 
-  --font-sans: var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-cyrillic: var(--font-noto-sans), 'Segoe UI', sans-serif;
+  --color-success: oklch(0.5 0.13 150);
+  --color-success-muted: oklch(0.94 0.05 150);
+  --color-warning: oklch(0.72 0.17 75);
+  --color-warning-muted: oklch(0.95 0.07 80);
+  --color-danger: oklch(0.5 0.22 15);
+  --color-danger-muted: oklch(0.94 0.05 20);
+  --color-pending: oklch(0.5 0.17 255);
+  --color-pending-muted: oklch(0.93 0.04 255);
+
+  --font-sans: var(--font-golos), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-oswald), 'Arial Narrow', Impact, sans-serif;
+  --font-cyrillic: var(--font-golos), 'Segoe UI', sans-serif;
   --font-mono: ui-monospace, 'SF Mono', monospace;
 
-  --radius-panel: 0.85rem;
-  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 22px oklch(0.4 0.03 262 / 0.08);
+  /* Corner radius, app-wide: none. The poster is cut paper — every rounded-* utility in every
+     component resolves to a square corner, so the identity reaches the exercise cards and MDX
+     blocks, not just the chrome. (rounded-full is untouched and still draws circles.) */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+
+  --radius-panel: 0;
+  --shadow-panel: 4px 4px 0 oklch(0.17 0.01 260);
 }
 
 @layer base {
@@ -64,7 +82,7 @@
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-    border-radius: 3px;
+    border-radius: 0;
   }
 
   ::selection {
@@ -81,11 +99,30 @@
   }
 }
 
+/* ---- Poster pieces -------------------------------------------------------- */
+
+/* Condensed capitals, the poster voice. */
+.poster {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+}
+
+/* A red diagonal band. Shallow on purpose: skewed from the centre, a steeper angle lifts the
+   band's left end hundreds of pixels over a wide hero and swallows the text above it. */
+.band {
+  background: var(--color-accent);
+  transform: skewY(-3deg);
+  transform-origin: center;
+}
+
 /* ---- Reading column ------------------------------------------------------- */
 
 .lesson-prose {
   font-size: 1.0625rem;
-  line-height: 1.85;
+  line-height: 1.8;
   color: var(--color-fg-muted);
 }
 
@@ -93,31 +130,46 @@
   margin-top: 1.15rem;
 }
 
-/* A short accent-colored rule before each section heading — a scannable "here's a new section"
-   marker, since the sidebar tree alone isn't enough wayfinding once a lesson runs long. */
+/* Section headings as poster lines: condensed capitals with a short red bar beneath. */
 .lesson-prose h2 {
   margin-top: 3rem;
   margin-bottom: 1.1rem;
-  padding-left: 0.85rem;
-  border-left: 3px solid var(--color-accent);
-  font-size: 1.4rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
   font-weight: 700;
-  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
+}
+
+.lesson-prose h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3rem;
+  height: 4px;
+  background: var(--color-accent);
 }
 
 .lesson-prose h3 {
   margin-top: 2.25rem;
   margin-bottom: 0.7rem;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
 }
 
 .lesson-prose strong {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-fg);
 }
 
@@ -127,7 +179,7 @@
 }
 
 .lesson-prose ul {
-  list-style: disc;
+  list-style: square;
 }
 
 .lesson-prose ol {
@@ -139,7 +191,7 @@
 }
 
 .lesson-prose li::marker {
-  color: var(--color-fg-subtle);
+  color: var(--color-accent);
 }
 
 .lesson-prose code {
@@ -148,11 +200,10 @@
   font-size: 0.9em;
   background-color: var(--color-surface-sunken);
   border: 1px solid var(--color-border);
-  border-radius: 0.3rem;
 }
 
 .lesson-prose a {
-  color: var(--color-accent);
+  color: var(--color-accent-strong);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -164,11 +215,12 @@
   }
 }
 
-/* A vocabulary word, front and center — a VocabCard's headline word, not body text. */
+/* A Russian word, front and center — a VocabCard's headline word, not body text. The condensed
+   display face at a large size is the poster lettering; its stress mark still reads clearly. */
 .word-display {
-  font-family: var(--font-cyrillic);
+  font-family: var(--font-display);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 th, td {

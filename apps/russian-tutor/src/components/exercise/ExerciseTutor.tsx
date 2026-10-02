@@ -72,7 +72,7 @@ export function ExerciseTutor({
           type="button"
           onClick={send}
           disabled={pending || draft.trim().length === 0}
-          className="flex shrink-0 items-center justify-center rounded-lg bg-accent p-1.5 text-canvas disabled:opacity-40"
+          className="flex shrink-0 items-center justify-center rounded-lg bg-accent p-1.5 text-accent-fg disabled:opacity-40"
           aria-label="Send"
         >
           <Send className="size-3.5" aria-hidden />

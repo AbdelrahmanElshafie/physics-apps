@@ -24,7 +24,7 @@ export default async function PracticeListPage() {
 
       <div className="mt-4 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-fg">Practice</h1>
+          <h1 className="font-display text-3xl font-bold text-fg">练习 <span className="text-base font-normal text-fg-subtle">Practice</span></h1>
           <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">
             Write a sentence, a short dialogue, or anything you want feedback on — then send it to
             your tutor to review.
@@ -39,7 +39,7 @@ export default async function PracticeListPage() {
         >
           <button
             type="submit"
-            className="flex shrink-0 items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
+            className="flex shrink-0 items-center gap-1.5 bg-accent px-4 py-2 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90"
           >
             <Plus className="size-4" aria-hidden />
             New

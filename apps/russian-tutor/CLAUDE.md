@@ -30,6 +30,34 @@ of this app — read that first if something here is unclear, most of the reason
   `containsHanzi` became `containsCyrillic` (Unicode range `Ѐ`–`ӿ`), used the same way:
   gating which exercise choices and table cells get a speak button.
 
+## Visual identity — the constructivist poster
+
+Each language app in this workspace looks like a different product on purpose; they were clones,
+and three identical sites with the labels swapped is not a course, it is a template. This one is a
+**Soviet-era poster**.
+
+- **Palette** (`src/app/globals.css` `@theme`): chalk-white ground, black (`ink`) bars and blocks,
+  one red accent, nothing else. Corners are square everywhere — `--radius-*` is overridden
+  app-wide to 0, so every `rounded-*` utility in every component, including the exercise cards and
+  MDX blocks, draws a square corner without those files knowing. `--shadow-panel` is a hard
+  4px offset black, not a soft blur, so panels read as pasted paper.
+- **Type**: **Oswald**, a condensed grotesque, as `--font-display` for every heading, the chrome,
+  and `.word-display`; Golos Text (a Russian-designed text face) for English reading text. Both
+  were drawn for Cyrillic, so a Russian word inside an English sentence never swaps font.
+- **Chrome**: `Header` is a black bar with a skewed red block as its mark. The home page is the
+  poster itself — the course name at 8rem in condensed capitals, a shallow red diagonal band along
+  the hero's bottom edge, then the five phases as numbered blocks (01–05) listing their lessons
+  with a square marker: red filled = written, hollow = roadmap only, black with a tick = read.
+  `Sidebar` repeats the black phase bars and square markers.
+- **Helpers**: `.poster` (condensed capitals, the poster voice) and `.band`. The band's skew is
+  deliberately shallow and centred — a steeper angle lifts its left end hundreds of pixels across
+  a wide hero and swallows the text above it; nothing is ever laid on top of it.
+  `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and name and pads the number to
+  the two-digit poster numeral.
+
+Keep new UI reading the semantic tokens (`accent`, `ink`, `fg-muted`, `surface`) rather than
+naming colours, and the identity stays in one file.
+
 ## Watching a student write, not just grading multiple choice
 
 Identical mechanism to chinese-tutor and both physics apps, via `@physics/tutor-bridge`:

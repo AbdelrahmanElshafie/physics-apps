@@ -1,17 +1,28 @@
 import type { Metadata } from 'next'
-import { Noto_Sans } from 'next/font/google'
+import { Golos_Text, Oswald } from 'next/font/google'
 
 import { TutorStreamProvider } from '@physics/tutor-bridge/react'
 import { TutorSidePanel } from '@/components/tutor/TutorSidePanel'
 
 import './globals.css'
 
-// One font family covers both the English interface chrome and the Russian content itself, so
-// there is no visible font swap between a lesson's English prose and the Cyrillic inside it.
-const notoSans = Noto_Sans({
+/*
+ * Two families, both drawn for Cyrillic first: Oswald, a condensed grotesque in the poster
+ * tradition, for headings and the Russian a VocabCard puts front and centre; Golos Text, a
+ * Russian-designed text face, for the English reading text. Both cover Latin as well, so an
+ * English sentence with a Russian word inside it never swaps font mid-line.
+ */
+const oswald = Oswald({
   subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700', '900'],
-  variable: '--font-noto-sans',
+  weight: ['500', '700'],
+  variable: '--font-oswald',
+  display: 'swap',
+})
+
+const golos = Golos_Text({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '700'],
+  variable: '--font-golos',
   display: 'swap',
 })
 
@@ -22,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={notoSans.variable}>
+    <html lang="en" className={`${oswald.variable} ${golos.variable}`}>
       <body>
         {/*
          * One topic-scoped stream for the whole app, under the fixed topic "general" — the thread

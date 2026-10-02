@@ -1,42 +1,61 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens — the same warm, light palette as the other apps in this workspace: a bright,
- * approachable study surface rather than a developer-tool dark theme, with warm-tinted neutrals
- * and a livelier accent than a dashboard blue.
+ * Design tokens — the Mediterranean one. Cream paper, terracotta for the accent, azulejo blue as
+ * the second colour, saffron for highlights; large radii and soft warm shadows. Every component
+ * reads these semantic names, so the identity lives here and in the chrome (Header, Sidebar, home,
+ * review) rather than being sprinkled through lesson blocks.
  */
 
 @theme {
-  --color-canvas: oklch(0.975 0.008 80);
-  --color-surface: oklch(1 0 0);
-  --color-surface-raised: oklch(0.99 0.005 80);
-  --color-surface-sunken: oklch(0.955 0.009 80);
-  --color-border: oklch(0.9 0.011 75);
-  --color-border-strong: oklch(0.78 0.016 75);
+  --color-canvas: oklch(0.975 0.014 80);
+  --color-surface: oklch(0.995 0.006 85);
+  --color-surface-raised: oklch(1 0 0);
+  --color-surface-sunken: oklch(0.95 0.02 78);
+  --color-border: oklch(0.89 0.03 72);
+  --color-border-strong: oklch(0.76 0.045 65);
 
-  --color-fg: oklch(0.27 0.025 265);
-  --color-fg-muted: oklch(0.46 0.022 265);
-  --color-fg-subtle: oklch(0.58 0.018 265);
+  --color-fg: oklch(0.28 0.035 45);
+  --color-fg-muted: oklch(0.45 0.03 45);
+  --color-fg-subtle: oklch(0.58 0.025 45);
 
-  --color-accent: oklch(0.56 0.19 262);
-  --color-accent-strong: oklch(0.47 0.2 262);
-  --color-accent-muted: oklch(0.93 0.045 262);
+  /* terracotta */
+  --color-accent: oklch(0.6 0.155 42);
+  --color-accent-strong: oklch(0.5 0.16 40);
+  --color-accent-muted: oklch(0.935 0.04 50);
   --color-accent-fg: oklch(1 0 0);
 
-  --color-success: oklch(0.56 0.15 155);
-  --color-success-muted: oklch(0.94 0.055 155);
-  --color-warning: oklch(0.65 0.16 65);
-  --color-warning-muted: oklch(0.95 0.06 70);
-  --color-danger: oklch(0.57 0.21 25);
-  --color-danger-muted: oklch(0.95 0.05 25);
-  --color-pending: oklch(0.53 0.16 300);
-  --color-pending-muted: oklch(0.95 0.05 300);
+  /* azulejo blue and saffron — the two colours terracotta is always seen next to */
+  --color-azul: oklch(0.5 0.12 240);
+  --color-azul-muted: oklch(0.93 0.035 240);
+  --color-sol: oklch(0.82 0.16 90);
+  --color-sol-muted: oklch(0.96 0.06 92);
 
-  --font-sans: var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
+  --color-success: oklch(0.56 0.12 140);
+  --color-success-muted: oklch(0.94 0.05 140);
+  --color-warning: oklch(0.7 0.15 80);
+  --color-warning-muted: oklch(0.95 0.06 85);
+  --color-danger: oklch(0.55 0.2 27);
+  --color-danger-muted: oklch(0.95 0.05 27);
+  --color-pending: oklch(0.5 0.12 240);
+  --color-pending-muted: oklch(0.93 0.035 240);
+
+  --font-sans: var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
   --font-mono: ui-monospace, 'SF Mono', monospace;
 
-  --radius-panel: 0.85rem;
-  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 22px oklch(0.4 0.03 262 / 0.08);
+  /* Corner radius, app-wide. Generous: every rounded-* utility in every component reads these, so
+     the soft, pill-shaped feel reaches the exercise cards and MDX blocks, not just the chrome. */
+  --radius-xs: 0.3rem;
+  --radius-sm: 0.45rem;
+  --radius-md: 0.6rem;
+  --radius-lg: 0.8rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.2rem;
+  --radius-3xl: 1.5rem;
+
+  --radius-panel: 1.25rem;
+  --shadow-panel: 0 1px 2px oklch(0.4 0.05 45 / 0.06), 0 10px 28px oklch(0.5 0.08 45 / 0.12);
 }
 
 @layer base {
@@ -63,11 +82,11 @@
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-    border-radius: 3px;
+    border-radius: 999px;
   }
 
   ::selection {
-    background-color: var(--color-accent-muted);
+    background-color: var(--color-sol-muted);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -78,6 +97,21 @@
       scroll-behavior: auto !important;
     }
   }
+}
+
+/* ---- Azulejo ----------------------------------------------------------------
+   A tiny four-quarter tile repeated — the pattern on a Seville doorstep. Used as a thin strip
+   under the header and as the texture behind the home-page hero, never behind reading text. */
+.azulejo {
+  background-color: var(--color-azul-muted);
+  background-image: conic-gradient(
+    from 45deg at 50% 50%,
+    var(--color-azul) 0 25%,
+    transparent 0 50%,
+    var(--color-azul) 0 75%,
+    transparent 0
+  );
+  background-size: 14px 14px;
 }
 
 /* ---- Reading column ------------------------------------------------------- */
@@ -92,31 +126,45 @@
   margin-top: 1.15rem;
 }
 
-/* A short accent-colored rule before each section heading — a scannable "here's a new section"
-   marker, since the sidebar tree alone isn't enough wayfinding once a lesson runs long. */
+/* Section headings in the display serif, each opened by a terracotta tile-dot — the same
+   "new section starts here" cue the other apps draw differently. */
 .lesson-prose h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
   margin-top: 3rem;
   margin-bottom: 1.1rem;
-  padding-left: 0.85rem;
-  border-left: 3px solid var(--color-accent);
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
   line-height: 1.3;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
 }
 
+.lesson-prose h2::before {
+  content: '';
+  flex: none;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-muted);
+  transform: translateY(-0.1em);
+}
+
 .lesson-prose h3 {
   margin-top: 2.25rem;
   margin-bottom: 0.7rem;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
   color: var(--color-fg);
   scroll-margin-top: 5rem;
 }
 
 .lesson-prose strong {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-fg);
 }
 
@@ -138,7 +186,7 @@
 }
 
 .lesson-prose li::marker {
-  color: var(--color-fg-subtle);
+  color: var(--color-accent);
 }
 
 .lesson-prose code {
@@ -147,11 +195,11 @@
   font-size: 0.9em;
   background-color: var(--color-surface-sunken);
   border: 1px solid var(--color-border);
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
 }
 
 .lesson-prose a {
-  color: var(--color-accent);
+  color: var(--color-azul);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -163,10 +211,11 @@
   }
 }
 
-/* A vocabulary word, front and center — a VocabCard's headline word, not body text. */
+/* A vocabulary word, front and center — a VocabCard's headline word, not body text. The display
+   serif here is what tells the eye "this is the Spanish" on a page that is otherwise English. */
 .word-display {
-  font-family: var(--font-sans);
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 600;
   line-height: 1.2;
 }
 

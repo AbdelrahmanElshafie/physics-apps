@@ -14,10 +14,10 @@ import { cn } from '@/lib/utils'
 const REQUEUE_OFFSET = 3
 
 const GRADE_BUTTONS: { grade: Grade; label: string; className: string }[] = [
-  { grade: 'again', label: 'Again', className: 'bg-danger text-canvas hover:opacity-90' },
-  { grade: 'hard', label: 'Hard', className: 'bg-warning text-canvas hover:opacity-90' },
-  { grade: 'good', label: 'Good', className: 'bg-accent text-canvas hover:opacity-90' },
-  { grade: 'easy', label: 'Easy', className: 'bg-success text-canvas hover:opacity-90' },
+  { grade: 'again', label: 'Again', className: 'bg-danger text-accent-fg hover:opacity-90' },
+  { grade: 'hard', label: 'Hard', className: 'bg-warning text-accent-fg hover:opacity-90' },
+  { grade: 'good', label: 'Good', className: 'bg-accent text-accent-fg hover:opacity-90' },
+  { grade: 'easy', label: 'Easy', className: 'bg-success text-accent-fg hover:opacity-90' },
 ]
 
 export function ReviewSession({
@@ -67,7 +67,7 @@ export function ReviewSession({
         </p>
         <Link
           href="/review"
-          className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
+          className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90"
         >
           Back to review
         </Link>
@@ -85,7 +85,7 @@ export function ReviewSession({
         </p>
         <Link
           href="/review"
-          className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
+          className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90"
         >
           Back to review
         </Link>

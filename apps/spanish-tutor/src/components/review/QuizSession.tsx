@@ -61,7 +61,7 @@ export function QuizSession({ questions: initialQuestions }: { questions: QuizQu
         </p>
         <Link
           href="/review"
-          className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
+          className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-accent px-3.5 py-2 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90"
         >
           Back to review
         </Link>
@@ -127,7 +127,7 @@ export function QuizSession({ questions: initialQuestions }: { questions: QuizQu
         <button
           type="button"
           onClick={next}
-          className="mt-4 w-full rounded-lg bg-accent py-2.5 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
+          className="mt-4 w-full rounded-lg bg-accent py-2.5 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90"
         >
           {index + 1 === questions.length ? 'See score' : 'Next question'}
         </button>

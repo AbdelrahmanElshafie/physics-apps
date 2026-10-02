@@ -1,17 +1,28 @@
 import type { Metadata } from 'next'
-import { Noto_Sans_SC } from 'next/font/google'
+import { Noto_Sans_SC, Noto_Serif_SC } from 'next/font/google'
 
 import { TutorStreamProvider } from '@physics/tutor-bridge/react'
 import { TutorSidePanel } from '@/components/tutor/TutorSidePanel'
 
 import './globals.css'
 
-// One font family covers both the English interface chrome and the Chinese content itself, so
-// there is no visible font swap between a lesson's English prose and the hanzi inside it.
+/*
+ * Two families: Noto Sans SC for the English interface and running text (it covers hanzi too, so
+ * a character inside an English sentence never swaps font), and Noto Serif SC — a Song-style face,
+ * the type of a printed Chinese book — for headings and for the hanzi a VocabCard puts front and
+ * centre. The serif is what makes the characters look like characters rather than UI labels.
+ */
 const notoSansSC = Noto_Sans_SC({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '900'],
+  weight: ['400', '500', '700'],
   variable: '--font-noto-sans-sc',
+  display: 'swap',
+})
+
+const notoSerifSC = Noto_Serif_SC({
+  subsets: ['latin'],
+  weight: ['500', '700', '900'],
+  variable: '--font-noto-serif-sc',
   display: 'swap',
 })
 
@@ -22,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={notoSansSC.variable}>
+    <html lang="en" className={`${notoSansSC.variable} ${notoSerifSC.variable}`}>
       <body>
         {/*
          * One topic-scoped stream for the whole app, under the fixed topic "general" — the thread

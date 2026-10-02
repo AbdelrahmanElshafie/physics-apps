@@ -1,17 +1,29 @@
 import type { Metadata } from 'next'
-import { Noto_Sans } from 'next/font/google'
+import { Fraunces, Nunito_Sans } from 'next/font/google'
 
 import { TutorStreamProvider } from '@physics/tutor-bridge/react'
 import { TutorSidePanel } from '@/components/tutor/TutorSidePanel'
 
 import './globals.css'
 
-// One font family covers both the English interface chrome and the Spanish content itself, so
-// there is no visible font swap between a lesson's English prose and the Spanish inside it.
-const notoSans = Noto_Sans({
+/*
+ * Two families, deliberately: a warm, slightly old-fashioned serif for headings and the Spanish
+ * itself (Fraunces — the shape of a Mediterranean shop sign), and a soft rounded sans for the
+ * English reading text (Nunito Sans). Both cover every accented letter and ñ; the serif is what
+ * makes a VocabCard's word look like Spanish rather than like interface chrome.
+ */
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '900'],
-  variable: '--font-noto-sans',
+  weight: ['500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap',
+})
+
+const nunitoSans = Nunito_Sans({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-nunito-sans',
   display: 'swap',
 })
 
@@ -22,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={notoSans.variable}>
+    <html lang="en" className={`${fraunces.variable} ${nunitoSans.variable}`}>
       <body>
         {/*
          * One topic-scoped stream for the whole app, under the fixed topic "general" — the thread

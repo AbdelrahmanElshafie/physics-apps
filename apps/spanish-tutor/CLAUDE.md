@@ -38,6 +38,32 @@ fix already in it) and replacing exactly the subject-specific pieces listed belo
 - **Nothing CJK- or Cyrillic-specific in styling.** `.word-display` stays as the generic
   display-text class; the `--font-cyrillic` variable and the `cyrillic` font subset are gone.
 
+## Visual identity — Mediterranean
+
+Each language app in this workspace looks like a different product on purpose; they were clones,
+and three identical sites with the labels swapped is not a course, it is a template. This one is
+**warm and Mediterranean**.
+
+- **Palette** (`src/app/globals.css` `@theme`): cream paper, terracotta accent, azulejo blue as
+  the second colour and saffron (`sol`) for highlights. Corners are generous — `--radius-*` is
+  overridden app-wide to 0.3–1.5rem, so every `rounded-*` utility in every component, including
+  the exercise cards and MDX blocks, comes out soft without those files naming a radius.
+- **Type**: **Fraunces**, a warm old-style serif, as `--font-display` for every heading and for
+  `.word-display` — the Spanish word a `VocabCard` puts front and centre, which is what tells the
+  eye "this is the Spanish" on a page that is otherwise English; Nunito Sans for reading text.
+- **Chrome**: `Header` carries a round terracotta ñ, the two destinations labelled in Spanish
+  first (Repaso · Review), and an azulejo tile strip along its bottom edge. The home page is
+  **el camino** — the course drawn as one road down the page, phases as numbered nodes on a
+  vertical rule, every lesson a pill: solid where written, dashed where only on the roadmap,
+  green with a tick where read, with a saffron star on the `critical` ones. `Sidebar` repeats
+  the pill shape and the Fase badges.
+- **Helpers**: `.azulejo` (a four-quarter conic-gradient tile, used behind the hero and as the
+  header strip, never behind reading text). `src/lib/titles.ts` splits "Phase 1 — Foundations"
+  into number and name.
+
+Keep new UI reading the semantic tokens (`accent`, `azul`, `sol`, `fg-muted`, `surface`) rather
+than naming colours, and the identity stays in one file.
+
 ## Watching a student write, not just grading multiple choice
 
 Identical mechanism to every sibling app, via `@physics/tutor-bridge`:

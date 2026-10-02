@@ -62,9 +62,9 @@ export function Predict({
                   className={cn(
                     'mt-px inline-flex size-5 shrink-0 items-center justify-center rounded-full border text-[0.7rem] font-semibold',
                     revealed && isAnswer
-                      ? 'border-success bg-success text-canvas'
+                      ? 'border-success bg-success text-accent-fg'
                       : revealed && isPicked
-                        ? 'border-danger bg-danger text-canvas'
+                        ? 'border-danger bg-danger text-accent-fg'
                         : 'border-border-strong text-fg-subtle',
                   )}
                 >

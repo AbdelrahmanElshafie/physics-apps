@@ -1,28 +1,52 @@
 import Link from 'next/link'
-import { BookOpen, NotebookPen, RotateCcw } from 'lucide-react'
+import { NotebookPen, RotateCcw } from 'lucide-react'
 
+/**
+ * The Chinese chrome: a running head like a printed book's — the seal 中 as the mark, the app
+ * name in the Song serif, the two destinations labelled in Chinese first, and the double rule
+ * underneath that a page carries under its header.
+ */
 export function Header() {
   return (
-    <header className="flex items-center gap-3 border-b border-border bg-surface px-5 py-3">
-      <Link href="/" className="flex items-center gap-2 text-base font-bold text-accent-strong">
-        <BookOpen className="size-5" aria-hidden />
-        中文 · Mandarin
-      </Link>
-      <span className="mx-1 h-5 w-px bg-border" aria-hidden />
-      <Link
-        href="/review"
-        className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-fg-muted transition-colors hover:bg-accent-muted/50 hover:text-accent-strong"
-      >
-        <RotateCcw className="size-4" aria-hidden />
-        Review
-      </Link>
-      <Link
-        href="/practice"
-        className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-fg-muted transition-colors hover:bg-accent-muted/50 hover:text-accent-strong"
-      >
-        <NotebookPen className="size-4" aria-hidden />
-        Practice
-      </Link>
+    <header className="book-rule shrink-0 bg-surface">
+      <div className="flex items-center gap-4 px-5 py-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="seal size-8 text-lg leading-none" aria-hidden>
+            中
+          </span>
+          <span className="font-display text-lg font-bold text-fg">
+            中文 <span className="font-normal text-fg-subtle">·</span> Mandarin
+          </span>
+        </Link>
+
+        <nav className="ml-auto flex items-center gap-1" aria-label="Sections">
+          <HeaderLink href="/review" zh="复习" en="Review" icon={RotateCcw} />
+          <HeaderLink href="/practice" zh="练习" en="Practice" icon={NotebookPen} />
+        </nav>
+      </div>
     </header>
+  )
+}
+
+function HeaderLink({
+  href,
+  zh,
+  en,
+  icon: Icon,
+}: {
+  href: string
+  zh: string
+  en: string
+  icon: typeof RotateCcw
+}) {
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-1.5 border-b-2 border-transparent px-3 py-1.5 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-accent-strong"
+    >
+      <Icon className="size-4" aria-hidden />
+      <span className="font-display font-bold">{zh}</span>
+      <span className="text-fg-subtle">{en}</span>
+    </Link>
   )
 }
