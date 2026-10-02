@@ -1,0 +1,122 @@
+# Exercises: pronunciation and spelling.
+
+schemaVersion: 1
+topic: pronunciation-and-spelling
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ps1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: How many vowel sounds does Spanish have?
+    choices:
+      - { id: a, label: 'Five — and each letter always makes the same one' }
+      - { id: b, label: 'Five letters, but each has several sounds, like English' }
+      - { id: c, label: 'Around twelve, like English' }
+      - { id: d, label: 'Three' }
+    check: { type: exact, value: a }
+    solution: Five letters, five sounds, no exceptions. A Spanish vowel is never reduced or glided the way English vowels are.
+
+  - id: ps2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: How is the h in hola pronounced?
+    choices:
+      - { id: a, label: 'Like an English h' }
+      - { id: b, label: 'Like a Spanish j' }
+      - { id: c, label: 'It is silent' }
+      - { id: d, label: 'Like a w' }
+    check: { type: exact, value: c }
+    solution: h is always silent in Spanish — hola is OH-la, ahora is a-OR-a.
+
+  - id: ps3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: The j in jamón sounds most like...
+    choices:
+      - { id: a, label: 'An English j, as in "jam"' }
+      - { id: b, label: 'A strong English h, from the throat' }
+      - { id: c, label: 'A y, as in "yes"' }
+      - { id: d, label: 'It is silent, like h' }
+    check: { type: exact, value: b }
+    solution: 'j is a hard h — jamón is ha-MON. (g before e or i makes the same sound: gente.)'
+
+  - id: ps4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: The ñ in España sounds like...
+    choices:
+      - { id: a, label: 'An ordinary n' }
+      - { id: b, label: 'The ny in "canyon"' }
+      - { id: c, label: 'An ng, as in "sing"' }
+      - { id: d, label: 'An m' }
+    check: { type: exact, value: b }
+    solution: ñ is the ny of canyon — España is es-PAN-ya, año is AN-yo.
+
+  - id: ps5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: What is the difference between pero and perro?
+    choices:
+      - { id: a, label: 'Spelling only — they sound the same' }
+      - { id: b, label: 'A single tapped r versus a rolled rr, and they are different words — "but" and "dog"' }
+      - { id: c, label: 'Regional — one is Spain, one is Latin America' }
+      - { id: d, label: 'perro is the plural' }
+    check: { type: exact, value: b }
+    solution: pero (tap) is "but"; perro (rolled) is "dog". The r/rr contrast separates real words, the way ship/sheep does in English.
+
+  - id: ps6
+    set: B
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — v and b are pronounced differently in Spanish, as they are in English.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Say vino and bueno — is there any difference in the first sound?' }
+    solution: >-
+      False. Spanish has no v sound at all — v is pronounced exactly like b. vino and bueno start
+      with the same sound. The two letters are a spelling distinction, not a spoken one.
+
+  - id: ps7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: How is the c in gracias pronounced?
+    choices:
+      - { id: a, label: 'Always like k' }
+      - { id: b, label: 'Like th in Spain, like s in Latin America' }
+      - { id: c, label: 'Like ch' }
+      - { id: d, label: 'It is silent' }
+    check: { type: exact, value: b }
+    solution: Before e or i, c is th (Spain) or s (Latin America) — the one regional split worth knowing early. Before a, o, u it is a hard k.
+
+  - id: ps8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — a Spanish question is correctly written with only the closing question mark, like English.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What does a Spanish question start with?' }
+    solution: >-
+      False. Questions open with ¿ and exclamations with ¡. The opening mark is part of the
+      spelling — leaving it out is an error, not a stylistic choice.
+
+  - id: ps9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: what does it mean that Spanish "spells what it says", and what does that
+      let you do that English spelling does not?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Think about meeting a written word you have never heard, or hearing one you have never seen.' }
+    solution: >-
+      Each letter maps to one sound, with only a handful of context rules (c and g before e/i, the
+      silent h, rr). So a written word you have never encountered can be pronounced correctly on
+      sight, and a spoken word can be spelled from its sound — neither of which English allows,
+      where "though", "through" and "tough" share letters and share no sounds. It means
+      pronunciation and spelling can be learned once, as a code, rather than word by word.

@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens — the same warm, light palette as the other apps in this workspace: a bright,
+ * approachable study surface rather than a developer-tool dark theme, with warm-tinted neutrals
+ * and a livelier accent than a dashboard blue.
+ */
+
+@theme {
+  --color-canvas: oklch(0.975 0.008 80);
+  --color-surface: oklch(1 0 0);
+  --color-surface-raised: oklch(0.99 0.005 80);
+  --color-surface-sunken: oklch(0.955 0.009 80);
+  --color-border: oklch(0.9 0.011 75);
+  --color-border-strong: oklch(0.78 0.016 75);
+
+  --color-fg: oklch(0.27 0.025 265);
+  --color-fg-muted: oklch(0.46 0.022 265);
+  --color-fg-subtle: oklch(0.58 0.018 265);
+
+  --color-accent: oklch(0.56 0.19 262);
+  --color-accent-strong: oklch(0.47 0.2 262);
+  --color-accent-muted: oklch(0.93 0.045 262);
+  --color-accent-fg: oklch(1 0 0);
+
+  --color-success: oklch(0.56 0.15 155);
+  --color-success-muted: oklch(0.94 0.055 155);
+  --color-warning: oklch(0.65 0.16 65);
+  --color-warning-muted: oklch(0.95 0.06 70);
+  --color-danger: oklch(0.57 0.21 25);
+  --color-danger-muted: oklch(0.95 0.05 25);
+  --color-pending: oklch(0.53 0.16 300);
+  --color-pending-muted: oklch(0.95 0.05 300);
+
+  --font-sans: var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', monospace;
+
+  --radius-panel: 0.85rem;
+  --shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 22px oklch(0.4 0.03 262 / 0.08);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: light;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---- Reading column ------------------------------------------------------- */
+
+.lesson-prose {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--color-fg-muted);
+}
+
+.lesson-prose > * + * {
+  margin-top: 1.15rem;
+}
+
+/* A short accent-colored rule before each section heading — a scannable "here's a new section"
+   marker, since the sidebar tree alone isn't enough wayfinding once a lesson runs long. */
+.lesson-prose h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.1rem;
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--color-accent);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-fg);
+  scroll-margin-top: 5rem;
+}
+
+.lesson-prose h3 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-fg);
+  scroll-margin-top: 5rem;
+}
+
+.lesson-prose strong {
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.lesson-prose ul,
+.lesson-prose ol {
+  padding-left: 1.5rem;
+}
+
+.lesson-prose ul {
+  list-style: disc;
+}
+
+.lesson-prose ol {
+  list-style: decimal;
+}
+
+.lesson-prose li + li {
+  margin-top: 0.4rem;
+}
+
+.lesson-prose li::marker {
+  color: var(--color-fg-subtle);
+}
+
+.lesson-prose code {
+  padding: 0.1em 0.35em;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-surface-sunken);
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+}
+
+.lesson-prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@supports (scrollbar-width: thin) {
+  .pane-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
+  }
+}
+
+/* A vocabulary word, front and center — a VocabCard's headline word, not body text. */
+.word-display {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+th, td {
+  text-align: left;
+}

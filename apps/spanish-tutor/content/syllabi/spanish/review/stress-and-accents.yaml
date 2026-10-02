@@ -1,0 +1,93 @@
+# Review cards: the two stress rules, the accent that overrides them, and the pairs it separates.
+# One-syllable homophones are fronted "él (not el)" so that the plain pronoun él stays free for
+# the pronouns deck — no two decks may share a front.
+
+schemaVersion: 1
+topic: stress-and-accents
+cards:
+  - id: sa-amigo
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: amigo
+    back: friend — ends in a vowel, so stress falls on MI by rule one
+    exerciseIds: [sa1]
+
+  - id: sa-ciudad
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: ciudad
+    back: city — ends in d, so stress falls on DAD by rule two
+    exerciseIds: [sa2]
+
+  - id: sa-espanol
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: español
+    back: Spanish (the language) — ends in l, stress on ÑOL; lowercase, like all language names
+
+  - id: sa-arbol
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: árbol
+    back: tree — the accent overrides rule two, ÁR-bol
+    exerciseIds: [sa3]
+
+  - id: sa-cafe
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: café
+    back: coffee — the accent overrides rule one, ca-FÉ
+
+  - id: sa-telefono
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: teléfono
+    back: telephone — te-LÉ-fo-no
+
+  - id: sa-musica
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: música
+    back: music — MÚ-si-ca
+
+  - id: sa-hablo-present
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: hablo (present)
+    back: I speak — HA-blo, stressed by rule one
+    exerciseIds: [sa4]
+
+  - id: sa-hablo-past
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: habló (past)
+    back: he / she spoke — ha-BLÓ; the accent is the only difference from hablo
+    exerciseIds: [sa4, sa6]
+
+  - id: sa-papa
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: papá
+    back: dad — pa-PÁ; papa without the accent is a potato
+    exerciseIds: [sa5]
+
+  - id: sa-esta-is
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: está (not esta)
+    back: is — he, she or it is; es-TÁ. esta without the accent means "this"
+    exerciseIds: [sa8]
+
+  - id: sa-el-he
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: él (not el)
+    back: he — the accent distinguishes it from el, "the"
+    exerciseIds: [sa7]
+
+  - id: sa-si-yes
+    kind: word
+    topicId: spanish:stress-and-accents
+    front: sí (not si)
+    back: yes — without the accent, si means "if"
+    exerciseIds: [sa9]

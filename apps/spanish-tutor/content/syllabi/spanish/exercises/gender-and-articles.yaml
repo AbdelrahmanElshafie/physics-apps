@@ -1,0 +1,115 @@
+# Exercises: gender and articles.
+
+schemaVersion: 1
+topic: gender-and-articles
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: ga1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: libro ends in -o. What is "the book"?
+    choices:
+      - { id: a, label: el libro }
+      - { id: b, label: la libro }
+      - { id: c, label: los libro }
+      - { id: d, label: un libro }
+    check: { type: exact, value: a }
+    solution: -o is the masculine ending, so the masculine article — el libro. (un libro is "a book".)
+
+  - id: ga2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: casa ends in -a. What is "the house"?
+    choices:
+      - { id: a, label: el casa }
+      - { id: b, label: la casa }
+      - { id: c, label: una casa }
+      - { id: d, label: las casa }
+    check: { type: exact, value: b }
+    solution: -a is the feminine ending — la casa. (una casa is "a house".)
+
+  - id: ga3
+    set: A
+    label: Q3
+    kind: text
+    prompt: 'Type the correct word for "the" to go with mesa (table).'
+    check: { type: exact, value: la }
+    solution: la — mesa ends in -a and is feminine.
+
+  - id: ga4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Nouns ending in -ción, like nación and televisión, are...
+    choices:
+      - { id: a, label: 'Always feminine — la nación' }
+      - { id: b, label: 'Always masculine' }
+      - { id: c, label: 'Unpredictable, learned one by one' }
+      - { id: d, label: 'Both, depending on meaning' }
+    check: { type: exact, value: a }
+    solution: -ción and -sión are as reliable as -a — always feminine. So are -dad and -tad (la ciudad, la universidad).
+
+  - id: ga5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: problema ends in -a but takes el. Why?
+    choices:
+      - { id: a, label: 'It is a one-off exception with no pattern' }
+      - { id: b, label: 'Nouns in -ma that came from Greek are masculine as a group — problema, programa, sistema' }
+      - { id: c, label: 'Abstract nouns are always masculine' }
+      - { id: d, label: 'It is actually la problema; el problema is a common mistake' }
+    check: { type: exact, value: b }
+    solution: The -ma group kept the gender it had in Greek. Learn the group — problema, programa, sistema, tema, idioma, clima — and none of them will surprise you.
+
+  - id: ga6
+    set: B
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — mano (hand) is masculine, because it ends in -o.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Is mano one of the words that follows the ending rule, or one of the handful that breaks it?' }
+    solution: >-
+      False. la mano is one of the famous exceptions — feminine despite the -o. Like el día and el
+      mapa (masculine despite -a), it is learned with its article attached rather than derived
+      from the ending.
+
+  - id: ga7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: What is "the day"?
+    choices:
+      - { id: a, label: la día }
+      - { id: b, label: el día }
+      - { id: c, label: una día }
+      - { id: d, label: las día }
+    check: { type: exact, value: b }
+    solution: el día — masculine despite the -a. One of the exceptions worth memorising with its article from the start.
+
+  - id: ga8
+    set: C
+    label: Q8
+    kind: text
+    prompt: 'Type the word for "a" to go with casa (house).'
+    check: { type: exact, value: una }
+    solution: una — the feminine indefinite article. un goes with masculine nouns (un libro).
+
+  - id: ga9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does it matter for the rest of the course whether a noun is masculine
+      or feminine, beyond choosing el or la?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What other words in a sentence have to change to match a noun — not just the article?' }
+    solution: >-
+      Gender is not a label that stops at the article. Adjectives change their ending to match the
+      noun (casa blanca, libro blanco), and several pronouns do too. So a noun's gender is a single
+      decision that propagates outward to every word agreeing with it — get it wrong and the error
+      appears in several places at once, which is why gender comes before vocabulary rather than
+      after.

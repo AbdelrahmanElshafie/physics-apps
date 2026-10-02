@@ -16,3 +16,6 @@ data/scratch/
 .env*
 !.env.example
 .DS_Store
+
+# Spaced-repetition review log — same runtime-state status as events.jsonl.
+data/review/

@@ -13,6 +13,8 @@ apps/
                          writing practice, the same live tutor bridge. See apps/chinese-tutor/CLAUDE.md.
   russian-tutor/          Russian from scratch, English interface — Cyrillic, stress, cases, verb
                          aspect, the same live tutor bridge. See apps/russian-tutor/CLAUDE.md.
+  spanish-tutor/          Spanish from scratch, English interface — pronunciation, gender agreement,
+                         ser/estar, conjugation, the same live tutor bridge. See apps/spanish-tutor/CLAUDE.md.
 packages/
   core/                  Syllabus/prerequisite-graph model, exercise schema, the append-only
                           progress log and its reducer, scratchpads, port interfaces.
@@ -55,8 +57,15 @@ actually need the same thing.
 When building a new language-learning app, `chinese-tutor`'s CLAUDE.md and content are the
 reference shape — `russian-tutor` was built by cloning that structure and replacing exactly the
 subject-specific pieces (pinyin/tone → stress/case, `ToneDemo` → `StressDemo`, `containsHanzi` →
-`containsCyrillic`). Everything else — the tutor bridge, the side chat, practice pads, the
-exercise schema and checker — carried over unchanged.
+`containsCyrillic`), and `spanish-tutor` by cloning `russian-tutor` in turn. Everything else — the
+tutor bridge, the side chat, practice pads, the review system, the exercise schema and checker —
+carried over unchanged. The subject-specific surface is small and always the same four things:
+one pure domain helper that makes a lesson-printed form testable (`toneMarkPinyin`, `markStress`,
+`conjugatePresent`), one "compare these side by side" demo component, the TTS voice picker, and
+how a block decides which text is the target language (a Unicode range for Chinese and Russian;
+an explicit `speakColumns` prop for Spanish, since it shares an alphabet with the interface).
+Clone whichever sibling is most recent — it has every later fix in it — and note that
+`tar --exclude=content` also matches `src/adapters/content/`; copy that directory back.
 
 ## Commands (repo root)
 
@@ -68,4 +77,4 @@ pnpm -r lint && pnpm -r typecheck
 ```
 
 Ports: physics-instructor on 3100, physics-eg on 3200, chinese-tutor on 3300, russian-tutor on
-3400 — chosen so all four can run at once.
+3400, spanish-tutor on 3500 — chosen so all five can run at once.

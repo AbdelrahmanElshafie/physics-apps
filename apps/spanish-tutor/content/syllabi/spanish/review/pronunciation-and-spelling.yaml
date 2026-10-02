@@ -1,0 +1,84 @@
+# Review cards: the sounds worth drilling individually. Greetings vocabulary (hola, gracias) is
+# deliberately left to the greetings deck so no two decks share a front.
+
+schemaVersion: 1
+topic: pronunciation-and-spelling
+cards:
+  - id: ps-ahora
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: ahora
+    back: now — the h is silent, a-OR-a
+    exerciseIds: [ps2]
+
+  - id: ps-jamon
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: jamón
+    back: ham — j is a hard English h, ha-MON
+    exerciseIds: [ps3]
+
+  - id: ps-espana
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: España
+    back: Spain — ñ is the ny of canyon
+    exerciseIds: [ps4]
+
+  - id: ps-nino
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: niño
+    back: boy, child — ñ again, NEE-nyo
+
+  - id: ps-calle
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: calle
+    back: street — ll sounds like the y in "yes"
+
+  - id: ps-pero
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: pero
+    back: but — a single tapped r
+    exerciseIds: [ps5]
+
+  - id: ps-perro
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: perro
+    back: dog — a rolled rr, the only thing separating it from pero
+    exerciseIds: [ps5]
+
+  - id: ps-gato
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: gato
+    back: cat — g before a is hard
+
+  - id: ps-gente
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: gente
+    back: people — g before e sounds like j, HEN-te
+
+  - id: ps-vino
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: vino
+    back: wine — v is pronounced exactly like b
+    exerciseIds: [ps6]
+
+  - id: ps-cerveza
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: cerveza
+    back: beer — c before e and z both give th (Spain) or s (Latin America)
+    exerciseIds: [ps7]
+
+  - id: ps-zapato
+    kind: word
+    topicId: spanish:pronunciation-and-spelling
+    front: zapato
+    back: shoe — z is th in Spain, s in Latin America

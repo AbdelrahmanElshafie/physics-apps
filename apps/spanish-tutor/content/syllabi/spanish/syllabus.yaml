@@ -1,0 +1,173 @@
+# Spanish, from scratch — a personal course roadmap. No lessons are written yet; every topic here
+# is a real, ordered plan for what comes next, so progress always has a visible "what's after
+# this" even before the content exists.
+
+schemaVersion: 1
+id: spanish
+title: Spanish, from scratch
+subtitle: A personal course — sounds, gender, ser and estar, verbs, and real sentences
+goal: Read, write, and hold a basic conversation in Spanish.
+
+phases:
+  - id: foundations
+    title: 'Phase 1 — Foundations'
+    summary: The sound system and the noun system, before any vocabulary leans on them.
+    modules:
+      - id: sounds-spelling
+        title: 'Module 1.1 — Sounds and Spelling'
+        topics:
+          - id: pronunciation-and-spelling
+            title: Pronunciation and spelling
+            critical: true
+            estimatedMinutes: 25
+            summary: Five pure vowels, a silent h, a j that sounds like an English h, and the rolled rr — Spanish spells what it says, once you know the code.
+          - id: stress-and-accents
+            title: Word stress and written accents
+            requires: [pronunciation-and-spelling]
+            estimatedMinutes: 20
+            summary: Two rules predict the stress of almost every word; the written accent marks every exception — and sometimes the only difference between two words.
+      - id: nouns
+        title: 'Module 1.2 — Nouns'
+        topics:
+          - id: gender-and-articles
+            title: Gender and articles
+            requires: [pronunciation-and-spelling]
+            estimatedMinutes: 20
+            summary: Every noun is masculine or feminine, the ending usually gives it away, and the article has to match.
+          - id: plurals-and-agreement
+            title: Plurals and adjective agreement
+            requires: [gender-and-articles]
+            estimatedMinutes: 20
+            summary: Adjectives change to match their noun in both gender and number — the agreement system the rest of the course runs on.
+
+  - id: everyday-basics
+    title: 'Phase 2 — Everyday Basics'
+    summary: The first real conversations — greetings, names, numbers, and time.
+    modules:
+      - id: greetings-module
+        title: 'Module 2.1 — Greetings and Introductions'
+        topics:
+          - id: greetings
+            title: Hello, goodbye, and thank you
+            requires: [pronunciation-and-spelling]
+            critical: true
+            estimatedMinutes: 25
+            summary: The handful of phrases that open and close almost every interaction, and the time-of-day greetings that replace a single "hello."
+          - id: introducing-yourself
+            title: Saying who you are
+            requires: [greetings]
+            estimatedMinutes: 20
+            summary: Me llamo, soy, and soy de — names, nationality, and the first appearance of ser.
+          - id: how-are-you
+            title: Asking how someone is
+            requires: [introducing-yourself]
+            estimatedMinutes: 15
+            summary: ¿Cómo estás? and its answers — the first appearance of estar, and the tú/usted split in one question.
+      - id: numbers-time
+        title: 'Module 2.2 — Numbers and Time'
+        topics:
+          - id: numbers-0-100
+            title: Numbers 0 to 100
+            requires: [pronunciation-and-spelling]
+            estimatedMinutes: 20
+            summary: Regular above thirty, fused below it (dieciséis, veintiuno), and uno that shortens to un before a noun.
+          - id: dates-and-time
+            title: Dates and telling the time
+            requires: [numbers-0-100]
+            estimatedMinutes: 20
+            summary: Days and months (lowercase), and ¿qué hora es? — es la una, son las dos.
+
+  - id: ser-estar-pronouns
+    title: 'Phase 3 — Ser, Estar, and Pronouns'
+    summary: The two verbs "to be," and the pronouns that go with them.
+    modules:
+      - id: two-to-bes
+        title: 'Module 3.1 — The Two "To Be"s'
+        topics:
+          - id: ser-vs-estar
+            title: Ser vs. estar
+            requires: [how-are-you]
+            critical: true
+            estimatedMinutes: 25
+            summary: What something is versus how or where it is — the distinction English speakers get wrong for longest, and the adjectives whose meaning flips with it.
+          - id: subject-pronouns-and-usted
+            title: Subject pronouns, and tú vs. usted
+            requires: [introducing-yourself]
+            estimatedMinutes: 15
+            summary: Yo, tú, él, ella, nosotros… — why they are usually left out, and the formality split that usted and ustedes carry.
+      - id: possession-pointing
+        title: 'Module 3.2 — Possession and Pointing'
+        topics:
+          - id: possessives-and-de
+            title: Possessives, de, and this/that
+            requires: [gender-and-articles]
+            estimatedMinutes: 20
+            summary: Mi, tu, su, and the de that does the work of apostrophe-s; este, ese, aquel for pointing at things.
+
+  - id: verbs
+    title: 'Phase 4 — Verbs'
+    summary: The present tense in full, the first irregulars, and a first look at the past.
+    modules:
+      - id: present-tense-module
+        title: 'Module 4.1 — Present Tense'
+        topics:
+          - id: present-tense-ar
+            title: 'Present tense: -ar verbs'
+            requires: [subject-pronouns-and-usted]
+            critical: true
+            estimatedMinutes: 25
+            summary: Hablar and the six endings that every regular -ar verb shares.
+          - id: present-tense-er-ir
+            title: 'Present tense: -er and -ir verbs'
+            requires: [present-tense-ar]
+            estimatedMinutes: 20
+            summary: Comer and vivir — the same shape as -ar, with two endings swapped.
+          - id: irregular-verbs-core
+            title: The irregulars you cannot avoid
+            requires: [present-tense-er-ir]
+            estimatedMinutes: 25
+            summary: Tener, ir, querer, hacer — the handful of irregular verbs that appear in almost every conversation.
+          - id: gustar
+            title: Gustar — saying what you like
+            requires: [present-tense-er-ir]
+            estimatedMinutes: 20
+            summary: Me gusta, me gustan — the verb that agrees with the thing liked, not the person liking it.
+      - id: past-module
+        title: 'Module 4.2 — A First Past Tense'
+        topics:
+          - id: preterite-intro
+            title: The preterite
+            requires: [present-tense-er-ir, stress-and-accents]
+            estimatedMinutes: 25
+            summary: Hablé, comí, viví — completed past actions, and the accent that is the only thing separating hablo from habló.
+
+  - id: building-sentences
+    title: 'Phase 5 — Building Real Sentences'
+    summary: The grammar patterns that turn a vocabulary list into actual conversation.
+    modules:
+      - id: core-patterns
+        title: 'Module 5.1 — Questions, Negation, and Order'
+        topics:
+          - id: questions-and-question-words
+            title: Asking questions
+            requires: [present-tense-ar]
+            estimatedMinutes: 15
+            summary: Intonation and the ¿ mark do most of the work; qué, quién, dónde, cuándo, por qué, cómo, cuánto do the rest — each wearing an accent.
+          - id: negation
+            title: Negation
+            requires: [present-tense-ar]
+            estimatedMinutes: 15
+            summary: No before the verb, and the double negatives Spanish requires — no…nada, no…nadie, no…nunca.
+          - id: word-order-and-adjectives
+            title: Word order and adjective placement
+            requires: [plurals-and-agreement, present-tense-ar]
+            estimatedMinutes: 20
+            summary: Flexible subject-verb-object with the subject usually dropped — and adjectives after the noun, the reverse of English.
+      - id: connecting
+        title: 'Module 5.2 — Connecting Ideas'
+        topics:
+          - id: connecting-sentences
+            title: Connecting sentences
+            requires: [word-order-and-adjectives]
+            estimatedMinutes: 15
+            summary: Y, pero, porque, que — and the y that becomes e, the o that becomes u — for building two-clause sentences.

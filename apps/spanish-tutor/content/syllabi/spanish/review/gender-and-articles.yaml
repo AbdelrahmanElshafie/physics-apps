@@ -1,0 +1,112 @@
+# Review cards: the four articles, the ending rules, and the exceptions. Every noun is fronted
+# with its article, which is how a learner should store it — and keeps these fronts distinct
+# from bare words in other decks.
+
+schemaVersion: 1
+topic: gender-and-articles
+cards:
+  - id: ga-el
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: el
+    back: the — masculine singular
+    exerciseIds: [ga1]
+
+  - id: ga-la
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la
+    back: the — feminine singular
+    exerciseIds: [ga2, ga3]
+
+  - id: ga-un
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: un
+    back: a / an — masculine
+
+  - id: ga-una
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: una
+    back: a / an — feminine
+    exerciseIds: [ga8]
+
+  - id: ga-el-libro
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: el libro
+    back: the book — -o, masculine
+    exerciseIds: [ga1]
+
+  - id: ga-la-casa
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la casa
+    back: the house — -a, feminine
+    exerciseIds: [ga2]
+
+  - id: ga-la-mesa
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la mesa
+    back: the table — -a, feminine
+    exerciseIds: [ga3]
+
+  - id: ga-el-coche
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: el coche
+    back: the car — masculine
+
+  - id: ga-la-silla
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la silla
+    back: the chair — -a, feminine
+
+  - id: ga-la-nacion
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la nación
+    back: the nation — -ción is always feminine
+    exerciseIds: [ga4]
+
+  - id: ga-la-universidad
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la universidad
+    back: the university — -dad is always feminine
+
+  - id: ga-el-problema
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: el problema
+    back: the problem — masculine despite the -a; the -ma group came from Greek
+    exerciseIds: [ga5]
+
+  - id: ga-el-dia
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: el día
+    back: the day — masculine despite the -a; a true exception, learned with its article
+    exerciseIds: [ga7]
+
+  - id: ga-el-mapa
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: el mapa
+    back: the map — masculine despite the -a
+
+  - id: ga-la-mano
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la mano
+    back: the hand — feminine despite the -o
+    exerciseIds: [ga6]
+
+  - id: ga-la-foto
+    kind: word
+    topicId: spanish:gender-and-articles
+    front: la foto
+    back: the photo — feminine despite the -o; short for la fotografía

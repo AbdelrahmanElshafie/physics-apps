@@ -1,0 +1,115 @@
+# Exercises: word stress and written accents.
+
+schemaVersion: 1
+topic: stress-and-accents
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: sa1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: casa ends in a vowel. Where is it stressed?
+    choices:
+      - { id: a, label: 'CA-sa — second-to-last syllable' }
+      - { id: b, label: 'ca-SA — last syllable' }
+      - { id: c, label: 'Both syllables equally' }
+      - { id: d, label: 'It cannot be known without hearing it' }
+    check: { type: exact, value: a }
+    solution: Rule one — a word ending in a vowel, n or s is stressed on the second-to-last syllable. No accent is written because the rule already gives the right answer.
+
+  - id: sa2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: ciudad ends in d. Where is it stressed?
+    choices:
+      - { id: a, label: 'CIU-dad' }
+      - { id: b, label: 'ciu-DAD — last syllable' }
+      - { id: c, label: 'Neither — it needs an accent to be stressed at all' }
+      - { id: d, label: 'It varies by region' }
+    check: { type: exact, value: b }
+    solution: Rule two — a word ending in a consonant other than n or s is stressed on the last syllable.
+
+  - id: sa3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: What does a written accent mark on a vowel tell you?
+    choices:
+      - { id: a, label: 'That the vowel is pronounced longer' }
+      - { id: b, label: 'That the stress falls on this syllable, overriding the two rules' }
+      - { id: c, label: 'That the word is borrowed from another language' }
+      - { id: d, label: 'Nothing — it is decorative' }
+    check: { type: exact, value: b }
+    solution: 'The accent has exactly one job: it marks stress that the two rules would have placed elsewhere. No accent means the rule is right.'
+
+  - id: sa4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: What is the difference between hablo and habló?
+    choices:
+      - { id: a, label: 'None — the accent is optional' }
+      - { id: b, label: 'hablo is "I speak" (present); habló is "he/she spoke" (past) — they differ only in stress' }
+      - { id: c, label: 'habló is the plural' }
+      - { id: d, label: 'habló is more formal' }
+    check: { type: exact, value: b }
+    solution: Same letters, different stressed syllable, different tense. The accent is the only thing separating the present from the past here.
+
+  - id: sa5
+    set: B
+    label: Q5
+    kind: text
+    prompt: 'Type the word for "dad", with its accent. (Without the accent it means potato.)'
+    check: { type: exact, value: papá }
+    solution: papá — pa-PÁ. papa, stressed PA-pa by rule one, is a potato.
+
+  - id: sa6
+    set: B
+    label: Q6
+    kind: truefalse
+    prompt: 'True or false — Spanish stress is unpredictable from spelling and has to be memorised word by word, as in English.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'What covers the words that follow the rules, and what covers the ones that do not?' }
+    solution: >-
+      False. Two rules cover every word without an accent, and the written accent marks every
+      word that breaks them. Between the rules and the mark, stress is fully predictable from the
+      spelling — there is no third case.
+
+  - id: sa7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: What is the difference between el and él?
+    choices:
+      - { id: a, label: 'el is "the"; él is "he"' }
+      - { id: b, label: 'They are the same word; the accent is optional' }
+      - { id: c, label: 'él is the plural of el' }
+      - { id: d, label: 'él is more emphatic' }
+    check: { type: exact, value: a }
+    solution: On a one-syllable word the accent is not about stress — it distinguishes two different words that would otherwise be spelled the same.
+
+  - id: sa8
+    set: C
+    label: Q8
+    kind: text
+    prompt: 'Type the word meaning "is" (he, she or it is), with its accent. (Without the accent it means "this".)'
+    check: { type: exact, value: está }
+    solution: está — es-TÁ. esta, stressed ES-ta, means "this" (feminine).
+
+  - id: sa9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why does this course treat a missing accent mark as a spelling error
+      rather than a minor slip?
+    check: { type: tutor }
+    explain: { required: true, hint: 'What does the reader lose, or get wrong, when the accent is missing from habló or sí?' }
+    solution: >-
+      Because the accent carries meaning. It marks where the stress falls when the rules would put
+      it elsewhere, and on short words it is the only thing distinguishing one word from another —
+      habló is a different tense from hablo, sí is a different word from si, él from el. Dropping
+      it does not produce a slightly misspelled version of the intended word; it produces a
+      different word, or one that follows the wrong stress rule.

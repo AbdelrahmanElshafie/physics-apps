@@ -1,0 +1,128 @@
+---
+title: Word stress and written accents
+summary: Two rules predict the stress of almost every word; the written accent marks every exception — and sometimes the only difference between two words.
+readingMinutes: 20
+---
+
+Every Spanish word of more than one syllable has one stressed syllable, and — unlike in English or
+Russian — you never have to guess which. Two rules cover nearly every word, and the written accent
+mark (the tilde: á é í ó ú) exists to flag the ones they don't. That makes the accent a piece of
+information, not decoration: leave it off and you have written a different word, or no word.
+
+## 1. Rule one: ends in a vowel, n, or s → second-to-last syllable
+
+<Compare
+  columns={['Word', 'Stressed as', 'Why']}
+  rows={[
+    ['casa', 'CA-sa', 'ends in a vowel'],
+    ['amigo', 'a-MI-go', 'ends in a vowel'],
+    ['hablo', 'HA-blo', 'ends in a vowel'],
+    ['comen', 'CO-men', 'ends in n'],
+    ['libros', 'LI-bros', 'ends in s'],
+  ]}
+  speakColumns={[0]}
+  caption="The large majority of Spanish words end in a vowel, n or s, so this rule covers most of what you will ever say."
+/>
+
+## 2. Rule two: ends in any other consonant → last syllable
+
+<Compare
+  columns={['Word', 'Stressed as', 'Why']}
+  rows={[
+    ['comer', 'co-MER', 'ends in r'],
+    ['ciudad', 'ciu-DAD', 'ends in d'],
+    ['español', 'es-pa-ÑOL', 'ends in l'],
+  ]}
+  speakColumns={[0]}
+/>
+
+<Predict
+  question="Where does the stress fall in the word animal (ends in l)?"
+  options={['A-ni-mal', 'a-NI-mal', 'a-ni-MAL', 'Impossible to tell without hearing it']}
+  answer={2}
+>
+  a-ni-MAL. It ends in a consonant other than n or s, so rule two applies and the stress goes on
+  the last syllable. No accent mark is written because the rule already gives the right answer.
+</Predict>
+
+## 3. The written accent marks every exception
+
+When a word's stress isn't where the rules would put it, an accent is written over the vowel that
+*does* carry it. That's the entire function of the mark:
+
+<Compare
+  columns={['Word', 'The rule would say', 'The accent says', 'So it is stressed']}
+  rows={[
+    ['árbol', 'ar-BOL (ends in l → last)', 'no — first syllable', 'ÁR-bol'],
+    ['café', 'CA-fe (ends in vowel → second-to-last)', 'no — last syllable', 'ca-FÉ'],
+    ['teléfono', 'te-le-FO-no', 'no — second syllable', 'te-LÉ-fo-no'],
+    ['música', 'mu-SI-ca', 'no — first syllable', 'MÚ-si-ca'],
+  ]}
+  speakColumns={[0]}
+  caption="An accent mark always means: ignore the rule, stress this syllable. No accent always means: the rule is right."
+/>
+
+<Callout kind="why" title="This is why stress is never a guess">
+Put the two rules and the accent together and stress becomes fully predictable from spelling. A
+word with an accent is stressed on the accented vowel; a word without one is stressed by rule one
+or rule two. There is no third case. This is also why, when you *hear* a word stressed somewhere
+the rules wouldn't put it, you already know it must be spelled with an accent.
+</Callout>
+
+<VocabCard word="café" meaning="coffee" pronunciation="ca-FÉ" />
+<VocabCard word="teléfono" meaning="telephone" pronunciation="te-LÉ-fo-no" />
+
+## 4. When the accent is the whole difference
+
+Because the accent moves the stress, it can turn one word into another. These pairs are spelled
+with the same letters:
+
+<AccentDemo
+  items={[
+    { word: 'hablo', syllables: ['ha', 'blo'], stress: 0, meaning: 'I speak — present tense, stress by rule one' },
+    { word: 'habló', syllables: ['ha', 'bló'], stress: 1, meaning: 'he / she spoke — past tense, the accent moves the stress' },
+    { word: 'papa', syllables: ['pa', 'pa'], stress: 0, meaning: 'potato' },
+    { word: 'papá', syllables: ['pa', 'pá'], stress: 1, meaning: 'dad' },
+    { word: 'esta', syllables: ['es', 'ta'], stress: 0, meaning: 'this (feminine)' },
+    { word: 'está', syllables: ['es', 'tá'], stress: 1, meaning: 'is — he, she or it is' },
+  ]}
+/>
+
+<Callout kind="warning" title="hablo / habló is a whole tense">
+That first pair is not a curiosity. The present tense "I speak" and the past tense "he spoke"
+differ *only* by the accent, and the preterite lesson in Phase 4 depends on your being able to
+hear and write that difference. If the stress rules feel abstract now, that pair is why they
+matter.
+</Callout>
+
+## 5. Accents on one-syllable words
+
+A one-syllable word has nowhere else to put its stress, so an accent on it isn't about stress at
+all — it distinguishes two words that would otherwise be spelled identically:
+
+<Compare
+  columns={['Without accent', 'Means', 'With accent', 'Means']}
+  rows={[
+    ['el', 'the', 'él', 'he'],
+    ['si', 'if', 'sí', 'yes'],
+    ['tu', 'your', 'tú', 'you'],
+    ['que', 'that', 'qué', 'what?'],
+  ]}
+  speakColumns={[0, 2]}
+  caption="Same sound, same stress, different word. The accent is doing exactly one job: telling the two apart on paper."
+/>
+
+<Predict
+  question="You want to write 'yes'. Which is it?"
+  options={['si', 'sí', 'Either — the accent is optional on short words', 'sì']}
+  answer={1}
+>
+  sí. Without the accent, si means "if" — a different word. The accent on one-syllable words is
+  never optional; it is the only thing distinguishing them in writing.
+</Predict>
+
+<Callout kind="forward">
+Next: noun gender — every noun is masculine or feminine, the ending usually tells you which, and
+the article in front of it has to agree. It's the first of several agreement rules the rest of the
+course runs on.
+</Callout>
