@@ -1,0 +1,107 @@
+# Exercises: hello, goodbye, and thank you.
+
+schemaVersion: 1
+topic: greetings
+intro: Nine questions. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: gr1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: It is 9 a.m. Which greeting fits?
+    choices:
+      - { id: a, label: buenos días }
+      - { id: b, label: buenas tardes }
+      - { id: c, label: buenas noches }
+      - { id: d, label: hasta luego }
+    check: { type: exact, value: a }
+    solution: buenos días — the morning greeting, used until around lunchtime.
+
+  - id: gr2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: Why is it buenOS días but buenAS tardes?
+    choices:
+      - { id: a, label: 'Fixed phrases with no rule behind them' }
+      - { id: b, label: 'día is masculine and tarde is feminine, so the adjective agrees with each' }
+      - { id: c, label: 'buenos is morning, buenas is afternoon — the ending marks the time' }
+      - { id: d, label: 'A regional difference' }
+    check: { type: exact, value: b }
+    solution: It is the agreement rule from the previous lesson, live in a daily phrase. día is one of the masculine -a nouns; tarde and noche are feminine.
+
+  - id: gr3
+    set: A
+    label: Q3
+    kind: text
+    prompt: Type the Spanish for "thank you".
+    check: { type: exact, value: gracias }
+    solution: gracias.
+
+  - id: gr4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: Someone says gracias. What is the standard reply?
+    choices:
+      - { id: a, label: por favor }
+      - { id: b, label: de nada }
+      - { id: c, label: perdón }
+      - { id: d, label: hola }
+    check: { type: exact, value: b }
+    solution: de nada — "you're welcome", literally "of nothing".
+
+  - id: gr5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: Which phrase means "see you tomorrow"?
+    choices:
+      - { id: a, label: hasta luego }
+      - { id: b, label: hasta mañana }
+      - { id: c, label: buenas noches }
+      - { id: d, label: adiós }
+    check: { type: exact, value: b }
+    solution: hasta mañana — hasta is "until", so "until tomorrow". hasta luego is "until later".
+
+  - id: gr6
+    set: B
+    label: Q6
+    kind: text
+    prompt: Type the Spanish for "please" (two words).
+    check: { type: exact, value: por favor }
+    solution: por favor.
+
+  - id: gr7
+    set: C
+    label: Q7
+    kind: multichoice
+    prompt: What is the difference between perdón and lo siento?
+    choices:
+      - { id: a, label: 'No difference — both mean sorry' }
+      - { id: b, label: 'perdón is light (excuse me, a bump); lo siento carries real regret or sympathy' }
+      - { id: c, label: 'perdón is formal, lo siento is informal' }
+      - { id: d, label: 'lo siento is only used in writing' }
+    check: { type: exact, value: b }
+    solution: 'perdón is for small things; lo siento literally means "I feel it" and belongs with bad news or a real apology.'
+
+  - id: gr8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — buenas noches is only said at bedtime, like English "good night".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Can you greet someone with it when you arrive somewhere in the evening?' }
+    solution: >-
+      False. buenas noches is also the evening greeting — said on arriving at a restaurant at 8
+      p.m., not only on the way to bed. English speakers tend to hold it back far too long.
+
+  - id: gr9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "Hello! Thank you! See you later!" — with the opening marks; your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'Three short phrases, each an exclamation — what does each one open with?' }
+    solution: "¡Hola! ¡Gracias! ¡Hasta luego! — any reasonable phrasing along these lines is fine, as long as the opening ¡ marks are there."

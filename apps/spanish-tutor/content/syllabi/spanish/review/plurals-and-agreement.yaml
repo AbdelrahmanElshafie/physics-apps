@@ -1,0 +1,96 @@
+# Review cards: plural nouns, the four-form adjective, and the accent that comes and goes.
+
+schemaVersion: 1
+topic: plurals-and-agreement
+cards:
+  - id: pa-los-libros
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: los libros
+    back: the books — vowel ending, so -s
+    exerciseIds: [pa1]
+
+  - id: pa-las-casas
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: las casas
+    back: the houses
+
+  - id: pa-las-ciudades
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: las ciudades
+    back: the cities — consonant ending, so -es
+    exerciseIds: [pa2]
+
+  - id: pa-los-lapices
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: los lápices
+    back: the pencils — z becomes c before -es
+    exerciseIds: [pa3]
+
+  - id: pa-los-jovenes
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: los jóvenes
+    back: the young people — an accent appears in the plural to keep the stress on JO
+    exerciseIds: [pa4]
+
+  - id: pa-blanco
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: blanco
+    back: white — masculine singular
+
+  - id: pa-blanca
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: blanca
+    back: white — feminine singular
+    exerciseIds: [pa6]
+
+  - id: pa-blancos
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: blancos
+    back: white — masculine plural, also used for a mixed group
+
+  - id: pa-blancas
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: blancas
+    back: white — feminine plural
+
+  - id: pa-grande
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: grande
+    back: big — one form for both genders; plural grandes
+    exerciseIds: [pa7]
+
+  - id: pa-azul
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: azul
+    back: blue — one form for both genders; plural azules
+
+  - id: pa-ingles
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: inglés
+    back: English — masculine; the accent is needed, in-GLÉS
+
+  - id: pa-inglesa
+    kind: word
+    topicId: spanish:plurals-and-agreement
+    front: inglesa
+    back: English — feminine; nationalities take -a, and the accent drops
+    exerciseIds: [pa8]
+
+  - id: pa-la-casa-blanca
+    kind: sentence
+    topicId: spanish:plurals-and-agreement
+    front: la casa blanca
+    back: the white house — adjective after the noun, agreeing in gender and number
+    exerciseIds: [pa5, pa9]

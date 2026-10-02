@@ -1,0 +1,94 @@
+# Review cards: hello, the time-of-day greetings, goodbye, thanks, and the apologies.
+# sí / no are left out — the stress deck already fronts "sí (not si)" and the quiz would read two
+# cards for the same word as two right answers.
+
+schemaVersion: 1
+topic: greetings
+cards:
+  - id: gr-hola
+    kind: word
+    topicId: spanish:greetings
+    front: hola
+    back: hello / hi — any time, anyone; the h is silent
+
+  - id: gr-buenos-dias
+    kind: word
+    topicId: spanish:greetings
+    front: buenos días
+    back: good morning — buenos, because día is masculine
+    exerciseIds: [gr1, gr2]
+
+  - id: gr-buenas-tardes
+    kind: word
+    topicId: spanish:greetings
+    front: buenas tardes
+    back: good afternoon — buenas, because tarde is feminine
+    exerciseIds: [gr2]
+
+  - id: gr-buenas-noches
+    kind: word
+    topicId: spanish:greetings
+    front: buenas noches
+    back: good evening / good night — an evening greeting, not only for bedtime
+    exerciseIds: [gr8]
+
+  - id: gr-adios
+    kind: word
+    topicId: spanish:greetings
+    front: adiós
+    back: goodbye — slightly final; hasta luego is the everyday one
+
+  - id: gr-hasta-luego
+    kind: word
+    topicId: spanish:greetings
+    front: hasta luego
+    back: see you later — the default goodbye; hasta means "until"
+
+  - id: gr-hasta-manana
+    kind: word
+    topicId: spanish:greetings
+    front: hasta mañana
+    back: see you tomorrow
+    exerciseIds: [gr5]
+
+  - id: gr-gracias
+    kind: word
+    topicId: spanish:greetings
+    front: gracias
+    back: thank you
+    exerciseIds: [gr3]
+
+  - id: gr-de-nada
+    kind: word
+    topicId: spanish:greetings
+    front: de nada
+    back: you're welcome — literally "of nothing"
+    exerciseIds: [gr4]
+
+  - id: gr-por-favor
+    kind: word
+    topicId: spanish:greetings
+    front: por favor
+    back: please
+    exerciseIds: [gr6]
+
+  - id: gr-perdon
+    kind: word
+    topicId: spanish:greetings
+    front: perdón
+    back: sorry / excuse me — the light one, for a bump or getting past
+    exerciseIds: [gr7]
+
+  - id: gr-lo-siento
+    kind: word
+    topicId: spanish:greetings
+    front: lo siento
+    back: I'm sorry — real regret or sympathy; literally "I feel it"
+    exerciseIds: [gr7]
+
+  - id: gr-sentence-exchange
+    kind: sentence
+    topicId: spanish:greetings
+    front: ¡Hola! ¡Gracias! ¡Hasta luego!
+    back: Hello! Thank you! See you later!
+    exerciseIds: [gr9]

@@ -1,0 +1,84 @@
+# Review cards: me llamo, the first three forms of ser, professions without an article, and soy de.
+
+schemaVersion: 1
+topic: introducing-yourself
+cards:
+  - id: iy-me-llamo
+    kind: word
+    topicId: spanish:introducing-yourself
+    front: me llamo
+    back: my name is — literally "I call myself"; ll is a y sound
+    exerciseIds: [iy1]
+
+  - id: iy-como-te-llamas
+    kind: sentence
+    topicId: spanish:introducing-yourself
+    front: ¿Cómo te llamas?
+    back: What's your name? — literally "how do you call yourself?"
+    exerciseIds: [iy2]
+
+  - id: iy-soy
+    kind: word
+    topicId: spanish:introducing-yourself
+    front: soy
+    back: I am — from ser; irregular
+    exerciseIds: [iy3]
+
+  - id: iy-eres
+    kind: word
+    topicId: spanish:introducing-yourself
+    front: eres
+    back: you are (tú) — from ser
+    exerciseIds: [iy7]
+
+  - id: iy-es
+    kind: word
+    topicId: spanish:introducing-yourself
+    front: es
+    back: he / she / it is; you (formal) are — from ser
+
+  - id: iy-estudiante
+    kind: word
+    topicId: spanish:introducing-yourself
+    front: estudiante
+    back: student — one form for both genders; no article after soy
+
+  - id: iy-profesor
+    kind: word
+    topicId: spanish:introducing-yourself
+    front: profesor
+    back: teacher (male)
+
+  - id: iy-profesora
+    kind: word
+    topicId: spanish:introducing-yourself
+    front: profesora
+    back: teacher (female)
+
+  - id: iy-soy-estudiante
+    kind: sentence
+    topicId: spanish:introducing-yourself
+    front: Soy estudiante.
+    back: I am a student — no article before a profession
+    exerciseIds: [iy4, iy5]
+
+  - id: iy-soy-inglesa
+    kind: sentence
+    topicId: spanish:introducing-yourself
+    front: Soy inglesa.
+    back: I am English (a woman speaking) — nationality agrees with the speaker
+    exerciseIds: [iy6]
+
+  - id: iy-de-donde-eres
+    kind: sentence
+    topicId: spanish:introducing-yourself
+    front: ¿De dónde eres?
+    back: Where are you from? — literally "from where are you?"
+    exerciseIds: [iy8]
+
+  - id: iy-soy-de-londres
+    kind: sentence
+    topicId: spanish:introducing-yourself
+    front: Soy de Londres.
+    back: I am from London — de is "from"
+    exerciseIds: [iy9]

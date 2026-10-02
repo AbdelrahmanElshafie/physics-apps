@@ -1,0 +1,108 @@
+# Exercises: plurals and adjective agreement.
+
+schemaVersion: 1
+topic: plurals-and-agreement
+intro: Nine questions. The last one is a short explanation — your tutor will read that one.
+
+exercises:
+  - id: pa1
+    set: A
+    label: Q1
+    kind: text
+    prompt: Type the plural of libro (book).
+    check: { type: exact, value: libros }
+    solution: libros — a noun ending in a vowel adds -s.
+
+  - id: pa2
+    set: A
+    label: Q2
+    kind: text
+    prompt: Type the plural of ciudad (city).
+    check: { type: exact, value: ciudades }
+    solution: ciudades — a noun ending in a consonant adds -es.
+
+  - id: pa3
+    set: A
+    label: Q3
+    kind: multichoice
+    prompt: What is the plural of lápiz (pencil)?
+    choices:
+      - { id: a, label: lápizs }
+      - { id: b, label: lápizes }
+      - { id: c, label: lápices }
+      - { id: d, label: lápiz }
+    check: { type: exact, value: c }
+    solution: lápices — a final z becomes c before -es. The same happens with vez → veces.
+
+  - id: pa4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: nación has an accent but its plural naciones does not. Why?
+    choices:
+      - { id: a, label: 'Plurals never carry accents' }
+      - { id: b, label: 'naciones ends in s, so rule one now stresses CIO on its own — the accent is no longer needed' }
+      - { id: c, label: 'The stress moves to the last syllable in the plural' }
+      - { id: d, label: 'It is a spelling irregularity with no reason' }
+    check: { type: exact, value: b }
+    solution: The stress stays on CIO. In the singular it needed an accent to be there; in the plural, rule one puts it there anyway, so the mark goes.
+
+  - id: pa5
+    set: B
+    label: Q5
+    kind: multichoice
+    prompt: How do you say "the white house"?
+    choices:
+      - { id: a, label: la blanca casa }
+      - { id: b, label: la casa blanca }
+      - { id: c, label: la casa blanco }
+      - { id: d, label: el casa blanca }
+    check: { type: exact, value: b }
+    solution: la casa blanca — the adjective agrees (feminine singular) and comes after the noun.
+
+  - id: pa6
+    set: B
+    label: Q6
+    kind: text
+    prompt: Type the feminine singular form of blanco (white).
+    check: { type: exact, value: blanca }
+    solution: blanca — an -o adjective has four forms, blanco / blanca / blancos / blancas.
+
+  - id: pa7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — grande (big) becomes granda with a feminine noun.'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Does an adjective ending in -e change for gender at all?' }
+    solution: >-
+      False. Adjectives ending in -e or a consonant have no separate feminine — la casa grande,
+      el libro grande. They change only for number: grandes.
+
+  - id: pa8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: A woman says she is English. Which is correct, and what happens to the accent?
+    choices:
+      - { id: a, label: 'inglés — consonant adjectives never change' }
+      - { id: b, label: 'inglesa — nationalities do take a feminine, and the accent drops' }
+      - { id: c, label: 'inglésa — the accent stays' }
+      - { id: d, label: 'ingles — the accent drops in both forms' }
+    check: { type: exact, value: b }
+    solution: inglesa. Nationality adjectives are the exception that takes a feminine; and since inglesa ends in a vowel, rule one stresses GLE without help, so the accent goes.
+
+  - id: pa9
+    set: D
+    label: Q9
+    kind: text
+    prompt: >-
+      In your own words: why is it fair to say there is "nothing to decide" at the adjective in
+      la casa blanca?
+    check: { type: tutor }
+    explain: { required: true, hint: 'Where were the gender and number of blanca actually decided?' }
+    solution: >-
+      Because every ending on the adjective is reporting a decision already made at the noun. casa
+      is feminine and singular; blanca simply agrees with that. The adjective has no gender or
+      number of its own to choose — it inherits both — which is why the whole system reduces to
+      knowing the noun and then letting the endings follow.

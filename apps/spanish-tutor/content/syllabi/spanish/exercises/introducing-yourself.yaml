@@ -1,0 +1,107 @@
+# Exercises: saying who you are.
+
+schemaVersion: 1
+topic: introducing-yourself
+intro: Nine questions. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: iy1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: What is the everyday way to give your name?
+    choices:
+      - { id: a, label: Soy llamo Ana. }
+      - { id: b, label: Me llamo Ana. }
+      - { id: c, label: Mi nombre Ana. }
+      - { id: d, label: Llamo Ana. }
+    check: { type: exact, value: b }
+    solution: Me llamo Ana — literally "I call myself Ana". (Soy Ana is also fine; me llamo is the standard introduction.)
+
+  - id: iy2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: ¿Cómo te llamas? means...
+    choices:
+      - { id: a, label: 'How are you?' }
+      - { id: b, label: "What's your name?" }
+      - { id: c, label: 'Where are you from?' }
+      - { id: d, label: 'What do you do?' }
+    check: { type: exact, value: b }
+    solution: Literally "how do you call yourself?" — the question that goes with me llamo.
+
+  - id: iy3
+    set: A
+    label: Q3
+    kind: text
+    prompt: Type the form of ser that means "I am".
+    check: { type: exact, value: soy }
+    solution: soy — irregular, like every form of ser.
+
+  - id: iy4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: How do you say "I am a student"?
+    choices:
+      - { id: a, label: Soy un estudiante. }
+      - { id: b, label: Soy estudiante. }
+      - { id: c, label: Estoy estudiante. }
+      - { id: d, label: Soy el estudiante. }
+    check: { type: exact, value: b }
+    solution: Soy estudiante — no article before a profession. Estoy is the other "to be", estar, which is never used for what someone is.
+
+  - id: iy5
+    set: B
+    label: Q5
+    kind: truefalse
+    prompt: 'True or false — "Soy un profesor" is the natural way to say "I am a teacher".'
+    check: { type: exact, value: false }
+    explain: { required: true, hint: 'Does Spanish put an article before a profession after ser?' }
+    solution: >-
+      False. Spanish drops the article before a profession: soy profesor. Including un is
+      understood but immediately marks a speaker as thinking in English.
+
+  - id: iy6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: A woman wants to say she is English. Which is correct?
+    choices:
+      - { id: a, label: Soy inglés. }
+      - { id: b, label: Soy inglesa. }
+      - { id: c, label: Soy inglésa. }
+      - { id: d, label: Soy una inglesa. }
+    check: { type: exact, value: b }
+    solution: Soy inglesa — nationality is an adjective and agrees with the speaker; the accent drops in the feminine, as the plurals lesson showed.
+
+  - id: iy7
+    set: C
+    label: Q7
+    kind: text
+    prompt: Type the form of ser that means "you are" (tú).
+    check: { type: exact, value: eres }
+    solution: eres.
+
+  - id: iy8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: ¿De dónde eres? means...
+    choices:
+      - { id: a, label: 'Who are you?' }
+      - { id: b, label: 'Where are you from?' }
+      - { id: c, label: 'Where are you?' }
+      - { id: d, label: 'What are you?' }
+    check: { type: exact, value: b }
+    solution: 'de is "from", dónde is "where" — literally "from where are you?" The answer starts Soy de…'
+
+  - id: iy9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "Hello! My name is Ana. I am from Madrid. I am a student." — your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'Four short sentences. Watch the opening ¡ on the first, and whether a profession takes an article.' }
+    solution: "¡Hola! Me llamo Ana. Soy de Madrid. Soy estudiante. — any reasonable phrasing along these lines is fine; the two things to get right are the ¡ and the missing article before estudiante."

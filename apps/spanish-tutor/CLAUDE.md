@@ -109,10 +109,12 @@ content/syllabi/<id>/
 ```
 
 The `spanish` syllabus (`content/syllabi/spanish/syllabus.yaml`) is a full five-phase roadmap of
-21 topics, running from pronunciation to two-clause sentences. **No lessons are written yet** —
-every topic is real (ordered, with real prerequisites and summaries) but shows "this lesson
-hasn't been written yet" until its `.mdx` file exists. `pnpm validate:content` prints how many
-remain; treat that line as the progress check.
+21 topics, running from pronunciation to two-clause sentences. **Six lessons are written** —
+all of Phase 1 (`pronunciation-and-spelling`, `stress-and-accents`, `gender-and-articles`,
+`plurals-and-agreement`) and the first two of Phase 2 (`greetings`, `introducing-yourself`), each
+with its exercises and review deck. Every other topic is real (ordered, with real prerequisites
+and summaries) but shows "this lesson hasn't been written yet" until its `.mdx` file exists.
+`pnpm validate:content` prints how many remain; treat that line as the progress check.
 
 **What to write first, and why:** the structural spine is `pronunciation-and-spelling` →
 `gender-and-articles` → `plurals-and-agreement` (everything else agrees with a noun's gender),
