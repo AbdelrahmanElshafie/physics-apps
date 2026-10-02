@@ -5,9 +5,14 @@
  * hand-typing diacritics into every lesson file (which also could not be exercise-checked, since
  * `ǎ` and `a3` are not the same keystrokes).
  *
- * Mark placement follows the standard pinyin rule: `a` or `e` always takes the mark; else `o` in
- * an `ou` pair; else the last of `i`/`u`/`ü` in the syllable. A lone `v` is treated as `ü`, the
- * common keyboard stand-in where no umlaut key exists.
+ * Mark placement follows the standard pinyin rule: `a` takes the mark if present; else `o` or `e`
+ * (which never co-occur in one syllable, so their relative order doesn't matter); else the last of
+ * `i`/`u`/`ü` in the syllable. A lone `v` is treated as `ü`, the common keyboard stand-in where no
+ * umlaut key exists.
+ *
+ * `o` has to be checked as a plain vowel, not only inside an `ou` pair: the `uo` and `ong` finals
+ * (`wo3` -> wǒ, `guo2` -> guó, `hong2` -> hóng) carry the mark on their `o` too, and treating `ou`
+ * as the only `o` case silently left those either unmarked or marked on the wrong letter.
  */
 
 const TONE_MARKS: Record<string, readonly [string, string, string, string, string]> = {
@@ -21,8 +26,8 @@ const TONE_MARKS: Record<string, readonly [string, string, string, string, strin
 
 function markIndex(lower: string): number {
   if (lower.includes('a')) return lower.indexOf('a')
+  if (lower.includes('o')) return lower.indexOf('o')
   if (lower.includes('e')) return lower.indexOf('e')
-  if (lower.includes('ou')) return lower.indexOf('o')
   for (let i = lower.length - 1; i >= 0; i--) {
     if ('iuü'.includes(lower[i]!)) return i
   }

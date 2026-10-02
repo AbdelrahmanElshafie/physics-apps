@@ -35,11 +35,24 @@ describe('toneMarkPinyin', () => {
     expect(toneMarkPinyin('bu4 lai2')).toBe('bù lái') // no sandhi — lái isn't 4th tone
   })
 
-  it('places the mark on a, then e, over i/u/ü, per the standard pinyin rule', () => {
+  it('places the mark on a, then o/e, over i/u/ü, per the standard pinyin rule', () => {
     expect(toneMarkPinyin('hao3')).toBe('hǎo') // a beats o
     expect(toneMarkPinyin('hen3')).toBe('hěn') // e, only vowel
-    expect(toneMarkPinyin('jiu3')).toBe('jiǔ') // last of i/u when no a/e/ou
+    expect(toneMarkPinyin('jiu3')).toBe('jiǔ') // last of i/u when no a/o/e
     expect(toneMarkPinyin('gui4')).toBe('guì') // last of i/u in "ui"
+  })
+
+  it('marks the o of uo, ong and a bare o — not just the o of an ou pair', () => {
+    // Regression: these were previously left unmarked, or marked on the wrong vowel, because
+    // only `ou` was treated as an o-case. 我 wǒ is far too common a word to get wrong.
+    expect(toneMarkPinyin('wo3')).toBe('wǒ')
+    expect(toneMarkPinyin('guo2')).toBe('guó')
+    expect(toneMarkPinyin('duo1')).toBe('duō')
+    expect(toneMarkPinyin('shuo1')).toBe('shuō')
+    expect(toneMarkPinyin('hong2')).toBe('hóng')
+    expect(toneMarkPinyin('zhong1 guo2')).toBe('zhōng guó')
+    expect(toneMarkPinyin('hou4')).toBe('hòu') // the ou case still marks the o
+    expect(toneMarkPinyin('gou3')).toBe('gǒu')
   })
 
   it('treats a bare "v" as the keyboard stand-in for ü', () => {
