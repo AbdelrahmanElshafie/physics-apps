@@ -1,0 +1,95 @@
+# Exercises: tener, ir, querer, hacer.
+
+schemaVersion: 1
+topic: irregular-verbs-core
+intro: Nine questions. Accents count on the typed ones. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: iv1
+    set: A
+    label: Q1
+    kind: text
+    prompt: 'tener — to have. Type "I have".'
+    check: { type: exact, value: tengo }
+    solution: tengo — the yo form grows a g.
+
+  - id: iv2
+    set: A
+    label: Q2
+    kind: multichoice
+    prompt: How do you say "I am twenty years old"?
+    choices:
+      - { id: a, label: Soy veinte años. }
+      - { id: b, label: Estoy veinte años. }
+      - { id: c, label: Tengo veinte años. }
+      - { id: d, label: Hago veinte años. }
+    check: { type: exact, value: c }
+    solution: Tengo veinte años — you have your years in Spanish. Neither ser nor estar is used for age.
+
+  - id: iv3
+    set: A
+    label: Q3
+    kind: text
+    prompt: 'ir — to go. Type "we go".'
+    check: { type: exact, value: vamos }
+    solution: vamos — none of the forms of ir look like ir.
+
+  - id: iv4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: 'Voy ___ mercado.'
+    choices:
+      - { id: a, label: a el }
+      - { id: b, label: al }
+      - { id: c, label: a la }
+      - { id: d, label: en }
+    check: { type: exact, value: b }
+    solution: al — a and el always fuse. a la stays two words (voy a la escuela).
+
+  - id: iv5
+    set: B
+    label: Q5
+    kind: text
+    prompt: 'querer — to want. Type "I want".'
+    check: { type: exact, value: quiero }
+    solution: quiero — e becomes ie in the stem.
+
+  - id: iv6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: Which forms of querer keep the plain e of the stem, with no ie?
+    choices:
+      - { id: a, label: 'quiero and quieres' }
+      - { id: b, label: 'queremos and queréis' }
+      - { id: c, label: 'quiere and quieren' }
+      - { id: d, label: 'None — every form has ie' }
+    check: { type: exact, value: b }
+    solution: queremos and queréis — nosotros and vosotros sit outside the boot and keep the infinitive's stem.
+
+  - id: iv7
+    set: C
+    label: Q7
+    kind: text
+    prompt: 'hacer — to do, to make. Type "I do".'
+    check: { type: exact, value: hago }
+    solution: hago — the only irregular form of hacer in the present tense.
+
+  - id: iv8
+    set: C
+    label: Q8
+    kind: truefalse
+    prompt: 'True or false — "it is cold" (the weather) is hace frío, with hacer.'
+    check: { type: exact, value: true }
+    explain: { required: true, hint: 'And how would a person say they feel cold — which verb?' }
+    solution: True. Weather uses hacer (hace frío, hace calor); a person uses tener (tengo frío). Neither uses ser or estar.
+
+  - id: iv9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "I am hungry. I want to eat. I am going to the market." — your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'Three different irregular verbs in the yo form — and how do a and el combine before mercado?' }
+    solution: "Tengo hambre. Quiero comer. Voy al mercado. — any natural phrasing is fine; the three things to get right are tengo for hunger, quiero + infinitive, and al rather than a el."

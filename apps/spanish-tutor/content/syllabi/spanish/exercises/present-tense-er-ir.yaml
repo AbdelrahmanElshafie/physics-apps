@@ -1,0 +1,99 @@
+# Exercises: the present tense of regular -er and -ir verbs.
+
+schemaVersion: 1
+topic: present-tense-er-ir
+intro: Nine questions. Accents count on the typed ones. The last one is a short translation — your tutor will read that one.
+
+exercises:
+  - id: ei1
+    set: A
+    label: Q1
+    kind: multichoice
+    prompt: 'comer — to eat. Which form means "we eat"?'
+    choices:
+      - { id: a, label: comimos }
+      - { id: b, label: comemos }
+      - { id: c, label: comamos }
+      - { id: d, label: comen }
+    check: { type: exact, value: b }
+    solution: comemos — the -er family has -emos in the nosotros row.
+
+  - id: ei2
+    set: A
+    label: Q2
+    kind: text
+    prompt: 'vivir — to live. Type "I live".'
+    check: { type: exact, value: vivo }
+    solution: vivo — the yo form ends in -o in all three families.
+
+  - id: ei3
+    set: A
+    label: Q3
+    kind: text
+    prompt: 'comer — to eat. Type "they eat".'
+    check: { type: exact, value: comen }
+    solution: comen — stem plus -en.
+
+  - id: ei4
+    set: B
+    label: Q4
+    kind: multichoice
+    prompt: In which persons do the -er and -ir endings differ?
+    choices:
+      - { id: a, label: 'yo and tú' }
+      - { id: b, label: 'nosotros and vosotros' }
+      - { id: c, label: 'él and ellos' }
+      - { id: d, label: 'They differ in every person' }
+    check: { type: exact, value: b }
+    solution: Only nosotros and vosotros — comemos / vivimos and coméis / vivís. The other four rows are identical.
+
+  - id: ei5
+    set: B
+    label: Q5
+    kind: text
+    prompt: 'vivir — to live. Type "we live".'
+    check: { type: exact, value: vivimos }
+    solution: vivimos — -ir keeps its i in the nosotros row. vivemos is the classic mistake.
+
+  - id: ei6
+    set: B
+    label: Q6
+    kind: multichoice
+    prompt: vivís means...
+    choices:
+      - { id: a, label: 'we live' }
+      - { id: b, label: 'you (plural, Spain) live' }
+      - { id: c, label: 'they live' }
+      - { id: d, label: 'you (tú) live' }
+    check: { type: exact, value: b }
+    solution: -ís is the vosotros ending of the -ir family, with its accent on the stressed final syllable.
+
+  - id: ei7
+    set: C
+    label: Q7
+    kind: truefalse
+    prompt: 'True or false — comes is the tú form of comer and means "you eat".'
+    check: { type: exact, value: true }
+    solution: True. It happens to look like an English word; the Spanish for "to come" is venir, a different verb.
+
+  - id: ei8
+    set: C
+    label: Q8
+    kind: multichoice
+    prompt: ¿Dónde vives? means...
+    choices:
+      - { id: a, label: 'Where are you from?' }
+      - { id: b, label: 'Where do you live?' }
+      - { id: c, label: 'Where do you work?' }
+      - { id: d, label: 'Where are you?' }
+    check: { type: exact, value: b }
+    solution: Where do you live? — dónde plus the tú form of vivir. ¿De dónde eres? is "where are you from?".
+
+  - id: ei9
+    set: D
+    label: Q9
+    kind: text
+    prompt: 'Translate into Spanish: "I live in Seville. I eat at home and I drink coffee. I am learning Spanish." (Seville = Sevilla) — your tutor will check it.'
+    check: { type: tutor }
+    explain: { required: true, hint: 'Four verbs, all in the yo form — one -ir, two -er, and one more -er. How does "I am learning" come out?' }
+    solution: "Vivo en Sevilla. Como en casa y bebo café. Aprendo español. — any natural phrasing is fine; the simple present aprendo covers English's \"I am learning\"."

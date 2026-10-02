@@ -1,0 +1,140 @@
+# Review cards: the -er / -ir infinitives, the forms where the two families differ, and the
+# dialogue's sentences. Full tables are not fronted form by form — the two swapped endings are
+# the thing worth drilling.
+
+schemaVersion: 1
+topic: present-tense-er-ir
+cards:
+  - id: ei-comer
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: comer
+    back: to eat — the model -er verb
+
+  - id: ei-vivir
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: vivir
+    back: to live — the model -ir verb
+
+  - id: ei-beber
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: beber
+    back: to drink
+
+  - id: ei-aprender
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: aprender
+    back: to learn
+
+  - id: ei-leer
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: leer
+    back: to read — regular in the present (leo, lees, lee…)
+
+  - id: ei-vender
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: vender
+    back: to sell
+
+  - id: ei-comprender
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: comprender
+    back: to understand
+
+  - id: ei-escribir
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: escribir
+    back: to write
+
+  - id: ei-abrir
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: abrir
+    back: to open
+
+  - id: ei-recibir
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: recibir
+    back: to receive
+
+  - id: ei-comemos
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: comemos
+    back: we eat — -er keeps the e in the nosotros row
+    exerciseIds: [ei1, ei4]
+
+  - id: ei-vivimos
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: vivimos
+    back: we live — -ir keeps the i in the nosotros row
+    exerciseIds: [ei5, ei4]
+
+  - id: ei-comeis
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: coméis
+    back: you (plural, Spain) eat — accented final syllable
+
+  - id: ei-vivis
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: vivís
+    back: you (plural, Spain) live — accented final syllable
+    exerciseIds: [ei6]
+
+  - id: ei-comes
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: comes
+    back: you (tú) eat — not English "comes"
+    exerciseIds: [ei7]
+
+  - id: ei-comen
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: comen
+    back: they eat; you (plural) eat
+    exerciseIds: [ei3]
+
+  - id: ei-pan
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: el pan
+    back: the bread
+
+  - id: ei-mucho
+    kind: word
+    topicId: spanish:present-tense-er-ir
+    front: mucho
+    back: a lot, much — unchanging as an adverb after a verb
+
+  - id: ei-donde-vives
+    kind: sentence
+    topicId: spanish:present-tense-er-ir
+    front: ¿Dónde vives?
+    back: Where do you live?
+    exerciseIds: [ei8]
+
+  - id: ei-vivo-en-sevilla
+    kind: sentence
+    topicId: spanish:present-tense-er-ir
+    front: Vivo en Sevilla.
+    back: I live in Seville.
+    exerciseIds: [ei2, ei9]
+
+  - id: ei-como-pan-y-bebo-cafe
+    kind: sentence
+    topicId: spanish:present-tense-er-ir
+    front: Como pan y bebo café.
+    back: I eat bread and drink coffee — two -er verbs in the yo form
+    exerciseIds: [ei9]

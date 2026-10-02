@@ -62,6 +62,17 @@ describe('conjugatePresent', () => {
     ])
   })
 
+  it('produces the aprender and escribir tables exactly as the present-tense-er-ir lesson prints them', () => {
+    expect(presentTable('aprender')).toEqual([
+      'aprendo', 'aprendes', 'aprende', 'aprendemos', 'aprendéis', 'aprenden',
+    ])
+    expect(presentTable('escribir')).toEqual([
+      'escribo', 'escribes', 'escribe', 'escribimos', 'escribís', 'escriben',
+    ])
+    // leer is described in prose as regular in the present; hold it to that.
+    expect(presentTable('leer')).toEqual(['leo', 'lees', 'lee', 'leemos', 'leéis', 'leen'])
+  })
+
   it('shares every ending but nosotros/vosotros between -er and -ir', () => {
     const er = presentTable('comer')!
     const ir = presentTable('vivir')!

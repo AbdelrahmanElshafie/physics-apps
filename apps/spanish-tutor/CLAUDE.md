@@ -109,11 +109,15 @@ content/syllabi/<id>/
 ```
 
 The `spanish` syllabus (`content/syllabi/spanish/syllabus.yaml`) is a full five-phase roadmap of
-21 topics, running from pronunciation to two-clause sentences. **Ten lessons are written** —
-all of Phase 1 (`pronunciation-and-spelling`, `stress-and-accents`, `gender-and-articles`,
-`plurals-and-agreement`), the conversational half of Phase 2 (`greetings`,
-`introducing-yourself`, `how-are-you`), the two critical topics (`ser-vs-estar`,
-`present-tense-ar`) and `subject-pronouns-and-usted`, each with its exercises and review deck. Every other topic is real (ordered, with real prerequisites
+21 topics, running from pronunciation to two-clause sentences. **Twelve lessons are written and
+the structural spine is complete**: all of Phase 1 (`pronunciation-and-spelling`,
+`stress-and-accents`, `gender-and-articles`, `plurals-and-agreement`), the conversational half of
+Phase 2 (`greetings`, `introducing-yourself`, `how-are-you`), Phase 3's `ser-vs-estar` and
+`subject-pronouns-and-usted`, and the whole present-tense chain (`present-tense-ar`,
+`present-tense-er-ir`, `irregular-verbs-core`), each with its exercises and review deck. Still
+unwritten: `numbers-0-100`, `dates-and-time`, `possessives-and-de`, `gustar`, `preterite-intro`,
+and all of Phase 5 (`questions-and-question-words`, `negation`, `word-order-and-adjectives`,
+`connecting-sentences`) — every one of them now has its prerequisites in place. Every other topic is real (ordered, with real prerequisites
 and summaries) but shows "this lesson hasn't been written yet" until its `.mdx` file exists.
 `pnpm validate:content` prints how many remain; treat that line as the progress check.
 

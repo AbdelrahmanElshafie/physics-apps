@@ -1,0 +1,195 @@
+# Review cards: the four core irregulars — infinitive, yo form, and the forms that show each
+# verb's kind of irregularity — plus the tener/hacer idioms that English does with "to be".
+
+schemaVersion: 1
+topic: irregular-verbs-core
+cards:
+  - id: iv-tener
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: tener
+    back: to have — also hunger, thirst, cold, age, and "have to"
+
+  - id: iv-tengo
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: tengo
+    back: I have — the yo form grows a g
+    exerciseIds: [iv1]
+
+  - id: iv-tienes
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: tienes
+    back: you (tú) have — e → ie
+
+  - id: iv-tiene
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: tiene
+    back: he / she has; you (formal) have
+
+  - id: iv-tenemos
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: tenemos
+    back: we have — outside the boot, plain e
+
+  - id: iv-tienen
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: tienen
+    back: they have; you (plural) have
+
+  - id: iv-tengo-hambre
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Tengo hambre.
+    back: I'm hungry — literally "I have hunger"
+    exerciseIds: [iv9]
+
+  - id: iv-tengo-veinte-anos
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Tengo veinte años.
+    back: I am twenty years old — age uses tener
+    exerciseIds: [iv2]
+
+  - id: iv-tengo-que
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Tengo que trabajar.
+    back: I have to work — tener que + infinitive
+
+  - id: iv-ir
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: ir
+    back: to go — fully irregular; every form starts with v
+
+  - id: iv-voy
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: voy
+    back: I go; I'm going
+
+  - id: iv-vas
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: vas
+    back: you (tú) go
+
+  - id: iv-va
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: va
+    back: he / she goes; you (formal) go
+
+  - id: iv-vamos
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: vamos
+    back: we go — also "let's go"
+    exerciseIds: [iv3]
+
+  - id: iv-van
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: van
+    back: they go; you (plural) go
+
+  - id: iv-al
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: al
+    back: to the (masculine) — a + el, always fused
+    exerciseIds: [iv4]
+
+  - id: iv-voy-al-mercado
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Voy al mercado.
+    back: I'm going to the market
+    exerciseIds: [iv4, iv9]
+
+  - id: iv-voy-a-comer
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Voy a comer.
+    back: I'm going to eat — ir a + infinitive is the everyday future
+
+  - id: iv-el-mercado
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: el mercado
+    back: the market
+
+  - id: iv-tambien
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: también
+    back: also, too
+
+  - id: iv-querer
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: querer
+    back: to want — boot verb, e → ie
+
+  - id: iv-quiero
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: quiero
+    back: I want
+    exerciseIds: [iv5]
+
+  - id: iv-quieres
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: quieres
+    back: you (tú) want
+
+  - id: iv-queremos
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: queremos
+    back: we want — outside the boot, plain e
+    exerciseIds: [iv6]
+
+  - id: iv-te-quiero
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Te quiero.
+    back: I love you — querer, not a separate verb
+
+  - id: iv-hacer
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: hacer
+    back: to do, to make — irregular only in the yo form
+
+  - id: iv-hago
+    kind: word
+    topicId: spanish:irregular-verbs-core
+    front: hago
+    back: I do, I make
+    exerciseIds: [iv7]
+
+  - id: iv-que-haces
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: ¿Qué haces?
+    back: What are you doing?
+
+  - id: iv-hace-frio
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Hace frío.
+    back: It's cold (weather) — hacer; a person says tengo frío
+    exerciseIds: [iv8]
+
+  - id: iv-hace-calor
+    kind: sentence
+    topicId: spanish:irregular-verbs-core
+    front: Hace calor.
+    back: It's hot (weather)
