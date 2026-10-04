@@ -26,38 +26,43 @@ pnpm workspace, sharing what is genuinely subject-agnostic via `packages/`.
   before it. A written sentence has no "previous line" to be consistent with; it just needs a
   human read. So `/practice` is free writing + "ask your tutor", with no local verdict.
 
-## Visual identity — warm paper and vermilion
+## Visual identity — ink and brushed gold
 
 Each language app in this workspace looks like a different product on purpose; they were clones,
 and three identical sites with the labels swapped is not a course, it is a template. This one is
-**warm paper and a vermilion seal**.
+**warm paper and a muted gold accent**.
 
-**It was redesigned once, and the reason matters.** The first cut chased the look of a printed
-Chinese book: square corners, a laid-paper line texture, a table of contents with dotted leaders,
-a vertical spine down the left, small grey type. It was faithful to the idea and bad to use —
-dense, low-contrast, and it read as a document rather than something you want to open. The layout
-is now the one spanish-tutor proved out; the Song serif, the seal and the volume numbering are
-what keep it Chinese. **Don't reintroduce the book-imitation layout.**
+**It went through two redesigns, and the reasons both matter.** The first cut chased the look of
+a printed Chinese book: square corners, a laid-paper line texture, a table of contents with dotted
+leaders, a vertical spine down the left, small grey type. It was faithful to the idea and bad to
+use — dense, low-contrast, and it read as a document. It was rebuilt on the airy shape
+spanish-tutor proved out, but kept a high-chroma vermilion red as the accent and a separate jade
+green for "done", spread across borders, pill text and fills — loud, and red next to green in the
+same row clashed. **Don't reintroduce either: the book layout, or red as the accent.**
 
-- **Palette** (`src/app/globals.css` `@theme`): rice-paper canvas, ink text, a single vermilion
-  accent (the colour of a name seal), jade for "done". Generous radii — `--radius-*` is overridden
-  app-wide to 0.3-1.5rem, so every `rounded-*` utility in every component, including the exercise
-  cards and MDX blocks, comes out soft without those files naming a radius.
+- **Palette** (`src/app/globals.css` `@theme`): rice-paper canvas, ink text, a single low-chroma
+  gold accent (brass, not lacquer — nowhere near the red family) used only for the primary action,
+  small marks and links. "Done" is ink filled solid rather than a second hue — there is no green
+  anywhere in the decorative UI; `success`/`danger` still exist, muted, for their one real job,
+  exercise right/wrong feedback. Generous radii — `--radius-*` is overridden app-wide to
+  0.3-1.5rem, so every `rounded-*` utility in every component, including the exercise cards and
+  MDX blocks, comes out soft without those files naming a radius.
 - **Type**: Noto Sans SC for interface and running text; **Noto Serif SC** (a Song face) as
   `--font-display` for every heading and for `.word-display`, the hanzi a `VocabCard` puts front
   and centre. The serif is what makes characters read as characters rather than UI labels.
-- **Chrome**: `Header` carries a seal mark and a hairline rule over a vermilion thread. The home
-  page is the course as a path: a hero with the next lesson as a vermilion card, then the five
-  volumes as numbered seal nodes down a vertical rule, each lesson a pill — solid where written,
-  dashed where only on the roadmap, jade with a tick where read. `Sidebar` repeats the pill shape
-  and the volume badges.
+- **Chrome**: `Header` carries a seal mark and a hairline rule over a gold thread. The home page
+  is the course as a path: a hero with the next lesson as a gold card, then the five volumes as
+  numbered nodes down a vertical rule — a soft gold tint while open, solid ink with a tick once
+  every lesson in that volume is read. Each lesson is a pill — dashed when unwritten, a plain
+  neutral outline once written, solid ink with a tick once read. `Sidebar` repeats the same states.
 - **Helpers**: `.seal`, `.book-rule`, `.paper` (now a plain warm sheet — the line grid it used to
   carry read as noise behind text), `.vertical-rl` (upright hanzi, ornament only).
   `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and name and converts a number to
   a hanzi numeral.
 
-Keep new UI reading the semantic tokens (`accent`, `fg-muted`, `surface`, `jade`) rather than
-naming colours, and the identity stays in one file.
+Keep new UI reading the semantic tokens (`accent`, `fg-muted`, `surface`, `ink`) rather than
+naming colours. Reach for `ink`/`ink-fg`, not `success`, for a decorative "done" state —
+`success`/`danger` are reserved for exercise feedback. The identity stays in one file.
 
 ## Watching a student write, not just grading multiple choice
 

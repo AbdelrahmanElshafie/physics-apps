@@ -1,40 +1,48 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens — red, ink and paper.
+ * Design tokens — ink and cobalt.
  *
- * The first cut of this app went all-in on a constructivist poster: pure black bars, square
- * corners, a hard offset shadow, condensed capitals on every label. It was striking and tiring —
- * all-caps everywhere is slow to read and the black edges made every panel shout. What is left of
- * the poster is what was actually good about it: one strong red, a condensed display face used
- * for headings only, and big numerals. Everything else now follows the airy shape proven in
- * spanish-tutor — soft borders, real radii, a soft shadow, sentence case.
+ * This went through two earlier passes. The first went all-in on a constructivist poster: pure
+ * black bars, square corners, a hard offset shadow, condensed capitals on every label — striking
+ * and tiring, since all-caps is slow to read and the black edges made every panel shout. The
+ * second kept the airy spanish-tutor shape but the accent was still a near-crimson red at a very
+ * high chroma (0.22), used as a solid fill down the hero band, every phase number and half the
+ * borders on the page, with a separate green for "done" sitting right next to it. Loud, and the
+ * two hues fought each other.
+ *
+ * This pass moves the accent off red entirely — to a deep cobalt, the colour on a Russian lacquer
+ * box, not a stop sign — and drops the fill footprint: the accent now appears only on the primary
+ * action, small marks, links and a thin rule, never repeated as a solid block down the page.
+ * "Done" is ink filled solid instead of a second hue. `success`/`danger` still exist, muted, for
+ * their one real job: exercise right/wrong feedback — never for a decorative state.
  */
 
 @theme {
-  --color-canvas: oklch(0.973 0.006 70);
+  --color-canvas: oklch(0.975 0.005 75);
   --color-surface: oklch(1 0 0);
   --color-surface-raised: oklch(1 0 0);
-  --color-surface-sunken: oklch(0.945 0.008 70);
-  --color-border: oklch(0.885 0.01 60);
-  --color-border-strong: oklch(0.74 0.015 55);
+  --color-surface-sunken: oklch(0.948 0.007 75);
+  --color-border: oklch(0.888 0.009 70);
+  --color-border-strong: oklch(0.75 0.013 65);
 
-  --color-fg: oklch(0.17 0.01 260);
-  --color-fg-muted: oklch(0.4 0.01 260);
-  --color-fg-subtle: oklch(0.55 0.01 260);
+  --color-fg: oklch(0.2 0.016 258);
+  --color-fg-muted: oklch(0.42 0.016 258);
+  --color-fg-subtle: oklch(0.56 0.014 258);
 
-  /* the red */
-  --color-accent: oklch(0.55 0.22 27);
-  --color-accent-strong: oklch(0.46 0.21 27);
-  --color-accent-muted: oklch(0.93 0.05 27);
-  --color-accent-fg: oklch(1 0 0);
+  /* cobalt — used only for the primary action, small marks and links, never as a fill repeated
+     down the page */
+  --color-accent: oklch(0.47 0.125 258);
+  --color-accent-strong: oklch(0.39 0.12 258);
+  --color-accent-muted: oklch(0.93 0.03 258);
+  --color-accent-fg: oklch(0.99 0.004 85);
 
-  /* black as a colour, for bars and blocks */
-  --color-ink: oklch(0.17 0.01 260);
+  /* ink — the neutral "this is settled" colour, used for the done state instead of a second hue */
+  --color-ink: oklch(0.2 0.016 258);
   --color-ink-fg: oklch(0.97 0.004 80);
 
-  --color-success: oklch(0.5 0.13 150);
-  --color-success-muted: oklch(0.94 0.05 150);
+  --color-success: oklch(0.54 0.11 150);
+  --color-success-muted: oklch(0.94 0.035 150);
   --color-warning: oklch(0.72 0.17 75);
   --color-warning-muted: oklch(0.95 0.07 80);
   --color-danger: oklch(0.5 0.22 15);
@@ -121,9 +129,10 @@
   letter-spacing: 0.12em;
 }
 
-/* A red diagonal band, kept shallow and confined to the hero's bottom edge: skewed from the
-   centre, a steeper angle lifts its left end hundreds of pixels over a wide hero and swallows the
-   text above it. Nothing is ever laid on top of it. */
+/* A thin cobalt rule along the hero's bottom edge, skewed. This used to be a solid 40px band —
+   a large flat fill of the accent colour, which was exactly the kind of "accent as wallpaper"
+   this app moved away from. It is now a hairline, closer to a ruled line under a poster title
+   than a block of colour. */
 .band {
   background: var(--color-accent);
   transform: skewY(-3deg);

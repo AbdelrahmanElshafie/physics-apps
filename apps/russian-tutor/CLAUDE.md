@@ -30,41 +30,50 @@ of this app — read that first if something here is unclear, most of the reason
   `containsHanzi` became `containsCyrillic` (Unicode range `Ѐ`–`ӿ`), used the same way:
   gating which exercise choices and table cells get a speak button.
 
-## Visual identity — red, ink and paper
+## Visual identity — ink and cobalt
 
 Each language app in this workspace looks like a different product on purpose; they were clones,
 and three identical sites with the labels swapped is not a course, it is a template. This one is
-**one strong red over warm paper**.
+**warm paper and a deep cobalt accent**.
 
-**It was redesigned once, and the reason matters.** The first cut went all-in on a constructivist
-poster: pure black bars, square corners everywhere, a hard offset shadow, condensed capitals on
-every label, dense checkbox lists. It looked good in a screenshot and was tiring to use — all-caps
-is slow to read and the black edges made every panel shout. What survived is what was actually
-good: one strong red, a condensed display face, and big two-digit numerals. The layout is now the
-one spanish-tutor proved out. **Don't put the black bars and the blanket uppercase back.**
+**It went through two redesigns, and the reasons both matter.** The first cut went all-in on a
+constructivist poster: pure black bars, square corners, a hard offset shadow, condensed capitals
+on every label. It looked good in a screenshot and was tiring to use — all-caps is slow to read
+and the black edges made every panel shout. It was rebuilt on the airy shape spanish-tutor proved
+out, but kept a near-crimson red at a very high chroma (0.22) as the accent, filled solid down the
+hero band, every phase number and half the borders, with a separate green for "done" right next to
+it. Still loud, and the two hues clashed. **Don't reintroduce either: the poster layout, or red as
+the accent.**
 
-- **Palette** (`src/app/globals.css` `@theme`): warm off-white canvas, soft grey borders, one red
-  accent. Radii are real — `--radius-*` is overridden app-wide to 0.25-1.4rem — and
-  `--shadow-panel` is a soft warm shadow, not a hard offset black.
+- **Palette** (`src/app/globals.css` `@theme`): warm off-white canvas, soft grey borders, a deep
+  cobalt accent — the colour on a lacquer box, not a stop sign — used only for the primary action,
+  small marks, links and a thin rule, never as a repeated fill. "Done" is ink filled solid rather
+  than a second hue — there is no green anywhere in the decorative UI; `success`/`danger` still
+  exist, muted, for their one real job, exercise right/wrong feedback. Radii are real —
+  `--radius-*` is overridden app-wide to 0.25-1.4rem — and `--shadow-panel` is a soft warm shadow,
+  not a hard offset black.
 - **Type**: **Oswald**, a condensed grotesque, as `--font-display` for headings, the chrome and
   `.word-display`; Golos Text (a Russian-designed text face) for English reading text. Both were
   drawn for Cyrillic, so a Russian word inside an English sentence never swaps font.
-- **Two display classes, and the distinction is the whole lesson from the redesign**: `.poster` is
-  the condensed voice in sentence case, for headings and labels; `.poster-caps` adds uppercase and
-  wide tracking and is for a short eyebrow of two or three words only. Reaching for `.poster-caps`
-  on body-adjacent text is what made the first version tiring.
-- **Chrome**: `Header` is a light bar with a skewed red block as its mark and a red hairline
-  underneath. The home page is a hero with the next lesson as a red card and a shallow red band
-  along the hero's bottom edge, then the five phases as numbered red nodes down a vertical rule,
-  each lesson a pill — solid where written, dashed where only on the roadmap, green with a tick
-  where read. `Sidebar` repeats the pill shape and the numerals.
+- **Two display classes, and the distinction is part of the lesson from the second redesign**:
+  `.poster` is the condensed voice in sentence case, for headings and labels; `.poster-caps` adds
+  uppercase and wide tracking and is for a short eyebrow of two or three words only. Reaching for
+  `.poster-caps` on body-adjacent text is what made the first version tiring.
+- **Chrome**: `Header` is a light bar with a skewed cobalt block as its mark and a cobalt hairline
+  underneath — the only places the accent appears there. The home page is a hero with the next
+  lesson as a cobalt card and a thin cobalt hairline along the bottom edge (not the 40px filled
+  band the second pass used), then the five phases as numbered nodes down a vertical rule — a soft
+  cobalt tint while open, solid ink with a tick once every lesson in that phase is read. Each
+  lesson is a pill — dashed when unwritten, a plain neutral outline once written, solid ink with a
+  tick once read. `Sidebar` repeats the same states.
 - **Helpers**: `.band` — its skew is deliberately shallow and centred, because a steeper angle
   lifts the left end hundreds of pixels across a wide hero and swallows the text above it; nothing
   is ever laid on top of it. `src/lib/titles.ts` splits "Phase 1 — Foundations" into number and
   name and pads the number to two digits.
 
-Keep new UI reading the semantic tokens (`accent`, `fg-muted`, `surface`, `success`) rather than
-naming colours, and the identity stays in one file.
+Keep new UI reading the semantic tokens (`accent`, `fg-muted`, `surface`, `ink`) rather than
+naming colours. Reach for `ink`/`ink-fg`, not `success`, for a decorative "done" state —
+`success`/`danger` are reserved for exercise feedback. The identity stays in one file.
 
 ## Watching a student write, not just grading multiple choice
 

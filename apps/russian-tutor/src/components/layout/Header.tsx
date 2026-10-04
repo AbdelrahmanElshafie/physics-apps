@@ -2,11 +2,9 @@ import Link from 'next/link'
 import { NotebookPen, RotateCcw } from 'lucide-react'
 
 /**
- * The Russian chrome: a skewed red block as the mark, the app name in the condensed display face,
- * the two destinations labelled in Russian first, and a red hairline along the bottom edge.
- *
- * This was a solid black bar with everything in capitals. The red is the identity; the black bar
- * only made the page shout.
+ * The Russian chrome: a skewed cobalt block as the mark, the app name in the condensed display
+ * face, the two destinations labelled in Russian first, and a cobalt hairline along the bottom
+ * edge — the only places the accent appears here.
  */
 export function Header() {
   return (

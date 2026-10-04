@@ -71,20 +71,28 @@ an explicit `speakColumns` prop for Spanish, since it shares an alphabet with th
 Clone whichever sibling is most recent — it has every later fix in it — and note that
 `tar --exclude=content` also matches `src/adapters/content/`; copy that directory back.
 
-**Then give the new app its own look — but keep the proven shape.** Cloning is how the plumbing
-gets there, not how the app should end up: three language sites that differ only in their labels
-read as one template. Each app carries a distinct palette, typeface and ornament — chinese-tutor
-is warm paper and a vermilion seal, russian-tutor is one red over warm paper with a condensed
-display face, spanish-tutor is Mediterranean cream, terracotta and azulejo tiles.
+**Then give the new app its own look — but keep the proven shape, and keep colour restrained.**
+Cloning is how the plumbing gets there, not how the app should end up: three language sites that
+differ only in their labels read as one template. Each app carries a distinct palette, typeface
+and ornament — chinese-tutor is warm paper and a muted gold accent, russian-tutor is warm paper
+and a deep cobalt accent, spanish-tutor is Mediterranean cream, terracotta and azulejo tiles.
 
-What they share is the **layout**, and that was learned the hard way. Chinese and Russian were
-first built as full-blown pastiches: a printed book with dotted-leader contents and a vertical
-spine, and a constructivist poster of black bars and blanket uppercase. Both looked striking in a
-screenshot and were rejected on sight in use — dense, low-contrast, tiring. They were rebuilt on
-spanish-tutor's shape, which works: a hero with the next lesson as one accent card, then the
-course as a path of numbered nodes down a vertical rule, every lesson a pill that is solid when
-written, dashed when only on the roadmap, and ticked when read. **Start a new app from that
-shape** and spend the invention on colour, type and one ornament. See each app's own CLAUDE.md.
+What they share is the **layout and the colour discipline**, and both were learned the hard way
+across two bad passes on Chinese and Russian. The first pass on each was a full-blown pastiche — a
+printed book with dotted-leader contents and a vertical spine, and a constructivist poster of
+black bars and blanket uppercase. Both looked striking in a screenshot and were rejected on sight
+in use: dense, low-contrast, tiring. The second pass fixed the layout, built on spanish-tutor's
+shape, but kept a near-crimson, high-chroma red as each accent, filled solid down headers, bands
+and numbered badges, with a separate saturated green for "done" sitting right next to it — still
+loud, and red against green at matching chroma is close to the worst possible colour pairing.
+
+**Start a new app from spanish-tutor's shape**: a hero with the next lesson as one accent card,
+then the course as a path of numbered nodes down a vertical rule, every lesson a pill that is
+dashed when unwritten, a plain neutral outline once written, and solid ink with a tick once read.
+Pick one accent colour, well clear of the stop-sign red family and at a moderate chroma (0.09-0.16
+in OKLCH, not 0.19+) — then use it sparingly: the primary button, small marks, links, a thin rule.
+Never give "done" a second hue; fill it with `ink` instead, and leave `success`/`danger` alone for
+their one real job, exercise right/wrong feedback. See each app's own CLAUDE.md.
 
 The identity is deliberately cheap to carry, because it lives in four places and nowhere else:
 `src/app/globals.css` (`@theme` tokens, including an app-wide `--radius-*` scale so every

@@ -44,11 +44,10 @@ export interface CourseDefinition {
   /** One line about what the course actually teaches. */
   readonly blurb: string
   /**
-   * The course's own accent, so a tile looks like the app it opens.
-   *
-   * Three of the five courses are warm reds in their own apps, and sampled literally the Mandarin
-   * and Russian tiles were indistinguishable side by side. Each is still that course's colour, but
-   * spread along both hue and lightness (deep red → vermilion → clay) so the grid stays scannable.
+   * The course's own accent, read straight from that app's globals.css so a tile always matches
+   * what opening it actually looks like. Chinese and Russian both used a high-chroma red here
+   * until their apps moved off red entirely (it was too loud and clashed with green "done"
+   * states); the hub's colours were updated alongside that change, not independently of it.
    */
   readonly accent: string
   readonly accentSoft: string
@@ -65,8 +64,9 @@ export const COURSES: readonly CourseDefinition[] = [
     mark: '中',
     label: 'Mandarin',
     blurb: 'Pinyin and tones, characters, measure words, and the grammar spine.',
-    accent: 'oklch(0.66 0.185 40)',
-    accentSoft: 'oklch(0.66 0.185 40 / 0.16)',
+    // Matches that app's own gold accent — oklch(0.6 0.095 80) in its globals.css.
+    accent: 'oklch(0.6 0.095 80)',
+    accentSoft: 'oklch(0.6 0.095 80 / 0.18)',
   },
   {
     dir: 'russian-tutor',
@@ -76,8 +76,9 @@ export const COURSES: readonly CourseDefinition[] = [
     mark: 'Я',
     label: 'Russian',
     blurb: 'Cyrillic, stress, the six cases, verb aspect, and real sentences.',
-    accent: 'oklch(0.57 0.235 21)',
-    accentSoft: 'oklch(0.57 0.235 21 / 0.18)',
+    // Matches that app's own cobalt accent — oklch(0.47 0.125 258) in its globals.css.
+    accent: 'oklch(0.47 0.125 258)',
+    accentSoft: 'oklch(0.47 0.125 258 / 0.18)',
   },
   {
     dir: 'spanish-tutor',

@@ -40,8 +40,9 @@ export default async function HomePage() {
       <main className="pane-scroll flex-1 overflow-y-auto">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-border bg-surface">
-          <div className="band absolute -left-10 bottom-0 right-[-10%] h-10 opacity-90" aria-hidden />
-          <div className="relative mx-auto flex max-w-5xl flex-col gap-8 px-6 pb-20 pt-12 md:flex-row md:items-end md:justify-between">
+          {/* A hairline, not a slab — this used to be a solid 40px fill of the accent colour. */}
+          <div className="band absolute -left-10 bottom-0 right-[-10%] h-[3px]" aria-hidden />
+          <div className="relative mx-auto flex max-w-5xl flex-col gap-8 px-6 pb-14 pt-12 md:flex-row md:items-end md:justify-between">
             <div className="max-w-xl">
               <p className="poster-caps mb-3 text-xs text-accent">С нуля · from scratch</p>
               <h1 className="poster text-6xl text-fg">
@@ -88,7 +89,7 @@ export default async function HomePage() {
             written yet.
           </p>
 
-          <ol className="relative border-l-2 border-accent/25 pl-10">
+          <ol className="relative border-l-2 border-border pl-10">
             {syllabus.phases.map((phase, index) => {
               const { number, name } = splitTitle(phase.title)
               const ordinal = posterNumeral(number ? Number(number) : index + 1)
@@ -96,10 +97,12 @@ export default async function HomePage() {
               const phaseDone = topicIds.length > 0 && topicIds.every(viewed)
               return (
                 <li key={phase.id} className={cn('relative', index < syllabus.phases.length - 1 && 'pb-10')}>
+                  {/* Done is ink-filled, not a second hue — the cobalt accent stays reserved for
+                      the primary action and small marks, not repeated five times down the path. */}
                   <span
                     className={cn(
                       'poster absolute -left-[3.6rem] top-0 flex size-11 items-center justify-center rounded-lg text-base shadow-panel',
-                      phaseDone ? 'bg-success text-accent-fg' : 'bg-accent text-accent-fg',
+                      phaseDone ? 'bg-ink text-ink-fg' : 'bg-accent-muted text-accent-strong',
                     )}
                     aria-hidden
                   >
@@ -159,14 +162,20 @@ function TopicPill({
   if (!topic) return null
   return (
     <li>
+      {/*
+       * Three states, one hue. Unwritten is dashed and quiet; written is a plain neutral outline
+       * — a lesson existing isn't an achievement, so it gets no colour; read is solid ink, the
+       * same "settled" fill the phase marker above uses. No second hue competes with the cobalt
+       * accent here, which is what made the red/green pairing in the first pass clash.
+       */}
       <Link
         href={hrefFor(topicId)}
         className={cn(
           'flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-sm font-semibold transition',
           viewed
-            ? 'border-success/40 bg-success-muted text-success hover:border-success'
+            ? 'border-ink bg-ink text-ink-fg hover:opacity-90'
             : written
-              ? 'border-accent/40 bg-surface text-accent-strong hover:bg-accent-muted'
+              ? 'border-border-strong bg-surface text-fg-muted hover:border-fg-subtle hover:text-fg'
               : 'border-dashed border-border-strong bg-transparent font-normal text-fg-subtle hover:text-fg',
         )}
         title={topic.summary}

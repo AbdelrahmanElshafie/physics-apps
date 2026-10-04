@@ -1,41 +1,48 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens — warm paper and vermilion. A rice-paper canvas, ink text, vermilion (the colour
- * of a name seal) as the single accent and jade for "done".
+ * Design tokens — ink and brushed gold. A rice-paper canvas, ink text, a muted brass/gold accent
+ * — the colour of aged gold leaf or a brass seal handle, not of lacquer — used sparingly.
  *
- * The first cut of this app chased the look of a printed book — square corners, a laid-paper
- * texture, dense dotted-leader contents, small grey type — and it read as a document rather than
- * something you want to open. It is now built on the same airy shape as spanish-tutor: generous
- * radii, soft shadows, large headings and scannable pills. The Song serif, the seal and the 卷
- * numbering are what keep it Chinese; the layout is the one that was proven to work.
+ * This went through two earlier passes. The first chased the look of a printed book — square
+ * corners, a laid-paper texture, dotted-leader contents — and read as a document, not something
+ * you want to open; it was rebuilt on the airy shape spanish-tutor proved out. The second kept
+ * that shape but used a high-chroma vermilion red as the accent and a separate jade green for
+ * "done" — spread across borders, pill text and fills everywhere, with red and green sitting in
+ * the same row. It was loud and the two hues fought each other.
+ *
+ * This pass does two things differently: the accent moved off red entirely to a low-chroma gold
+ * (nothing here is anywhere near the red/crimson family), and "done" no longer gets its own
+ * colour — it is ink filled solid, so there is only ever one hue on the page plus neutral ink and
+ * paper. `success`/`danger` still exist, muted, for their one real job: exercise right/wrong
+ * feedback — never for a decorative state like "lesson read".
  */
 
 @theme {
-  --color-canvas: oklch(0.962 0.014 85);
-  --color-surface: oklch(0.985 0.009 88);
-  --color-surface-raised: oklch(0.995 0.005 88);
-  --color-surface-sunken: oklch(0.938 0.016 84);
-  --color-border: oklch(0.87 0.02 80);
-  --color-border-strong: oklch(0.72 0.03 75);
+  --color-canvas: oklch(0.97 0.012 80);
+  --color-surface: oklch(0.99 0.007 85);
+  --color-surface-raised: oklch(0.998 0.004 88);
+  --color-surface-sunken: oklch(0.948 0.013 80);
+  --color-border: oklch(0.885 0.015 78);
+  --color-border-strong: oklch(0.74 0.018 72);
 
-  --color-fg: oklch(0.22 0.012 60);
-  --color-fg-muted: oklch(0.42 0.015 60);
-  --color-fg-subtle: oklch(0.56 0.015 65);
+  --color-fg: oklch(0.24 0.012 60);
+  --color-fg-muted: oklch(0.44 0.013 60);
+  --color-fg-subtle: oklch(0.58 0.013 62);
 
-  /* vermilion — the seal */
-  --color-accent: oklch(0.56 0.19 32);
-  --color-accent-strong: oklch(0.47 0.19 30);
-  --color-accent-muted: oklch(0.93 0.04 35);
+  /* brushed gold — used only for the primary action, small marks and links, never as a fill
+     repeated down the page */
+  --color-accent: oklch(0.6 0.095 80);
+  --color-accent-strong: oklch(0.49 0.095 78);
+  --color-accent-muted: oklch(0.93 0.025 82);
   --color-accent-fg: oklch(0.99 0.005 88);
 
-  /* ink, for the few places something darker than the text is wanted */
-  --color-ink: oklch(0.2 0.012 60);
-  --color-jade: oklch(0.55 0.1 165);
-  --color-jade-muted: oklch(0.94 0.04 165);
+  /* ink — the neutral "this is settled" colour, used for the done state instead of a second hue */
+  --color-ink: oklch(0.22 0.012 60);
+  --color-ink-fg: oklch(0.99 0.005 88);
 
-  --color-success: oklch(0.55 0.1 165);
-  --color-success-muted: oklch(0.94 0.04 165);
+  --color-success: oklch(0.55 0.1 150);
+  --color-success-muted: oklch(0.94 0.035 150);
   --color-warning: oklch(0.68 0.14 70);
   --color-warning-muted: oklch(0.95 0.05 75);
   --color-danger: oklch(0.52 0.2 22);
@@ -113,7 +120,8 @@
     repeating-linear-gradient(90deg, transparent 0 23px, oklch(0.5 0.02 70 / 0.035) 23px 24px);
 }
 
-/* A seal: the vermilion square with a character cut into it. */
+/* A seal: the gold square with a character cut into it. Reserved for the one small header mark —
+   not a pattern to repeat for every "done" or "current" state down the page. */
 .seal {
   display: inline-flex;
   align-items: center;

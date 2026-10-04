@@ -93,7 +93,7 @@ export default async function HomePage() {
             written yet.
           </p>
 
-          <ol className="relative border-l-2 border-accent/25 pl-10">
+          <ol className="relative border-l-2 border-border pl-10">
             {syllabus.phases.map((phase, index) => {
               const { number, name } = splitTitle(phase.title)
               const volume = hanziNumeral(number ? Number(number) : index + 1)
@@ -101,10 +101,12 @@ export default async function HomePage() {
               const phaseDone = topicIds.length > 0 && topicIds.every(viewed)
               return (
                 <li key={phase.id} className={cn('relative', index < syllabus.phases.length - 1 && 'pb-10')}>
+                  {/* Done is ink-filled, not a second hue — the gold accent stays reserved for the
+                      primary action and small marks, not repeated five times down the path. */}
                   <span
                     className={cn(
                       'absolute -left-[3.35rem] top-0 flex size-10 items-center justify-center rounded-lg font-display text-lg font-bold shadow-panel',
-                      phaseDone ? 'bg-jade text-accent-fg' : 'seal',
+                      phaseDone ? 'bg-ink text-ink-fg' : 'bg-accent-muted text-accent-strong',
                     )}
                     aria-hidden
                   >
@@ -164,14 +166,20 @@ function TopicPill({
   if (!topic) return null
   return (
     <li>
+      {/*
+       * Three states, one hue. Unwritten is dashed and quiet; written is a plain neutral outline
+       * — a lesson existing isn't an achievement, so it gets no colour; read is solid ink, the
+       * same "settled" fill the phase marker above uses. No second hue competes with the gold
+       * accent here, which is what made the red/green pairing in the first pass clash.
+       */}
       <Link
         href={hrefFor(topicId)}
         className={cn(
           'flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-sm font-semibold transition',
           viewed
-            ? 'border-jade/40 bg-jade-muted text-jade hover:border-jade'
+            ? 'border-ink bg-ink text-ink-fg hover:opacity-90'
             : written
-              ? 'border-accent/40 bg-surface text-accent-strong hover:bg-accent-muted'
+              ? 'border-border-strong bg-surface text-fg-muted hover:border-fg-subtle hover:text-fg'
               : 'border-dashed border-border-strong bg-transparent font-normal text-fg-subtle hover:text-fg',
         )}
         title={topic.summary}

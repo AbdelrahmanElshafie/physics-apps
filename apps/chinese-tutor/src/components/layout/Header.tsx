@@ -3,7 +3,7 @@ import { NotebookPen, RotateCcw } from 'lucide-react'
 
 /**
  * The Chinese chrome: a 中 seal as the mark, the app name in the Song serif, the two destinations
- * labelled in Chinese first, and a hairline rule over a vermilion thread underneath.
+ * labelled in Chinese first, and a hairline rule over a gold thread underneath.
  */
 export function Header() {
   return (

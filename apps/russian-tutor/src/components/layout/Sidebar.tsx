@@ -7,8 +7,9 @@ import { cn } from '@/lib/utils'
 
 /**
  * The course tree: phases > modules > topics, current topic highlighted, viewed topics ticked.
- * Phases carry the same two-digit numeral the home page uses, and the active topic is a filled
- * red pill — the same shape the home page uses for a lesson, so the two views read as one system.
+ * Phases carry the same two-digit numeral the home page uses; the active topic is a filled cobalt
+ * pill, and a viewed topic's dot is ink-filled rather than a second hue, matching the home page's
+ * pill states so the two views read as one system.
  *
  * No prerequisite locking yet — every topic is a link, even though the syllabus already carries a
  * `requires` DAG (same schema as the physics apps). Worth adding once there is enough content that
@@ -73,7 +74,7 @@ export function Sidebar({
                                 active
                                   ? 'border-accent-fg/60'
                                   : viewed
-                                    ? 'border-success bg-success text-accent-fg'
+                                    ? 'border-ink bg-ink text-ink-fg'
                                     : 'border-border-strong',
                               )}
                               aria-hidden
