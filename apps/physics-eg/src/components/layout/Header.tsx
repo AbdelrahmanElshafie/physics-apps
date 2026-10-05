@@ -1,9 +1,21 @@
 import Link from 'next/link'
-import { CircuitBoard, Home, NotebookPen } from 'lucide-react'
+import { CircuitBoard, Home, LayoutGrid, NotebookPen } from 'lucide-react'
+
+import { HUB_URL } from '@/lib/hub'
 
 export function Header() {
   return (
     <header className="flex items-center gap-3 border-b border-border bg-surface px-5 py-3">
+      {/* A plain <a>, not a Next Link — it crosses to the hub's own port. */}
+      <a
+        href={HUB_URL}
+        title="كل الدورات"
+        aria-label="الرجوع لكل الدورات"
+        className="flex items-center justify-center rounded-lg p-2 text-fg-subtle transition-colors hover:bg-accent-muted/50 hover:text-accent-strong"
+      >
+        <LayoutGrid className="size-4" aria-hidden />
+      </a>
+      <span className="mx-1 h-5 w-px bg-border" aria-hidden />
       <Link href="/" className="flex items-center gap-2 text-base font-bold text-accent-strong">
         <Home className="size-5" aria-hidden />
         الفيزياء بالعربي

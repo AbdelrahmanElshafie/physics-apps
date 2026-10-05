@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check, NotebookPen, RotateCcw, Star } from 'lucide-react'
 
-import type { Syllabus, TopicId } from '@core/domain'
+import { mostRecentTopic, type Syllabus, type TopicId } from '@core/domain'
 import { container } from '@/container'
 import { Header } from '@/components/layout/Header'
 import { posterNumeral, splitTitle } from '@/lib/titles'
@@ -16,7 +16,8 @@ export const dynamic = 'force-dynamic'
  * It replaces an earlier poster layout: black-bordered blocks, dense checkbox lists, condensed
  * capitals everywhere. It looked good in a screenshot and was tiring to use. This is the same
  * shape spanish-tutor uses, which reads well — the red, the condensed display face and the big
- * 01–05 numerals are what keep it Russian.
+ * 01–05 numerals are what keep it Russian. The hero's "Continue" card goes to the lesson last
+ * actually open — see `mostRecentTopic` — not wherever the syllabus says is next.
  */
 export default async function HomePage() {
   const [syllabi, progress] = await Promise.all([container.content.listSyllabi(), container.progress.state()])
@@ -32,7 +33,14 @@ export default async function HomePage() {
   const viewed = (id: TopicId) => progress.topics.get(id)?.viewed ?? false
   const viewedCount = syllabus.order.filter(viewed).length
   const nextUp = syllabus.order.find((id) => written.has(id) && !viewed(id)) ?? syllabus.order[0]!
-  const nextTopic = syllabus.topics.get(nextUp)!
+
+  // "Continue" means the lesson that was literally last open, not the next unfinished one in
+  // the syllabus — the way a game remembers which level you were on rather than suggesting the
+  // next one. Falls back to the next-unwritten-unviewed heuristic only on a brand-new course.
+  const lastVisited = mostRecentTopic(progress)
+  const resumeId = lastVisited && written.has(lastVisited) && syllabus.topics.has(lastVisited) ? lastVisited : nextUp
+  const resumeTopic = syllabus.topics.get(resumeId)!
+  const resuming = lastVisited !== undefined
 
   return (
     <div className="flex h-dvh flex-col">
@@ -60,14 +68,14 @@ export default async function HomePage() {
 
             <div className="flex w-full max-w-sm flex-col gap-3">
               <Link
-                href={hrefFor(nextUp)}
+                href={hrefFor(resumeId)}
                 className="group rounded-panel bg-accent px-5 py-4 text-accent-fg shadow-panel transition hover:bg-accent-strong"
               >
                 <p className="poster-caps text-[0.65rem] opacity-85">
-                  {viewed(nextUp) ? 'Start again from' : viewedCount > 0 ? 'Continue with' : 'Start with'}
+                  {resuming ? 'Continue with' : 'Start with'}
                 </p>
                 <p className="poster mt-1.5 flex items-center justify-between gap-3 text-xl">
-                  {nextTopic.title}
+                  {resumeTopic.title}
                   <ArrowRight className="size-5 shrink-0 transition group-hover:translate-x-1" aria-hidden />
                 </p>
               </Link>

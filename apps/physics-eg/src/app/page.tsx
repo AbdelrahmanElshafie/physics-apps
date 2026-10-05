@@ -1,13 +1,38 @@
 import Link from 'next/link'
 import { BookOpen, CircuitBoard } from 'lucide-react'
 
+import { mostRecentTopic, type TopicId } from '@core/domain'
 import { container } from '@/container'
 import { Header } from '@/components/layout/Header'
 
 export const dynamic = 'force-dynamic'
 
+/**
+ * "استكمال" (continue) goes to the lesson that was literally last open, not the next unfinished
+ * one in the syllabus — the way a game remembers which level you were on rather than suggesting
+ * the next one. Falls back to the syllabus's first written topic on a brand-new course. See
+ * `mostRecentTopic` in @physics/core for the shared definition every app in this workspace uses.
+ */
 export default async function HomePage() {
-  const syllabi = await container.content.listSyllabi()
+  const [syllabi, progress] = await Promise.all([container.content.listSyllabi(), container.progress.state()])
+  const lastVisited = mostRecentTopic(progress)
+
+  const cards = await Promise.all(
+    syllabi.map(async (s) => {
+      const written = new Set<TopicId>()
+      await Promise.all(
+        s.order.map(async (id) => {
+          if ((await container.content.getLesson(id)) !== null) written.add(id)
+        }),
+      )
+      const resumeId =
+        lastVisited && s.topics.has(lastVisited) && written.has(lastVisited)
+          ? lastVisited
+          : (s.order.find((id) => written.has(id)) ?? s.order[0])
+      const resuming = resumeId !== undefined && resumeId === lastVisited
+      return { syllabus: s, resumeId, resuming }
+    }),
+  )
 
   return (
     <div className="flex h-dvh flex-col">
@@ -19,11 +44,11 @@ export default async function HomePage() {
         </p>
 
         <div className="space-y-3">
-          {syllabi.map((s) => {
-            const firstTopic = s.order[0]
-            if (!firstTopic) return null
-            const at = firstTopic.indexOf(':')
-            const local = firstTopic.slice(at + 1)
+          {cards.map(({ syllabus: s, resumeId, resuming }) => {
+            if (!resumeId) return null
+            const at = resumeId.indexOf(':')
+            const local = resumeId.slice(at + 1)
+            const topic = s.topics.get(resumeId)
             return (
               <Link
                 key={s.id}
@@ -34,7 +59,9 @@ export default async function HomePage() {
                 <div>
                   <p className="font-semibold text-fg">{s.title}</p>
                   {s.subtitle && <p className="mt-0.5 text-sm text-fg-muted">{s.subtitle}</p>}
-                  <p className="mt-1 text-sm text-fg-subtle">{s.topics.size} موضوع</p>
+                  <p className="mt-1 text-sm text-fg-subtle">
+                    {resuming ? 'استكمال من' : 'ابدأ من'} {topic?.title ?? ''} · {s.topics.size} موضوع
+                  </p>
                 </div>
               </Link>
             )

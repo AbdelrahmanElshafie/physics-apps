@@ -2,16 +2,20 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { ArrowRight, BookOpen } from 'lucide-react'
 
-import { parseTopicId } from '@core/domain'
+import { mostRecentTopic, parseTopicId } from '@core/domain'
 import { buildTopicViews, nextTopic, summarise } from '@core/services'
 import { container } from '@/container'
 
 /**
  * Entry point: continue where you left off.
  *
- * With one syllabus this is a redirect straight into the next topic — landing on a menu when
- * there is only one sensible destination is friction, not choice. More than one, and it becomes
- * a picker.
+ * "Left off" means the lesson literally last open — `mostRecentTopic` — not the next unfinished
+ * one `nextTopic` would suggest; the two usually agree, but not once work is revisited out of
+ * order. `nextTopic` is still the fallback on a brand-new syllabus, where nothing has a
+ * `lastActivityAt` yet to resume to.
+ *
+ * With one syllabus this is a redirect straight into that topic — landing on a menu when there is
+ * only one sensible destination is friction, not choice. More than one, and it becomes a picker.
  */
 export const dynamic = 'force-dynamic'
 
@@ -25,10 +29,14 @@ export default async function HomePage() {
     const syllabus = syllabi[0]!
     const [state, counts] = await Promise.all([progress.state(), content.exerciseCounts()])
     const views = buildTopicViews(syllabus, state, counts)
-    const next = nextTopic(views, syllabus.order)
+    const resumeId = mostRecentTopic(state)
 
-    // Everything complete: fall back to the first topic rather than dead-ending.
-    const target = next?.topic ?? syllabus.topics.get(syllabus.order[0]!)
+    const target =
+      (resumeId && syllabus.topics.get(resumeId)) ??
+      nextTopic(views, syllabus.order)?.topic ??
+      // Everything complete, or nothing ever touched and nextTopic found nothing ready: fall
+      // back to the first topic rather than dead-ending.
+      syllabus.topics.get(syllabus.order[0]!)
     if (target) {
       const { syllabus: sid, local } = parseTopicId(target.id)
       redirect(`/learn/${sid}/${local}`)
@@ -39,7 +47,8 @@ export default async function HomePage() {
     syllabi.map(async (syllabus) => {
       const [state, counts] = await Promise.all([progress.state(), content.exerciseCounts()])
       const views = buildTopicViews(syllabus, state, counts)
-      const next = nextTopic(views, syllabus.order)
+      const resumeId = mostRecentTopic(state)
+      const next = (resumeId && views.get(resumeId)) ?? nextTopic(views, syllabus.order)
       return { syllabus, stats: summarise(views), next }
     }),
   )
@@ -63,7 +72,7 @@ export default async function HomePage() {
                 <div className="min-w-0 flex-1">
                   <p className="font-medium text-fg">{syllabus.title}</p>
                   <p className="truncate text-sm text-fg-muted">
-                    {stats.complete} of {stats.total} complete · next: {target.title}
+                    {stats.complete} of {stats.total} complete · continue: {target.title}
                   </p>
                 </div>
                 <ArrowRight className="size-4 shrink-0 text-fg-subtle" aria-hidden />

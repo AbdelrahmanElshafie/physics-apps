@@ -123,3 +123,16 @@ entry to `COURSES` in `apps/hub/src/lib/courses.ts` (directory, port, syllabus i
 English names, blurb, mark, accent pair). The hub reads everything else — title, topic count,
 which lessons are written, what has been read — off that app's own `syllabus.yaml`,
 `lessons/*.mdx` and `data/events.jsonl`, so nothing else is needed and nothing else can drift.
+
+**The link has to go both ways.** Give the new app a `src/lib/hub.ts` exporting
+`HUB_URL = 'http://localhost:3000'`, and a small grid-icon `<a href={HUB_URL}>` (a plain anchor,
+not a framework `Link` — it crosses to a different dev server) in its header, so a student can
+always get back to the launcher in one click. Every existing app does this already.
+
+**"Continue" means the lesson literally last open, not the next unfinished one** — the way a game
+remembers which level you were on rather than suggesting the next one. Every course app's own home
+page and the hub's own tile both resume to `mostRecentTopic(progress)` (from `@physics/core/domain`,
+or its local equivalent in physics-instructor — see that app's own `src/core/domain/progress.ts`
+for why that one is duplicated rather than imported), falling back to the first written lesson only
+when nothing has ever been touched. A new app's home page should do the same, not reinvent a
+next-unread heuristic.

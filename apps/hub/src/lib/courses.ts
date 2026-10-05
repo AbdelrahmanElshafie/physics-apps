@@ -4,6 +4,7 @@ import path from 'node:path'
 import { parse as parseYaml } from 'yaml'
 import {
   buildSyllabus,
+  mostRecentTopic,
   parseEventLine,
   reduceEvents,
   syllabusFileSchema,
@@ -124,7 +125,12 @@ export interface Course extends CourseDefinition {
   readonly topicCount: number
   readonly writtenCount: number
   readonly readCount: number
-  /** Where "Continue" goes: the first written lesson not yet viewed, else the first topic. */
+  /**
+   * Where "Continue" goes: the lesson literally last open in that app — `mostRecentTopic` — not
+   * the next unfinished one, the way a game remembers which level you were on rather than
+   * suggesting the next one. Falls back to the first written lesson, then the first topic, on a
+   * course that has never been opened.
+   */
   readonly continueHref: string
   readonly continueTitle: string
   /** True when the continue link is a resume rather than a cold start. */
@@ -247,8 +253,14 @@ async function loadOne(c: CourseDefinition): Promise<Course> {
 
   const order = syllabus.order
   const writtenIds = order.filter((id) => written.has(localOf(id)))
-  const next = writtenIds.find((id) => !viewed(id)) ?? writtenIds[0] ?? order[0]
-  const nextTopic = next ? syllabus.topics.get(next) : undefined
+
+  // The lesson last actually open beats the next-unwritten-unviewed heuristic whenever there is
+  // one — see the doc comment on `continueHref` above. It only needs to still have a lesson file;
+  // it does not need to be unread, unlike the old heuristic.
+  const lastVisited = mostRecentTopic(progress)
+  const resumeId = lastVisited && written.has(localOf(lastVisited)) ? lastVisited : (writtenIds[0] ?? order[0])
+  const resumeTopic = resumeId ? syllabus.topics.get(resumeId) : undefined
+  const resuming = resumeId !== undefined && resumeId === lastVisited
 
   return {
     ...c,
@@ -257,11 +269,11 @@ async function loadOne(c: CourseDefinition): Promise<Course> {
     topicCount: order.length,
     writtenCount: writtenIds.length,
     readCount: order.filter(viewed).length,
-    continueHref: next
-      ? `${originOf(c)}/${c.lessonPath ?? 'lesson'}/${c.syllabusId}/${localOf(next)}`
+    continueHref: resumeId
+      ? `${originOf(c)}/${c.lessonPath ?? 'lesson'}/${c.syllabusId}/${localOf(resumeId)}`
       : originOf(c),
-    continueTitle: nextTopic?.title ?? 'Open the app',
-    resuming: Boolean(next && writtenIds.some(viewed)),
+    continueTitle: resumeTopic?.title ?? 'Open the app',
+    resuming,
     ...(progress.lastActivityAt ? { lastActivityAt: progress.lastActivityAt } : {}),
     online,
   }

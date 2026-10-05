@@ -12,9 +12,14 @@ port or an adapter, that is a sign the feature belongs in a course app instead.
 - **A tile per course**, carrying that course's own accent colour so a tile looks like the app it
   opens. Each tile shows lessons read out of total, lessons written, the dev server's port and
   whether it is up, and when the course was last touched.
-- **A Continue button** that deep-links to the specific lesson to resume — the first *written*
-  lesson not yet viewed — not just the app's home page. The tile as a whole still opens the home
-  page; the button is a second, deeper target.
+- **A Continue button** that deep-links to the specific lesson to resume — not just the app's
+  home page. "Resume" means the lesson literally last open (`mostRecentTopic` from
+  `@physics/core/domain`, read off that course's own `data/events.jsonl`), the way a game
+  remembers which level you were on, not the next unfinished lesson in the syllabus. Falls back to
+  the first written lesson, then the first topic, on a course that has never been opened. The tile
+  as a whole still opens the home page; the button is a second, deeper target — and every course
+  app's own home page resumes to the same lesson via the same function, so the hub and the app
+  never disagree about where "continue" goes.
 - **A resume strip** above the grid for whichever course was touched most recently, so the common
   case ("carry on with what I was doing") is one click from a cold start.
 - **The start command** on any course whose server is not running, e.g.
@@ -54,6 +59,17 @@ would fail silently:
 Counting written lessons intersects the lesson filenames with the syllabus's topic order, which is
 why `physics-instructor`'s Arabic variants (`<topic>.ar.mdx`) don't double-count: they match no
 topic id.
+
+### Every course links back
+
+A new entry in this registry is only half the connection — the hub pointing at the app. The app
+also needs to point back: every course's own header carries a small grid-icon button to
+`http://localhost:3000`, so a student is never stuck one app deep with no way out except the
+browser's back button. Each app declares the URL itself, in its own `src/lib/hub.ts` (a one-line
+constant, re-declared per app rather than shared, the same way each app already hardcodes its own
+port), and wires it into its header as a plain `<a>` — not a framework `Link`, since it crosses to
+a different dev server. **A new course app needs this too**, or it is reachable from the hub but
+not back to it.
 
 ### The liveness probe
 

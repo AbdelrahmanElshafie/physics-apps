@@ -1,15 +1,28 @@
 import Link from 'next/link'
-import { NotebookPen, RotateCcw } from 'lucide-react'
+import { LayoutGrid, NotebookPen, RotateCcw } from 'lucide-react'
+
+import { HUB_URL } from '@/lib/hub'
 
 /**
  * The Spanish chrome: a round terracotta ñ as the mark, the app name in the display serif, the
  * two destinations labelled in Spanish first, and an azulejo strip along the bottom edge — the
- * one place the tile pattern appears on every page.
+ * one place the tile pattern appears on every page. The grid icon at the far left is a plain
+ * `<a>`, not a Next `Link` — it crosses to the hub's own port, so client-side routing can't help.
  */
 export function Header() {
   return (
     <header className="shrink-0 bg-surface">
       <div className="flex items-center gap-4 px-5 py-2.5">
+        <a
+          href={HUB_URL}
+          title="All courses"
+          aria-label="Back to all courses"
+          className="flex items-center justify-center rounded-full p-1.5 text-fg-subtle transition-colors hover:bg-accent-muted hover:text-accent-strong"
+        >
+          <LayoutGrid className="size-4" aria-hidden />
+        </a>
+        <span className="h-5 w-px bg-border" aria-hidden />
+
         <Link href="/" className="flex items-center gap-2.5">
           <span
             className="flex size-8 items-center justify-center rounded-full bg-accent font-display text-lg font-bold leading-none text-accent-fg shadow-panel"

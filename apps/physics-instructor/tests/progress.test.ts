@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   buildSyllabus,
+  mostRecentTopic,
   pendingReviews,
   reduceEvents,
   syllabusFileSchema,
@@ -247,6 +248,38 @@ describe('pendingReviews', () => {
       }),
     ])
     expect(pendingReviews(state).map((p) => p.exerciseId)).toEqual(['q9'])
+  })
+})
+
+describe('mostRecentTopic', () => {
+  it('is undefined when nothing has been touched', () => {
+    expect(mostRecentTopic(reduceEvents([]))).toBeUndefined()
+  })
+
+  it('picks the topic touched last, not the topic visited first', () => {
+    const state = reduceEvents([
+      event({ type: 'topic.viewed', topicId: 't1' }),
+      event({ type: 'topic.viewed', topicId: 't2' }),
+      event({ type: 'topic.viewed', topicId: 't3' }),
+    ])
+    expect(mostRecentTopic(state)).toBe('t3')
+  })
+
+  it('counts any later activity on an earlier topic, not just a view', () => {
+    const state = reduceEvents([
+      event({ type: 'topic.viewed', topicId: 't1' }),
+      event({ type: 'topic.viewed', topicId: 't2' }),
+      event({
+        type: 'attempt.submitted',
+        topicId: 't1',
+        exerciseId: 'q1',
+        attemptId: 'a1',
+        answer: 'x',
+        autoVerdict: 'unverified',
+      }),
+    ])
+    // t2 was viewed after t1, but t1 had an attempt submitted after that — t1 is "more recent".
+    expect(mostRecentTopic(state)).toBe('t1')
   })
 })
 

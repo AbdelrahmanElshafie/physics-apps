@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check, NotebookPen, RotateCcw, Star } from 'lucide-react'
 
-import type { Syllabus, TopicId } from '@core/domain'
+import { mostRecentTopic, type Syllabus, type TopicId } from '@core/domain'
 import { container } from '@/container'
 import { Header } from '@/components/layout/Header'
 import { hanziNumeral, splitTitle } from '@/lib/titles'
@@ -16,7 +16,8 @@ export const dynamic = 'force-dynamic'
  * It replaces an earlier table-of-contents layout that imitated a printed book: dotted leaders,
  * small grey type, a vertical spine eating a third of the width. It was faithful and hard to use.
  * This is the same shape spanish-tutor uses, which reads well — the Song serif, the seal and the
- * 卷 numbering are what keep it Chinese.
+ * 卷 numbering are what keep it Chinese. The hero's "Continue" card goes to the lesson last
+ * actually open — see `mostRecentTopic` — not wherever the syllabus says is next.
  */
 export default async function HomePage() {
   const [syllabi, progress] = await Promise.all([container.content.listSyllabi(), container.progress.state()])
@@ -32,7 +33,14 @@ export default async function HomePage() {
   const viewed = (id: TopicId) => progress.topics.get(id)?.viewed ?? false
   const viewedCount = syllabus.order.filter(viewed).length
   const nextUp = syllabus.order.find((id) => written.has(id) && !viewed(id)) ?? syllabus.order[0]!
-  const nextTopic = syllabus.topics.get(nextUp)!
+
+  // "Continue" means the lesson that was literally last open, not the next unfinished one in
+  // the syllabus — the way a game remembers which level you were on rather than suggesting the
+  // next one. Falls back to the next-unwritten-unviewed heuristic only on a brand-new course.
+  const lastVisited = mostRecentTopic(progress)
+  const resumeId = lastVisited && written.has(lastVisited) && syllabus.topics.has(lastVisited) ? lastVisited : nextUp
+  const resumeTopic = syllabus.topics.get(resumeId)!
+  const resuming = lastVisited !== undefined
 
   return (
     <div className="flex h-dvh flex-col">
@@ -64,14 +72,14 @@ export default async function HomePage() {
 
             <div className="flex w-full max-w-sm flex-col gap-3">
               <Link
-                href={hrefFor(nextUp)}
+                href={hrefFor(resumeId)}
                 className="group rounded-panel bg-accent px-5 py-4 text-accent-fg shadow-panel transition hover:bg-accent-strong"
               >
                 <p className="text-xs font-bold tracking-wider opacity-80">
-                  {viewed(nextUp) ? '重读 · Start again from' : viewedCount > 0 ? '继续 · Continue with' : '开始 · Start with'}
+                  {resuming ? '继续 · Continue with' : '开始 · Start with'}
                 </p>
                 <p className="mt-1 flex items-center justify-between gap-3 font-display text-xl font-bold">
-                  {nextTopic.title}
+                  {resumeTopic.title}
                   <ArrowRight className="size-5 shrink-0 transition group-hover:translate-x-1" aria-hidden />
                 </p>
               </Link>

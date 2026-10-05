@@ -21,6 +21,7 @@ const en = {
   'nav.locked': 'Locked',
   'nav.completeFirst': 'Complete first',
 
+  'header.allCourses': 'All courses',
   'header.toggleSyllabus': 'Toggle syllabus panel',
   'header.toggleInstructor': 'Toggle instructor panel',
   'header.focusMode': 'Toggle focus mode',
@@ -163,6 +164,7 @@ const ar: Record<StringKey, string> = {
   'nav.locked': 'مقفول',
   'nav.completeFirst': 'لازم تخلّص الأول',
 
+  'header.allCourses': 'كل الدورات',
   'header.toggleSyllabus': 'إظهار أو إخفاء لوحة المنهج',
   'header.toggleInstructor': 'إظهار أو إخفاء لوحة المدرّس',
   'header.focusMode': 'وضع التركيز',

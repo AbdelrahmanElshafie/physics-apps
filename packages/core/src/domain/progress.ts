@@ -194,3 +194,21 @@ export function pendingReviews(
   }
   return out
 }
+
+/**
+ * The single topic most recently touched — by a view, a submitted attempt, a grade, anything that
+ * bumps `TopicProgress.lastActivityAt`. This is what "continue where I left off" means to every
+ * app that uses it: not the next unfinished lesson in the syllabus, but literally the lesson that
+ * was last open, the way a game remembers which level you were on rather than suggesting the next
+ * one. `undefined` when nothing has ever been touched.
+ */
+export function mostRecentTopic(state: ProgressState): TopicId | undefined {
+  let best: { topicId: TopicId; lastActivityAt: string } | undefined
+  for (const topic of state.topics.values()) {
+    if (!topic.lastActivityAt) continue
+    if (!best || topic.lastActivityAt > best.lastActivityAt) {
+      best = { topicId: topic.topicId, lastActivityAt: topic.lastActivityAt }
+    }
+  }
+  return best?.topicId
+}

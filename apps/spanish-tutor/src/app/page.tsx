@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check, NotebookPen, RotateCcw, Star } from 'lucide-react'
 
-import type { Syllabus, TopicId } from '@core/domain'
+import { mostRecentTopic, type Syllabus, type TopicId } from '@core/domain'
 import { container } from '@/container'
 import { Header } from '@/components/layout/Header'
 import { splitTitle } from '@/lib/titles'
@@ -12,8 +12,9 @@ export const dynamic = 'force-dynamic'
 /**
  * The home page is "el camino" — the whole course drawn as one road down the page, phase by
  * phase, with every topic as a pill you can walk to. Written lessons are solid, unwritten ones
- * are dashed outlines (the roadmap is real even where the content isn't yet), and the next
- * unread lesson is pulled out into the hero so a returning student never has to find their place.
+ * are dashed outlines (the roadmap is real even where the content isn't yet), and the hero's
+ * "Continue" card is pulled out to the lesson last actually open — see `mostRecentTopic` — so a
+ * returning student lands exactly where they stopped, not wherever the syllabus says is next.
  */
 export default async function HomePage() {
   const [syllabi, progress] = await Promise.all([container.content.listSyllabi(), container.progress.state()])
@@ -29,7 +30,14 @@ export default async function HomePage() {
   const viewed = (id: TopicId) => progress.topics.get(id)?.viewed ?? false
   const viewedCount = syllabus.order.filter(viewed).length
   const nextUp = syllabus.order.find((id) => written.has(id) && !viewed(id)) ?? syllabus.order[0]!
-  const nextTopic = syllabus.topics.get(nextUp)!
+
+  // "Continue" means the lesson that was literally last open, not the next unfinished one in
+  // the syllabus — the way a game remembers which level you were on rather than suggesting the
+  // next one. Falls back to the next-unwritten-unviewed heuristic only on a brand-new course.
+  const lastVisited = mostRecentTopic(progress)
+  const resumeId = lastVisited && written.has(lastVisited) && syllabus.topics.has(lastVisited) ? lastVisited : nextUp
+  const resumeTopic = syllabus.topics.get(resumeId)!
+  const resuming = lastVisited !== undefined
 
   return (
     <div className="flex h-dvh flex-col">
@@ -55,14 +63,14 @@ export default async function HomePage() {
 
             <div className="flex w-full max-w-sm flex-col gap-3">
               <Link
-                href={hrefFor(nextUp)}
+                href={hrefFor(resumeId)}
                 className="group rounded-panel bg-accent px-5 py-4 text-accent-fg shadow-panel transition hover:bg-accent-strong"
               >
                 <p className="text-xs font-bold uppercase tracking-wider opacity-80">
-                  {viewed(nextUp) ? 'Start again from' : viewedCount > 0 ? 'Continue with' : 'Start with'}
+                  {resuming ? 'Continue with' : 'Start with'}
                 </p>
                 <p className="mt-1 flex items-center justify-between gap-3 font-display text-xl font-semibold">
-                  {nextTopic.title}
+                  {resumeTopic.title}
                   <ArrowRight className="size-5 shrink-0 transition group-hover:translate-x-1" aria-hidden />
                 </p>
               </Link>

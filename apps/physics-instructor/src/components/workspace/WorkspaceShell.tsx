@@ -2,11 +2,12 @@
 
 import { useEffect, useState, type ReactNode } from 'react'
 import Link from 'next/link'
-import { Maximize2, Moon, NotebookPen, PanelLeft, PanelRight, Settings, Sun } from 'lucide-react'
+import { LayoutGrid, Maximize2, Moon, NotebookPen, PanelLeft, PanelRight, Settings, Sun } from 'lucide-react'
 
 import { LOCALE_INFO } from '@core/domain'
 import { useWorkspace } from '@/stores/workspace'
 import { translator } from '@/lib/i18n'
+import { HUB_URL } from '@/lib/hub'
 
 import { SettingsDialog } from './SettingsDialog'
 import { cn } from '@/lib/utils'
@@ -87,6 +88,17 @@ export function WorkspaceShell({
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
       <header className="flex h-12 shrink-0 items-center gap-2 border-b border-border bg-surface px-3">
+        {/* A plain <a>, not a Next Link — it crosses to the hub's own port. */}
+        <a
+          href={HUB_URL}
+          title={t('header.allCourses')}
+          aria-label={t('header.allCourses')}
+          className="rounded-lg border border-transparent p-2 text-fg-subtle transition-colors hover:bg-surface-raised hover:text-fg"
+        >
+          <LayoutGrid className="size-4" aria-hidden />
+        </a>
+        <span className="h-5 w-px bg-border" aria-hidden />
+
         <IconButton
           onClick={toggleNavigator}
           active={navigatorOpen}

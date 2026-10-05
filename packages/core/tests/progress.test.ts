@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { pendingReviews, reduceEvents, topicMastery, type LearningEvent } from '../src/domain'
+import { mostRecentTopic, pendingReviews, reduceEvents, topicMastery, type LearningEvent } from '../src/domain'
 
 /**
  * The append-only-log-to-state reducer, tested in isolation from any app's syllabus or services.
@@ -115,5 +115,41 @@ describe('pendingReviews', () => {
     const pending = pendingReviews(state)
     expect(pending).toHaveLength(1)
     expect(pending[0]!.exerciseId).toBe('e1')
+  })
+})
+
+describe('mostRecentTopic', () => {
+  it('is undefined when nothing has been touched', () => {
+    expect(mostRecentTopic(reduceEvents([]))).toBeUndefined()
+  })
+
+  it('picks the topic touched last, not the topic visited first', () => {
+    const state = reduceEvents(
+      events(
+        { type: 'topic.viewed', topicId: 't1' },
+        { type: 'topic.viewed', topicId: 't2' },
+        { type: 'topic.viewed', topicId: 't3' },
+      ),
+    )
+    expect(mostRecentTopic(state)).toBe('t3')
+  })
+
+  it('counts any later activity on an earlier topic, not just a view', () => {
+    const state = reduceEvents(
+      events(
+        { type: 'topic.viewed', topicId: 't1' },
+        { type: 'topic.viewed', topicId: 't2' },
+        {
+          type: 'attempt.submitted',
+          topicId: 't1',
+          exerciseId: 'e1',
+          attemptId: 'a1',
+          answer: 'x',
+          autoVerdict: 'unverified',
+        },
+      ),
+    )
+    // t2 was viewed after t1, but t1 had an attempt submitted after that — t1 is "more recent".
+    expect(mostRecentTopic(state)).toBe('t1')
   })
 })
