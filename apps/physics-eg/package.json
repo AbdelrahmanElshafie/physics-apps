@@ -27,7 +27,7 @@
     "katex": "^0.16.22",
     "mathlive": "^0.105.3",
     "next": "^15.5.4",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "rehype-katex": "^7.0.1",

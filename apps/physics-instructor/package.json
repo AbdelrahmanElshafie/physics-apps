@@ -36,7 +36,7 @@
     "lucide-react": "^0.544.0",
     "mathlive": "^0.105.3",
     "next": "^15.5.4",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-resizable-panels": "^3.0.6",

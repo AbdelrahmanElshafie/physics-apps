@@ -202,6 +202,13 @@ export default async function TopicPage({ params, searchParams }: PageProps) {
                 })}
                 options={{
                   parseFrontmatter: false,
+                  // next-mdx-remote v6 defaults both flags to true, stripping every JS expression
+                  // (<Eq latex={String.raw`...`} /> included) out of the MDX — a sane default
+                  // against *untrusted* MDX, which this isn't: every lesson is first-party
+                  // content, authored and reviewed in this repo, never user-submitted. Off is
+                  // correct here, not a workaround.
+                  blockJS: false,
+                  blockDangerousJS: false,
                   mdxOptions: {
                     remarkPlugins: [remarkGfm, remarkMath],
                     // Prose math ($...$) renders through the same KaTeX as <Eq>.

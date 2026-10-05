@@ -73,6 +73,13 @@ export default async function LessonPage({ params }: PageProps) {
                       components={mdxComponents()}
                       options={{
                         parseFrontmatter: false,
+                        // next-mdx-remote v6 defaults both flags to true, stripping every JS
+                        // expression (<Circuit components={[...]} /> included) out of the MDX —
+                        // a sane default against *untrusted* MDX, which this isn't: every lesson
+                        // is first-party content, authored and reviewed in this repo, never
+                        // user-submitted. Off is correct here, not a workaround.
+                        blockJS: false,
+                        blockDangerousJS: false,
                         mdxOptions: {
                           remarkPlugins: [remarkGfm, remarkMath],
                           rehypePlugins: [[rehypeKatex, { macros: KATEX_MACROS, strict: false, trust: false }]],
