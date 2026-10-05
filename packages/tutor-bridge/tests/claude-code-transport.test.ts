@@ -4,7 +4,7 @@ import path from 'node:path'
 import { asThreadId } from '@physics/core/domain'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
-import { ClaudeCodeTutorTransport } from '../src/claude-code-transport'
+import { ClaudeCodeTutorTransport, TutorBridgeUnavailableError } from '../src/claude-code-transport'
 
 describe('ClaudeCodeTutorTransport', () => {
   let root: string
@@ -67,5 +67,17 @@ describe('ClaudeCodeTutorTransport', () => {
 
     expect(await transport.history(asThreadId('a#q1'))).toHaveLength(1)
     expect(await transport.history(asThreadId('b#q1'))).toHaveLength(1)
+  })
+
+  it('send() raises TutorBridgeUnavailableError rather than a raw fs error on a read-only root', async () => {
+    // A file where the root directory should be — mkdir(recursive) under it can never succeed,
+    // the same failure shape a serverless deployment's read-only filesystem produces.
+    const blocked = path.join(root, 'blocked-root')
+    await fs.writeFile(blocked, 'not a directory')
+    const broken = new ClaudeCodeTutorTransport(blocked)
+
+    await expect(
+      broken.send({ threadId: asThreadId('topic-1'), body: 'Hello?', context: {} }),
+    ).rejects.toThrow(TutorBridgeUnavailableError)
   })
 })

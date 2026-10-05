@@ -24,6 +24,7 @@ export function TutorRail({ topicId, topicTitle }: { topicId: string; topicTitle
   const { askContext, draft, setDraft, clearAsk } = useWorkspace()
   const [history, setHistory] = useState<Message[]>([])
   const [sending, setSending] = useState(false)
+  const [offline, setOffline] = useState(false)
   const scroller = useRef<HTMLDivElement>(null)
 
   // The thread follows what the question is about, so asking about an equation and asking about
@@ -68,7 +69,7 @@ export function TutorRail({ topicId, topicTitle }: { topicId: string; topicTitle
 
     setSending(true)
     try {
-      await sendQuestion({
+      const result = await sendQuestion({
         body,
         topicId,
         ...(askContext?.exerciseId !== undefined ? { exerciseId: askContext.exerciseId } : {}),
@@ -80,7 +81,8 @@ export function TutorRail({ topicId, topicTitle }: { topicId: string; topicTitle
           ? { equationLabel: askContext.equationLabel }
           : {}),
       })
-      setDraft('')
+      setOffline(!result.ok)
+      if (result.ok) setDraft('')
     } finally {
       setSending(false)
     }
@@ -159,6 +161,12 @@ export function TutorRail({ topicId, topicTitle }: { topicId: string; topicTitle
       </div>
 
       <div className="border-t border-border p-3">
+        {offline && (
+          <p className="mb-2 text-xs font-medium text-danger">
+            Your instructor isn&apos;t reachable on this deployment — this only works running
+            locally, where <code className="font-mono">pnpm tutor</code> can answer it.
+          </p>
+        )}
         <div className="flex items-end gap-2">
           <textarea
             value={draft}

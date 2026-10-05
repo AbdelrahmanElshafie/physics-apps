@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { askTutor, threadFor } from '@physics/tutor-bridge'
+import { askTutor, threadFor, TutorBridgeUnavailableError } from '@physics/tutor-bridge'
 import { asThreadId, type TopicId } from '@core/domain'
 import { submitAttempt, type SubmitAttemptResult } from '@core/services'
 import { container } from '@/container'
@@ -66,12 +66,22 @@ export async function revealSolution(topicId: string, exerciseId: string): Promi
   })
 }
 
+/**
+ * `ok: false` means the tutor bridge itself couldn't be reached — a read-only deployment with no
+ * writable `data/`, almost certainly — not that the question was bad. Callers show that inline
+ * instead of letting the exception reach Next's error boundary, which otherwise turns "I can't
+ * send this" into the whole page crashing.
+ */
+export type SendQuestionResult =
+  | { ok: true; threadId: string; messageId: string }
+  | { ok: false; reason: 'offline' }
+
 export async function sendQuestion(input: {
   body: string
   topicId?: string
   exerciseId?: string
   draftAnswer?: string
-}): Promise<{ threadId: string; messageId: string }> {
+}): Promise<SendQuestionResult> {
   const { tutor } = container
 
   const threadId = threadFor({
@@ -79,17 +89,21 @@ export async function sendQuestion(input: {
     ...(input.exerciseId !== undefined ? { exerciseId: input.exerciseId } : {}),
   })
 
-  const messageId = await askTutor(tutor, {
-    threadId,
-    body: input.body,
-    context: {
-      ...(input.topicId !== undefined ? { topicId: input.topicId as TopicId } : {}),
-      ...(input.exerciseId !== undefined ? { exerciseId: input.exerciseId } : {}),
-      ...(input.draftAnswer !== undefined ? { draftAnswer: input.draftAnswer } : {}),
-    },
-  })
-
-  return { threadId: String(threadId), messageId: String(messageId) }
+  try {
+    const messageId = await askTutor(tutor, {
+      threadId,
+      body: input.body,
+      context: {
+        ...(input.topicId !== undefined ? { topicId: input.topicId as TopicId } : {}),
+        ...(input.exerciseId !== undefined ? { exerciseId: input.exerciseId } : {}),
+        ...(input.draftAnswer !== undefined ? { draftAnswer: input.draftAnswer } : {}),
+      },
+    })
+    return { ok: true, threadId: String(threadId), messageId: String(messageId) }
+  } catch (cause) {
+    if (cause instanceof TutorBridgeUnavailableError) return { ok: false, reason: 'offline' }
+    throw cause
+  }
 }
 
 /** Reads a thread for a fresh page load, before the live stream has anything of its own. */

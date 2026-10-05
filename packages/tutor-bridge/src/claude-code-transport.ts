@@ -54,6 +54,22 @@ export type BridgeMessage = z.infer<typeof bridgeMessageSchema>
 const REQUEST_SUFFIX = '.request.json'
 const RESPONSE_SUFFIX = '.response.json'
 
+/**
+ * Thrown by `send()` when the request file couldn't be written — the one expected cause being a
+ * read-only filesystem, i.e. a serverless deployment, where this app's own `data/` only exists in
+ * local dev. A human instructor was never going to pick up the question there regardless of
+ * whether the write succeeds, so this is the one error every caller should treat as "the tutor
+ * isn't available here" rather than a bug — see each app's `sendQuestion` server action, which
+ * catches it by name and turns it into a message the UI can show instead of crashing the page.
+ */
+export class TutorBridgeUnavailableError extends Error {
+  constructor(cause: unknown) {
+    super('The tutor bridge could not write a request file — this deployment has no writable storage for it.')
+    this.name = 'TutorBridgeUnavailableError'
+    this.cause = cause
+  }
+}
+
 export class ClaudeCodeTutorTransport implements TutorTransport {
   readonly id = 'claude-code' as const
 
@@ -71,7 +87,6 @@ export class ClaudeCodeTutorTransport implements TutorTransport {
 
   async send(message: OutboundMessage): Promise<MessageId> {
     const dir = threadDir(this.root, message.threadId)
-    await fs.mkdir(dir, { recursive: true })
 
     const id = ulid()
     const payload: BridgeMessage = {
@@ -84,7 +99,12 @@ export class ClaudeCodeTutorTransport implements TutorTransport {
       context: message.context,
     }
 
-    await writeAtomic(path.join(dir, `${id}${REQUEST_SUFFIX}`), payload)
+    try {
+      await fs.mkdir(dir, { recursive: true })
+      await writeAtomic(path.join(dir, `${id}${REQUEST_SUFFIX}`), payload)
+    } catch (cause) {
+      throw new TutorBridgeUnavailableError(cause)
+    }
     return id as MessageId
   }
 

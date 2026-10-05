@@ -26,6 +26,7 @@ export function TutorSidePanel() {
   const { connected } = useTutorStream()
   const [draft, setDraft] = useState('')
   const [pending, startTransition] = useTransition()
+  const [offline, setOffline] = useState(false)
 
   const unread = messages.some((m) => m.role === 'tutor') && !open
 
@@ -34,7 +35,8 @@ export function TutorSidePanel() {
     if (!body || pending) return
     setDraft('')
     startTransition(async () => {
-      await sendQuestion({ body })
+      const result = await sendQuestion({ body })
+      setOffline(!result.ok)
     })
   }
 
@@ -76,6 +78,13 @@ export function TutorSidePanel() {
         <p className="flex items-center gap-1.5 border-b border-warning/30 bg-warning-muted/20 px-4 py-2 text-xs font-medium text-warning">
           <span className="size-1.5 shrink-0 animate-pulse rounded-full bg-warning" aria-hidden />
           Reconnecting... replies won&apos;t appear here until this clears.
+        </p>
+      )}
+
+      {offline && (
+        <p className="border-b border-danger/30 bg-danger-muted/20 px-4 py-2 text-xs font-medium text-danger">
+          Your tutor isn&apos;t reachable on this deployment — this chat only works running
+          locally, where a live Claude Code session answers it.
         </p>
       )}
 

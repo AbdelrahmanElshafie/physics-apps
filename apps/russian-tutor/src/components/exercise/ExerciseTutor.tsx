@@ -24,13 +24,15 @@ export function ExerciseTutor({
   const messages = useThreadMessages(threadId)
   const [draft, setDraft] = useState('')
   const [pending, startTransition] = useTransition()
+  const [offline, setOffline] = useState(false)
 
   const send = () => {
     const body = draft.trim()
     if (!body || pending) return
     setDraft('')
     startTransition(async () => {
-      await sendQuestion({ body, topicId, exerciseId })
+      const result = await sendQuestion({ body, topicId, exerciseId })
+      setOffline(!result.ok)
     })
   }
 
@@ -56,6 +58,12 @@ export function ExerciseTutor({
             </div>
           ))}
         </div>
+      )}
+
+      {offline && (
+        <p className="mb-2 text-xs font-medium text-danger">
+          Your tutor isn&apos;t reachable on this deployment — this only works running locally.
+        </p>
       )}
 
       <div className="flex items-center gap-1.5">

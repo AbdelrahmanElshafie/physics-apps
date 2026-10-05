@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 
 import { asThreadId, parseTopicId, type TopicId } from '@core/domain'
 import { askTutor, submitAttempt, threadFor, type SubmitAttemptResult } from '@core/services'
+import { TutorBridgeUnavailableError } from '@physics/tutor-bridge'
 import { container } from '@/container'
 
 /**
@@ -110,6 +111,16 @@ export async function addNote(topicId: string, body: string): Promise<void> {
   revalidatePath(topicPath(topicId as TopicId))
 }
 
+/**
+ * `ok: false` means the tutor bridge itself couldn't be reached — a read-only deployment with no
+ * writable `data/`, almost certainly — not that the question was bad. Callers show that inline
+ * instead of letting the exception reach Next's error boundary, which otherwise turns "I can't
+ * send this" into the whole page crashing.
+ */
+export type SendQuestionResult =
+  | { ok: true; threadId: string; messageId: string }
+  | { ok: false; reason: 'offline' }
+
 export async function sendQuestion(input: {
   body: string
   topicId?: string
@@ -118,7 +129,7 @@ export async function sendQuestion(input: {
   equationLatex?: string
   equationLabel?: string
   draftAnswer?: string
-}): Promise<{ threadId: string; messageId: string }> {
+}): Promise<SendQuestionResult> {
   const { tutor } = container()
 
   const threadId = threadFor({
@@ -127,19 +138,23 @@ export async function sendQuestion(input: {
     ...(input.equationId !== undefined ? { equationId: input.equationId } : {}),
   })
 
-  const messageId = await askTutor(tutor, {
-    threadId,
-    body: input.body,
-    context: {
-      ...(input.topicId !== undefined ? { topicId: input.topicId as TopicId } : {}),
-      ...(input.exerciseId !== undefined ? { exerciseId: input.exerciseId } : {}),
-      ...(input.equationLatex !== undefined ? { equationLatex: input.equationLatex } : {}),
-      ...(input.equationLabel !== undefined ? { equationLabel: input.equationLabel } : {}),
-      ...(input.draftAnswer !== undefined ? { draftAnswer: input.draftAnswer } : {}),
-    },
-  })
-
-  return { threadId: String(threadId), messageId: String(messageId) }
+  try {
+    const messageId = await askTutor(tutor, {
+      threadId,
+      body: input.body,
+      context: {
+        ...(input.topicId !== undefined ? { topicId: input.topicId as TopicId } : {}),
+        ...(input.exerciseId !== undefined ? { exerciseId: input.exerciseId } : {}),
+        ...(input.equationLatex !== undefined ? { equationLatex: input.equationLatex } : {}),
+        ...(input.equationLabel !== undefined ? { equationLabel: input.equationLabel } : {}),
+        ...(input.draftAnswer !== undefined ? { draftAnswer: input.draftAnswer } : {}),
+      },
+    })
+    return { ok: true, threadId: String(threadId), messageId: String(messageId) }
+  } catch (cause) {
+    if (cause instanceof TutorBridgeUnavailableError) return { ok: false, reason: 'offline' }
+    throw cause
+  }
 }
 
 /** Reads a thread for the tutor rail's initial render and after a reconnect. */
