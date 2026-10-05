@@ -26,8 +26,15 @@ import {
 export interface CourseDefinition {
   /** Workspace directory under apps/, which is also its pnpm filter name. */
   readonly dir: string
-  /** Dev-server port, as that app's own package.json pins it. */
+  /** Dev-server port, as that app's own package.json pins it — used in `pnpm dev` only. */
   readonly port: number
+  /**
+   * The environment variable holding this course's real, deployed origin (e.g.
+   * `https://physics-apps-chinese.vercel.app`, no trailing slash). `originOf` reads it first and
+   * falls back to `http://localhost:{port}`, so the same code runs unchanged in `pnpm dev` and in
+   * production — only the hub's own deployment needs these set, once every course has its own URL.
+   */
+  readonly envVar: string
   /** Folder under content/syllabi/, which is also the syllabus segment of a lesson URL. */
   readonly syllabusId: string
   /**
@@ -60,6 +67,7 @@ export const COURSES: readonly CourseDefinition[] = [
   {
     dir: 'chinese-tutor',
     port: 3300,
+    envVar: 'CHINESE_TUTOR_URL',
     syllabusId: 'mandarin',
     native: '中文',
     mark: '中',
@@ -72,6 +80,7 @@ export const COURSES: readonly CourseDefinition[] = [
   {
     dir: 'russian-tutor',
     port: 3400,
+    envVar: 'RUSSIAN_TUTOR_URL',
     syllabusId: 'russian',
     native: 'Русский',
     mark: 'Я',
@@ -84,6 +93,7 @@ export const COURSES: readonly CourseDefinition[] = [
   {
     dir: 'spanish-tutor',
     port: 3500,
+    envVar: 'SPANISH_TUTOR_URL',
     syllabusId: 'spanish',
     native: 'Español',
     mark: 'ñ',
@@ -95,6 +105,7 @@ export const COURSES: readonly CourseDefinition[] = [
   {
     dir: 'physics-instructor',
     port: 3100,
+    envVar: 'PHYSICS_INSTRUCTOR_URL',
     syllabusId: 'nuclear-physics',
     lessonPath: 'learn',
     native: 'Atomic & Nuclear',
@@ -107,6 +118,7 @@ export const COURSES: readonly CourseDefinition[] = [
   {
     dir: 'physics-eg',
     port: 3200,
+    envVar: 'PHYSICS_EG_URL',
     syllabusId: 'electricity',
     native: 'الفيزياء',
     mark: 'ف',
@@ -150,7 +162,15 @@ const lessonsDir = (c: CourseDefinition) =>
   path.join(appDir(c), 'content', 'syllabi', c.syllabusId, 'lessons')
 const eventsFile = (c: CourseDefinition) => path.join(appDir(c), 'data', 'events.jsonl')
 
-export const originOf = (c: CourseDefinition) => `http://localhost:${c.port}`
+/**
+ * A course's real origin — its deployed URL in production, `http://localhost:{port}` in
+ * `pnpm dev`. Trims a trailing slash from the env var so `${originOf(c)}/lesson/...` never ends
+ * up with a doubled one.
+ */
+export const originOf = (c: CourseDefinition) => {
+  const deployed = process.env[c.envVar]
+  return deployed ? deployed.replace(/\/$/, '') : `http://localhost:${c.port}`
+}
 export const startCommand = (c: CourseDefinition) => `pnpm --filter ${c.dir} dev`
 
 async function readSyllabus(c: CourseDefinition): Promise<Syllabus> {
