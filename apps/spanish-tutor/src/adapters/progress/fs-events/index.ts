@@ -27,11 +27,21 @@ export class FileSystemProgressRepository implements ProgressRepository {
   constructor(private readonly logPath: string = DEFAULT_LOG) {}
 
   async append(event: LearningEvent): Promise<void> {
-    // Validate before writing — a bad line would otherwise poison every later read.
+    // Validate before writing — a bad line would otherwise poison every later read. A validation
+    // failure is a real programming error and still throws; only the filesystem write below is
+    // treated as something that can legitimately fail at runtime.
     const validated = learningEventSchema.parse(event)
-    await fs.mkdir(path.dirname(this.logPath), { recursive: true })
-    await fs.appendFile(this.logPath, `${JSON.stringify(validated)}\n`, 'utf8')
-    this.cache = null
+    try {
+      await fs.mkdir(path.dirname(this.logPath), { recursive: true })
+      await fs.appendFile(this.logPath, `${JSON.stringify(validated)}\n`, 'utf8')
+      this.cache = null
+    } catch (cause) {
+      // A read-only filesystem (a serverless deployment, for instance — this app's own writable
+      // `data/` only exists in local dev) must not turn "mark this lesson viewed" into a 500 on
+      // every single page load. Progress just doesn't persist there; the event is logged and
+      // dropped, the same tolerant-of-a-bad-write spirit as `read()`'s malformed-line handling.
+      console.warn(`[progress] Could not persist event to ${this.logPath} — ${(cause as Error).message}`)
+    }
   }
 
   async read(): Promise<LearningEvent[]> {
