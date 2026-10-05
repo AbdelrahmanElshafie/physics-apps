@@ -59,6 +59,9 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
+      '@eslint/eslintrc':
+        specifier: ^3.3.7
+        version: 3.3.7
       '@tailwindcss/postcss':
         specifier: ^4.1.13
         version: 4.3.3
@@ -229,6 +232,9 @@ importers:
         specifier: ^5.0.8
         version: 5.0.15(@types/react@19.3.0)(react@19.3.0)
     devDependencies:
+      '@eslint/eslintrc':
+        specifier: ^3.3.7
+        version: 3.3.7
       '@tailwindcss/postcss':
         specifier: ^4.1.13
         version: 4.3.3
@@ -462,6 +468,9 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
+      '@eslint/eslintrc':
+        specifier: ^3.3.7
+        version: 3.3.7
       '@tailwindcss/postcss':
         specifier: ^4.1.13
         version: 4.3.3
@@ -556,6 +565,9 @@ importers:
         specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
+      '@eslint/eslintrc':
+        specifier: ^3.3.7
+        version: 3.3.7
       '@tailwindcss/postcss':
         specifier: ^4.1.13
         version: 4.3.3
